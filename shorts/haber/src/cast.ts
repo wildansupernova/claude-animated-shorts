@@ -305,17 +305,17 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
       break;
     }
     case 2: case 13: {
-      const TR = P.haberTrench, wide = t >= T(1111) - LEAD && t < T(1157);
+      const TR = P.haberTrench, wide = t >= T(1111) && t < T(1157);
       if (id === 2 || t < T(1229)) {
         put(out, cam, t, 1, HABER_WAR, "haberW", TR, { mode: "stand", expr: id === 2 ? "stern" : ex(t, [[0, "stern"], [T(1157), "smug"]]), prop: id === 13 && t < T(1157) ? "watch" : null });
-        const gx = wide ? [-8, -5.2, -2.6, 2.6, 5.2, 8] : id === 13 && t >= T(1157) - LEAD ? [-12, 5, 9.5] : [-2.3, 2.4];
+        const gx = wide ? [-8, -5.2, -2.6, 2.6, 5.2, 8] : id === 13 && t >= T(1157) ? [-12, 5, 9.5] : [-2.3, 2.4];
         gx.forEach((x, k) => put(out, cam, t, 20 + k, GERMAN(k), `ger${k % 4}`, add(TR, x, 0, 0.15 + 0.2 * hh(k)), { mode: "stand", expr: (["nervous", "stern", "neutral", "nervous", "stern", "neutral"] as Expr[])[k], facing: x < 0 ? 1 : -1 }));
       }
       if (id === 2) gasCloud(out, t, T(20), TR[0] - 10, TR[0] + 10, TR[2] + 4.5, 1.0, 10, cam, 1.6);
       else {
         gasCloud(out, t, EV.cloud0, TR[0] - 22, TR[0] + 22, TRENCH[2] + 2.6, 1.8, 24, cam, 0.9);
         if (t > EV.valves && t < T(1229)) for (let k = -16; k <= 16; k += 2) puffAt(out, t, EV.valves + ((k + 16) % 5) * 0.05, 0.7, [TR[0] + k * 0.6, 1.55, TRENCH[2] + 2.3], 0.9);
-        if (t >= T(1229) - LEAD) {
+        if (t >= T(1229)) {
           const F = P.french;
           [-1.6, -0.5, 0.7, 1.7, -2.6, 2.6].forEach((x, k) => {
             const run = Math.max(0, t - EV.french - 0.12 * k);
@@ -335,8 +335,8 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
         burstAt(out, t, EV.sparkle, 0.5, add(L, 0.38, 1.62, 0.1), 0.7, "#fff3b0");
         sparkles(out, t, add(L, 0.38, 1.62, 0.05), 0.32, 7, 0.14, cam, 3);
       } else {
-        const near = t >= T(629) - LEAD;
-        put(out, cam, t, 1, HABER, "haber", !near ? L : t < T(704) - LEAD ? add(L, 2.15, 0, -2.3) : add(L, 0.6, 0, -1.0), {
+        const near = t >= T(629);
+        put(out, cam, t, 1, HABER, "haber", !near ? L : t < T(704) ? add(L, 2.15, 0, -2.3) : add(L, 0.6, 0, -1.0), {
           mode: "stand", prop: t < T(560) ? "cross" : null, facing: near ? 1 : 0,
           expr: ex(t, [[0, "smug"], [T(539), "stern"], [T(629), "nervous"], [T(684), "grin"]]),
         }, { swaps: [T(539), T(629)] });
@@ -368,7 +368,7 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
           if (k % 2 === 0 && dt < 0.7) fx(out, "poop", 80, 110, fxPoop, add(pos, 0, -dt * dt * 9, 0), 0.22, 0.3);
         }
         const top = add(I, 0, 3.0, 5);
-        if (t < T(309) - LEAD) put(out, cam, t, 3, MERCHANT, "merchant", add(top, 0.3, 0, 0.2), { mode: "stand", prop: "sack", expr: ex(t, [[0, "neutral"], [T(281), "grin"]]) });
+        if (t < T(309)) put(out, cam, t, 3, MERCHANT, "merchant", add(top, 0.3, 0, 0.2), { mode: "stand", prop: "sack", expr: ex(t, [[0, "neutral"], [T(281), "grin"]]) });
         else {
           const pull = 0.12 * Math.sin(t * 7);
           put(out, cam, t, 4, SPAIN, "spain", add(top, -0.78 + pull, 0, 0), { mode: "stand", prop: "rope", tilt: -12, expr: t < EV.cannon ? "pained" : "shock" });
@@ -378,15 +378,15 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
           puffAt(out, t, EV.cannon + 0.1, 1.2, add(top, 3.5, 2.2, -3.8), 3.4);
         }
       } else {
-        const M = P.merchant, deck = add(M, 0.6, 1.55, 0.1);
+        const M = P.merchant, deck = add(M, -0.35, 1.55, 0.55);
         put(out, cam, t, 6, CAPTAIN, "captain", deck, { mode: "stand", expr: ex(t, [[0, "smile"], [EV.warshipStop - 0.6, "shock"]]) }, { blob: false });
-        put(out, cam, t, 7, WORKER, "sailor", add(deck, -2.4, 0, -0.3), { mode: "stand", prop: "sack", expr: ex(t, [[0, "neutral"], [EV.warshipStop - 0.4, "shock"]]) }, { blob: false });
+        put(out, cam, t, 7, WORKER, "sailor", add(M, 3.7, 1.55, 0.6), { mode: "stand", prop: "sack", expr: ex(t, [[0, "neutral"], [EV.warshipStop - 0.4, "shock"]]) }, { blob: false });
       }
       break;
     }
     case 6: {
       const K = P.kid;
-      if (t < T(453) - LEAD) {
+      if (t < T(453)) {
         put(out, cam, t, 8, KID, "kid", K, { mode: "stand", expr: ex(t, [[0, "smile"], [EV.breath, "whistle"], [T(439), "shock"]]), prop: "hands" }, { scale: 0.85, swaps: [T(439)] });
         for (let k = 0; k < 9; k++) {
           const suck = clamp01((t - EV.breath) / 1.6) * (k % 3 === 0 ? 1 : 0.35);
@@ -436,7 +436,7 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
       break;
     }
     case 14: {
-      if (t < EV.claraGone - LEAD) put(out, cam, t, 13, CLARA, "clara", P.clara, { mode: "stand", prop: "flask", expr: ex(t, [[0, "neutral"], [T(1320), "smile_closed"]]), facing: -1 });
+      if (t < EV.claraGone) put(out, cam, t, 13, CLARA, "clara", P.clara, { mode: "stand", prop: "flask", expr: ex(t, [[0, "neutral"], [T(1320), "smile_closed"]]), facing: -1 });
       break;
     }
     case 15: {
@@ -448,15 +448,15 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
     case 16: case 17: {
       const A = P.haberAlps;
       if (id === 16) {
-        if (t >= T(1504) - LEAD && t < T(1533) - LEAD) {
+        if (t >= T(1504) && t < T(1533)) {
           const beard = t >= EV.beard;
           put(out, cam, t, 1, beard ? HABER_BEARD : HABER, beard ? "haberB" : "haber", A, { mode: "stand", expr: beard ? "smug" : "nervous" }, { swaps: [EV.beard] });
           puffAt(out, t, EV.beard - 0.03, 0.6, add(A, 0, 1.25, 0.25), 1.1);
-        } else if (t >= T(1533) - LEAD) {
+        } else if (t >= T(1533)) {
           put(out, cam, t, 1, HABER_BEARD, "haberB", add(P.hideTree, 0.78, 0, -0.2), { mode: "stand", expr: "nervous", look: -1, facing: -1 });
         }
       } else {
-        const walk = clamp01((t - T(1570)) / 0.45), arrived = walk >= 1;
+        const walk = clamp01((t - T(1570)) / (T(1594) - T(1570))), arrived = walk >= 1;
         const pp = add(A, -3.6 + 2.3 * walk, 0, 0.35);
         if (!arrived) { const view = viewOf(cam, pp[0], pp[2], 1, 0); put(out, cam, t, 14, POSTMAN, "post", pp, { mode: "stand" }, { side: { mirror: view.mirror, so: { mode: "march", phase: (t * 2) % 1, expr: "smile", stride: 0.8 * view.fs } } }); }
         else put(out, cam, t, 14, POSTMAN, "post", pp, { mode: "stand", expr: t > EV.medal ? "grin" : "smile", prop: t < EV.medal - 0.1 ? "medal" : "hands", facing: 1 });
@@ -468,7 +468,7 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
     }
     case 18: {
       const S = P.scientist;
-      if (t < T(1703) - LEAD) {
+      if (t < T(1703)) {
         put(out, cam, t, 15, SCIENTIST, "sci", S, { mode: "stand", prop: "sprayer", expr: ex(t, [[0, "neutral"], [EV.bugs, "stern"]]), facing: 1 });
         for (let k = 0; k < 3; k++) { const u = ((t * 1.5 + k / 3) % 1); fx(out, `mist${q(u, 20)}`, 300, 300, (p) => fxPuff(p, q(u, 20)), add(S, 0.55 + 0.45 * u, 1.38 + 0.05 * k, -0.4 - 0.5 * u), 0.35 + 0.3 * u, 0.35 + 0.3 * u, { soft: true }); }
         for (let k = 0; k < 4; k++) {

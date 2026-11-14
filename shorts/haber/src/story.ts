@@ -201,7 +201,7 @@ const CAMS: Record<number, Key[]> = {
   // 11 blockade: the grey warship steams in front of the nitrate clipper
   11: [
     { f: 943, s: (f) => dolly(add(P.merchant, 7, 3.8, 34), add(P.merchant, 2, 3.2, 0), pushK(f, 943, 0.002), { fov: 40 }) },
-    { f: 1012, cut: true, s: (f) => dolly(add(P.merchant, 1.2, 3.2, 8.0), add(P.merchant, 0.5, 2.6, 0), pushK(f, 1012, 0.003, 0.006, 30), { fov: 38, roll: -0.03 }) },
+    { f: 1012, cut: true, s: (f) => dolly(add(P.merchant, 0.15, 3.15, 7.6), add(P.merchant, -0.35, 2.75, 0.55), pushK(f, 1012, 0.003, 0.006, 30), { fov: 38, roll: -0.03 }) },
   ],
   // 12 the field gun fires twice (kicks)
   12: [{ f: 1043, s: (f) => dolly(add(P.gun, 6.5, 1.4, -2.2), add(P.gun, 0.4, 1.3, 1.0), pushK(f, 1043, 0.003), { fov: 42, roll: 0.03 }) }],
@@ -295,7 +295,7 @@ export const DOF: Dof[] = [
   { f: 842, cInf: 6, focus: () => add(P.worker, 0, 1.4, 0) },
   { f: 905, cInf: 11, focus: () => add(P.worker, 0, 1.4, 0) },
   { f: 943, cInf: 0 },
-  { f: 1012, cInf: 10, focus: () => add(P.merchant, 0.6, 2.9, 0) },
+  { f: 1012, cInf: 10, focus: () => add(P.merchant, -0.35, 2.9, 0.55) },
   { f: 1043, cInf: 0 },
   { f: 1081, cInf: 12, focus: () => add(TR, 0, 1.45, 0) },
   { f: 1111, cInf: 0 },

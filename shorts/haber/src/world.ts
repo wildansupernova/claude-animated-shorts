@@ -683,9 +683,9 @@ export class World {
     this.liquid.scale.y = 0.4 + 1.2 * (s.id >= 7 ? drips : 0) + (s.id >= 8 ? 0 : 0);
     const lampOn = night && (id === 14 || id === 20);
     this.bulb.visible = this.lampGlow.visible = lampOn && id === 14;
-    if (id === 14) { const dim = t > EV.claraGone ? 0.55 : 1; (this.lampGlow.material as THREE.SpriteMaterial).opacity = 0.75 * dim; }
+    if (id === 14) { const dim = t >= EV.claraGone - 1e-6 ? 0.55 : 1; (this.lampGlow.material as THREE.SpriteMaterial).opacity = 0.75 * dim; }
     this.flame.visible = this.candleGlow.visible = id === 20;
-    if (id === 20) { const fl = 1 + 0.12 * Math.sin(t * 23) + 0.08 * Math.sin(t * 37); this.flame.scale.set(0.035 * fl, 0.07 * fl, 1); this.candleGlow.scale.setScalar(0.75 * fl); }
+    if (id === 20) { const fl = 1 + 0.05 * Math.sin(t * 11) + 0.03 * Math.sin(t * 17); this.flame.scale.set(0.035 * fl, 0.07 * fl, 1); this.candleGlow.scale.setScalar(0.75 * fl); }
     // factory chute: sacks every 0.85 s, then the shell
     const C = P.chute, slide = (u: number) => [C[0], C[1] + 0.25 - (C[1] - 0.95) * u, C[2] + 0.3 + 3.9 * u] as V3;
     this.sacks.forEach((m) => { m.visible = false; });
