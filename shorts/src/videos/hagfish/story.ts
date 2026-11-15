@@ -9,6 +9,7 @@ import { cueSheet } from "../../lib/cues";
 import type { Word } from "../../lib/captions";
 import words from "../../../videos/hagfish/voice/words.json";
 import { seagull } from "../herring/actors";
+import { stink } from "../whale/actors";
 import {
   DRIVER, FLAGGER, FIREFIGHTER, DINER, MOTORIST, hagfish, slimeCoat, slimeSheet, skein, flatbed, tote, hatch, bulldozer, shark, airbag,
   workSign, stopPaddle, trex, hoseSpray, HagOpts,
@@ -292,9 +293,9 @@ add(B(16), B(17), [{ key: "prehistoric", d: 0.4, bounds: BIG, res: 0.6, paint: (
 
 // 18 THE PLAN: BE DISGUSTING (line 17)
 add(B(17), B(18), [LAB, { d: 1, draw: (g, f) => {
-  hag(g, 540, 960, 2.2, { f, seed: 6, expr: "smug", slime: f > fDisg ? 1 : 0.3, wig: 0.6 });
-  if (f > fDisg) for (let i = 0; i < 6; i++) { const k = pop(f, fDisg + i * 3, 6); ell(g, 200 + i * 140, 520 + (i % 2) * 60, 30 * k, 30 * k, "#ffd84a", 4); }
-} }], camKeys([{ f: B(17), c: { z: 1.0, y: 980 }, creep: 0.0015 }, { f: fDisg, c: { z: 1.15, y: 960, r: 0.02 }, dur: 8 }]), { bg: "#0f4f79" });
+  hag(g, 400, 980, 1.7, { f, seed: 6, expr: "smug", slime: f > fDisg ? 1 : 0.3, wig: 0.6 }, -0.12);
+  if (f > fDisg - 4) stink(g, 420, 760, f, 5, 1.3);
+} }], camKeys([{ f: B(17), c: { z: 1.0, y: 980 }, creep: 0.0015 }, { f: fDisg, c: { z: 1.12, x: 600, y: 960, r: 0.02 }, dur: 8 }]), { bg: "#0f4f79" });
 
 // 19 IT'S WORKING (line 18 to the end)
 add(B(18), TOTAL, [COAST, { d: 1, draw: (g, f) => {

@@ -44,7 +44,7 @@ export const hagfish = (g: Ctx, o: HagOpts = {}) => {
   else if (expr === "smug") { ell(g, ex, ey, 12 * s, 12 * s, "#ffffff", 3.5); g.save(); g.beginPath(); g.arc(ex, ey, 12 * s, 0, Math.PI * 2); g.clip(); g.fillStyle = "#c48090"; g.fillRect(ex - 12 * s, ey - 12 * s, 24 * s, 12 * s); g.restore(); ell(g, ex, ey, 12 * s, 12 * s, null, 3.5); ell(g, ex + 2 * s, ey + 4 * s, 4 * s, 4 * s, INKC, 0); }
   else if (expr === "sad") { ell(g, ex, ey, 11 * s, 11 * s, "#ffffff", 3.5); ell(g, ex, ey + 3 * s, 4 * s, 4 * s, INKC, 0); line(g, [[ex - 12 * s, ey - 16 * s], [ex + 10 * s, ey - 22 * s]], INKC, 4); }
   else { ell(g, ex, ey, 10 * s, 10 * s, "#ffffff", 3.5); ell(g, ex + 2 * s, ey, 4 * s, 4 * s, INKC, 0); }
-  if (slime > 0) slimeCoat(g, spine, slime, f, seed, s);
+  if (slime > 0) slimeCoat(g, spine.slice(0, n - 1), slime, f, seed, s);
 };
 /** translucent goo hanging off a set of points */
 export const slimeCoat = (g: Ctx, pts: P[], k: number, f: number, seed: number, s = 1) => {
