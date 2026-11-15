@@ -43,3 +43,12 @@ Final: `out/haber_1080x1920.mp4` (native render) and `out/haber_1440x2560.mp4` (
 - QA (`out/qa_report.md`): no black, white, frozen or pop frames after the fixes.
 - One cause of pops: characters vanished 2 frames before their cut, because the expression lead (LEAD) was also applied to scene changes.
   Rule: LEAD is only for expressions and actions inside a shot, never for appear/disappear at a cut.
+
+## Captions (added on request, 2026-11-15)
+- `scripts/captions.py` → `out/captions.ass` (burned in) + `out/captions.srt` (platform upload / translation).
+- Viral style: Inter Display Black 120 px at 1080, white with a 10 px black outline, key words yellow, centred at y 1300/1920
+  (clear of the platform UI), hard swaps 2 frames before each phrase, a small pop-in scale.
+  Clara's line and the camps line are plain white with no pop.
+- Phrase breaks are hand-set (`BREAKS`); spoken numbers are shown as figures (78%, 200 TIMES, 500 DEGREES, 168 TONS);
+  each phrase is scaled to fit 960 px, measured with the real font.
+- Burned with ffmpeg `ass=` onto the finished renders (no 3D re-render): `out/haber_*_captions.mp4`.
