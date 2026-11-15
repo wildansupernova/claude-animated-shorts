@@ -148,7 +148,7 @@ lighting 5-6, ink 6, textures 5-6, characters 7, depth 6-7, composition 6-7 (fro
   - Render at 1080x1920 here, not 2K.
 - **Time every cue from words.json by word** (`cue(line, "word")` in story.ts), not by hand-typed frame numbers. Export the timeline to JSON for the sound script.
 - **Additive glow lines** (pair webs, beams): scale each line's brightness by about sqrt(253 / count), or a dense web blows out to white.
-- **Low golden backlight** (el 7) puts a whole lawn in violet shade and reads as night. For long golden scenes, override the shot's `sunEl` to about 24.
+- **Golden light in an enclosed square:** surrounding houses throw shadows about h / tan(el) long (12 m houses at el 24 cast ~27 m), so the whole square falls into violet-blue shade even with `sunEl` raised. That reads as dusk or night-blue, which suits an explanation beat (the reference does the same) and makes glow effects pop. If the ground must stay lit, turn off `castShadow` on the town batch for golden shots.
 - Kenney nature-kit materials are teal: recolour them by material name in build.ts.
 - Cameras end up inside houses: the sight-line culler in build.ts/world.ts removes anything blocking any camera ray.
 - Ink in the same merged effect pass as DOF gets overwritten. Ink must be its own pass before the blur.
