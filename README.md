@@ -11,6 +11,7 @@ Proven on **The Bridge That Fell for a Song**, a 67 s short about the 1831 Broug
 |---|---|
 | `SKILL.md` | The skill: the full pipeline, every rule, every fix, and the final look values |
 | `templates/bridge/` | The full source of the bridge short: world, characters, ink, lens blur, grade, story/camera |
+| `templates/forest/` | Second example: "The Forest Snitch" (forensic botany), procedural forest world, burned-in captions, its own score/SFX mix |
 | `templates/audio/` | The synthesized sound: SFX, march music, the mix with ducking and loudness |
 | `templates/scripts/` | Stills, side-by-side sheets, shot merge and frame-by-frame QA helpers |
 | `references/STYLE_BIBLE.md` | The script and visual formula measured from 20 reference shorts |
