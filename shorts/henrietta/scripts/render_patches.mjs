@@ -7,10 +7,10 @@ const browserExecutable = "/opt/pw-browsers/chromium_headless_shell-1243/chrome-
 const chromiumOptions = { gl: "swangle" };
 const serveUrl = await bundle({ entryPoint: path.resolve("src/index.ts"), publicDir: path.resolve("public") });
 const browser = await openBrowser("chrome", { browserExecutable, chromiumOptions });
-const composition = await selectComposition({ serveUrl, id: "HaberShort", browserExecutable, chromiumOptions, puppeteerInstance: browser });
+const composition = await selectComposition({ serveUrl, id: process.env.COMP || "HaberShort", browserExecutable, chromiumOptions, puppeteerInstance: browser });
 for (const [a, b] of ranges) {
   const t0 = Date.now();
-  await renderMedia({ composition, serveUrl, codec: "h264", crf: 16, outputLocation: `out/haber/seg/patch_${a}_${b}.mp4`, browserExecutable, chromiumOptions,
+  await renderMedia({ composition, serveUrl, codec: "h264", crf: 16, outputLocation: `${process.env.OUTDIR || "out/haber/seg"}/patch_${a}_${b}.mp4`, browserExecutable, chromiumOptions,
     frameRange: [a, b], concurrency: 1, timeoutInMilliseconds: 600000, muted: true, puppeteerInstance: browser });
   console.log("patch", a, b, ((Date.now() - t0) / 1000).toFixed(0) + "s");
 }

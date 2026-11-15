@@ -172,15 +172,20 @@ export const skull = (p: Pen, cx: number, cy: number, s = 1) => {
 
 // ======================= Henrietta Lacks short =======================
 /** a cell with a face, 500 x 400; split 0 (round) .. 1 (two daughters, pinched apart); mood: happy / dead / plain */
-export const fxCell = (p: Pen, split: number, mood: "happy" | "dead" | "plain", hue = 0) => {
+export const fxCell = (p: Pen, split: number, mood: "happy" | "dead" | "plain", hue = 0, vert = false) => {
+  // 800 x 800 card, cell centred at (400, 400): uniform 500 px per world unit of cell size at every split stage, so the
+  // two lobes at split = 1 sit exactly where two 0.75-scale daughter cells will be placed (offset 95 px = 0.19 size).
   const body = mood === "dead" ? "#b9b4bf" : ["#f3a6c4", "#ef9bbd", "#f6b2cb"][hue % 3], nuc = mood === "dead" ? "#8d8696" : "#9b5fb8";
-  const s = Math.min(1, Math.max(0, split)), d = 95 * s, r = 120 - 30 * s;
-  const lobes: [number, number][] = s < 0.02 ? [[250, 205]] : [[250 - d, 205], [250 + d, 205]];
+  const s = Math.min(1, Math.max(0, split)), d = 95 * s, r = 120 - 30 * s, CX = 400, CY = 400;
+  const lobes: [number, number][] = s < 0.02 ? [[CX, CY]] : vert ? [[CX, CY - d], [CX, CY + d]] : [[CX - d, CY], [CX + d, CY]];
+  const wx = vert ? 60 : 70, wy = vert ? 70 : 60;
   for (const [x, y] of lobes) p.ell(x, y, r * 1.1 + 8, r + 8, INK, 0);
-  if (s > 0.02 && s < 0.85) p.ell(250, 205, 70 * (1 - s), 60 * (1 - s), INK, 0);
+  if (s > 0.02 && s < 0.85) p.ell(CX, CY, wx * (1 - s), wy * (1 - s), INK, 0);
   for (const [x, y] of lobes) p.ell(x, y, r * 1.1, r, body, 0);
-  if (s > 0.02 && s < 0.85) p.ell(250, 205, 70 * (1 - s) - 8, 60 * (1 - s) - 8, body, 0);
-  for (const [x, y] of lobes) {
+  if (s > 0.02 && s < 0.85) p.ell(CX, CY, wx * (1 - s) - 8, wy * (1 - s) - 8, body, 0);
+  // faces: one face until the waist is clearly pinched, then one per lobe (cross-faded, so no doubled face while
+  // the lobes still overlap)
+  const face = (x: number, y: number) => {
     p.ell(x + r * 0.35, y + r * 0.3, r * 0.32, r * 0.28, nuc, 5);
     p.ell(x - r * 0.45, y - r * 0.5, r * 0.22, r * 0.12, "rgba(255,255,255,0.45)", 0);
     const k = r / 120, ex = x - 22 * k, ey = y - 18 * k;
@@ -189,7 +194,11 @@ export const fxCell = (p: Pen, split: number, mood: "happy" | "dead" | "plain", 
     if (mood === "happy") p.arc(ex, ey + 22 * k, 22 * k, 13 * k, 20, 160, 7 * k);
     else if (mood === "dead") p.arc(ex, ey + 34 * k, 18 * k, 9 * k, 200, 340, 6 * k);
     else p.stroke([[ex - 14 * k, ey + 26 * k], [ex + 14 * k, ey + 26 * k]], 6 * k);
-  }
+  };
+  const w = lobes.length < 2 ? 0 : Math.min(1, Math.max(0, (s - 0.3) / 0.25)), g = p.g;
+  if (w < 1) { g.globalAlpha = 1 - w; face(CX, CY); }
+  if (w > 0) { g.globalAlpha = w; for (const [x, y] of lobes) face(x, y); }
+  g.globalAlpha = 1;
 };
 
 /** the countdown: an hourglass, 300 x 460; level 1 full top .. 0 empty; broken = cracked open, sand flying */

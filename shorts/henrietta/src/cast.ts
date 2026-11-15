@@ -280,17 +280,59 @@ const sparkles = (out: Stage, t: number, centre: V3, r: number, n: number, size:
   }
 };
 const tobacco = (out: Stage, pos: V3, h: number, seed: number) => fx(out, `tob${seed % 3}`, 300, 600, (p) => fxTobacco(p, seed), add(pos, 0, h / 2, 0), h / 2, h);
-/** a cell card on the dish (y = its centre) */
-const cell = (out: Stage, pos: V3, size: number, split: number, mood: "happy" | "dead" | "plain", hue: number) => {
+/** a cell card on the dish (y = its centre). Uniform 800 x 800 card (see fxCell), so a split = 1 card's lobes are two
+ *  0.75-size cells offset 0.19 size along the card's x (or y when vert). */
+const cell = (out: Stage, pos: V3, size: number, split: number, mood: "happy" | "dead" | "plain", hue: number, vert = false) => {
   const sq = q(split, 12);
-  fx(out, `cell${mood}${hue % 3}${sq}`, 500, 400, (p) => fxCell(p, sq, mood, hue), pos, size * (1 + 0.6 * sq), size * 0.8);
+  fx(out, `cell${mood}${hue % 3}${sq}${vert ? "v" : ""}`, 800, 800, (p) => fxCell(p, sq, mood, hue, vert), pos, size * 1.6, size * 1.6);
 };
-/** a field of cells on the dish, each dividing on its own clock (period ~1.6 s) */
-const cellField = (out: Stage, t: number, n: number, mood: "happy" | "plain", seed = 0) => {
+const along = (p: V3, v: THREE.Vector3, d: number): V3 => add(p, v.x * d, v.y * d, v.z * d);
+/** a field of cells on the dish, each dividing on its own clock (period ~1.6 s). A cell that finishes its split during
+ *  the shot (t0 = shot start) stays two: its daughters are born exactly where the card's lobes were and ease apart
+ *  along the screen, so nothing ever snaps back to one cell. */
+const cellField = (out: Stage, t: number, t0: number, n: number, mood: "happy" | "plain", cam: CamInfo, seed = 0) => {
   for (let k = 0; k < n; k++) {
-    const a = k * 2.399 + seed, r = 0.68 * Math.sqrt(k + 0.5);
-    const ph = ((t + hh(k, 40 + seed) * 1.6) / 1.6) % 1, split = ph > 0.7 ? (ph - 0.7) / 0.3 : 0;
-    cell(out, add(CELLS, r * Math.cos(a) * 1.15, 0.45 + 0.05 * Math.sin(t * 2 + k), r * Math.sin(a)), 0.8, split, mood, k);
+    const a = k * 2.399 + seed, r = 0.68 * Math.sqrt(k + 0.5), size = 0.8;
+    const p = add(CELLS, r * Math.cos(a) * 1.15, 0.45 + 0.05 * Math.sin(t * 2 + k), r * Math.sin(a));
+    const off = hh(k, 40 + seed) * 1.6, ph = ((t + off) / 1.6) % 1, ph0 = ((t0 + off) / 1.6) % 1;
+    const done = t0 + (1 - ph0) * 1.6; // this cell's first split completes here
+    if (t < done) { cell(out, p, size, ph > 0.7 ? (ph - 0.7) / 0.3 : 0, mood, k); continue; }
+    const e = smooth((t - done) / 0.45), d = size * (0.19 + 0.13 * e), sc = size * (0.75 + 0.1 * e);
+    for (const sx of [-1, 1]) cell(out, along(p, cam.right, sx * d), sc, 0, mood, k);
+  }
+};
+/** the doubling colony (shot 9): generation g lasts DIV_P. Daughters are born where the parent's lobes were (0.75 size)
+ *  and glide out to their H-tree spot while growing; then every cell pinches in two. Splits alternate across the screen
+ *  (world x) and up the screen (world z); spacing is just wider than a cell (0.48 across, 0.6 deep), so the colony fills
+ *  the microscope circle rather than spreading past it. */
+const DIV_P = 0.32;
+const treeSpot = (k: number, G: number): V3 => {
+  let x = 0, z = 0;
+  for (let j = 0; j < G; j++) {
+    const sgn = (k >> j) & 1 ? 1 : -1, d = (j % 2 === 0 ? 0.24 : 0.3) * 2 ** Math.floor((G - 1 - j) / 2);
+    if (j % 2 === 0) x += sgn * d; else z += sgn * d;
+  }
+  return add(CELLS, x, 0.45, z);
+};
+const colony = (out: Stage, t: number, cam: CamInfo) => {
+  const raw = (t - EV.divide0) / DIV_P, g = Math.max(-1, Math.min(5, Math.floor(raw))), size = 0.78;
+  if (g < 0) { cell(out, treeSpot(0, 0), size, 0, "happy", 0); return; }
+  const u = Math.min(1, raw - g), G = g;
+  const fwd = new THREE.Vector3(CELLS[0] - cam.pos.x, CELLS[1] + 0.45 - cam.pos.y, CELLS[2] - cam.pos.z).normalize();
+  const up = cam.right.clone().cross(fwd).normalize(), down = up.clone().multiplyScalar(-1);
+  const e = smooth(u / 0.45), split = G < 5 && u > 0.45 ? (u - 0.45) / 0.55 : 0;
+  for (let k = 0; k < 2 ** G; k++) {
+    const target = treeSpot(k, G);
+    let pos = target, sc = size;
+    if (G > 0 && e < 1) {
+      // born on the lobe of the split that made it: split j = G - 1 ran across (j even: + child on the right) or up
+      // the screen (j odd: + child is nearer the camera = lower on screen)
+      const j = G - 1, parent = k & ((1 << j) - 1), sgn = (k >> j) & 1 ? 1 : -1;
+      const birth = along(treeSpot(parent, j), j % 2 === 0 ? cam.right : down, sgn * 0.19 * size);
+      pos = [birth[0] + (target[0] - birth[0]) * e, birth[1] + (target[1] - birth[1]) * e, birth[2] + (target[2] - birth[2]) * e];
+      sc = size * (0.75 + 0.25 * e);
+    }
+    cell(out, pos, sc, split, "happy", k, G % 2 === 1);
   }
 };
 
@@ -307,7 +349,7 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
       if (id === 27 && t > EV.worldKnows - 0.2) sparkles(out, t, add(P.portrait, 0, 1.3, 0.2), 0.75, 7, 0.14, cam, 2);
       break;
     }
-    case 2: case 26: cellField(out, t, 26, "happy", id); break;
+    case 2: case 26: cellField(out, t, T(s.a), 26, "happy", cam, id); break;
     case 3: sparkles(out, t, add(P.satellite, 0.35, 0.15, 0.6), 0.25, 4, 0.12, cam, 1); break;
     case 4: {
       if (t < T(280)) {
@@ -349,14 +391,7 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
       }
       break;
     }
-    case 9: {
-      const g = Math.min(5, Math.floor((t - EV.divide0) / 0.32)), n = 2 ** Math.max(0, g), u = ((t - EV.divide0) / 0.32) % 1;
-      for (let k = 0; k < Math.min(n, 32); k++) {
-        const a = k * 2.399, r = 0.62 * Math.sqrt(k + 0.5);
-        cell(out, add(CELLS, r * Math.cos(a) * 1.15, 0.45, r * Math.sin(a)), 0.78, g < 5 && u > 0.6 ? (u - 0.6) / 0.4 : 0, "happy", k);
-      }
-      break;
-    }
+    case 9: colony(out, t, cam); break;
     case 11: {
       const lvl = clamp01(1 - (t - T(754)) / 2.1);
       cell(out, add(CELLS, -0.55, 0.55, 0), 0.8, 0, "plain", 0);
