@@ -1,5 +1,9 @@
 # The Birthday Bet: a birthday-paradox short made with this skill
 
+**Watch:** [`birthday_paradox_short.mp4`](birthday_paradox_short.mp4) (68 s, 1080x1920, burned-in captions). The QA record is in [`qa_report.md`](qa_report.md).
+
+![poster](poster.jpg)
+
 A 68 s vertical short (1080x1920, 30 fps) about the birthday paradox: "Put just 23 people in a room, and it's a coin
 flip that two of them share a birthday." It is built from `templates/bridge/` and `templates/audio/`, with these additions:
 - **Burned-in captions** (`Captions.tsx`) so the short works with the sound off. They show 1-4 word chunks, numbers as
@@ -41,5 +45,11 @@ node scripts/stills.mjs BirthdayShort out/look/s_ 120,700,1090,1900 0.5
 node scripts/render-chunks.mjs 3 0-143,144-294,...          # parallel chunks, resumable
 scripts/finish.sh                                           # concat + mux + frame QA -> out/birthday_bet.mp4
 ```
-Chromium uses software WebGL (`gl: "swangle"`), about 7.5 s per 1080p frame on 4 CPU cores. Render the chunks in
-parallel and check stills before the full render.
+Chromium uses software WebGL (`gl: "swangle"`). On 4 CPU cores with 3 parallel workers, each worker took 6.5-12 s per
+1080p frame. The full 2049 frames rendered in 113 min. Check stills before the full render.
+
+Share encode (the crf 16 master is ~145 MB; this one is 49 MB, so it fits under GitHub's 50 MB warning):
+```bash
+ffmpeg -i out/birthday_bet.mp4 -c:v libx264 -preset slow -crf 21 -tune animation -maxrate 7M -bufsize 14M \
+  -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart out/birthday_paradox_short.mp4
+```
