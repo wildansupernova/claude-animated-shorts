@@ -1,0 +1,23 @@
+# speed | pause after (s) | text
+1.08 | 0.32 | In {1970,|nineteen seventy,} Oregon got rid of a dead *whale*... with half a ton of *dynamite*.
+1.20 | 0.08 | A forty-five foot sperm whale has washed up on a beach in Florence, Oregon.
+1.12 | 0.10 | It weighs eight tons, and it *stinks*.
+1.22 | 0.06 | The job goes to the *Highway* Division, because back then, Oregon's beaches legally counted as highways.
+1.15 | 0.10 | So they treat it like a giant *rock* in the road.
+1.18 | 0.08 | The plan? Blow it into tiny pieces, and let the *seagulls* eat the rest.
+1.18 | 0.08 | One local, an explosives veteran named *Walter*, warns them: twenty *sticks* is plenty.
+1.00 | 0.22 | They use twenty *cases*.
+1.20 | 0.10 | Seventy-five people gather to watch. A TV crew starts rolling.
+0.95 | 0.10 | Three... two... one...
+1.00 | 0.30 | *Boom!*
+1.05 | 0.10 | And then, it starts *raining* *whale*.
+1.25 | 0.10 | Huge slabs of blubber fly hundreds of feet, splattering the crowd, the cars, and the dunes.
+1.02 | 0.16 | *Wait...* weren't they supposed to be *tiny* pieces?
+1.15 | 0.06 | You see, dynamite doesn't make things disappear. It just *throws* them.
+1.18 | 0.08 | And tough, rubbery blubber doesn't shred into crumbs. It rips into *slabs*.
+1.18 | 0.06 | It's like trying to get rid of a pudding with a firecracker. You don't get less pudding. You get pudding *everywhere*.
+1.20 | 0.08 | Even worse, the blast scared off every *seagull*, and most of the whale is still lying there.
+1.15 | 0.10 | Oh, and one slab *flattened* a brand-new car in the parking lot.
+1.05 | 0.12 | Whose car? *Walter's.* The guy who warned them.
+1.10 | 0.14 | He'd just bought it in a "Whale of a Deal" sale.
+1.10 | 0.00 | And in {2020,|twenty twenty,} the town named a park... *Exploding* *Whale* *Memorial* Park.
