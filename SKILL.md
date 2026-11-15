@@ -16,7 +16,7 @@ The style reference is a channel studied privately (`references/`: STYLE_BIBLE.m
 - Never say the channel's name in a voice-over or description.
 
 User rules that apply:
-- No captions or labels in the video.
+- No captions or labels in the video, unless the user asks for them. If they do, burn in word-chunk captions as `examples/birthday-bet/src/videos/birthday/Captions.tsx` does, for viewers who watch with the sound off.
 - English only.
 - Voice: one steady tone.
 - Jokes are researched real facts.
@@ -141,6 +141,14 @@ lighting 5-6, ink 6, textures 5-6, characters 7, depth 6-7, composition 6-7 (fro
 5. Contracts between owners live in exported constants (e.g. `NOINK` layer from ink.ts, `dofAt`/`FOREGROUND` from story.ts, `LIGHTS`/`LOOK` from lights.ts). Changing a contract means telling every owner that reads it.
 
 ## Gotchas
+- **Linux / CPU-only containers** (proven on The Birthday Bet, `examples/birthday-bet/`):
+  - Render with Playwright's `chrome-headless-shell` and `chromiumOptions: { gl: "swangle" }` (software WebGL).
+  - Expect about 7.5 s per 1080x1920 frame, so check stills first.
+  - Then render the shots as parallel, resumable chunks (`scripts/render-chunks.mjs`) and join them with ffmpeg concat.
+  - Render at 1080x1920 here, not 2K.
+- **Time every cue from words.json by word** (`cue(line, "word")` in story.ts), not by hand-typed frame numbers. Export the timeline to JSON for the sound script.
+- **Additive glow lines** (pair webs, beams): scale each line's brightness by about sqrt(253 / count), or a dense web blows out to white.
+- **Low golden backlight** (el 7) puts a whole lawn in violet shade and reads as night. For long golden scenes, override the shot's `sunEl` to about 24.
 - Kenney nature-kit materials are teal: recolour them by material name in build.ts.
 - Cameras end up inside houses: the sight-line culler in build.ts/world.ts removes anything blocking any camera ray.
 - Ink in the same merged effect pass as DOF gets overwritten. Ink must be its own pass before the blur.
