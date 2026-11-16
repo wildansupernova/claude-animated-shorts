@@ -67,7 +67,10 @@ export const sign = (p: Pen, w: number, h: number, lines: string[], o: { bg?: st
   g.textAlign = "center"; g.textBaseline = "middle"; g.font = `${size}px ${FONT}`; g.lineJoin = "round";
   lines.forEach((s, i) => {
     const y = h / 2 + (i - (lines.length - 1) / 2) * size * 1.05;
-    g.lineWidth = size * 0.16; g.strokeStyle = INK; g.strokeText(s, w / 2, y);
+    g.font = `${size}px ${FONT}`;
+    const fit = Math.min(size, (size * (w - 90)) / Math.max(1, g.measureText(s).width)); // shrink long lines to fit the board
+    g.font = `${fit}px ${FONT}`;
+    g.lineWidth = fit * 0.16; g.strokeStyle = INK; g.strokeText(s, w / 2, y);
     g.fillStyle = i === 0 ? fg : (o.fg ? fg : WHITE); g.fillText(s, w / 2, y);
   });
 };
