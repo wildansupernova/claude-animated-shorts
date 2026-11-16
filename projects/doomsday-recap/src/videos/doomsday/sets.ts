@@ -15,6 +15,7 @@ export const PLACES = {
 export type PlaceId = keyof typeof PLACES;
 
 // ---------------- helpers ----------------
+const L1 = (a: number, b: number, t: number) => a + (b - a) * t;
 const rng = (seed: number) => { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; };
 const mats = new Map<string, THREE.Material>();
 export const lam = (key: string, make: () => THREE.MeshLambertMaterialParameters) => {
@@ -311,6 +312,8 @@ export const buildPlaces = (root: THREE.Object3D) => {
     const mesa = col("#c8703a"), mesa2 = col("#b05a30"), rockM = col("#a8805a"), R = rng(3);
     for (let i = 0; i < 14; i++) { const a = R() * Math.PI * 2, r = 260 + R() * 260; b.add(new THREE.CylinderGeometry(20 + R() * 30, 30 + R() * 34, 26 + R() * 40, 7), i % 2 ? mesa : mesa2, M4(Math.cos(a) * r, 10, Math.sin(a) * r)); }
     for (let i = 0; i < 40; i++) { const a = R() * Math.PI * 2, r = 22 + R() * 140; b.add(new THREE.DodecahedronGeometry(0.6 + R() * 2.2, 0), rockM, M4(Math.cos(a) * r, 0.3, Math.sin(a) * r, R() * 3, [1, 0.7, 1])); }
+    // Magneto's rock tower at (-20, 0, -6): top at y = 4.4
+    for (let i = 0; i < 7; i++) { const k = i / 6, r = L1(3.2, 1.3, k); b.add(new THREE.DodecahedronGeometry(r, 0), rockM, M4(-20 + Math.sin(i * 2.1) * 0.5 * (1 - k), 0.6 + k * 3.2, -6.4 + Math.cos(i * 1.7) * 0.4 * (1 - k), i, [1, 0.7, 1])); }
     // crater for Thor
     b.add(new THREE.TorusGeometry(5, 1.1, 6, 24), col("#b8905a"), new THREE.Matrix4().makeRotationX(Math.PI / 2).setPosition(0, 0.2, 0));
     // ruins (Void / battlefield) around x = -120

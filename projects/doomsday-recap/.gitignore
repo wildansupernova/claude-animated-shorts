@@ -3,3 +3,5 @@ out/
 public/voice/*.wav
 public/audio/
 *.mp4
+audio/out/*.wav
+audio/__pycache__/

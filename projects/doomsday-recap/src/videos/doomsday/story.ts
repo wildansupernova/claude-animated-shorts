@@ -194,10 +194,9 @@ shot(1, 352, 444, "mansion", "day", [D(352, [0.4, 1.5, 6.5], [0, 1.0, -2], { fov
     { id: "folk4", x: -1.7, z: -4.6, pose: "idle", expr: "smile_closed", seed: 8 }, { id: "nightcrawler", x: 1.8, z: -4.8, pose: "idle", expr: "grin", seed: 9 }],
     fx: f > 420 ? [{ k: "sparkle", x: 0, y: 2.6, z: -1, w: 0.5, col: "#ffd84a" }] : [] }));
 // 444-524 "His old friend Magneto wants mutants on top": Magneto on a rock tower, metal swirling (desert, golden)
-shot(1, 444, 524, "desert", "battle", [D(444, [-16.5, 2.2, 2.5], [-20, 5.6, -6], { fov: 42, rate: 0.0022, roll: -0.03 }), { f: 490, dur: 22, s: (f) => dolly([-18.2, 4.4, -1.6], [-20, 5.8, -6], pushK(f, 490, 0.003), { fov: 38, roll: 0.04 }) }],
+shot(1, 444, 524, "desert", "battle", [D(444, [-17.4, 2.6, 0.2], [-20, 5.4, -6], { fov: 42, rate: 0.0022, roll: -0.03 }), { f: 490, dur: 22, s: (f) => dolly([-18.2, 4.4, -1.6], [-20, 5.8, -6], pushK(f, 490, 0.003), { fov: 38, roll: 0.04 }) }],
   (f) => ({ actors: [{ id: "magneto", x: -20, y: 4.4, z: -6, s: 1.1, pose: f > 488 ? "lift" : "hips", expr: f > 488 ? "grin" : "smile", flutter: 0.6, shadow: false },
     { id: "mystique", x: -19.0, y: 0, z: -3.6, pose: "hips", expr: "smile", seed: 5 }],
-    fx: [{ k: "puff", x: -20, y: 2.2, z: -6.4, w: 5, h: 4.4, col: "#9a8a7a", seed: 4 }],
     particles: ring(90, [-20, 4.6, -6], 3.2 + 0.4 * Math.sin(f * 0.1), "#a9adb4", f * 0.06, 0.4), particleSize: 0.35 }));
 // 524-633 "Remember these faces. Twenty-six years later, they're coming back.": the chess game
 shot(1, 524, 633, "mansion", "golden", [D(524, [0, 1.3, 5.2], [0, 0.95, 0], { fov: 40, rate: 0.0025 }), D(586, [0, 1.2, 4.0], [0, 1.0, 0], { fov: 38, dur: 28, rate: 0.002, punch: 0.005, n: 30 })],
@@ -219,7 +218,7 @@ shot(2, 737, 814, "city", "day", [M(737, (f) => { const t = glide(at(f, 737, 814
 // 814-875 "A super soldier wakes up from the ice"
 shot(2, 814, 875, "snow", "snow", [D(814, [0.5, 1.6, 4.6], [0, 1.4, 0], { fov: 40, rate: 0.003, punch: 0.006, n: 28 })],
   (f, H) => { H.ice.visible = f < 846; H.ice.scale.setScalar(f < 840 ? 1 : 1 + 0.05 * (f - 840)); return { actors: [{ id: "cap", x: 0, z: 0, pose: f > 846 ? "fist" : "idle", expr: f < 838 ? "neutral" : f < 846 ? "shock" : "grin", blink: f < 838 ? 1 : undefined, glow: 0 }],
-    fx: f >= 840 && f < 852 ? [{ k: "crack", x: 0, y: 1.6, z: 0.65, w: 1.6, h: 0.6, col: "#dff6ff", seed: 5 }, { k: "burst", x: 0.9, y: 1.9, z: 0.5, w: 1.0, t: at(f, 840, 852), col: "#e6f7ff" }] : [],
+    fx: f >= 840 && f < 852 ? [{ k: "crack", x: 0, y: 0.75, z: 0.65, w: 1.3, h: 0.45, col: "#dff6ff", seed: 5 }, { k: "burst", x: 0.9, y: 1.9, z: 0.5, w: 1.0, t: at(f, 840, 852), col: "#e6f7ff" }] : [],
     particles: f >= 846 ? dust(70, 0, 0.6, 0, at(f, 846, 870), 60, "#dff6ff", 2, 1) : [], particleSize: 0.1 }; });
 // 875-942 "A god of thunder falls from the sky": Thor drops into the desert, crater + dust
 shot(2, 875, 942, "desert", "desert", [D(875, [2, 2.2, 13], [0, 6, 0], { fov: 46, rate: 0.002 }), { f: 908, cut: true, s: (f) => dolly([1.2, 1.4, 6.5], [0, 1.2, 0], pushK(f, 908, 0.003), { fov: 40, roll: 0.04 }) }],
@@ -295,7 +294,7 @@ shot(5, 1860, 1950, "tva", "tva", [M(1860, (f) => { const t = glide(at(f, 1860, 
 shot(5, 1950, 2054, "space", "endtime", [D(1950, [304, 4, 10], [300, 2.2, -8], { fov: 44, rate: 0.002 }), { f: 2004, cut: true, s: (f) => dolly([303.6, 1.8, -1.2], [300, 1.6, -8.4], pushK(f, 2004, 0.003), { fov: 40, roll: -0.04 }) }],
   (f, H) => { showBranches(H, null, 0); return { actors: [{ id: "hwr", x: 300, z: -9.5, y: 1.2, pose: f > 2008 ? "shrug" : "hips", expr: f > 2008 ? "shock" : "smile", alpha: 1 - at(f, 2030, 2050), seed: 4 },
     { id: "sylvie", x: 301.1, z: -5.6 - 1.6 * sm(f, 1990, 2006), pose: f > 2004 ? "throw" : "idle", expr: "stern", mirror: true, seed: 5, flutter: 0.4 }, { id: "lokiTVA", x: 298.7, z: -6.0, pose: "reach", expr: f > 2010 ? "shock" : "nervous", seed: 6 }],
-    fx: f >= 2009 && f < 2020 ? [{ k: "burst", x: 300.4, y: 2.6, z: -8.6, w: 3, t: at(f, 2009, 2020), col: "#ffe0a0" }] : [] }; });
+    fx: f >= 2009 && f < 2016 ? [{ k: "burst", x: 300.8, y: 2.4, z: -8.2, w: 1.4, t: at(f, 2009, 2016), col: "#ffe0a0" }] : [] }; });
 // 2054-2144 "and one timeline explodes into infinite universes"
 shot(5, 2054, 2144, "space", "endtime", [M(2054, (f) => { const t = glide(at(f, 2054, 2144)); return { pos: [300 + L(30, 90, t), L(20, 70, t), L(120, 260, t)], look: [300, L(40, 80, t), -10], fov: 50 }; })],
   (f, H) => { showBranches(H, "tubes", at(f, 2056, 2120)); bubbles(H, f, [300, 120, -10], 200 * sm(f, 2090, 2140) + 1, 0); return { actors: [] }; });
@@ -311,7 +310,7 @@ shot(6, 2300, 2365, "city", "snowNight", [D(2300, [1.2, 1.7, 28], [0, 1.7, 21], 
     particles: snowfall(f, 0, 22, 120, 16, 8), particleSize: 0.06 }));
 // 2365-2414 "Villains from other universes pour in"
 shot(6, 2365, 2414, "city", "snowNight", [M(2365, (f) => ({ pos: [1.5, 1.6, 22], look: [0, L(6, 8, at(f, 2365, 2414)), 4], fov: 48 }))],
-  (f) => ({ actors: [{ id: "goblin", x: -1.6, y: L(16, 4.5, sm(f, 2368, 2392)), z: 6, pose: "cheer", legs: "fly", expr: "laugh", shadow: false, seed: 4 }, { id: "ock", x: 1.4, y: L(18, 0, sm(f, 2376, 2398)), z: 8, s: 1.1, pose: "fight", expr: "grin", seed: 5 }],
+  (f) => ({ actors: [{ id: "goblin", x: -1.2, y: L(14, 3.4, sm(f, 2368, 2392)), z: 13, s: 1.2, pose: "cheer", legs: "fly", expr: "laugh", shadow: false, seed: 4 }, { id: "ock", x: 1.1, y: L(16, 0, sm(f, 2376, 2398)), z: 14, s: 1.2, pose: "fight", expr: "grin", seed: 5 }],
     fx: [{ k: "crack", x: 0, y: 16, z: 0, w: 14, h: 4.5, col: "#ffb347", seed: 9 }], particles: snowfall(f, 0, 20, 140, 30, 18), particleSize: 0.1 }));
 // 2414-2471 "along with two more Spider-Men" — they point at each other
 shot(6, 2414, 2471, "city", "snowNight", [D(2414, [0, 1.4, 30.5], [0, 1.0, 23.8], { fov: 42, rate: 0.0028, punch: 0.006, n: 26 })],
@@ -335,11 +334,11 @@ shot(7, 2710, 2800, "space", "incursion", [D(2710, [0, 10, 220], [0, 0, 0], { fo
 
 // ===== BLACK PANTHER: WAKANDA FOREVER (2022) =====
 // 2800-2945 Shuri on the shore; Namor rises from the sea
-shot(8, 2800, 2945, "ocean", "ocean", [D(2800, [3, 1.6, 22], [0, 1.4, 12], { fov: 42, rate: 0.002 }), { f: 2850, cut: true, s: (f) => dolly([3.0, 1.8, 17.5], [-1, 1.8, -6], pushK(f, 2850, 0.0022), { fov: 40, roll: 0.03 }) }],
-  (f) => ({ actors: [{ id: "shuri", x: f < 2850 ? 0 : 1.7, z: f < 2850 ? 12 : 13.2, y: 0.4, pose: f < 2850 ? "hips" : "fight", expr: "stern", seed: 3 },
-    ...(f >= 2850 ? [{ id: "namor" as CastId, x: -1, y: L(-2.2, 1.4, sm(f, 2852, 2876)), z: -6, s: 1.3, pose: "cross" as Pose, expr: "stern" as Expr, shadow: false, seed: 4 }] : [])],
-    fx: f >= 2852 && f < 2880 ? [{ k: "puff", x: -1, y: 0.4, z: -5.5, w: 4, h: 2.4, col: "#dff6ff", seed: 6, alpha: 1 - at(f, 2868, 2880) }] : [],
-    particles: f >= 2852 ? dust(600, -1, -0.2, -6, at(f, 2852, 2890), 80, "#bfefff", 2.4, 2) : [], particleSize: 0.12 }));
+shot(8, 2800, 2945, "ocean", "ocean", [D(2800, [3, 1.6, 22], [0, 1.4, 12], { fov: 42, rate: 0.002 }), { f: 2850, cut: true, s: (f) => dolly([2.4, 1.6, 15], [-0.6, 1.9, 3], pushK(f, 2850, 0.0022), { fov: 42, roll: 0.03 }) }],
+  (f) => ({ actors: [{ id: "shuri", x: f < 2850 ? 0 : 1.15, z: f < 2850 ? 12 : 11.8, y: 0.4, pose: f < 2850 ? "hips" : "fight", expr: "stern", seed: 3 },
+    ...(f >= 2850 ? [{ id: "namor" as CastId, x: -0.8, y: L(-2.6, 0.9, sm(f, 2852, 2876)), z: 3, s: 1.2, pose: "cross" as Pose, expr: "stern" as Expr, shadow: false, seed: 4 }] : [])],
+    fx: f >= 2852 && f < 2880 ? [{ k: "puff", x: -0.8, y: 0.3, z: 3.4, w: 3, h: 1.8, col: "#dff6ff", seed: 6, alpha: 1 - at(f, 2868, 2880) }] : [],
+    particles: f >= 2852 ? dust(600, -0.8, -0.2, 3, at(f, 2852, 2890), 80, "#bfefff", 2.4, 2) : [], particleSize: 0.1 }));
 
 // ===== ANT-MAN AND THE WASP: QUANTUMANIA (2023) =====
 // 2945-3034 pulled into the Quantum Realm
@@ -373,7 +372,7 @@ shot(11, 3287, 3395, "mansion", "dusk", [D(3287, [1.2, 1.6, -36], [0, 3.2, -54],
 shot(11, 3395, 3454, "mansion", "dusk", [D(3395, [1.2, 1.4, -37], [0, 1.0, -42], { fov: 40, rate: 0.002 })],
   () => ({ actors: [{ id: "deadpool", x: 0.75, z: -41.4, pose: "idle", expr: "nervous", mirror: true, seed: 3 }], fx: [{ k: "grave", x: -0.45, y: 0.6, z: -42, w: 1.0, h: 1.2, text: ["LOGAN"] }] }));
 // 3454-3530 "So he drags in the worst Wolverine in the multiverse"
-shot(11, 3454, 3530, "desert", "void", [D(3454, [-103.4, 1.6, 12.5], [-104.4, 1.1, 6], { fov: 42, rate: 0.0022 }), { f: 3484, dur: 20, s: (f) => dolly([-103.2, 1.5, 10.6], [-104, 1.1, 6], pushK(f, 3484, 0.0025), { fov: 38, roll: 0.04 }) }],
+shot(11, 3454, 3530, "desert", "void", [D(3454, [-103.0, 1.6, 12.5], [-104.0, 1.1, 6], { fov: 42, rate: 0.0022 }), { f: 3484, dur: 20, s: (f) => dolly([-102.8, 1.5, 10.8], [-103.7, 1.1, 6], pushK(f, 3484, 0.0025), { fov: 40, roll: 0.04 }) }],
   (f) => ({ actors: [{ id: "deadpool", x: -103.5 + 0.5 * sm(f, 3460, 3500), z: 6, pose: "point", legs: "walk", phase: f / FPS, expr: "grin", seed: 3 }, { id: "wolverine", x: -104.5 + 0.5 * sm(f, 3460, 3500), z: 5.8, pose: "cross", expr: "stern", seed: 4 }],
     fx: [{ k: "portal", x: -105.6, y: 1.3, z: 5, w: 2.4 * sm(f, 3456, 3470) * (1 - at(f, 3500, 3510)), t: f * 0.02, col: "#f08a2c", col2: "#ffe0a0" }] }));
 // 3530-3623 "survives the Void, where forgotten heroes like Gambit end up"
@@ -422,7 +421,7 @@ shot(13, 4326, 4475, "city", "day", [M(4326, (f) => { const t = glide(at(f, 4326
 
 // ===== THE FANTASTIC FOUR: FIRST STEPS (2025) =====
 // 4475-4601 "That's the Fantastic Four, from Earth 828, a retro-future world."
-shot(14, 4475, 4601, "retro", "retro", [D(4475, [0.4, 1.4, 8.5], [0, 1.1, 0], { fov: 42, rate: 0.0025 }), M(4546, (f) => { const t = glide(at(f, 4546, 4601)); return { pos: [L(1, 30, t), L(1.5, 30, t), L(9, 70, t)], look: [0, L(1.4, 40, t), L(0, -100, t)], fov: L(42, 50, t) }; }, false, 30)],
+shot(14, 4475, 4601, "retro", "retro", [D(4475, [0.3, 1.4, 10.5], [0, 1.1, 0], { fov: 42, rate: 0.0025 }), M(4546, (f) => { const t = glide(at(f, 4546, 4601)); return { pos: [L(1, 30, t), L(1.5, 30, t), L(9, 70, t)], look: [0, L(1.4, 40, t), L(0, -100, t)], fov: L(42, 50, t) }; }, false, 30)],
   (f, H) => { H.saucers.forEach((m, i) => { m.visible = true; const a = f * 0.004 + i; m.position.set(Math.cos(a) * (60 + i * 15), 30 + i * 8, -60 + Math.sin(a) * 50); });
     return { actors: (["reed", "sue", "torch", "thing"] as CastId[]).map((id, i) => ({ id, x: -1.5 + i * 0.95 + (i === 3 ? 0.2 : 0), z: i % 2 ? -0.4 : 0, s: id === "thing" ? 1.35 : 1, pose: (["hips", "wave", "cheer", "cross"] as Pose[])[i], wave: Math.sin(f * 0.2), expr: (i === 3 ? "stern" : "grin") as Expr, seed: 500 + i, glow: 1 })) }; });
 // 4601-4673 "They beat Galactus, a planet eater"
@@ -433,10 +432,10 @@ shot(14, 4673, 4721, "retro", "retro", [D(4673, [0.3, 1.3, 4.0], [0.2, 1.1, 0], 
   (f) => ({ actors: [{ id: "sue", x: 0, z: 0, pose: "hold", expr: "smile_closed", seed: 3 }, { id: "reed", x: 0.95, z: -0.6, pose: "idle", expr: "smile", seed: 4 }],
     fx: [{ k: "hero", x: 0.02, y: 0.86, z: 0.12, w: 0.33, h: 0.55, text: ["franklin", "smile", "idle"] }, { k: "sparkle", x: 0.32, y: 1.18, z: 0.15, w: 0.18 + 0.03 * Math.sin(f * 0.3), col: "#9fe6ff" }] }));
 // 4721-4810 "But four years later, someone comes to visit little Franklin."
-shot(14, 4721, 4810, "retro", "retroNight", [D(4721, [400.5, 1.3, 3.8], [400, 0.8, -1], { fov: 44, rate: 0.002 })],
-  (f) => ({ actors: [{ id: "franklin", x: 399.4, z: -0.6, pose: "sit", legs: "sit", expr: f > 4770 ? "smile" : "smile_closed", seed: 4 },
-    { id: "doom", x: L(402.6, 400.9, sm(f, 4750, 4800)), z: -2.2, legs: f < 4800 ? "walk" : "stand", phase: f / FPS * 0.7, pose: "idle", expr: "stern", alpha: sm(f, 4748, 4760), seed: 5, mirror: true }],
-    fx: [{ k: "blocks", x: 398.6, y: 0.2, z: -0.2, w: 0.6, h: 0.4 }] }));
+shot(14, 4721, 4810, "retro", "retroNight", [D(4721, [400.9, 1.35, 4.4], [400.6, 0.85, -1.2], { fov: 44, rate: 0.002 })],
+  (f) => ({ actors: [{ id: "franklin", x: 399.9, z: -0.6, pose: "sit", legs: "sit", expr: f > 4770 ? "smile" : "smile_closed", seed: 4 },
+    { id: "doom", x: L(402.2, 401.0, sm(f, 4750, 4800)), z: -2.2, legs: f < 4800 ? "walk" : "stand", phase: f / FPS * 0.7, pose: "idle", expr: "stern", alpha: sm(f, 4748, 4760), seed: 5, mirror: true }],
+    fx: [{ k: "blocks", x: 399.3, y: 0.2, z: -0.1, w: 0.5, h: 0.33 }] }));
 // 4810-4870 "Someone in a metal mask."
 shot(14, 4810, 4870, "retro", "retroNight", [D(4810, [400.9, 1.95, 1.0], [401.2, 1.92, -2.2], { fov: 34, rate: 0.002, punch: 0.006, n: 30, roll: -0.04 })],
   (f) => ({ actors: [{ id: "doom", x: 401.2, z: -2.2, pose: "reach", expr: "stern", flutter: 0.3, seed: 5, mirror: true }] }));
@@ -460,7 +459,7 @@ shot(16, 5093, 5186, "space", "incursion", [D(5093, [0, 30, 260], [0, 0, 0], { f
   (f, H) => { bubbles(H, f, [0, 0, 0], 160, sm(f, 5140, 5186)); planet(H, 2, [L(-200, -60, sm(f, 5100, 5186)), 20, -40], 30); planet(H, 3, [L(200, 60, sm(f, 5100, 5186)), -20, -40], 30);
     return { actors: [], fx: f > 5160 ? [{ k: "crack", x: 0, y: 0, z: 40, w: 200, h: 60, col: "#ff6a3a", seed: 33, full: true, alpha: sm(f, 5160, 5170) }] : [] }; });
 // 5186-5265 "and Doctor Doom is standing right in the middle of it."
-shot(16, 5186, 5265, "castle", "storm", [D(5186, [1.2, 1.3, 8.5], [0, 1.7, 0], { fov: 44, rate: 0.003 }), { f: 5226, dur: 26, s: (f) => dolly([0.5, 1.9, 6], [0, 2.1, 0], pushK(f, 5226, 0.002, 0.006), { fov: 38, roll: -0.04 }) }],
+shot(16, 5186, 5265, "castle", "storm", [D(5186, [0.9, 1.4, 6.2], [0, 1.5, 0], { fov: 44, rate: 0.003 }), { f: 5226, dur: 26, s: (f) => dolly([0.5, 1.9, 6], [0, 2.1, 0], pushK(f, 5226, 0.002, 0.006), { fov: 38, roll: -0.04 }) }],
   (f) => ({ actors: [{ id: "doom", x: 0, z: 0, s: 1.1, pose: "lift", expr: "stern", flutter: 0.7 + 0.3 * Math.sin(f * 0.2) }],
     particles: ring(120, [0, 0.4, 0], 5 + 0.5 * Math.sin(f * 0.05), "#8aff9a", f * 0.04, 0.5), particleSize: 0.18,
     fx: f >= 5190 && f < 5206 ? [{ k: "bolt", x: -6, y: 10, z: -10, w: 2.4, h: 10, seed: 8 }, { k: "bolt", x: 7, y: 11, z: -14, w: 2.4, h: 10, seed: 9 }] : [] }));
@@ -486,8 +485,8 @@ shot(16, 5441, 5473, "mansion", "golden", [D(5441, [0.3, 1.0, 4], [0, 1.6, 0], {
 shot(16, 5473, 5499, "castle", "storm", [D(5473, [-0.3, 1.0, 4.2], [0, 1.7, 0], { fov: 38, rate: 0.004, roll: -0.04 })],
   (f) => ({ actors: [{ id: "thor", x: 0, z: 0, pose: "fist", expr: "grin", flutter: 0.8, seed: 3 }], fx: [{ k: "bolt", x: 0.5, y: 4.6, z: -0.2, w: 0.7, h: 2.6, seed: (f >> 2) % 5 }] }));
 // 5499-5563 "Professor X and Magneto are back."
-shot(16, 5499, 5563, "mansion", "golden", [D(5499, [0, 1.3, 5.2], [0, 1.0, 0], { fov: 40, rate: 0.0025, punch: 0.005, n: 30 })],
-  () => ({ actors: [{ id: "profx", x: -0.55, z: 0, pose: "sit", legs: "sit", chair: true, expr: "smile_closed", facing: 1 }, { id: "magneto", x: 0.55, z: -0.3, pose: "hips", expr: "grin", facing: -1, flutter: 0.4 }] }));
+shot(16, 5499, 5563, "mansion", "golden", [D(5499, [0, 1.3, 6.0], [0, 1.0, 0], { fov: 40, rate: 0.0025, punch: 0.005, n: 30 })],
+  () => ({ actors: [{ id: "profx", x: -0.48, z: 0, pose: "sit", legs: "sit", chair: true, expr: "smile_closed", facing: 1 }, { id: "magneto", x: 0.42, z: -0.3, pose: "hips", expr: "grin", facing: -1, flutter: 0.4 }] }));
 // 5563-5636 "And under Doom's mask? Robert Downey Junior."
 shot(16, 5563, 5636, "castle", "storm", [D(5563, [0.3, 2.0, 3.6], [0, 1.95, 0], { fov: 36, rate: 0.002, punch: 0.006, n: 30 })],
   (f) => ({ actors: [{ id: "doom", x: 0, z: 0, pose: "hold", expr: "stern", flutter: 0.4 }],
