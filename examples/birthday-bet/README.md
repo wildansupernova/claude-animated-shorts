@@ -1,6 +1,6 @@
 # The Birthday Bet: a birthday-paradox short made with this skill
 
-**Watch:** [`birthday_paradox_short.mp4`](birthday_paradox_short.mp4) (burned-in captions). The source here is v3, "Would you take this bet?" (55 s). The MP4 is still the v1 cut (68 s, one narrator) until the v3 render is committed. The QA record is in [`qa_report.md`](qa_report.md).
+**Watch:** [`birthday_paradox_short.mp4`](birthday_paradox_short.mp4) (55 s, burned-in captions): v3, "Would you take this bet?". The QA record is in [`qa_report.md`](qa_report.md).
 
 ![poster](poster.jpg)
 
@@ -50,14 +50,14 @@ python voice/gen_voice.py                                   # needs `pip install
 cp voice/words.json src/videos/birthday/words.json
 node scripts/dump-timeline.mjs                              # out/timeline.json
 python audio/sound.py && python audio/levels.py             # out/audio/mix.wav (+ stems, cues.md)
-node scripts/stills.mjs BirthdayShort out/look/s_ 120,700,1090,1900 0.5
-node scripts/render-chunks.mjs 3 0-143,144-294,...          # parallel chunks, resumable
+node scripts/stills.mjs BirthdayShort out/look/s_ 40,600,1100,1490 0.5
+node scripts/render-chunks.mjs 3 935-1010,1460-1559,...      # parallel chunks, resumable
 scripts/finish.sh                                           # concat + mux + frame QA -> out/birthday_bet.mp4
 ```
-Chromium uses software WebGL (`gl: "swangle"`). On 4 CPU cores with 3 parallel workers, each worker took 6.5-12 s per
-1080p frame. The full 2049 frames rendered in 113 min. Check stills before the full render.
+Chromium uses software WebGL (`gl: "swangle"`). On 4 CPU cores with 3 parallel workers, each worker took 6.7-16 s per
+1080p frame (the 253-person crowd and the web are the slowest). The full 1648 frames rendered in 103 min, in 19 chunks. Check stills before the full render.
 
-Share encode (the crf 16 master is ~145 MB; this one is 49 MB, so it fits under GitHub's 50 MB warning):
+Share encode (the crf 16 master is ~118 MB; this one is 41 MB, so it fits under GitHub's 50 MB warning):
 ```bash
 ffmpeg -i out/birthday_bet.mp4 -c:v libx264 -preset slow -crf 21 -tune animation -maxrate 7M -bufsize 14M \
   -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart out/birthday_paradox_short.mp4
