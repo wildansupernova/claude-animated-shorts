@@ -40,6 +40,7 @@
   --good-soft: #def2e5;
   --bad: #b3261e;
   --bad-soft: #fbe4e1;
+  --bad-line: #efb4ad;
   --font-display: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
@@ -71,6 +72,7 @@
     --good-soft: #143224;
     --bad: #f28b80;
     --bad-soft: #3a1c19;
+    --bad-line: #6e2c26;
     color-scheme: dark;
   }
 }
@@ -100,6 +102,7 @@
   --good-soft: #143224;
   --bad: #f28b80;
   --bad-soft: #3a1c19;
+  --bad-line: #6e2c26;
   color-scheme: dark;
 }
 
@@ -212,6 +215,21 @@ input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .divider { height: 1px; background: var(--line); }
 .error { color: var(--bad); font-size: 12.5px; font-weight: 600; }
+.sub-field { padding-left: 12px; border-left: 2px solid var(--line); }
+.sub-field.is-off { opacity: 0.55; }
+.field .check { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 500; cursor: pointer; width: fit-content; }
+.check input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
+input:disabled { cursor: not-allowed; opacity: 0.5; }
+.warn {
+  display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 8px; align-items: start;
+  padding: 10px 12px; border-radius: 8px; background: var(--bad-soft); border: 1px solid var(--bad-line);
+  color: var(--bad); font-size: 12.5px; line-height: 1.45;
+}
+.warn svg { width: 16px; height: 16px; margin-top: 1px; }
+.warn strong { display: block; font-size: 13px; }
+.warn .link-btn { display: block; color: var(--bad); font-size: 12.5px; margin-top: 4px; }
+.field.is-warn .num { border-color: var(--bad); }
+.field.is-warn input[type="range"] { accent-color: var(--bad); }
 
 /* Results */
 .results { display: grid; gap: 20px; min-width: 0; }
@@ -274,7 +292,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
 .seg.biaya { background: var(--b-biaya); color: var(--on-fill); }
 .seg.zakat { background: var(--b-zakat); color: var(--on-fill-light); }
 .seg.tumbuh { background: var(--b-tumbuh); color: var(--on-fill); }
-.seg-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.seg-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; align-items: end; }
 .seg-legend li { display: grid; grid-template-columns: 10px minmax(0, 1fr); column-gap: 8px; row-gap: 2px; align-items: baseline; }
 .sw { width: 10px; height: 10px; border-radius: 2px; align-self: center; }
 .sw.biaya { background: var(--b-biaya); }
@@ -395,7 +413,26 @@ tr.dead td { color: var(--muted); }
           <span class="num"><input id="inflasi" type="number" min="0" max="15" step="0.1" value="2.5" inputmode="decimal"><span class="unit">%</span></span>
         </div>
         <input id="inflasiRange" type="range" min="0" max="15" step="0.1" value="2.5" aria-label="Inflasi per tahun">
-        <p class="help">Kenaikan biaya hidup setiap tahun.</p>
+        <p class="help">Kenaikan harga setiap tahun. Biaya hidup ikut naik sebesar ini.</p>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="gaya">Kenaikan gaya hidup</label>
+          <span class="num"><input id="gaya" type="number" min="0" max="10" step="0.1" value="0" inputmode="decimal"><span class="unit">%</span></span>
+        </div>
+        <input id="gayaRange" type="range" min="0" max="10" step="0.1" value="0" aria-label="Kenaikan gaya hidup per tahun di atas inflasi">
+        <p class="help">Per tahun, di luar inflasi. Contoh: anak sekolah, biaya kesehatan, lebih sering liburan.</p>
+      </div>
+
+      <div class="field sub-field" id="durasiField">
+        <div class="field-head">
+          <label for="durasi">Selama</label>
+          <span class="num"><input id="durasi" type="number" min="1" max="50" step="1" value="10" inputmode="numeric"><span class="unit">th</span></span>
+        </div>
+        <input id="durasiRange" type="range" min="1" max="50" step="1" value="10" aria-label="Lama kenaikan gaya hidup dalam tahun">
+        <label class="check" for="selamanya"><input type="checkbox" id="selamanya"> Selamanya</label>
+        <p class="help" id="durasiHelp">Berlaku jika kenaikan gaya hidup lebih dari 0%.</p>
       </div>
 
       <div class="field">
@@ -407,13 +444,21 @@ tr.dead td { color: var(--muted); }
         <p class="help">Kenaikan nilai investasi per tahun, sebelum zakat.</p>
       </div>
 
-      <div class="field">
+      <div class="field" id="zakatField">
         <div class="field-head">
           <label for="zakat">Zakat maal</label>
           <span class="num"><input id="zakat" type="number" min="0" max="10" step="0.1" value="2.5" inputmode="decimal"><span class="unit">%</span></span>
         </div>
         <input id="zakatRange" type="range" min="0" max="10" step="0.1" value="2.5" aria-label="Zakat maal per tahun">
         <p class="help">Dibayar sekali setahun saat haul, dari seluruh saldo dana.</p>
+        <div class="warn" id="zakatWarn" role="status" hidden>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8 15 14H1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 6.2v3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.8" r="0.9" fill="currentColor"/></svg>
+          <div>
+            <strong>Zakat maal seharusnya 2,5%.</strong>
+            <span id="zakatWarnText">Perhitungan tetap memakai angka pilihan Anda.</span>
+            <button type="button" class="link-btn" id="zakatFix">Kembalikan ke 2,5%</button>
+          </div>
+        </div>
       </div>
 
       <div class="divider" role="presentation"></div>
@@ -500,7 +545,7 @@ tr.dead td { color: var(--muted); }
           <li>Di awal setiap bulan, biaya hidup bulan itu diambil dari dana.</li>
           <li>Sisa dana berkembang sesuai imbal hasil, dihitung per bulan (<span id="mImbal">6%</span> per tahun setara <span id="mBulan">0,4868%</span> per bulan).</li>
           <li>Di akhir tahun (haul), zakat maal <span id="mZakat">2,5%</span> dibayar dari seluruh saldo dana.</li>
-          <li>Tahun berikutnya, biaya hidup per bulan naik sebesar inflasi (<span id="mInflasi">2,5%</span>).</li>
+          <li>Tahun berikutnya, biaya hidup per bulan naik sebesar inflasi (<span id="mInflasi">2,5%</span>)<span id="mGaya"></span>.</li>
         </ol>
         <h3>Arti "tidak menyusut"</h3>
         <p>Saldo akhir tahun harus sama dengan saldo awal tahun ditambah inflasi. Daya beli dana jadi tetap dan nominalnya naik setiap tahun. Menjaga nominal saja tidak cukup: biaya hidup yang terus naik akan menggerus dana itu pelan-pelan. Karena itu angka di atas adalah dana minimum agar dana tidak pernah menyusut, berapa pun lamanya.</p>
@@ -511,8 +556,7 @@ tr.dead td { color: var(--muted); }
         <ul>
           <li>Imbal hasil dianggap sama setiap tahun. Kenyataannya hasil investasi naik turun, jadi sisakan cadangan di atas angka ini.</li>
           <li>Pajak, biaya pengelolaan, dan biaya transaksi belum dikurangkan. Masukkan imbal hasil bersih jika ingin memperhitungkannya.</li>
-          <li>Harta dianggap sudah melewati nisab (setara 85 gram emas), sehingga zakat wajib setiap tahun.</li>
-          <li>Jika Anda mengikuti pendapat yang menghitung zakat investasi dengan cara lain, sesuaikan persentase zakat.</li>
+          <li>Harta dianggap sudah melewati nisab (setara 85 gram emas), sehingga zakat maal 2,5% wajib dibayar setiap haul.</li>
         </ul>
         <p class="foot">Simulasi ini alat bantu perencanaan, bukan nasihat investasi.</p>
       </section>
@@ -524,7 +568,7 @@ tr.dead td { color: var(--muted); }
 (function () {
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
-  var DEFAULTS = { biaya: 100000000, inflasi: 2.5, imbal: 6, zakat: 2.5, tahun: 50 };
+  var DEFAULTS = { biaya: 100000000, inflasi: 2.5, imbal: 6, zakat: 2.5, tahun: 50, gaya: 0, durasi: 10, selamanya: false };
   var STORE = 'simulasi-ff-v1';
   var state = { mode: 'nom', chart: null, hoverT: null };
 
@@ -560,26 +604,44 @@ tr.dead td { color: var(--muted); }
   function signedPct(x) { return (x > 0 ? '+' : x < 0 ? '−' : '') + fmtNum(Math.abs(x) * 100, 2) + '%'; }
 
   /* ---------- Model ---------- */
-  // p = { M: monthly cost (today's Rp), i: inflation, r: return, z: zakat }, all yearly decimals.
+  // p = { M, i, r, z, g, T }: monthly cost (today's Rp), inflation, return, zakat, lifestyle growth
+  // above inflation, and how many years that growth lasts (Infinity = forever). Rates are yearly decimals.
   function model(p) {
     var m = Math.pow(1 + p.r, 1 / 12) - 1;
     // Value at year end of 12 withdrawals of 1 made at the start of each month.
     var A = Math.abs(m) < 1e-12 ? 12 : (1 + m) * (Math.pow(1 + m, 12) - 1) / m;
     var G = (1 + p.r) * (1 - p.z);
-    var gap = G - (1 + p.i);
-    var req = gap > 1e-9 ? (1 - p.z) * p.M * A / gap : Infinity;
-    return {
-      m: m, A: A, G: G, gap: gap, req: req,
-      rMin: (1 + p.i) / (1 - p.z) - 1,
+    var g = p.g > 0 ? p.g : 0;
+    var T = g > 0 ? p.T : 0;
+    var forever = g > 0 && !isFinite(T);
+    var growth = forever ? (1 + p.i) * (1 + g) : 1 + p.i; // long-run yearly growth of expenses
+    var gap = G - growth;
+    var res = {
+      m: m, A: A, G: G, g: g, T: T, forever: forever, gap: gap,
+      growth: growth - 1,
+      rMin: growth / (1 - p.z) - 1,
+      gMax: G / (1 + p.i) - 1,
       netReturn: G - 1,
-      realNet: G / (1 + p.i) - 1
+      req: Infinity
     };
+    if (gap <= 1e-9) return res;
+    var k = (1 - p.z) * A / gap;
+    if (forever || T === 0) { res.req = k * p.M; return res; }
+    // Growth lasts T years, then inflation only. In today's money the fund follows
+    // f(t+1) = q·f(t) − c·m(t), and must reach k·M_final when the growth stops.
+    var q = G / (1 + p.i), c = (1 - p.z) * A / (1 + p.i);
+    var sum = 0;
+    for (var t = 1; t <= T; t++) sum += Math.pow(q, T - t) * c * p.M * Math.pow(1 + g, t - 1);
+    res.Mfinal = p.M * Math.pow(1 + g, T);
+    res.reqFlat = k * res.Mfinal;
+    res.req = (res.reqFlat + sum) / Math.pow(q, T);
+    return res;
   }
 
   function simulate(F0, p, mdl, years) {
     var rows = [], F = F0, depletedYear = null, firstShrink = null;
     for (var t = 1; t <= years; t++) {
-      var Mt = p.M * Math.pow(1 + p.i, t - 1);
+      var Mt = p.M * Math.pow(1 + p.i, t - 1) * Math.pow(1 + (p.g || 0), Math.min(t - 1, p.T || 0));
       if (F <= 0) { rows.push({ t: t, start: 0, Mt: Mt, spent: 0, gains: 0, zakat: 0, end: 0, dead: true, after: true }); continue; }
       var bal = F, gains = 0, spent = 0, paid = 0;
       for (var k = 0; k < 12; k++) {
@@ -614,24 +676,31 @@ tr.dead td { color: var(--muted); }
     return Math.min(hi, Math.max(lo, v));
   }
   function readInputs() {
+    var zPct = numVal('zakat', 0, 10, DEFAULTS.zakat);
     return {
       M: parseRp($('biaya').value),
       i: numVal('inflasi', 0, 15, DEFAULTS.inflasi) / 100,
       r: numVal('imbal', 0, 20, DEFAULTS.imbal) / 100,
-      z: numVal('zakat', 0, 10, DEFAULTS.zakat) / 100,
+      z: zPct / 100,
+      zPct: zPct,
+      g: numVal('gaya', 0, 10, DEFAULTS.gaya) / 100,
+      durasi: Math.round(numVal('durasi', 1, 50, DEFAULTS.durasi)),
+      T: $('selamanya').checked ? Infinity : Math.round(numVal('durasi', 1, 50, DEFAULTS.durasi)),
       years: Math.round(numVal('tahun', 5, 100, DEFAULTS.tahun))
     };
   }
   function setInputs(v) {
     $('biaya').value = v.biaya ? fmtNum(v.biaya, 0) : '';
-    ['inflasi', 'imbal', 'zakat', 'tahun'].forEach(function (k) {
+    ['inflasi', 'imbal', 'zakat', 'tahun', 'gaya', 'durasi'].forEach(function (k) {
       $(k).value = v[k]; $(k + 'Range').value = v[k];
     });
+    $('selamanya').checked = !!v.selamanya;
   }
   function save(inp) {
     try {
       localStorage.setItem(STORE, JSON.stringify({
-        biaya: inp.M, inflasi: inp.i * 100, imbal: inp.r * 100, zakat: inp.z * 100, tahun: inp.years,
+        biaya: inp.M, inflasi: inp.i * 100, imbal: inp.r * 100, zakat: inp.zPct, tahun: inp.years,
+        gaya: inp.g * 100, durasi: inp.durasi, selamanya: !isFinite(inp.T),
         mode: state.mode
       }));
     } catch (e) { /* storage unavailable */ }
@@ -653,15 +722,27 @@ tr.dead td { color: var(--muted); }
     if (isFinite(mdl.req)) {
       $('heroValue').textContent = rpWords(mdl.req);
       $('heroFull').textContent = rpFull(mdl.req);
-      $('heroNote').textContent = 'Cukup untuk biaya hidup ' + rpShort(p.M, 2, true) + ' per bulan yang naik ' + pctT(p.i) +
-        ' per tahun, membayar zakat ' + pctT(p.z) + ' setiap haul, dan dananya tetap tumbuh ' + pctT(p.i) + ' per tahun.';
+      var B = rpShort(p.M, 2, true);
+      var note;
+      if (mdl.g === 0) {
+        note = 'Cukup untuk biaya hidup ' + B + ' per bulan yang naik ' + pctT(p.i) + ' per tahun, membayar zakat ' + pctT(p.z) +
+          ' setiap haul, dan dananya tetap tumbuh ' + pctT(p.i) + ' per tahun.';
+      } else if (mdl.forever) {
+        note = 'Cukup untuk biaya hidup ' + B + ' per bulan yang naik ' + pct(mdl.growth) + ' per tahun selamanya (inflasi ditambah gaya hidup), membayar zakat ' +
+          pctT(p.z) + ' setiap haul, dan dananya tumbuh ' + pct(mdl.growth) + ' per tahun.';
+      } else {
+        note = 'Cukup untuk biaya hidup ' + B + ' per bulan yang naik mengikuti inflasi ditambah ' + pctT(p.g) + ' gaya hidup selama ' + mdl.T +
+          ' tahun, hingga ' + rpShort(mdl.Mfinal, 2, true) + ' per bulan dalam nilai hari ini. Zakat ' + pctT(p.z) + ' dibayar setiap haul dan dananya tidak pernah menyusut.';
+      }
+      $('heroNote').textContent = note;
       $('factMultiple').textContent = trimDec(fmtNum(mdl.req / annual, 1)) + '×';
       $('factSwr').textContent = pct(annual / mdl.req) + ' per tahun';
     } else {
       $('heroValue').textContent = 'Tidak tercapai';
-      $('heroFull').textContent = 'Imbal hasil setelah zakat ' + pct(mdl.netReturn) + ' tidak melebihi inflasi ' + pct(p.i);
-      $('heroNote').textContent = 'Dengan asumsi ini, berapa pun besar dananya, nilainya akan terus menyusut. Naikkan imbal hasil di atas ' +
-        pct(mdl.rMin) + ', atau turunkan inflasi atau zakat.';
+      $('heroFull').textContent = 'Imbal hasil setelah zakat ' + pct(mdl.netReturn) + ' tidak melebihi kenaikan biaya hidup ' + pct(mdl.growth) + ' per tahun';
+      $('heroNote').textContent = 'Dengan asumsi ini, berapa pun besar dananya, nilainya akan terus menyusut. ' + (mdl.forever
+        ? 'Kurangi kenaikan gaya hidup' + (mdl.gMax > 0 ? ' di bawah ' + pct(mdl.gMax) : '') + ', batasi lamanya, atau naikkan imbal hasil di atas ' + pct(mdl.rMin) + '.'
+        : 'Naikkan imbal hasil di atas ' + pct(mdl.rMin) + ', atau turunkan asumsi inflasi.');
       $('factMultiple').textContent = '—';
       $('factSwr').textContent = '—';
     }
@@ -676,7 +757,7 @@ tr.dead td { color: var(--muted); }
     var parts = [
       { cls: 'biaya', name: 'Biaya hidup 12 bulan', v: r1.spent },
       { cls: 'zakat', name: 'Zakat maal', v: r1.zakat },
-      { cls: 'tumbuh', name: 'Penambahan dana agar ikut inflasi', v: growth }
+      { cls: 'tumbuh', name: mdl.g > 0 ? 'Penambahan dana untuk inflasi dan kenaikan gaya hidup' : 'Penambahan dana agar ikut inflasi', v: growth }
     ];
     var total = r1.gains;
     $('splitSub').textContent = 'Dana ' + rpShort(mdl.req, 2, true) + ' menghasilkan ' + rpShort(total, 2, true) +
@@ -890,7 +971,7 @@ tr.dead td { color: var(--muted); }
       var th = document.createElement('th'); th.scope = 'row'; th.textContent = trimDec(fmtNum(rv, 1)) + '%'; tr.appendChild(th);
       is.forEach(function (iv) {
         var td = document.createElement('td');
-        var mm = model({ M: p.M, i: iv / 100, r: rv / 100, z: p.z });
+        var mm = model({ M: p.M, i: iv / 100, r: rv / 100, z: p.z, g: p.g, T: p.T });
         if (isFinite(mm.req)) td.textContent = rpShort(mm.req, 1);
         else { td.textContent = 'Tidak mungkin'; td.className = 'na'; }
         if (Math.abs(rv - r0) < 1e-6 && Math.abs(iv - i0) < 1e-6) { td.className += ' cur'; td.setAttribute('aria-current', 'true'); }
@@ -899,14 +980,17 @@ tr.dead td { color: var(--muted); }
       tb.appendChild(tr);
     });
     tbl.appendChild(tb);
-    $('sensSub').textContent = 'Dana yang dibutuhkan untuk biaya hidup ' + rpShort(p.M, 2, true) + ' per bulan dan zakat ' + pctT(p.z) +
+    $('sensSub').textContent = 'Dana yang dibutuhkan untuk biaya hidup ' + rpShort(p.M, 2, true) + ' per bulan' +
+      (p.g > 0 ? ' (gaya hidup naik ' + pctT(p.g) + (isFinite(p.T) ? ' selama ' + p.T + ' tahun' : ' selamanya') + ')' : '') + ' dan zakat ' + pctT(p.z) +
       ', pada kombinasi imbal hasil dan inflasi lain. Kotak bergaris adalah asumsi Anda saat ini. Selisih kecil antara imbal hasil dan inflasi mengubah hasilnya sangat besar.';
   }
 
   /* ---------- Year table ---------- */
-  function renderTable(mdl, sim) {
-    $('tableSub').textContent = 'Mulai dari dana ' + rpShort(mdl.req, 2, true) + '. Semua angka dalam rupiah nominal pada tahun itu. ' +
-      'Kolom perubahan selalu sama dengan inflasi, tanda dana tidak menyusut.';
+  function renderTable(p, mdl, sim) {
+    var note = mdl.g === 0 ? 'Kolom perubahan selalu sama dengan inflasi, tanda dana tidak menyusut.'
+      : mdl.forever ? 'Kolom perubahan selalu ' + pct(mdl.growth) + ', sama dengan kenaikan biaya hidup.'
+      : 'Selama ' + mdl.T + ' tahun pertama dana tumbuh lebih cepat dari inflasi untuk menyiapkan biaya hidup yang naik. Setelahnya dana tumbuh sama dengan inflasi.';
+    $('tableSub').textContent = 'Mulai dari dana ' + rpShort(mdl.req, 2, true) + '. Semua angka dalam rupiah nominal pada tahun itu. ' + note;
     var tbl = $('yearTable');
     tbl.textContent = '';
     var cols = ['Tahun', 'Dana awal tahun', 'Biaya hidup / bulan', 'Biaya hidup setahun', 'Hasil investasi', 'Zakat maal', 'Dana akhir tahun', 'Perubahan'];
@@ -945,30 +1029,51 @@ tr.dead td { color: var(--muted); }
     $('mBulan').textContent = pct(mdl.m, 4);
     $('mZakat').textContent = pctT(p.z);
     $('mInflasi').textContent = pctT(p.i);
+    $('mGaya').textContent = mdl.g === 0 ? '' : mdl.forever
+      ? ', ditambah kenaikan gaya hidup ' + pctT(p.g) + ' setiap tahun'
+      : ', ditambah kenaikan gaya hidup ' + pctT(p.g) + ' selama ' + mdl.T + ' tahun pertama';
     var B = rpShort(p.M, 2, true);
-    var lines = [
-      'r = ' + pctT(p.r) + '   i = ' + pctT(p.i) + '   z = ' + pctT(p.z) + '   B = ' + B + ' per bulan',
-      '',
+    var head = 'r = ' + pctT(p.r) + '   i = ' + pctT(p.i) + '   z = ' + pctT(p.z) + '   B = ' + B + ' per bulan';
+    if (mdl.g > 0) head += '   g = ' + pctT(p.g) + (mdl.forever ? ' selamanya' : ' selama T = ' + mdl.T + ' tahun');
+    var lines = [head, '',
       'Imbal hasil per bulan   m = (1 + r)^(1/12) − 1 = ' + pct(mdl.m, 4),
       'Faktor 12 bulan         A = (1 + m) × ((1 + m)^12 − 1) ÷ m = ' + fmtNum(mdl.A, 4),
-      '',
-      'Dana dibutuhkan = (1 − z) × B × A ÷ [ (1 + r)(1 − z) − (1 + i) ]'
-    ];
-    if (isFinite(mdl.req)) {
-      lines.push('                = ' + fmtNum(1 - p.z, 3) + ' × ' + B + ' × ' + fmtNum(mdl.A, 4) + ' ÷ (' + fmtNum(mdl.G, 5) + ' − ' + fmtNum(1 + p.i, 5) + ')');
+      ''];
+    var growthTxt = mdl.forever ? '(1 + i)(1 + g)' : '(1 + i)';
+    var growthNum = fmtNum(1 + mdl.growth, 5);
+    if (!isFinite(mdl.req)) {
+      lines.push('Dana dibutuhkan = (1 − z) × B × A ÷ [ (1 + r)(1 − z) − ' + growthTxt + ' ]');
+      lines.push('                → penyebut ' + fmtNum(mdl.G, 5) + ' − ' + growthNum + ' ≤ 0, jadi tidak ada dana yang cukup');
+    } else if (mdl.g === 0 || mdl.forever) {
+      lines.push('Dana dibutuhkan = (1 − z) × B × A ÷ [ (1 + r)(1 − z) − ' + growthTxt + ' ]');
+      lines.push('                = ' + fmtNum(1 - p.z, 3) + ' × ' + B + ' × ' + fmtNum(mdl.A, 4) + ' ÷ (' + fmtNum(mdl.G, 5) + ' − ' + growthNum + ')');
       lines.push('                = ' + rpFull(mdl.req));
     } else {
-      lines.push('                → penyebut ' + fmtNum(mdl.G, 5) + ' − ' + fmtNum(1 + p.i, 5) + ' ≤ 0, jadi tidak ada dana yang cukup');
+      lines.push('Biaya hidup tertinggi   B_akhir = B × (1 + g)^T = ' + rpShort(mdl.Mfinal, 2, true) + ' per bulan (nilai hari ini)');
+      lines.push('Dana untuk B_akhir      = (1 − z) × B_akhir × A ÷ [ (1 + r)(1 − z) − (1 + i) ]');
+      lines.push('                        = ' + rpShort(mdl.reqFlat) + ' (nilai hari ini, harus tercapai di awal tahun ke-' + (mdl.T + 1) + ')');
+      lines.push('');
+      lines.push('Dana hari ini dihitung mundur ' + mdl.T + ' tahun dengan biaya hidup yang naik setiap tahun:');
+      lines.push('Dana dibutuhkan = ' + rpFull(mdl.req));
     }
     $('formula').textContent = lines.join('\n');
     var q = $('quickEst');
-    var simple = p.r - p.z - p.i;
-    if (simple > 0 && isFinite(mdl.req)) {
-      q.textContent = 'Sebagai perkiraan cepat, biaya setahun ÷ (r − z − i) = ' + rpShort(12 * p.M, 2, true) + ' ÷ ' + pct(simple) + ' = ' +
-        rpShort(12 * p.M / simple, 2, true) + '. Hasil simulasi ' + (mdl.req > 12 * p.M / simple ? 'lebih besar' : 'berbeda') +
-        ' karena zakat dipotong dari saldo yang sudah tumbuh dan biaya hidup diambil sebelum sempat berkembang.';
+    var annual = 12 * p.M;
+    if (!isFinite(mdl.req)) {
+      q.textContent = 'Syaratnya: imbal hasil setelah zakat, (1 + r)(1 − z) − 1 = ' + pct(mdl.netReturn) + ', harus lebih besar dari kenaikan biaya hidup ' + pct(mdl.growth) + ' per tahun.';
+    } else if (mdl.g > 0 && !mdl.forever) {
+      q.textContent = 'Sebagai perkiraan cepat, hitung dengan biaya hidup tertinggi (' + rpShort(mdl.Mfinal, 2, true) + ' per bulan) sejak awal: ' +
+        rpShort(mdl.reqFlat, 2, true) + '. Hasil simulasi sedikit lebih kecil karena di tahun-tahun awal biaya hidup masih lebih rendah.';
     } else {
-      q.textContent = 'Syaratnya: imbal hasil setelah zakat, (1 + r)(1 − z) − 1 = ' + pct(mdl.netReturn) + ', harus lebih besar dari inflasi ' + pct(p.i) + '.';
+      var simple = p.r - p.z - p.i - mdl.g;
+      var simpleTxt = mdl.g > 0 ? '(r − z − i − g)' : '(r − z − i)';
+      if (simple > 0) {
+        q.textContent = 'Sebagai perkiraan cepat, biaya setahun ÷ ' + simpleTxt + ' = ' + rpShort(annual, 2, true) + ' ÷ ' + pct(simple) + ' = ' +
+          rpShort(annual / simple, 2, true) + '. Hasil simulasi ' + (mdl.req > annual / simple ? 'lebih besar' : 'berbeda') +
+          ' karena zakat dipotong dari saldo yang sudah tumbuh dan biaya hidup diambil sebelum sempat berkembang.';
+      } else {
+        q.textContent = 'Perkiraan cepat biaya setahun ÷ ' + simpleTxt + ' tidak bisa dipakai di sini karena penyebutnya nol atau negatif. Rumus di atas tetap berlaku.';
+      }
     }
   }
 
@@ -978,8 +1083,21 @@ tr.dead td { color: var(--muted); }
     var bad = !(inp.M > 0);
     $('biayaErr').hidden = !bad;
     if (bad) return;
-    var p = { M: inp.M, i: inp.i, r: inp.r, z: inp.z };
+    var p = { M: inp.M, i: inp.i, r: inp.r, z: inp.z, g: inp.g, T: inp.T };
     var mdl = model(p);
+
+    var zOff = Math.abs(inp.zPct - 2.5) > 1e-9;
+    $('zakatWarn').hidden = !zOff;
+    $('zakatField').classList.toggle('is-warn', zOff);
+    if (zOff) $('zakatWarnText').textContent = 'Perhitungan tetap memakai ' + trimDec(fmtNum(inp.zPct, 2)) + '% sesuai pilihan Anda.';
+
+    var forever = !isFinite(inp.T);
+    $('durasi').disabled = forever;
+    $('durasiRange').disabled = forever;
+    $('durasiField').classList.toggle('is-off', !(inp.g > 0));
+    $('durasiHelp').textContent = !(inp.g > 0) ? 'Berlaku jika kenaikan gaya hidup lebih dari 0%.'
+      : forever ? (mdl.gMax > 0 ? 'Dengan asumsi sekarang, kenaikan selamanya harus di bawah ' + pct(mdl.gMax) + ' per tahun.' : 'Dengan asumsi sekarang, kenaikan selamanya tidak mungkin.')
+      : 'Setelah ' + inp.T + ' tahun, biaya hidup sekitar ' + rpShort(p.M * Math.pow(1 + inp.g, inp.T), 2, true) + ' per bulan (nilai hari ini), lalu hanya naik mengikuti inflasi.';
     var annual = 12 * p.M;
     $('biayaHelp').textContent = 'Setara ' + rpWords(annual) + ' per tahun, dalam nilai uang hari ini.';
     Array.prototype.forEach.call(document.querySelectorAll('[data-biaya]'), function (b) {
@@ -996,11 +1114,12 @@ tr.dead td { color: var(--muted); }
     $('tablePanel').hidden = !reqSim;
     if (reqSim) {
       state.chart = { N: N, i: p.i, req: [mdl.req].concat(reqSim.rows.map(function (r) { return r.end; })) };
-      $('chartSub').textContent = (state.mode === 'real'
-        ? 'Saldo dana dibutuhkan di akhir setiap tahun, dalam nilai uang hari ini. Garis datar berarti daya belinya tetap.'
-        : 'Saldo dana dibutuhkan di akhir setiap tahun dalam rupiah nominal, setelah biaya hidup dan zakat. Naik mengikuti inflasi.');
+      $('chartSub').textContent = state.mode === 'real'
+        ? 'Saldo dana dibutuhkan di akhir setiap tahun, dalam nilai uang hari ini. ' + (mdl.g === 0 ? 'Garis datar berarti daya belinya tetap.'
+          : mdl.forever ? 'Garis naik karena dana ikut tumbuh bersama kenaikan gaya hidup.' : 'Garis naik selama gaya hidup naik, lalu datar.')
+        : 'Saldo dana dibutuhkan di akhir setiap tahun dalam rupiah nominal, setelah biaya hidup dan zakat.';
       drawChart();
-      renderTable(mdl, reqSim);
+      renderTable(p, mdl, reqSim);
     } else {
       state.chart = null;
     }
@@ -1011,7 +1130,7 @@ tr.dead td { color: var(--muted); }
   }
 
   /* ---------- Wiring ---------- */
-  ['inflasi', 'imbal', 'zakat', 'tahun'].forEach(function (k) {
+  ['inflasi', 'imbal', 'zakat', 'tahun', 'gaya', 'durasi'].forEach(function (k) {
     var num = $(k), rng = $(k + 'Range');
     num.addEventListener('input', function () { if (num.value !== '' && isFinite(parseFloat(num.value))) rng.value = num.value; update(); });
     num.addEventListener('change', function () {
@@ -1035,6 +1154,10 @@ tr.dead td { color: var(--muted); }
   }
   $('modeNom').addEventListener('click', function () { state.mode = 'nom'; syncMode(); update(); });
   $('modeReal').addEventListener('click', function () { state.mode = 'real'; syncMode(); update(); });
+  $('selamanya').addEventListener('change', update);
+  $('zakatFix').addEventListener('click', function () {
+    $('zakat').value = 2.5; $('zakatRange').value = 2.5; update(); $('zakat').focus();
+  });
 
   var saved = load();
   if (saved) {
@@ -1043,7 +1166,10 @@ tr.dead td { color: var(--muted); }
       inflasi: isFinite(saved.inflasi) ? +(+saved.inflasi).toFixed(2) : DEFAULTS.inflasi,
       imbal: isFinite(saved.imbal) ? +(+saved.imbal).toFixed(2) : DEFAULTS.imbal,
       zakat: isFinite(saved.zakat) ? +(+saved.zakat).toFixed(2) : DEFAULTS.zakat,
-      tahun: isFinite(saved.tahun) ? saved.tahun : DEFAULTS.tahun
+      tahun: isFinite(saved.tahun) ? saved.tahun : DEFAULTS.tahun,
+      gaya: isFinite(saved.gaya) ? +(+saved.gaya).toFixed(2) : DEFAULTS.gaya,
+      durasi: isFinite(saved.durasi) ? saved.durasi : DEFAULTS.durasi,
+      selamanya: saved.selamanya === true
     });
     if (saved.mode === 'real') state.mode = 'real';
     syncMode();
