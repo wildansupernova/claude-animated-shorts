@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,"Segoe UI",sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Simulasi Financial Freedom</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root {
+  /* Layout: sticky "Asumsi" panel on the left, result column on the right; one column below 900px.
+     Teal marks the fund everywhere, gold marks zakat. */
+  --bg: #f2f4f1;
+  --surface: #ffffff;
+  --surface-2: #f6f8f5;
+  --ink: #12201b;
+  --ink-2: #43514b;
+  --muted: #62706a;
+  --line: #dde3de;
+  --line-strong: #c2cbc5;
+  --accent: #0b6b5a;
+  --accent-ink: #ffffff;
+  --accent-soft: #e1efe9;
+  --hero-bg: #0d4a3f;
+  --hero-ink: #f1f7f4;
+  --hero-ink-2: #b9d6cc;
+  --hero-line: rgba(241, 247, 244, 0.18);
+  --s-dana: #008a72;
+  --s-banding: #dd5a2a;
+  --b-biaya: #2a78d6;
+  --b-zakat: #c98a00;
+  --b-tumbuh: #008a72;
+  --on-fill: #ffffff;
+  --on-fill-light: #0b0b0b;
+  --grid: #e8ece9;
+  --axis: #c2cbc5;
+  --good: #0a6e36;
+  --good-soft: #def2e5;
+  --bad: #b3261e;
+  --bad-soft: #fbe4e1;
+  --font-display: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1311;
+    --surface: #161d1b;
+    --surface-2: #1b2421;
+    --ink: #e7eeea;
+    --ink-2: #b6c3bd;
+    --muted: #8d9a94;
+    --line: #26302d;
+    --line-strong: #364440;
+    --accent: #43c2a2;
+    --accent-ink: #062019;
+    --accent-soft: #15302a;
+    --hero-bg: #123a32;
+    --hero-ink: #eef6f2;
+    --hero-ink-2: #a9cbbf;
+    --hero-line: rgba(238, 246, 242, 0.16);
+    --s-dana: #22a888;
+    --s-banding: #de6a35;
+    --b-biaya: #3987e5;
+    --b-zakat: #c98500;
+    --b-tumbuh: #22a888;
+    --grid: #212a27;
+    --axis: #364440;
+    --good: #5fd09a;
+    --good-soft: #143224;
+    --bad: #f28b80;
+    --bad-soft: #3a1c19;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1311;
+  --surface: #161d1b;
+  --surface-2: #1b2421;
+  --ink: #e7eeea;
+  --ink-2: #b6c3bd;
+  --muted: #8d9a94;
+  --line: #26302d;
+  --line-strong: #364440;
+  --accent: #43c2a2;
+  --accent-ink: #062019;
+  --accent-soft: #15302a;
+  --hero-bg: #123a32;
+  --hero-ink: #eef6f2;
+  --hero-ink-2: #a9cbbf;
+  --hero-line: rgba(238, 246, 242, 0.16);
+  --s-dana: #22a888;
+  --s-banding: #de6a35;
+  --b-biaya: #3987e5;
+  --b-zakat: #c98500;
+  --b-tumbuh: #22a888;
+  --grid: #212a27;
+  --axis: #364440;
+  --good: #5fd09a;
+  --good-soft: #143224;
+  --bad: #f28b80;
+  --bad-soft: #3a1c19;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-block: 32px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Masthead */
+.masthead { display: grid; gap: 10px; max-width: 760px; margin-bottom: 28px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+h1 { font-size: clamp(1.65rem, 3.2vw, 2.5rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+.lede { color: var(--ink-2); font-size: 1.02rem; max-width: 64ch; }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Assumption panel */
+.controls {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  display: grid;
+  gap: 20px;
+}
+@media (max-width: 900px) {
+  .controls { position: static; max-height: none; overflow: visible; }
+}
+.controls-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.controls-head h2 { font-size: 1.05rem; font-weight: 700; }
+.link-btn {
+  background: none; border: 0; padding: 0;
+  color: var(--accent); font-size: 13px; font-weight: 600; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.field { display: grid; gap: 8px; }
+.field-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.field label, .field-label { font-weight: 600; font-size: 14px; }
+.help { font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+.num {
+  display: inline-flex; align-items: center; gap: 4px;
+  border: 1px solid var(--line-strong); border-radius: 8px;
+  background: var(--surface-2); padding: 3px 8px 3px 4px;
+}
+.num input {
+  width: 4.6em; border: 0; background: transparent; text-align: right;
+  font-family: var(--font-mono); font-size: 14px; padding: 2px 0;
+  font-variant-numeric: tabular-nums;
+}
+.num input:focus { outline: none; }
+.num:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
+.num .unit { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.rp {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--line-strong); border-radius: 10px;
+  background: var(--surface-2); padding: 8px 12px;
+}
+.rp:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
+.rp span { font-family: var(--font-mono); color: var(--muted); font-size: 14px; }
+.rp input {
+  flex: 1; min-width: 0; border: 0; background: transparent;
+  font-family: var(--font-mono); font-size: 16px; font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.rp input:focus { outline: none; }
+.rp input::placeholder { color: var(--muted); font-weight: 400; font-size: 13px; }
+input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  border: 1px solid var(--line-strong); background: transparent; border-radius: 999px;
+  padding: 3px 10px; font-size: 12.5px; font-family: var(--font-mono); cursor: pointer;
+  color: var(--ink-2);
+}
+.chip:hover { border-color: var(--accent); color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.divider { height: 1px; background: var(--line); }
+.error { color: var(--bad); font-size: 12.5px; font-weight: 600; }
+
+/* Results */
+.results { display: grid; gap: 20px; min-width: 0; }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; }
+.panel-head > div:first-child { display: grid; gap: 4px; min-width: 0; }
+.panel h2 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.sub { color: var(--muted); font-size: 13.5px; max-width: 70ch; }
+
+/* Hero */
+.hero {
+  background: var(--hero-bg);
+  color: var(--hero-ink);
+  border-radius: 16px;
+  padding: 26px 26px 22px;
+  display: grid;
+  gap: 8px;
+}
+.hero-label {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--hero-ink-2);
+}
+.hero-value {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2.3rem, 5.6vw, 3.9rem); line-height: 1.05; letter-spacing: -0.03em;
+}
+.hero-full { font-family: var(--font-mono); font-size: 13.5px; color: var(--hero-ink-2); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.hero-note { color: var(--hero-ink); max-width: 62ch; margin-top: 6px; opacity: 0.92; }
+.hero-facts {
+  margin: 14px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--hero-line);
+}
+.hero-facts > div { padding: 14px 16px 2px; border-left: 1px solid var(--hero-line); display: grid; gap: 2px; align-content: start; }
+.hero-facts > div:first-child { border-left: 0; padding-left: 0; }
+.hero-facts dt { font-size: 12.5px; color: var(--hero-ink-2); }
+.hero-facts dd { margin: 0; font-weight: 700; font-size: 1.15rem; }
+.hero-facts dd.fact-help { font-weight: 400; font-size: 12px; color: var(--hero-ink-2); }
+@media (max-width: 620px) {
+  .hero { padding: 22px 18px 18px; }
+  .hero-facts { grid-template-columns: minmax(0, 1fr); }
+  .hero-facts > div { border-left: 0; padding: 12px 0 0; }
+  .hero-facts > div + div { border-top: 1px solid var(--hero-line); margin-top: 10px; }
+}
+
+/* Segmented bar */
+.segbar { display: flex; gap: 2px; height: 28px; width: 100%; }
+.seg {
+  border-radius: 4px; display: flex; align-items: center; padding-left: 8px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500; white-space: nowrap;
+  min-width: 0;
+}
+.seg.biaya { background: var(--b-biaya); color: var(--on-fill); }
+.seg.zakat { background: var(--b-zakat); color: var(--on-fill-light); }
+.seg.tumbuh { background: var(--b-tumbuh); color: var(--on-fill); }
+.seg-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.seg-legend li { display: grid; grid-template-columns: 10px minmax(0, 1fr); column-gap: 8px; row-gap: 2px; align-items: baseline; }
+.sw { width: 10px; height: 10px; border-radius: 2px; align-self: center; }
+.sw.biaya { background: var(--b-biaya); }
+.sw.zakat { background: var(--b-zakat); }
+.sw.tumbuh { background: var(--b-tumbuh); }
+.seg-legend .nm { font-size: 13px; color: var(--ink-2); }
+.seg-legend .amt { grid-column: 2; font-weight: 700; font-variant-numeric: tabular-nums; }
+@media (max-width: 620px) { .seg-legend { grid-template-columns: minmax(0, 1fr); } }
+.callout { font-size: 14px; color: var(--ink-2); }
+.callout strong { color: var(--ink); }
+
+/* Toggle */
+.toggle { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 999px; padding: 2px; gap: 2px; background: var(--surface-2); }
+.toggle button {
+  border: 0; background: transparent; border-radius: 999px; padding: 5px 12px;
+  font-size: 13px; font-weight: 600; color: var(--ink-2); cursor: pointer;
+}
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.toggle button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Comparison status */
+.status {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: start;
+  padding: 12px 14px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line);
+}
+.pill {
+  display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 2px 10px 2px 8px;
+  font-size: 12.5px; font-weight: 700; white-space: nowrap;
+}
+.pill.good { background: var(--good-soft); color: var(--good); }
+.pill.bad { background: var(--bad-soft); color: var(--bad); }
+.pill svg { width: 12px; height: 12px; }
+.status-text { font-size: 14px; color: var(--ink-2); }
+.status-text strong { color: var(--ink); }
+
+/* Chart */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.key { width: 18px; height: 2px; border-radius: 2px; display: inline-block; }
+.key.req { background: var(--s-dana); }
+.key.cmp { background: var(--s-banding); }
+.chart-host { position: relative; width: 100%; min-width: 0; }
+.chart-host svg { display: block; width: 100%; height: auto; touch-action: pan-y; }
+.chart-host svg:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.gl { stroke: var(--grid); stroke-width: 1; }
+.base { stroke: var(--axis); stroke-width: 1; }
+.tick { fill: var(--muted); font-family: var(--font-mono); font-size: 11px; font-variant-numeric: tabular-nums; }
+.ln { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.ln.req { stroke: var(--s-dana); }
+.ln.cmp { stroke: var(--s-banding); }
+.area.req { fill: var(--s-dana); opacity: 0.1; }
+.dot { stroke: var(--surface); stroke-width: 2; }
+.dot.req { fill: var(--s-dana); }
+.dot.cmp { fill: var(--s-banding); }
+.annot { fill: var(--ink-2); font-size: 12px; font-weight: 600; font-family: var(--font-body); }
+.xhair { stroke: var(--line-strong); stroke-width: 1; }
+.tip {
+  position: absolute; top: 8px; pointer-events: none; z-index: 2;
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: 10px;
+  padding: 10px 12px; min-width: 190px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  display: grid; gap: 6px; font-size: 12.5px;
+}
+.tip-h { font-weight: 700; font-size: 12.5px; color: var(--ink-2); }
+.tip-row { display: grid; grid-template-columns: 14px auto; column-gap: 8px; align-items: center; }
+.tip-row .v { font-weight: 700; font-size: 14px; font-variant-numeric: tabular-nums; color: var(--ink); }
+.tip-row .n { grid-column: 2; color: var(--muted); font-size: 12px; }
+.tip-row .key { width: 14px; }
+
+/* Tables */
+.table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+.table-wrap.tall { max-height: 460px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { padding: 8px 12px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+thead th {
+  position: sticky; top: 0; z-index: 1; background: var(--surface-2); color: var(--ink-2);
+  font-weight: 600; font-size: 12px; border-bottom: 1px solid var(--line-strong);
+}
+tbody tr + tr td, tbody tr + tr th { border-top: 1px solid var(--line); }
+th:first-child, td:first-child { text-align: left; }
+td.neg { color: var(--bad); }
+td.pos { color: var(--good); }
+tr.dead td { color: var(--muted); }
+.sens th[scope="row"] { font-family: var(--font-mono); font-weight: 500; color: var(--ink-2); background: var(--surface-2); }
+.sens thead th { font-family: var(--font-mono); font-weight: 500; }
+.sens td { text-align: center; }
+.sens td.cur { box-shadow: inset 0 0 0 2px var(--accent); font-weight: 700; background: var(--accent-soft); }
+.sens td.na { color: var(--muted); }
+.corner { font-family: var(--font-body) !important; font-size: 11.5px !important; text-align: left !important; }
+
+/* Method */
+.method { display: grid; gap: 14px; padding: 6px 4px 0; max-width: 78ch; }
+.method h2 { font-size: 1.15rem; font-weight: 700; }
+.method h3 { font-size: 0.98rem; font-weight: 700; margin-top: 6px; }
+.method ol, .method ul { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; color: var(--ink-2); }
+.method p { color: var(--ink-2); }
+.formula {
+  margin: 0; overflow-x: auto; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 14px 16px; font-family: var(--font-mono); font-size: 12.5px;
+  line-height: 1.7; color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.foot { color: var(--muted); font-size: 12.5px; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="masthead">
+    <p class="eyebrow">Simulasi financial freedom · zakat maal &amp; inflasi</p>
+    <h1>Berapa dana yang dibutuhkan agar bisa hidup dari hasil investasi, tanpa dananya menyusut?</h1>
+    <p class="lede">Dana ini membiayai hidup Anda setiap bulan, membayar zakat maal setiap tahun, dan tetap tumbuh mengikuti inflasi. Ubah angka di panel Asumsi; semua hasil dihitung ulang langsung.</p>
+  </header>
+
+  <div class="layout">
+    <aside class="controls" aria-labelledby="asumsiTitle">
+      <div class="controls-head">
+        <h2 id="asumsiTitle">Asumsi</h2>
+        <button type="button" class="link-btn" id="resetBtn">Kembalikan ke awal</button>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="biaya">Biaya hidup per bulan</label>
+        <div class="rp"><span>Rp</span><input id="biaya" type="text" inputmode="numeric" autocomplete="off" value="100.000.000"></div>
+        <div class="chips" role="group" aria-label="Pilihan cepat biaya hidup">
+          <button type="button" class="chip" data-biaya="25000000">25 jt</button>
+          <button type="button" class="chip" data-biaya="50000000">50 jt</button>
+          <button type="button" class="chip" data-biaya="100000000">100 jt</button>
+          <button type="button" class="chip" data-biaya="250000000">250 jt</button>
+        </div>
+        <p class="help" id="biayaHelp">Dalam nilai uang hari ini.</p>
+        <p class="error" id="biayaErr" hidden>Isi biaya hidup per bulan lebih dari Rp 0.</p>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="inflasi">Inflasi per tahun</label>
+          <span class="num"><input id="inflasi" type="number" min="0" max="15" step="0.1" value="2.5" inputmode="decimal"><span class="unit">%</span></span>
+        </div>
+        <input id="inflasiRange" type="range" min="0" max="15" step="0.1" value="2.5" aria-label="Inflasi per tahun">
+        <p class="help">Kenaikan biaya hidup setiap tahun.</p>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="imbal">Imbal hasil investasi</label>
+          <span class="num"><input id="imbal" type="number" min="0" max="20" step="0.1" value="6" inputmode="decimal"><span class="unit">%</span></span>
+        </div>
+        <input id="imbalRange" type="range" min="0" max="20" step="0.1" value="6" aria-label="Imbal hasil investasi per tahun">
+        <p class="help">Kenaikan nilai investasi per tahun, sebelum zakat.</p>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="zakat">Zakat maal</label>
+          <span class="num"><input id="zakat" type="number" min="0" max="10" step="0.1" value="2.5" inputmode="decimal"><span class="unit">%</span></span>
+        </div>
+        <input id="zakatRange" type="range" min="0" max="10" step="0.1" value="2.5" aria-label="Zakat maal per tahun">
+        <p class="help">Dibayar sekali setahun saat haul, dari seluruh saldo dana.</p>
+      </div>
+
+      <div class="divider" role="presentation"></div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="tahun">Lama simulasi</label>
+          <span class="num"><input id="tahun" type="number" min="5" max="100" step="1" value="50" inputmode="numeric"><span class="unit">th</span></span>
+        </div>
+        <input id="tahunRange" type="range" min="5" max="100" step="1" value="50" aria-label="Lama simulasi dalam tahun">
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="banding">Dana pembanding</label>
+        <div class="rp"><span>Rp</span><input id="banding" type="text" inputmode="numeric" autocomplete="off" placeholder="Kosong = aturan 4%"></div>
+        <p class="help" id="bandingHelp">Masukkan dana yang Anda miliki atau targetkan. Jika kosong, dipakai aturan 4% (25× biaya hidup setahun).</p>
+      </div>
+    </aside>
+
+    <main class="results">
+      <section class="hero" aria-labelledby="heroLabel" aria-live="polite">
+        <p class="hero-label" id="heroLabel">Dana yang dibutuhkan hari ini</p>
+        <p class="hero-value" id="heroValue">Rp 0</p>
+        <p class="hero-full" id="heroFull"></p>
+        <p class="hero-note" id="heroNote"></p>
+        <dl class="hero-facts" id="heroFacts">
+          <div><dt>Kelipatan biaya hidup</dt><dd id="factMultiple">—</dd><dd class="fact-help">dari biaya hidup setahun</dd></div>
+          <div><dt>Penarikan aman</dt><dd id="factSwr">—</dd><dd class="fact-help">biaya setahun dibagi dana</dd></div>
+          <div><dt>Imbal hasil minimal</dt><dd id="factMin">—</dd><dd class="fact-help">di bawah ini, dana pasti menyusut</dd></div>
+        </dl>
+      </section>
+
+      <section class="panel" id="splitPanel" aria-labelledby="splitTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="splitTitle">Ke mana hasil investasi tahun pertama?</h2>
+            <p class="sub" id="splitSub"></p>
+          </div>
+        </div>
+        <div class="segbar" id="segbar" role="img"></div>
+        <ul class="seg-legend" id="segLegend"></ul>
+        <p class="callout" id="splitCallout"></p>
+      </section>
+
+      <section class="panel" aria-labelledby="chartTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="chartTitle">Perjalanan dana</h2>
+            <p class="sub" id="chartSub">Saldo dana di akhir setiap tahun, setelah biaya hidup dan zakat.</p>
+          </div>
+          <div class="toggle" role="group" aria-label="Satuan grafik">
+            <button type="button" id="modeNom" aria-pressed="true">Nominal</button>
+            <button type="button" id="modeReal" aria-pressed="false">Nilai hari ini</button>
+          </div>
+        </div>
+        <div class="status" id="cmpStatus"></div>
+        <div class="legend" id="legend"></div>
+        <div class="chart-host" id="chartHost">
+          <div class="tip" id="tip" hidden></div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="sensTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="sensTitle">Kalau asumsinya meleset</h2>
+            <p class="sub" id="sensSub"></p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="sens" id="sensTable"></table>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="tableTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="tableTitle">Rincian per tahun</h2>
+            <p class="sub" id="tableSub"></p>
+          </div>
+          <div class="toggle" role="group" aria-label="Dana yang ditampilkan di tabel">
+            <button type="button" id="tblReq" aria-pressed="true">Dana dibutuhkan</button>
+            <button type="button" id="tblCmp" aria-pressed="false">Dana pembanding</button>
+          </div>
+        </div>
+        <div class="table-wrap tall">
+          <table id="yearTable"></table>
+        </div>
+      </section>
+
+      <section class="method" aria-labelledby="methodTitle">
+        <h2 id="methodTitle">Cara menghitung</h2>
+        <p>Setiap tahun berjalan dengan urutan yang sama:</p>
+        <ol>
+          <li>Di awal setiap bulan, biaya hidup bulan itu diambil dari dana.</li>
+          <li>Sisa dana berkembang sesuai imbal hasil, dihitung per bulan (<span id="mImbal">6%</span> per tahun setara <span id="mBulan">0,4868%</span> per bulan).</li>
+          <li>Di akhir tahun (haul), zakat maal <span id="mZakat">2,5%</span> dibayar dari seluruh saldo dana.</li>
+          <li>Tahun berikutnya, biaya hidup per bulan naik sebesar inflasi (<span id="mInflasi">2,5%</span>).</li>
+        </ol>
+        <h3>Arti "tidak menyusut"</h3>
+        <p>Saldo akhir tahun harus sama dengan saldo awal tahun ditambah inflasi. Daya beli dana jadi tetap dan nominalnya naik setiap tahun. Menjaga nominal saja tidak cukup: biaya hidup yang terus naik akan menggerus dana itu pelan-pelan. Karena itu angka di atas adalah dana minimum agar dana tidak pernah menyusut, berapa pun lamanya.</p>
+        <h3>Rumus</h3>
+        <pre class="formula" id="formula"></pre>
+        <p id="quickEst"></p>
+        <h3>Yang belum dihitung</h3>
+        <ul>
+          <li>Imbal hasil dianggap sama setiap tahun. Kenyataannya hasil investasi naik turun, jadi sisakan cadangan di atas angka ini.</li>
+          <li>Pajak, biaya pengelolaan, dan biaya transaksi belum dikurangkan. Masukkan imbal hasil bersih jika ingin memperhitungkannya.</li>
+          <li>Harta dianggap sudah melewati nisab (setara 85 gram emas), sehingga zakat wajib setiap tahun.</li>
+          <li>Jika Anda mengikuti pendapat yang menghitung zakat investasi dengan cara lain, sesuaikan persentase zakat.</li>
+        </ul>
+        <p class="foot">Simulasi ini alat bantu perencanaan, bukan nasihat investasi.</p>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEFAULTS = { biaya: 100000000, inflasi: 2.5, imbal: 6, zakat: 2.5, tahun: 50, banding: 0 };
+  var STORE = 'simulasi-ff-v1';
+  var state = { mode: 'nom', table: 'req', chart: null, hoverT: null };
+
+  /* ---------- Formatting (id-ID) ---------- */
+  var nfCache = {};
+  function fmtNum(v, d) {
+    var k = d + '';
+    if (!nfCache[k]) nfCache[k] = new Intl.NumberFormat('id-ID', { minimumFractionDigits: d, maximumFractionDigits: d });
+    return nfCache[k].format(v);
+  }
+  function trimDec(s) { return s.indexOf(',') < 0 ? s : s.replace(/0+$/, '').replace(/,$/, ''); }
+  function rpFull(n) { return 'Rp ' + fmtNum(Math.round(n), 0); }
+  function rpShort(n, d, trim) {
+    if (!isFinite(n)) return '—';
+    if (d === undefined) d = 2;
+    var a = Math.abs(n), s = n < 0 ? '−' : '', out;
+    if (a >= 1e12) out = fmtNum(a / 1e12, d) + ' T';
+    else if (a >= 1e9) out = fmtNum(a / 1e9, d) + ' M';
+    else if (a >= 1e6) out = fmtNum(a / 1e6, a >= 1e8 ? 0 : 1) + ' jt';
+    else out = fmtNum(a, 0);
+    if (trim) out = out.replace(/^([\d.,]+)/, function (m) { return trimDec(m); });
+    return s + 'Rp ' + out;
+  }
+  function rpWords(n) {
+    var a = Math.abs(n);
+    if (a >= 1e12) return 'Rp ' + trimDec(fmtNum(a / 1e12, 2)) + ' triliun';
+    if (a >= 1e9) return 'Rp ' + trimDec(fmtNum(a / 1e9, 2)) + ' miliar';
+    if (a >= 1e6) return 'Rp ' + trimDec(fmtNum(a / 1e6, 1)) + ' juta';
+    return rpFull(a);
+  }
+  function pct(x, d) { return fmtNum(x * 100, d === undefined ? 2 : d) + '%'; }
+  function pctT(x, d) { return trimDec(fmtNum(x * 100, d === undefined ? 2 : d)) + '%'; }
+  function signedPct(x) { return (x > 0 ? '+' : x < 0 ? '−' : '') + fmtNum(Math.abs(x) * 100, 2) + '%'; }
+
+  /* ---------- Model ---------- */
+  // p = { M: monthly cost (today's Rp), i: inflation, r: return, z: zakat }, all yearly decimals.
+  function model(p) {
+    var m = Math.pow(1 + p.r, 1 / 12) - 1;
+    // Value at year end of 12 withdrawals of 1 made at the start of each month.
+    var A = Math.abs(m) < 1e-12 ? 12 : (1 + m) * (Math.pow(1 + m, 12) - 1) / m;
+    var G = (1 + p.r) * (1 - p.z);
+    var gap = G - (1 + p.i);
+    var req = gap > 1e-9 ? (1 - p.z) * p.M * A / gap : Infinity;
+    return {
+      m: m, A: A, G: G, gap: gap, req: req,
+      rMin: (1 + p.i) / (1 - p.z) - 1,
+      netReturn: G - 1,
+      realNet: G / (1 + p.i) - 1
+    };
+  }
+
+  function simulate(F0, p, mdl, years) {
+    var rows = [], F = F0, depletedYear = null, firstShrink = null;
+    for (var t = 1; t <= years; t++) {
+      var Mt = p.M * Math.pow(1 + p.i, t - 1);
+      if (F <= 0) { rows.push({ t: t, start: 0, Mt: Mt, spent: 0, gains: 0, zakat: 0, end: 0, dead: true, after: true }); continue; }
+      var bal = F, gains = 0, spent = 0, paid = 0;
+      for (var k = 0; k < 12; k++) {
+        if (bal >= Mt) { bal -= Mt; spent += Mt; paid++; }
+        else { spent += bal; bal = 0; break; }
+        var g = bal * mdl.m; gains += g; bal += g;
+      }
+      var zakat = bal * p.z;
+      var end = bal - zakat;
+      var dead = paid < 12;
+      if (dead) { end = 0; zakat = 0; }
+      if (dead && depletedYear === null) depletedYear = t;
+      if (end < F * (1 - 1e-9) && firstShrink === null) firstShrink = t;
+      rows.push({ t: t, start: F, Mt: Mt, spent: spent, gains: gains, zakat: zakat, end: end, chg: end / F - 1, dead: dead, monthsPaid: paid });
+      F = end;
+    }
+    return { rows: rows, depletedYear: depletedYear, firstShrink: firstShrink };
+  }
+
+  /* ---------- Inputs ---------- */
+  function parseRp(s) { var d = (s || '').replace(/\D/g, '').slice(0, 16); return d ? Number(d) : 0; }
+  function formatRpField(el) {
+    var fromEnd = el.value.length - (el.selectionEnd == null ? el.value.length : el.selectionEnd);
+    var n = parseRp(el.value);
+    el.value = n ? fmtNum(n, 0) : '';
+    var pos = Math.max(0, el.value.length - fromEnd);
+    try { el.setSelectionRange(pos, pos); } catch (e) { /* not focused */ }
+  }
+  function numVal(id, lo, hi, fallback) {
+    var v = parseFloat($(id).value);
+    if (!isFinite(v)) return fallback;
+    return Math.min(hi, Math.max(lo, v));
+  }
+  function readInputs() {
+    return {
+      M: parseRp($('biaya').value),
+      i: numVal('inflasi', 0, 15, DEFAULTS.inflasi) / 100,
+      r: numVal('imbal', 0, 20, DEFAULTS.imbal) / 100,
+      z: numVal('zakat', 0, 10, DEFAULTS.zakat) / 100,
+      years: Math.round(numVal('tahun', 5, 100, DEFAULTS.tahun)),
+      banding: parseRp($('banding').value)
+    };
+  }
+  function setInputs(v) {
+    $('biaya').value = v.biaya ? fmtNum(v.biaya, 0) : '';
+    ['inflasi', 'imbal', 'zakat', 'tahun'].forEach(function (k) {
+      $(k).value = v[k]; $(k + 'Range').value = v[k];
+    });
+    $('banding').value = v.banding ? fmtNum(v.banding, 0) : '';
+  }
+  function save(inp) {
+    try {
+      localStorage.setItem(STORE, JSON.stringify({
+        biaya: inp.M, inflasi: inp.i * 100, imbal: inp.r * 100, zakat: inp.z * 100, tahun: inp.years, banding: inp.banding,
+        mode: state.mode, table: state.table
+      }));
+    } catch (e) { /* storage unavailable */ }
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE);
+      if (!raw) return null;
+      var v = JSON.parse(raw);
+      if (!v || typeof v !== 'object') return null;
+      return v;
+    } catch (e) { return null; }
+  }
+
+  /* ---------- Render: hero & split ---------- */
+  function renderHero(p, mdl) {
+    var annual = 12 * p.M;
+    $('factMin').textContent = pct(mdl.rMin);
+    if (isFinite(mdl.req)) {
+      $('heroValue').textContent = rpWords(mdl.req);
+      $('heroFull').textContent = rpFull(mdl.req);
+      $('heroNote').textContent = 'Cukup untuk biaya hidup ' + rpShort(p.M, 2, true) + ' per bulan yang naik ' + pctT(p.i) +
+        ' per tahun, membayar zakat ' + pctT(p.z) + ' setiap haul, dan dananya tetap tumbuh ' + pctT(p.i) + ' per tahun.';
+      $('factMultiple').textContent = trimDec(fmtNum(mdl.req / annual, 1)) + '×';
+      $('factSwr').textContent = pct(annual / mdl.req) + ' per tahun';
+    } else {
+      $('heroValue').textContent = 'Tidak tercapai';
+      $('heroFull').textContent = 'Imbal hasil setelah zakat ' + pct(mdl.netReturn) + ' tidak melebihi inflasi ' + pct(p.i);
+      $('heroNote').textContent = 'Dengan asumsi ini, berapa pun besar dananya, nilainya akan terus menyusut. Naikkan imbal hasil di atas ' +
+        pct(mdl.rMin) + ', atau turunkan inflasi atau zakat.';
+      $('factMultiple').textContent = '—';
+      $('factSwr').textContent = '—';
+    }
+  }
+
+  function renderSplit(p, mdl, reqSim) {
+    var panel = $('splitPanel');
+    if (!isFinite(mdl.req)) { panel.hidden = true; return; }
+    panel.hidden = false;
+    var r1 = reqSim.rows[0];
+    var growth = r1.end - r1.start;
+    var parts = [
+      { cls: 'biaya', name: 'Biaya hidup 12 bulan', v: r1.spent },
+      { cls: 'zakat', name: 'Zakat maal', v: r1.zakat },
+      { cls: 'tumbuh', name: 'Penambahan dana agar ikut inflasi', v: growth }
+    ];
+    var total = r1.gains;
+    $('splitSub').textContent = 'Dana ' + rpShort(mdl.req, 2, true) + ' menghasilkan ' + rpShort(total, 2, true) +
+      ' di tahun pertama. Seluruh hasil itu terpakai untuk tiga hal berikut.';
+    var bar = $('segbar'), leg = $('segLegend');
+    bar.textContent = ''; leg.textContent = '';
+    var aria = [];
+    parts.forEach(function (pt) {
+      var share = total > 0 ? pt.v / total : 0;
+      aria.push(pt.name + ' ' + rpShort(pt.v) + ' (' + pct(share, 0) + ')');
+      if (pt.v > 0) {
+        var seg = document.createElement('div');
+        seg.className = 'seg ' + pt.cls;
+        seg.style.flex = share + ' 1 0';
+        seg.textContent = pct(share, 0);
+        seg.title = pt.name + ': ' + rpShort(pt.v) + ' (' + pct(share, 1) + ')';
+        bar.appendChild(seg);
+      }
+      var li = document.createElement('li');
+      var sw = document.createElement('span'); sw.className = 'sw ' + pt.cls;
+      var nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = pt.name;
+      var amt = document.createElement('span'); amt.className = 'amt'; amt.textContent = rpShort(pt.v);
+      li.appendChild(sw); li.appendChild(nm); li.appendChild(amt);
+      leg.appendChild(li);
+    });
+    bar.setAttribute('aria-label', 'Pembagian hasil investasi tahun pertama: ' + aria.join(', '));
+    requestAnimationFrame(function () {
+      Array.prototype.forEach.call(bar.children, function (seg) {
+        if (seg.scrollWidth > seg.clientWidth) seg.textContent = '';
+      });
+    });
+    var zs = parts[1].v / total, bs = parts[0].v / total;
+    var call = $('splitCallout');
+    call.textContent = '';
+    if (p.z > 0 && parts[1].v > parts[0].v) {
+      call.appendChild(document.createTextNode('Zakat maal mengambil '));
+      var s1 = document.createElement('strong'); s1.textContent = pct(zs, 0); call.appendChild(s1);
+      call.appendChild(document.createTextNode(' dari hasil investasi, lebih besar daripada biaya hidup Anda sendiri (' + pct(bs, 0) + '). Karena zakat dihitung dari seluruh saldo, dana yang besar juga berarti zakat yang besar.'));
+    } else {
+      call.appendChild(document.createTextNode('Biaya hidup memakai '));
+      var s2 = document.createElement('strong'); s2.textContent = pct(bs, 0); call.appendChild(s2);
+      call.appendChild(document.createTextNode(' dari hasil investasi tahun pertama. Sisanya menjaga dana tetap tumbuh mengikuti inflasi.'));
+    }
+  }
+
+  /* ---------- Render: comparison status ---------- */
+  var ICON_OK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.3l2.2 2.2 4.8-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var ICON_DOWN = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2v7.5M2.8 6.5L6 9.7l3.2-3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function renderStatus(p, mdl, cmp, cmpName, longSim) {
+    var box = $('cmpStatus');
+    box.textContent = '';
+    var pill = document.createElement('span');
+    var txt = document.createElement('p'); txt.className = 'status-text';
+    var head = document.createElement('strong');
+    head.textContent = cmpName + ': ' + rpShort(cmp, 2, true) + '. ';
+    txt.appendChild(head);
+    var ok = isFinite(mdl.req) && cmp >= mdl.req * (1 - 1e-9);
+    if (ok) {
+      pill.className = 'pill good'; pill.innerHTML = ICON_OK + '<span>Tidak menyusut</span>';
+      var surplus = cmp - mdl.req;
+      txt.appendChild(document.createTextNode(surplus > 1
+        ? 'Dana ini ' + rpShort(surplus, 2, true) + ' di atas kebutuhan minimum, jadi tumbuh lebih cepat dari inflasi.'
+        : 'Dana ini tepat di kebutuhan minimum.'));
+    } else {
+      pill.className = 'pill bad'; pill.innerHTML = ICON_DOWN + '<span>Menyusut</span>';
+      var parts = [];
+      if (isFinite(mdl.req)) parts.push('Kurang ' + rpShort(mdl.req - cmp, 2, true) + ' dari kebutuhan minimum.');
+      if (longSim.firstShrink) parts.push('Nominalnya mulai turun di tahun ke-' + longSim.firstShrink + '.');
+      if (longSim.depletedYear) parts.push('Dana habis di tahun ke-' + longSim.depletedYear + '.');
+      else parts.push('Dana belum habis dalam 300 tahun, tetapi daya belinya terus turun.');
+      txt.appendChild(document.createTextNode(parts.join(' ')));
+    }
+    box.appendChild(pill);
+    box.appendChild(txt);
+  }
+
+  /* ---------- Chart ---------- */
+  function niceTicks(max, count) {
+    var raw = max / count;
+    var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    var n = raw / mag;
+    var step = (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * mag;
+    var top = Math.ceil(max / step - 1e-9) * step;
+    var out = [];
+    for (var v = 0; v <= top + step / 2; v += step) out.push(v);
+    return out;
+  }
+  function axisFmt(v, unit) {
+    if (v === 0) return '0';
+    var div = unit === 'T' ? 1e12 : unit === 'M' ? 1e9 : unit === 'jt' ? 1e6 : 1;
+    return trimDec(fmtNum(v / div, 2)) + (unit ? ' ' + unit : '');
+  }
+
+  function drawChart() {
+    var d = state.chart;
+    var host = $('chartHost');
+    var old = host.querySelector('svg');
+    if (old) old.remove();
+    if (!d) return;
+    var W = Math.max(280, Math.floor(host.clientWidth));
+    var H = W < 560 ? 250 : 320;
+    var mg = { l: 58, r: 18, t: 14, b: 34 };
+    var pw = W - mg.l - mg.r, ph = H - mg.t - mg.b;
+    var real = state.mode === 'real';
+    var defl = function (t) { return real ? Math.pow(1 + d.i, t) : 1; };
+    var series = [];
+    if (d.req) series.push({ cls: 'req', name: 'Dana dibutuhkan', vals: d.req.map(function (v, t) { return v / defl(t); }) });
+    series.push({ cls: 'cmp', name: d.cmpName, vals: d.cmp.map(function (v, t) { return v / defl(t); }) });
+    var max = 0;
+    series.forEach(function (s) { s.vals.forEach(function (v) { if (v > max) max = v; }); });
+    var ticks = niceTicks(max || 1, W < 560 ? 4 : 5);
+    var yMax = ticks[ticks.length - 1];
+    var unit = yMax >= 1e12 ? 'T' : yMax >= 1e9 ? 'M' : yMax >= 1e6 ? 'jt' : '';
+    var N = d.N;
+    var x = function (t) { return mg.l + (t / N) * pw; };
+    var y = function (v) { return mg.t + ph - (v / yMax) * ph; };
+    var f = function (n) { return n.toFixed(1); };
+
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H +
+      '" tabindex="0" role="img" aria-label="Grafik saldo dana per tahun. Gunakan panah kiri dan kanan untuk melihat nilai tiap tahun.">';
+    ticks.forEach(function (v) {
+      var yy = f(y(v));
+      if (v > 0) svg += '<line class="gl" x1="' + mg.l + '" x2="' + (W - mg.r) + '" y1="' + yy + '" y2="' + yy + '"/>';
+      svg += '<text class="tick" x="' + (mg.l - 8) + '" y="' + yy + '" dy="0.32em" text-anchor="end">' + axisFmt(v, unit) + '</text>';
+    });
+    svg += '<line class="base" x1="' + mg.l + '" x2="' + (W - mg.r) + '" y1="' + f(y(0)) + '" y2="' + f(y(0)) + '"/>';
+    var step = N <= 12 ? 1 : N <= 25 ? 5 : N <= 60 ? 10 : 20;
+    if (W < 420 && step < 10 && N > 12) step = 10;
+    for (var t = 0; t <= N; t += step) {
+      var lbl = t === 0 ? 'Kini' : (t + (t === N || t + step > N ? ' th' : ''));
+      svg += '<text class="tick" x="' + f(x(t)) + '" y="' + (H - 10) + '" text-anchor="' + (t === 0 ? 'start' : 'middle') + '">' + lbl + '</text>';
+    }
+    if (N % step !== 0 && (N % step) > step * 0.4) {
+      svg += '<text class="tick" x="' + f(x(N)) + '" y="' + (H - 10) + '" text-anchor="end">' + N + ' th</text>';
+    }
+    series.forEach(function (s) {
+      var pts = s.vals.map(function (v, t) { return f(x(t)) + ',' + f(y(v)); });
+      if (s.cls === 'req') {
+        svg += '<path class="area req" d="M' + f(x(0)) + ',' + f(y(0)) + ' L' + pts.join(' L') + ' L' + f(x(N)) + ',' + f(y(0)) + ' Z"/>';
+      }
+      svg += '<path class="ln ' + s.cls + '" d="M' + pts.join(' L') + '"/>';
+    });
+    series.forEach(function (s) {
+      var lastV = s.vals[N];
+      svg += '<circle class="dot ' + s.cls + '" cx="' + f(x(N)) + '" cy="' + f(y(lastV)) + '" r="4"/>';
+    });
+    if (d.cmpDead) {
+      var tx = x(d.cmpDead), ty = y(0);
+      var anchor = tx > W - 140 ? 'end' : tx < mg.l + 80 ? 'start' : 'middle';
+      svg += '<circle class="dot cmp" cx="' + f(tx) + '" cy="' + f(ty) + '" r="4"/>';
+      svg += '<text class="annot" x="' + f(tx) + '" y="' + f(ty - 12) + '" text-anchor="' + anchor + '">Habis tahun ke-' + d.cmpDead + '</text>';
+    }
+    svg += '<g id="hoverG" visibility="hidden"><line class="xhair" id="xh" x1="0" x2="0" y1="' + mg.t + '" y2="' + f(y(0)) + '"/>';
+    series.forEach(function (s, idx) {
+      svg += '<circle class="dot ' + s.cls + '" id="hd' + idx + '" cx="0" cy="0" r="4.5"/>';
+    });
+    svg += '</g>';
+    svg += '<rect id="hit" x="' + mg.l + '" y="' + mg.t + '" width="' + pw + '" height="' + ph + '" fill="transparent"/>';
+    svg += '</svg>';
+
+    host.insertAdjacentHTML('beforeend', svg);
+    var el = host.querySelector('svg');
+    var geo = { W: W, mg: mg, pw: pw, N: N, x: x, y: y, series: series };
+
+    function show(t) {
+      state.hoverT = t;
+      var g = el.querySelector('#hoverG');
+      g.setAttribute('visibility', 'visible');
+      var xx = f(x(t));
+      var xh = el.querySelector('#xh'); xh.setAttribute('x1', xx); xh.setAttribute('x2', xx);
+      series.forEach(function (s, idx) {
+        var c = el.querySelector('#hd' + idx); c.setAttribute('cx', xx); c.setAttribute('cy', f(y(s.vals[t])));
+      });
+      var tip = $('tip');
+      tip.textContent = '';
+      var h = document.createElement('div'); h.className = 'tip-h';
+      h.textContent = (t === 0 ? 'Hari ini' : 'Akhir tahun ke-' + t) + (real ? ' · nilai hari ini' : '');
+      tip.appendChild(h);
+      series.forEach(function (s) {
+        var row = document.createElement('div'); row.className = 'tip-row';
+        var k = document.createElement('span'); k.className = 'key ' + s.cls;
+        var v = document.createElement('span'); v.className = 'v';
+        v.textContent = s.vals[t] > 0 ? rpShort(s.vals[t]) : 'Habis';
+        var n = document.createElement('span'); n.className = 'n'; n.textContent = s.name;
+        row.appendChild(k); row.appendChild(v); row.appendChild(n);
+        tip.appendChild(row);
+      });
+      tip.hidden = false;
+      var scale = el.getBoundingClientRect().width / W;
+      var px = x(t) * scale;
+      var tw = tip.offsetWidth;
+      var hostW = host.clientWidth;
+      var left = px + 14;
+      if (left + tw > hostW) left = px - tw - 14;
+      if (left < 0) left = Math.max(0, Math.min(hostW - tw, px - tw / 2));
+      tip.style.left = left + 'px';
+    }
+    function hide() {
+      state.hoverT = null;
+      var g = el.querySelector('#hoverG'); if (g) g.setAttribute('visibility', 'hidden');
+      $('tip').hidden = true;
+    }
+    function tFromEvent(ev) {
+      var rect = el.getBoundingClientRect();
+      var px = (ev.clientX - rect.left) * (W / rect.width);
+      var t = Math.round((px - mg.l) / pw * N);
+      return Math.max(0, Math.min(N, t));
+    }
+    el.addEventListener('pointermove', function (ev) { show(tFromEvent(ev)); });
+    el.addEventListener('pointerdown', function (ev) { show(tFromEvent(ev)); });
+    el.addEventListener('pointerleave', function (ev) { if (ev.pointerType === 'mouse') hide(); });
+    el.addEventListener('focus', function () { show(state.hoverT == null ? N : Math.min(state.hoverT, N)); });
+    el.addEventListener('blur', hide);
+    el.addEventListener('keydown', function (ev) {
+      var t = state.hoverT == null ? N : state.hoverT;
+      if (ev.key === 'ArrowLeft') { t = Math.max(0, t - 1); ev.preventDefault(); }
+      else if (ev.key === 'ArrowRight') { t = Math.min(N, t + 1); ev.preventDefault(); }
+      else if (ev.key === 'Home') { t = 0; ev.preventDefault(); }
+      else if (ev.key === 'End') { t = N; ev.preventDefault(); }
+      else if (ev.key === 'Escape') { hide(); return; }
+      else return;
+      show(t);
+    });
+    if (state.hoverT != null && document.activeElement !== el) { state.hoverT = null; $('tip').hidden = true; }
+    return geo;
+  }
+
+  function renderLegend(d) {
+    var leg = $('legend');
+    leg.textContent = '';
+    var items = [];
+    if (d.req) items.push({ cls: 'req', name: 'Dana dibutuhkan (' + rpShort(d.req[0], 2, true) + ')' });
+    items.push({ cls: 'cmp', name: d.cmpName + ' (' + rpShort(d.cmp[0], 2, true) + ')' });
+    items.forEach(function (it) {
+      var s = document.createElement('span');
+      var k = document.createElement('i'); k.className = 'key ' + it.cls;
+      s.appendChild(k); s.appendChild(document.createTextNode(it.name));
+      leg.appendChild(s);
+    });
+  }
+
+  /* ---------- Sensitivity ---------- */
+  function renderSens(p) {
+    var r0 = Math.round(p.r * 1000) / 10, i0 = Math.round(p.i * 1000) / 10;
+    var rOffs = [-1, -0.5, 0, 0.5, 1, 2, 3], iOffs = [-1, -0.5, 0, 0.5, 1];
+    var rs = rOffs.map(function (o) { return Math.round((r0 + o) * 10) / 10; }).filter(function (v) { return v >= 0 && v <= 25; });
+    var is = iOffs.map(function (o) { return Math.round((i0 + o) * 10) / 10; }).filter(function (v) { return v >= 0; });
+    var tbl = $('sensTable');
+    tbl.textContent = '';
+    var thead = document.createElement('thead'), hr = document.createElement('tr');
+    var corner = document.createElement('th'); corner.className = 'corner'; corner.textContent = 'Imbal hasil ↓ · Inflasi →';
+    hr.appendChild(corner);
+    is.forEach(function (iv) {
+      var th = document.createElement('th'); th.scope = 'col'; th.textContent = trimDec(fmtNum(iv, 1)) + '%'; hr.appendChild(th);
+    });
+    thead.appendChild(hr); tbl.appendChild(thead);
+    var tb = document.createElement('tbody');
+    rs.forEach(function (rv) {
+      var tr = document.createElement('tr');
+      var th = document.createElement('th'); th.scope = 'row'; th.textContent = trimDec(fmtNum(rv, 1)) + '%'; tr.appendChild(th);
+      is.forEach(function (iv) {
+        var td = document.createElement('td');
+        var mm = model({ M: p.M, i: iv / 100, r: rv / 100, z: p.z });
+        if (isFinite(mm.req)) td.textContent = rpShort(mm.req, 1);
+        else { td.textContent = 'Tidak mungkin'; td.className = 'na'; }
+        if (Math.abs(rv - r0) < 1e-6 && Math.abs(iv - i0) < 1e-6) { td.className += ' cur'; td.setAttribute('aria-current', 'true'); }
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+    tbl.appendChild(tb);
+    $('sensSub').textContent = 'Dana yang dibutuhkan untuk biaya hidup ' + rpShort(p.M, 2, true) + ' per bulan dan zakat ' + pctT(p.z) +
+      ', pada kombinasi imbal hasil dan inflasi lain. Kotak bergaris adalah asumsi Anda saat ini. Selisih kecil antara imbal hasil dan inflasi mengubah hasilnya sangat besar.';
+  }
+
+  /* ---------- Year table ---------- */
+  function renderTable(p, mdl, reqSim, cmpSim, cmpName) {
+    var useReq = state.table === 'req' && reqSim;
+    var sim = useReq ? reqSim : cmpSim;
+    $('tblReq').setAttribute('aria-pressed', String(!!useReq));
+    $('tblCmp').setAttribute('aria-pressed', String(!useReq));
+    $('tblReq').disabled = !reqSim;
+    $('tableSub').textContent = (useReq ? 'Dana dibutuhkan, ' + rpShort(mdl.req, 2, true) : cmpName + ', ' + rpShort(sim.rows[0].start, 2, true)) +
+      '. Semua angka nominal (rupiah pada tahun itu).';
+    var tbl = $('yearTable');
+    tbl.textContent = '';
+    var cols = ['Tahun', 'Dana awal tahun', 'Biaya hidup / bulan', 'Biaya hidup setahun', 'Hasil investasi', 'Zakat maal', 'Dana akhir tahun', 'Perubahan'];
+    var thead = document.createElement('thead'), hr = document.createElement('tr');
+    cols.forEach(function (c) { var th = document.createElement('th'); th.scope = 'col'; th.textContent = c; hr.appendChild(th); });
+    thead.appendChild(hr); tbl.appendChild(thead);
+    var tb = document.createElement('tbody');
+    for (var k = 0; k < sim.rows.length; k++) {
+      var r = sim.rows[k];
+      if (r.after) break;
+      var tr = document.createElement('tr');
+      if (r.dead) tr.className = 'dead';
+      var cells = [
+        String(r.t),
+        rpShort(r.start),
+        rpShort(r.Mt),
+        rpShort(r.spent),
+        rpShort(r.gains),
+        rpShort(r.zakat),
+        r.dead ? 'Habis (bulan ke-' + (r.monthsPaid + 1) + ')' : rpShort(r.end),
+        r.dead ? '—' : signedPct(r.chg)
+      ];
+      cells.forEach(function (c, ci) {
+        var td = document.createElement('td'); td.textContent = c;
+        if (ci === 7 && !r.dead) td.className = r.chg < -1e-9 ? 'neg' : r.chg > 1e-9 ? 'pos' : '';
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    }
+    tbl.appendChild(tb);
+  }
+
+  /* ---------- Method ---------- */
+  function renderMethod(p, mdl) {
+    $('mImbal').textContent = pctT(p.r);
+    $('mBulan').textContent = pct(mdl.m, 4);
+    $('mZakat').textContent = pctT(p.z);
+    $('mInflasi').textContent = pctT(p.i);
+    var B = rpShort(p.M, 2, true);
+    var lines = [
+      'r = ' + pctT(p.r) + '   i = ' + pctT(p.i) + '   z = ' + pctT(p.z) + '   B = ' + B + ' per bulan',
+      '',
+      'Imbal hasil per bulan   m = (1 + r)^(1/12) − 1 = ' + pct(mdl.m, 4),
+      'Faktor 12 bulan         A = (1 + m) × ((1 + m)^12 − 1) ÷ m = ' + fmtNum(mdl.A, 4),
+      '',
+      'Dana dibutuhkan = (1 − z) × B × A ÷ [ (1 + r)(1 − z) − (1 + i) ]'
+    ];
+    if (isFinite(mdl.req)) {
+      lines.push('                = ' + fmtNum(1 - p.z, 3) + ' × ' + B + ' × ' + fmtNum(mdl.A, 4) + ' ÷ (' + fmtNum(mdl.G, 5) + ' − ' + fmtNum(1 + p.i, 5) + ')');
+      lines.push('                = ' + rpFull(mdl.req));
+    } else {
+      lines.push('                → penyebut ' + fmtNum(mdl.G, 5) + ' − ' + fmtNum(1 + p.i, 5) + ' ≤ 0, jadi tidak ada dana yang cukup');
+    }
+    $('formula').textContent = lines.join('\n');
+    var q = $('quickEst');
+    var simple = p.r - p.z - p.i;
+    if (simple > 0 && isFinite(mdl.req)) {
+      q.textContent = 'Sebagai perkiraan cepat, biaya setahun ÷ (r − z − i) = ' + rpShort(12 * p.M, 2, true) + ' ÷ ' + pct(simple) + ' = ' +
+        rpShort(12 * p.M / simple, 2, true) + '. Hasil simulasi ' + (mdl.req > 12 * p.M / simple ? 'lebih besar' : 'berbeda') +
+        ' karena zakat dipotong dari saldo yang sudah tumbuh dan biaya hidup diambil sebelum sempat berkembang.';
+    } else {
+      q.textContent = 'Syaratnya: imbal hasil setelah zakat, (1 + r)(1 − z) − 1 = ' + pct(mdl.netReturn) + ', harus lebih besar dari inflasi ' + pct(p.i) + '.';
+    }
+  }
+
+  /* ---------- Main update ---------- */
+  var current = null;
+  function update() {
+    var inp = readInputs();
+    var bad = !(inp.M > 0);
+    $('biayaErr').hidden = !bad;
+    if (bad) return;
+    var p = { M: inp.M, i: inp.i, r: inp.r, z: inp.z };
+    var mdl = model(p);
+    var annual = 12 * p.M;
+    var ruleFund = 25 * annual;
+    var cmp = inp.banding > 0 ? inp.banding : ruleFund;
+    var cmpName = inp.banding > 0 ? 'Dana pembanding' : 'Aturan 4%';
+
+    $('biayaHelp').textContent = 'Setara ' + rpWords(annual) + ' per tahun, dalam nilai uang hari ini.';
+    $('bandingHelp').textContent = inp.banding > 0
+      ? 'Dibandingkan dengan dana yang dibutuhkan pada grafik dan tabel. Kosongkan untuk kembali ke aturan 4%.'
+      : 'Masukkan dana yang Anda miliki atau targetkan. Jika kosong, dipakai aturan 4%: 25× biaya hidup setahun = ' + rpShort(ruleFund, 2, true) + '.';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-biaya]'), function (b) {
+      b.setAttribute('aria-pressed', String(Number(b.getAttribute('data-biaya')) === inp.M));
+    });
+
+    var N = inp.years;
+    var reqSim = isFinite(mdl.req) ? simulate(mdl.req, p, mdl, N) : null;
+    var cmpSim = simulate(cmp, p, mdl, N);
+    var longSim = simulate(cmp, p, mdl, 300);
+
+    renderHero(p, mdl);
+    renderSplit(p, mdl, reqSim);
+    renderStatus(p, mdl, cmp, cmpName, longSim);
+
+    var toSeries = function (sim, F0) { return [F0].concat(sim.rows.map(function (r) { return r.end; })); };
+    state.chart = {
+      N: N, i: p.i, cmpName: cmpName,
+      req: reqSim ? toSeries(reqSim, mdl.req) : null,
+      cmp: toSeries(cmpSim, cmp),
+      cmpDead: cmpSim.depletedYear
+    };
+    renderLegend(state.chart);
+    $('chartSub').textContent = (state.mode === 'real'
+      ? 'Saldo dana di akhir setiap tahun, dalam nilai uang hari ini (sudah dikurangi inflasi). Garis datar berarti daya beli tetap.'
+      : 'Saldo dana di akhir setiap tahun dalam rupiah nominal, setelah biaya hidup dan zakat.');
+    drawChart();
+
+    renderSens(p);
+    if (!reqSim) state.table = 'cmp';
+    renderTable(p, mdl, reqSim, cmpSim, cmpName);
+    renderMethod(p, mdl);
+    current = { p: p, mdl: mdl, reqSim: reqSim, cmpSim: cmpSim, cmpName: cmpName };
+    save(inp);
+  }
+
+  /* ---------- Wiring ---------- */
+  ['inflasi', 'imbal', 'zakat', 'tahun'].forEach(function (k) {
+    var num = $(k), rng = $(k + 'Range');
+    num.addEventListener('input', function () { if (num.value !== '' && isFinite(parseFloat(num.value))) rng.value = num.value; update(); });
+    num.addEventListener('change', function () {
+      var lo = parseFloat(num.min), hi = parseFloat(num.max), v = parseFloat(num.value);
+      if (!isFinite(v)) v = DEFAULTS[k];
+      v = Math.min(hi, Math.max(lo, v));
+      num.value = v; rng.value = v; update();
+    });
+    rng.addEventListener('input', function () { num.value = rng.value; update(); });
+  });
+  ['biaya', 'banding'].forEach(function (k) {
+    $(k).addEventListener('input', function () { formatRpField($(k)); update(); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-biaya]'), function (b) {
+    b.addEventListener('click', function () { $('biaya').value = fmtNum(Number(b.getAttribute('data-biaya')), 0); update(); });
+  });
+  $('resetBtn').addEventListener('click', function () {
+    setInputs(DEFAULTS); state.mode = 'nom'; state.table = 'req'; syncMode(); update();
+  });
+  function syncMode() {
+    $('modeNom').setAttribute('aria-pressed', String(state.mode === 'nom'));
+    $('modeReal').setAttribute('aria-pressed', String(state.mode === 'real'));
+  }
+  $('modeNom').addEventListener('click', function () { state.mode = 'nom'; syncMode(); update(); });
+  $('modeReal').addEventListener('click', function () { state.mode = 'real'; syncMode(); update(); });
+  $('tblReq').addEventListener('click', function () { state.table = 'req'; update(); });
+  $('tblCmp').addEventListener('click', function () { state.table = 'cmp'; update(); });
+
+  var saved = load();
+  if (saved) {
+    setInputs({
+      biaya: Number(saved.biaya) > 0 ? Number(saved.biaya) : DEFAULTS.biaya,
+      inflasi: isFinite(saved.inflasi) ? +(+saved.inflasi).toFixed(2) : DEFAULTS.inflasi,
+      imbal: isFinite(saved.imbal) ? +(+saved.imbal).toFixed(2) : DEFAULTS.imbal,
+      zakat: isFinite(saved.zakat) ? +(+saved.zakat).toFixed(2) : DEFAULTS.zakat,
+      tahun: isFinite(saved.tahun) ? saved.tahun : DEFAULTS.tahun,
+      banding: Number(saved.banding) > 0 ? Number(saved.banding) : 0
+    });
+    if (saved.mode === 'real') state.mode = 'real';
+    if (saved.table === 'cmp') state.table = 'cmp';
+    syncMode();
+  }
+  update();
+
+  var lastW = 0;
+  var onResize = function () {
+    var w = $('chartHost').clientWidth;
+    if (Math.abs(w - lastW) > 1) { lastW = w; drawChart(); }
+  };
+  if ('ResizeObserver' in window) new ResizeObserver(onResize).observe($('chartHost'));
+  else window.addEventListener('resize', onResize);
+
+  // Exposed for checking the math from the console.
+  window.__simulasiFF = { model: model, simulate: simulate };
+})();
+</script>
+</body>
+</html>
