@@ -446,7 +446,7 @@ const hatOn = (p: Pen, o: Outfit, hp: P2[], H: Blob, cx: number, hc: number, lig
 // ---------------- bodies ----------------
 export type Arms = [P2[], P2[]];
 /** held prop; for the hammer the number is the strike 0 (raised) .. 1 (struck) */
-export type Prop = null | "icecream" | "shako" | ["hammer", number] | "cash" | "cashUp" | "palm";
+export type Prop = null | "icecream" | "shako" | ["hammer", number] | "cash" | "cashUp" | "palm" | "fan";
 
 const BUILD: Record<Build, { a: number; torso: number; legs: number; tw: number }> = {
   adult: { a: 118, torso: 1.1, legs: 1.4, tw: 0.8 },
@@ -459,6 +459,8 @@ export type FrontOpts = {
   prop?: Prop; tilt?: number; headTilt?: number; wave?: number;
   /** one arm straight out to that side (-1 / 1) at chest height: handshakes; both arms up: cheer */
   reach?: number; cheer?: boolean;
+  /** right hand slowly up, 0 = hanging .. 1 = high ("raises a hand") */
+  raise?: number;
   /** canvas angle the key light comes FROM (painted crescent + thick outline side) */
   light?: number; facing?: -1 | 0 | 1; seed?: number;
 };
@@ -470,7 +472,7 @@ const footStroke = (p: Pen, a: P2, b: P2, w: number, col: string) => {
 
 export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   const { phase = 0, expr = "neutral", mode = "march", look = 0, blink = false, lift = 60, prop = null, tilt = 0, headTilt = 0, wave,
-    light = DEF_LIGHT, facing = 0, seed = 1, reach = 0, cheer = false } = opts;
+    light = DEF_LIGHT, facing = 0, seed = 1, reach = 0, cheer = false, raise } = opts;
   const Bd = BUILD[o.build ?? "adult"], skin = o.skin ?? SKIN, two = Math.PI * 2, lid = lidOf(blink);
   const H = headBlob(seed, Bd.a, facing), W = 2 * H.a, HH = 2 * H.b, u = W / 100;
   const tall = (1 + Bd.torso + Bd.legs) * HH, sole = 975;
@@ -542,7 +544,10 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
     arms.push({ pts: cheer ? upArm(-1) : reach < 0 ? reachArm(-1) : prop === "shako" ? hang(-1, 0) : hang(-1, -sw), front: false });
     if (cheer) arms.push({ pts: upArm(1), front: false });
     else if (reach > 0) arms.push({ pts: reachArm(1), front: false });
-    else if (prop === "cash") {
+    else if (raise !== undefined) {
+      const k = clamp(raise, 0, 1), e = k * k * (3 - 2 * k), A = hang(1, 0), U = upArm(1);
+      arms.push({ pts: [A[0], lerp2(A[1], U[1], e), lerp2(A[2], U[2], e)], front: false });
+    } else if (prop === "cash" || prop === "fan") {
       const S = sh(1);
       arms.push({ pts: [S, [tcx + 1.08 * T.a + 6 * u, S[1] + 0.42 * HH], [tcx + 0.62 * T.a, S[1] + 0.3 * HH]], front: true });
     } else if (prop === "cashUp") {
@@ -618,14 +623,19 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   for (const a of arms) if (a.front) {
     drawArm(a);
     const [hx, hy] = a.pts[2];
-    if (prop === "cash" || prop === "cashUp") {
-      const up = prop === "cashUp", a = rad(up ? -14 : -24), bw = 30 * u, bh = 16 * u, cx = hx + (up ? 4 : -8) * u, cy = hy - (up ? 16 : 6) * u;
-      const B = (pts: P2[]) => rotPts(pts, a, cx, cy);
-      p.poly(B([[cx - bw, cy - bh], [cx + bw, cy - bh], [cx + bw, cy + bh], [cx - bw, cy + bh]]), "#7cc47a", 2.4 * u);
-      p.poly(B([[cx - bw + 5 * u, cy - bh + 5 * u], [cx + bw - 5 * u, cy - bh + 5 * u], [cx + bw - 5 * u, cy + bh - 5 * u], [cx - bw + 5 * u, cy + bh - 5 * u]]), null, 1.2 * u);
-      const [tx, ty] = p.P(cx, cy), g = p.g;
-      g.save(); g.translate(tx, ty); g.rotate(a + (p.rot ? p.rot[0] : 0)); g.font = `700 ${Math.round(17 * u)}px Fredoka, sans-serif`;
-      g.textAlign = "center"; g.textBaseline = "middle"; g.fillStyle = "#1f5a2a"; g.fillText("$10", 0, u); g.restore();
+    if (prop === "cash" || prop === "cashUp" || prop === "fan") {
+      const up = prop === "cashUp", bw = 30 * u, bh = 16 * u;
+      // one bill, or a fan of three (Gary counting his winnings)
+      const angs = prop === "fan" ? [-58, -34, -10] : [up ? -14 : -24];
+      for (const deg of angs) {
+        const a = rad(deg), fan = prop === "fan", cx = fan ? hx + 0.78 * bw * Math.cos(a) : hx + (up ? 4 : -8) * u, cy = fan ? hy + 0.78 * bw * Math.sin(a) : hy - (up ? 16 : 6) * u;
+        const B = (pts: P2[]) => rotPts(pts, a, cx, cy);
+        p.poly(B([[cx - bw, cy - bh], [cx + bw, cy - bh], [cx + bw, cy + bh], [cx - bw, cy + bh]]), "#7cc47a", 2.4 * u);
+        p.poly(B([[cx - bw + 5 * u, cy - bh + 5 * u], [cx + bw - 5 * u, cy - bh + 5 * u], [cx + bw - 5 * u, cy + bh - 5 * u], [cx - bw + 5 * u, cy + bh - 5 * u]]), null, 1.2 * u);
+        const [tx, ty] = p.P(cx, cy), g = p.g;
+        g.save(); g.translate(tx, ty); g.rotate(a + (p.rot ? p.rot[0] : 0)); g.font = `700 ${Math.round(15 * u)}px Fredoka, sans-serif`;
+        g.textAlign = "center"; g.textBaseline = "middle"; g.fillStyle = "#1f5a2a"; g.fillText("$100", 0, u); g.restore();
+      }
       p.dot(hx, hy, 6 * u);
     } else if (prop === "palm") {
       p.dot(hx, hy, 7.5 * u);
@@ -985,11 +995,11 @@ export const fxTag = (p: Pen, n: number, col = "#ffd84a", hot = false) => {
   label(p, String(n), 110, 112, n > 9 ? 92 : 112, "#ffffff", 9);
 };
 /** speech bubble with a tail toward the speaker (bottom left) on a 560 x 340 canvas */
-export const fxBubble = (p: Pen, text: string, fill = "#ffffff", ink = "#241726", hot = false) => {
-  const body = rrect(24, 22, 536, 246, 70);
-  p.poly([[150, 230], [222, 230], [110, 324]], fill, 12);
+export const fxBubble = (p: Pen, text: string, fill = "#ffffff", ink = "#241726", hot = false, flip = false) => {
+  const body = rrect(24, 22, 536, 246, 70), X = (pts: [number, number][]) => (flip ? pts.map(([x, y]) => [560 - x, y] as [number, number]) : pts);
+  p.poly(X([[150, 230], [222, 230], [110, 324]]), fill, 12);
   p.poly(body, fill, 12);
-  p.poly([[154, 222], [218, 222], [118, 312]], fill, 0); // hide the tail's join line
+  p.poly(X([[154, 222], [218, 222], [118, 312]]), fill, 0); // hide the tail's join line
   label(p, text, 280, 136, 128, hot ? "#ff4d4d" : ink, hot ? 7 : 0, 470);
 };
 /** little birthday cake icon (match marker) on a 260 x 260 canvas */

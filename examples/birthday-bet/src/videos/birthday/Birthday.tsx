@@ -1,11 +1,12 @@
-// "The Birthday Bet": our original ~68 s short about the birthday paradox, in the flat-characters-in-a-3D-toon-world
+// "The Birthday Bet" (v3, "Would you take this bet?"): our original ~54 s short about the birthday paradox, in the flat-characters-in-a-3D-toon-world
 // style of templates/bridge. One three.js world (world.ts) posed per frame from the story timeline (story.ts).
 // Post chain as the bridge short: InkPass -> lens blur pre + main -> bloom (emissive only) -> NEUTRAL tone map ->
-// grade, MSAA. Place / time changes crossfade by stacking a second canvas; the hook ends on a 4-frame white flash.
-// Burned-in captions (Captions.tsx) sit on top of everything.
+// grade, MSAA. Place / time changes crossfade by stacking a second canvas. After "September ninth!" a record scratch
+// freezes the picture (desaturated, creeping zoom, white flash). The story graphics (Overlay.tsx) and the burned-in
+// captions (Captions.tsx) sit on top of everything.
 import React, { useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
-import { AbsoluteFill, continueRender, delayRender, getInputProps, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Freeze, continueRender, delayRender, getInputProps, useCurrentFrame } from "remotion";
 import { ThreeCanvas } from "@remotion/three";
 import { useThree } from "@react-three/fiber";
 import { EffectComposer } from "@react-three/postprocessing";
@@ -15,8 +16,9 @@ import { InkPass, noInkFallback } from "./ink";
 import { LensBlur } from "./lensblur";
 import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "./grade";
 import { Kit } from "./build";
-import { TOTAL, FLASH_AT, SHOTS, layersAt, dofAt } from "./story";
+import { TOTAL, FLASH_AT, FREEZE, SHOTS, layersAt, dofAt } from "./story";
 import { Captions } from "./Captions";
+import { Overlay } from "./Overlay";
 
 export const BIRTHDAY_FRAMES = TOTAL;
 
@@ -94,11 +96,17 @@ export const BirthdayShort: React.FC = () => {
   const kit = useKit();
   const on = useMemo(toggles, []);
   if (!kit) return null;
-  const flash = f >= FLASH_AT && f < FLASH_AT + 4 ? [1, 0.75, 0.45, 0.2][f - FLASH_AT] : 0;
+  const flash = f >= FLASH_AT && f < FLASH_AT + 4 ? [0.85, 0.55, 0.3, 0.12][f - FLASH_AT] : 0;
+  const frozen = f >= FREEZE[0] && f < FREEZE[1], fz = frozen ? f - FREEZE[0] : 0;
   return (
     <AbsoluteFill style={{ background: "#cfe3f2" }}>
-      {layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} kit={kit} alpha={l.alpha} />)}
+      <AbsoluteFill style={frozen ? { filter: "saturate(0.3) contrast(1.12) brightness(1.04)", transform: `scale(${1 + 0.0035 * fz})` } : undefined}>
+        <Freeze frame={FREEZE[0]} active={frozen}>
+          {layersAt(frozen ? FREEZE[0] : f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} kit={kit} alpha={l.alpha} />)}
+        </Freeze>
+      </AbsoluteFill>
       {flash > 0 && <AbsoluteFill style={{ background: "#ffffff", opacity: flash }} />}
+      {on.captions && <Overlay />}
       {on.captions && <Captions />}
     </AbsoluteFill>
   );

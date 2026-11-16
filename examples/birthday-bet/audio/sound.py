@@ -1,4 +1,4 @@
-# Sound for "The Birthday Bet": original score + synthesized SFX + the voice, all from numpy (dsp.py / instruments.py /
+# Sound for "The Birthday Bet" (v3): original score + synthesized SFX + the voice, all from numpy (dsp.py / instruments.py /
 # sfx_gen.py from templates/audio). Every event time comes from out/timeline.json (dumped from story.ts) and
 # voice/words.json, so the sound lands on the same frames as the picture.
 # Writes out/audio/{mix,stem_voice,stem_music,stem_sfx}.wav (48 kHz, exact video length) and out/audio/cues.md.
@@ -25,6 +25,7 @@ CUES = []
 def cue(t, what):
     CUES.append((t, what))
 R = rng(2026)
+line_end = lambda li: max(w["e"] for w in WORDS if w["line"] == li)
 
 # ================================================================ small synth pieces
 def addl(a, b, gb=1.0):
@@ -144,6 +145,23 @@ def laugh(r, base, dur):
 def sparkle(r, vel=0.4):
     return I.glock(float(r.choice([2093, 2349, 2637, 3136, 3520])), vel, r, dur=0.6)
 
+def slap(r):
+    """a bill slapped flat on the lens: paper smack + body thump + crackle"""
+    t = tt(0.35)
+    y = lp(r.standard_normal(len(t)), 2500) * np.exp(-t / 0.012)
+    y += np.sin(phase(70 + 120 * np.exp(-t / 0.02))) * np.exp(-t / 0.07) * 0.9
+    y += bp(r.standard_normal(len(t)), 2500, 8000, 1) * np.exp(-t / 0.03) * 0.35
+    return fades(y, 0.0003, 0.03)
+
+def flick(r, vel=1.0):
+    """one banknote flicked"""
+    t = tt(0.08)
+    return bp(r.standard_normal(len(t)), 1500, 6000, 1) * np.exp(-t / 0.015) * vel
+
+def tick(r, f=1800.0):
+    """counter tick: a dry woodblock click"""
+    return fades(modal(0.07, [(f, 1.0, 0.02), (f * 1.78, 0.5, 0.012)], r), 0.0003, 0.01)
+
 # ================================================================ SFX stem
 sfx = np.zeros((2, N))
 def S(x, t, gain_db=0.0, p=0.0, what=None):
@@ -153,88 +171,102 @@ def S(x, t, gain_db=0.0, p=0.0, what=None):
     if what:
         cue(t, what)
 
+shot = {s["id"]: s for s in TL["shots"]}
+T = lambda i: fr(shot[i]["a"])
 # 1 hook: number tags count 1..23 (rising pentatonic blips)
 PENTA = [0, 2, 4, 7, 9]
 for i, f in enumerate(TL["tags"]):
     m = 72 + 12 * (i // 5) + PENTA[i % 5]
     S(blip(I.m2f(min(m, 100)), 0.55, R), fr(f), -22, p=0.6 * np.sin(i * 0.9), what="tag %d" % (i + 1) if i in (0, 22) else None)
-# the coins: whoosh up, spinning ticks, a ring on landing
-for c in TL["coins"]:
-    t0, t1 = fr(c["f0"]), fr(c["f1"])
-    S(G.whoosh(t1 - t0 + 0.4, R, peak=0.35, f_lo=300, f_hi=2600, tail=0.35), t0 - 0.05, -15, what="coin whoosh")
-    S(spin_ticks(R, t1 - t0), t0, -21)
-    S(coin_ring(R), t1, -15, what="coin ring")
-# the match line 9-17 in the hook: zip + ding-ding on "birthday"
-hl = TL["hookLink"]
-S(zip_(R, 400, 1600, fr(hl[1] - hl[0]) + 0.05, 0.6), fr(hl[0]), -18, what="hook link zip")
-for k, dt in enumerate((0.0, 0.13)):
-    S(ding(1568, 0.8, R), fr(hl[1]) - 0.05 + dt, -16, p=(-0.3, 0.3)[k], what="match ding" if k == 0 else None)
-# flash into the story
-S(G.whoosh(0.5, R, peak=0.38, f_lo=500, f_hi=3000, tail=0.2), fr(TL["FLASH_AT"]) - 0.38, -15, what="flash whoosh")
-S(kick(0.6), fr(TL["FLASH_AT"]), -14)
-# "bets ... ten bucks": paper flick
-S(bp(R.standard_normal(ns(0.08)), 1500, 6000, 1) * np.exp(-tt(0.08) / 0.015), fr(TL["cues"]["bets"]), -20, what="cash flick")
-# laughter
-t_l = fr(TL["cues"]["laugh"]) - 0.25
-lau = np.zeros((2, ns(1.9)))
+# 2 the $100 bill slaps the lens
+t_slap = fr(TL["slap"])
+S(G.whoosh(0.3, R, peak=0.25, f_lo=600, f_hi=3500, tail=0.05), t_slap - 0.24, -17)
+S(slap(R), t_slap, -9, what="bill slap")
+S(kick(0.7), t_slap, -15)
+# 3 laughter, the 365 page and the calendar flutter
+t_l = T(3) + 0.05  # under "You'd take that bet, right?", gone before "Three sixty-five"
+lau = np.zeros((2, ns(1.5)))
 for i in range(13):
     base = R.uniform(105, 150) if i % 3 else R.uniform(190, 250)
-    x = laugh(R, base, R.uniform(1.1, 1.6))
-    place(lau, pan(x, R.uniform(-0.8, 0.8)), R.uniform(0, 0.25), 1 / 13 ** 0.5)
-S(lau, t_l, -17, what="crowd laugh")
-# 365: page pop + calendar flutter
+    place(lau, pan(laugh(R, base, R.uniform(0.75, 1.05)), R.uniform(-0.8, 0.8)), R.uniform(0, 0.15), 1 / 13 ** 0.5)
+S(lau, t_l, -22, what="crowd laugh")
 S(pop(R, 700, 0.1, 0.9), fr(TL["cues"]["cal365"]), -16, what="365 pop")
 flut = np.zeros(ns(0.9))
 for i in range(60):
     k = ns(R.uniform(0, 0.7))
     flut[k:k + 400] += bp(R.standard_normal(400), 1200, 5000, 1) * np.exp(-np.arange(400) / 90) * R.uniform(0.3, 1)
 S(widen(flut, R, 9, 1.0), fr(TL["cues"]["calBurst"]), -18, what="calendar flutter")
+# 4 "Gary did. So did the whole party.": a bill flicked up per guest, round the ring
+for i, f in enumerate(TL["cash"]):
+    S(flick(R, 0.9 if i == 0 else 0.6), fr(f), -16 if i == 0 else -21, p=R.uniform(-0.7, 0.7), what="cash up (Gary)" if i == 0 else None)
+cue(fr(TL["cash"][1]), "cash wave round the ring")
+# 5 the stakes pill: low "uh-oh" sting
+t_st = fr(TL["stakes"][0])
+S(pop(R, 520, 0.12, 0.9), t_st, -17, what="stakes pill")
+S(I.timpani(73.4, 0.9, R, 1.6), t_st, -15)
 # bubbles: pops (+ a short murmur syllable for the roll call)
 for b in TL["bubbles"]:
     hot = b.get("hot", False)
-    S(pop(R, 1100 if hot else 850, 0.09, 0.9), fr(b["a"]), -15 if hot else -18, p=R.uniform(-0.4, 0.4), what="bubble %s" % b["text"])
-    if b.get("shot") == 7:
-        S(G.babble(0.45, R, R.uniform(110, 210), R.uniform(0.95, 1.1), rate=6, active=1.0), fr(b["a"]) - 0.05, -24, p=R.uniform(-0.5, 0.5))
-# silence: crickets (and no music)
-s5 = next(s for s in TL["shots"] if s["id"] == 5)
-cr = G.crickets(fr(s5["b"] - s5["a"]) + 0.6, R, 3)
-S(widen(cr * np.interp(np.arange(len(cr)), [0, ns(0.05), len(cr) - ns(0.3), len(cr)], [0, 1, 1, 0]), R, 9, 1.0), fr(s5["a"]), -19, what="crickets")
-# seventeen: the match stinger (impact + ding-ding + crowd "ooh")
-t17 = fr(TL["cues"]["seventeen"])
-S(kick(1.0), t17, -14, what="match impact")
-S(I.cymbal(0.6, R, 2.0), t17, -22)
-for k, dt in enumerate((0.02, 0.15)):
-    S(ding(1760, 0.9, R), t17 + dt, -15, p=(-0.3, 0.3)[k])
+    S(pop(R, 1100 if hot else 850, 0.09, 0.9), fr(b["a"]), -15 if hot else -19, p=R.uniform(-0.4, 0.4), what="bubble %s" % b["text"] if b["shot"] != 8 else None)
+    if b["shot"] == 8:
+        S(G.babble(0.4, R, R.uniform(110, 210), R.uniform(0.95, 1.1), rate=6, active=1.0), fr(b["a"]) - 0.05, -25, p=R.uniform(-0.5, 0.5))
+# 7 silence: crickets (and no music)
+cr = G.crickets(T(8) - T(7) + 0.5, R, 3)
+S(widen(cr * np.interp(np.arange(len(cr)), [0, ns(0.05), len(cr) - ns(0.3), len(cr)], [0, 1, 1, 0]), R, 9, 1.0), T(7) - 0.05, -18, what="crickets")
+# 8 roll call: a counter tick per guest checked
+for k, f in enumerate(TL["roll"]):
+    S(tick(R, 1700 + 40 * k), fr(f), -19, p=0.25, what="counter ticks 1..16" if k == 0 else None)
+S(tick(R, 2400), fr(TL["sep17"]), -18)
+# 9 Gary counts his money: a riffle of bills
+t9 = T(9) + 0.15
+for k in range(int((T(10) - t9 - 0.1) * 13)):
+    S(flick(R, R.uniform(0.4, 0.8)), t9 + k / 13 + R.uniform(0, 0.01), -21, p=0.3)
+cue(t9, "Gary's money riffle")
+# 10 the record scratch: freeze-frame + flash
+t_fz = fr(TL["FREEZE"][0])
+S(scratch(R), t_fz - 0.03, -11, what="record scratch (freeze)")
+S(G.whoosh(0.4, R, peak=0.1, f_lo=800, f_hi=4000, tail=0.3), t_fz, -22)
+# 11 the hand goes up: a riser; the match: impact + ding-ding + crowd "ooh"
+r0, r1 = fr(TL["raise"][0]), fr(TL["match"])
+S(riser(R, r1 - r0 + 0.05, 220, 880), r0, -18, what="hand-raise riser")
+t_m = fr(TL["match"])
+S(kick(1.0), t_m, -16, what="match impact")
+S(I.cymbal(0.6, R, 2.0), t_m, -21)
+t_me = line_end(8)
+for k, dt in enumerate((0.0, 0.12)):
+    S(ding(1760, 0.9, R), t_me + dt, -17, p=(-0.3, 0.3)[k])
 ooh = np.zeros((2, ns(0.8)))
 for i in range(9):
     place(ooh, pan(G.whoa(R, R.uniform(100, 220)), R.uniform(-0.8, 0.8)), R.uniform(0.05, 0.2), 1 / 3)
-S(ooh, t17 + 0.25, -19, what="crowd ooh")
-# confetti + cheers
-for k, f in enumerate(TL["confetti"]):
-    S(popper(R), fr(f), -13, p=(0.0, 0.0, 0.2)[k], what="party popper")
+S(ooh, t_me + 0.02, -21, what="crowd ooh")
+# 12 Dave wins: ka-ching on "won", popper + cheers + applause on the sum
+S(popper(R), fr(TL["confetti"][0]), -17, what="party popper (wide)")
+S(popper(R), fr(TL["confetti"][1]), -20, p=-0.5)
+S(popper(R), fr(TL["confetti"][1]) + 0.03, -20, p=0.5)
+S(cash_register(R), fr(TL["confetti"][1]) - 0.05, -18, what="ka-ching (Dave CU)")
+S(popper(R), fr(TL["confetti"][2]), -15, p=-0.5, what="confetti cannons (end)")
+S(popper(R), fr(TL["confetti"][2]) + 0.03, -15, p=0.5)
 for t0, n_people in ((fr(TL["confetti"][0]) + 0.1, 10), (fr(TL["confetti"][2]) + 0.1, 8)):
     ch = np.zeros((2, ns(1.4)))
     for i in range(n_people):
         place(ch, pan(G.hurrah(R, R.uniform(110, 230), R.uniform(0.95, 1.1)), R.uniform(-0.8, 0.8)), R.uniform(0, 0.3), 1 / n_people ** 0.5)
-    S(ch, t0, -15, what="cheer")
-apl = G.applause(2.6, R, 30, env=np.interp(np.arange(ns(2.6)), [0, ns(0.2), ns(1.8), ns(2.6)], [0, 1, 0.7, 0]))
-S(apl, fr(TL["confetti"][0]) + 0.3, -21, what="applause")
-# "Wait, how?": record scratch, question-mark pops
-s11 = next(s for s in TL["shots"] if s["id"] == 11)
-S(scratch(R), fr(s11["a"]) - 0.08, -15, what="record scratch")
+    S(ch, t0, -20 if n_people == 10 else -15, what="cheer")
+apl = G.applause(2.2, R, 30, env=np.interp(np.arange(ns(2.2)), [0, ns(0.2), ns(1.5), ns(2.2)], [0, 1, 0.7, 0]))
+S(apl, fr(TL["confetti"][0]) + 0.3, -25, what="applause")
+# 13 "Here's what Gary missed": question-mark pops, a thud on "Your brain"
 for k in range(3):
-    S(pop(R, 600 + 150 * k, 0.08, 0.7), fr(TL["cues"]["waitHow"] + 3 * k), -20, p=(-0.3, 0.3, 0)[k])
+    S(pop(R, 600 + 150 * k, 0.08, 0.7), fr(TL["cues"]["missed"] + 3 * k), -20, p=(-0.3, 0.3, 0)[k])
+S(kick(0.55), fr(TL["cues"]["your"]), -17, what="'your brain' thud")
 # golden-hour transition
-S(G.whoosh(0.8, R, peak=0.4, f_lo=250, f_hi=1500, tail=0.4), fr(next(s for s in TL["shots"] if s["id"] == 12)["a"]) - 0.4, -19, what="golden whoosh")
-# Gary's 22 lines: quick rising zips
+S(G.whoosh(0.8, R, peak=0.4, f_lo=250, f_hi=1500, tail=0.4), T(14) - 0.4, -19, what="golden whoosh")
+# 14 Gary's 22 lines: quick rising zips
 g0, g1 = TL["garyLines"]
 for i in range(22):
-    t = fr(g0 + i * (g1 - g0) / 21)
-    S(zip_(R, 380 + 25 * i, 1300 + 40 * i, 0.07, 0.5), t, -22, p=0.6 * np.sin(i * 1.3))
+    S(zip_(R, 380 + 25 * i, 1300 + 40 * i, 0.07, 0.5), fr(g0 + i * (g1 - g0) / 21), -22, p=0.6 * np.sin(i * 1.3))
 cue(fr(g0), "Gary's 22 zips")
-# "any two people": pings; the web of 253 pairs: shimmer + riser
-for a, b, f in TL["samplePairs"]:
-    S(blip(I.m2f(84 + (a % 5)), 0.6, R), fr(f), -17)
+# 15 "any two people": pings; the web of 253 pairs: shimmer + riser + ding
+for a_, b_, f in TL["samplePairs"]:
+    S(blip(I.m2f(84 + (a_ % 5)), 0.6, R), fr(f), -17)
 w0, w1 = TL["webBuild"]
 dw = fr(w1 - w0)
 sh = np.zeros((2, ns(dw + 0.8)))
@@ -243,62 +275,49 @@ for i in range(160):
     place(sh, pan(sparkle(R, 0.25 + 0.3 * u), R.uniform(-0.9, 0.9)), u * dw, 0.5)
 S(sh, fr(w0), -21, what="web shimmer")
 S(riser(R, dw + 0.15), fr(w0) - 0.15, -19, what="web riser")
-S(ding(2093, 0.9, R), fr(w1), -15, what="web complete ding")
-# handshakes: soft pats on each pairing; twinkles on "tiny chance at a match"
-sa, sb, se = TL["shake"]
-for t0 in (fr(sa), fr(sb)):
-    for k in range(11):
-        pat = lp(R.standard_normal(ns(0.05)), 1800) * np.exp(-tt(0.05) / 0.01)
-        S(pat, t0 + 0.02 * k + R.uniform(0, 0.03), -20, p=R.uniform(-0.8, 0.8))
-    S(sparkle(R, 0.5), t0 + 0.05, -20)
-cue(fr(sa), "handshake pats")
-tc = fr(TL["cues"]["tinyChance"])
-for k in range(10):
-    S(sparkle(R, 0.35), tc + 0.18 * k, -23, p=R.uniform(-0.8, 0.8))
-# 50 / 70 newcomers pop in; "guaranteed": the big hit
-for (a, b), n_new in ((TL["grow50"], 27), (TL["grow70"], 20)):
-    for j in range(n_new):
-        S(pop(R, R.uniform(700, 1300), 0.07, 0.6), fr(a + j * (b - a) / n_new), -21, p=R.uniform(-0.8, 0.8))
-    S(riser(R, 0.6, 300, 1200), fr(a) - 0.1, -24)
-    cue(fr(a), "newcomers pop (%d)" % n_new)
-tfl = fr(TL["flare"])
-S(I.timpani(87.3, 1.0, R, 2.0), tfl, -12, what="guaranteed hit")
-S(I.cymbal(0.9, R, 2.6), tfl, -18)
-# stadium: crowd roar bed, referee whistle, link ping, cheer on the shared birthday
-s17 = next(s for s in TL["shots"] if s["id"] == 17)
-d17 = fr(s17["b"] - s17["a"]) + 0.5
+S(ding(2093, 0.9, R), fr(w1), -18, what="web complete ding")
+# 16 the coin: whoosh up, spinning ticks, a ring on landing
+for c in TL["coins"]:
+    t0, t1 = fr(c["f0"]), fr(c["f1"])
+    S(G.whoosh(t1 - t0 + 0.4, R, peak=0.35, f_lo=300, f_hi=2600, tail=0.35), t0 - 0.05, -15, what="coin whoosh")
+    S(spin_ticks(R, t1 - t0), t0, -21)
+    S(coin_ring(R), t1, -18, what="coin ring")
+# 17 stadium: crowd roar bed, referee whistle, link zip, cheer on the shared birthday
+d17 = T(18) - T(17) + 0.5
 roar = widen(bp(colored(ns(d17), R, 1.0), 250, 3200, 1), R, 13, 1.0)
 roar = roar / (np.std(roar) + 1e-9) * (0.8 + 0.2 * smooth_noise(ns(d17), R, 0.6))[None, :]
 roar += G.applause(d17, R, 40) * 1.5
 env17 = np.interp(np.arange(ns(d17)), [0, ns(0.4), ns(d17 - 0.6), ns(d17)], [0, 1, 1, 0])
-S(roar * env17[None, :], fr(s17["a"]) - 0.25, -27, what="stadium roar")
-S(whistle_ref(R), fr(s17["a"]) + 0.35, -21, p=0.3, what="referee whistle")
+S(roar * env17[None, :], T(17) - 0.25, -27, what="stadium roar")
+S(whistle_ref(R), T(17) + 0.35, -21, p=0.3, what="referee whistle")
 S(zip_(R, 400, 1600, 0.25, 0.6), fr(TL["cupLink"][0]), -19)
 S(ding(1568, 0.8, R), fr(TL["cupCake"]), -15, what="cup match ding")
 ch = np.zeros((2, ns(1.5)))
 for i in range(12):
     place(ch, pan(G.hurrah(R, R.uniform(100, 200), R.uniform(0.95, 1.1)), R.uniform(-0.9, 0.9)), R.uniform(0, 0.4), 1 / 12 ** 0.5)
 S(ch, fr(TL["cupCake"]) + 0.1, -18, what="stadium cheer")
-# Gary's crowd: murmur bed + the crane-out whoosh
-s18 = next(s for s in TL["shots"] if s["id"] == 18)
-d18 = fr(s18["b"] - s18["a"]) + 0.4
+# 18 the twist: crowd murmur bed, the crane whoosh, the 253 card pops, a hit on "Same number"
+d18 = T(19) - T(18) + 0.4
 mur = np.zeros((2, ns(d18)))
 for i in range(7):
     place(mur, pan(G.babble(d18, R, R.uniform(100, 230), R.uniform(0.95, 1.12), rate=3.8, active=0.6), R.uniform(-0.9, 0.9)), 0, 1 / 7 ** 0.5)
 mur = lp(mur, 2500, 1) * np.interp(np.arange(ns(d18)), [0, ns(0.4), ns(d18 - 0.4), ns(d18)], [0, 1, 1, 0])[None, :]
-S(mur, fr(s18["a"]) - 0.2, -27, what="crowd murmur")
+S(mur, T(18) - 0.2, -27, what="crowd murmur")
 S(G.whoosh(1.9, R, peak=0.9, f_lo=200, f_hi=1800, tail=0.6), fr(TL["cues"]["need"]) - 0.6, -16, what="crane whoosh")
-# the end: party murmur, wink ding, ka-ching on "bet"
-s19 = next(s for s in TL["shots"] if s["id"] == 19)
-d19 = DUR - fr(s19["a"]) + 0.1
+c0, c1, _ = TL["card253"]
+S(pop(R, 760, 0.1, 0.9), fr(c0), -16, what="card: 253 people")
+S(pop(R, 980, 0.1, 0.9), fr(c1), -15, what="card: = 253 pairs")
+S(I.timpani(87.3, 1.0, R, 1.8), fr(TL["cues"]["same"]), -17, what="'same number' hit")
+# 19 the end: party murmur, the call-to-action pop, the wink, popper on "twin"
+d19 = DUR - T(19) + 0.1
 mur2 = np.zeros((2, ns(d19)))
 for i in range(5):
     place(mur2, pan(G.babble(d19, R, R.uniform(100, 230), R.uniform(0.95, 1.12), rate=4.0, active=0.6), R.uniform(-0.9, 0.9)), 0, 1 / 5 ** 0.5)
-S(lp(mur2, 2500, 1), fr(s19["a"]) - 0.1, -30, what="party murmur")
-S(I.glock(2637, 0.6, R, 0.8), fr(TL["cues"]["make"]) + 0.15, -21, what="wink")
-S(cash_register(R), fr(TL["cues"]["bet"]) - 0.06, -14, what="ka-ching")
+S(lp(mur2, 2500, 1), T(19) - 0.1, -30, what="party murmur")
+S(pop(R, 900, 0.1, 0.9), fr(TL["cta"]), -15, what="call-to-action pop")
+S(I.glock(2637, 0.6, R, 0.8), fr(TL["cues"]["twin"]) - 0.2, -21, what="wink")
 # camera glides: soft whooshes on fast moves (cuts are excluded: single-frame spikes)
-spd = np.array([s for _, s in TL["camSpeed"]]); frs = np.array([f for f, _ in TL["camSpeed"]])
+spd = np.array([s_ for _, s_ in TL["camSpeed"]]); frs = np.array([f for f, _ in TL["camSpeed"]])
 sm = ndimage.uniform_filter1d(np.minimum(spd, np.median(spd) * 60 + 1e-9), 5)
 cut = np.zeros_like(spd, bool)
 for i in range(1, len(spd) - 1):
@@ -358,41 +377,54 @@ def groove(t0, t1, layers=("bass", "chords", "drums", "mel"), mel_gain=-6.0, pro
                     x = I.glock(I.m2f(mm), 0.6, R, dur=0.9) if mel_inst == "glock" else I.musicbox(I.m2f(mm), 0.6, R, dur=1.0)
                     M(x, tt0, mel_gain, p=0.15)
 
-def bars_end(t0, t1):
-    """last bar line at or before t1 on a grid starting at t0 (for clean stops)"""
-    return t0 + int((t1 - t0) / (4 * Q)) * 4 * Q
+def stab(t, notes, g=-13, dur=0.6, kind="stab", vel=0.8):
+    for m in notes:
+        M(I.brass(I.m2f(m), dur, vel, R, kind=kind), t, g)
 
-shot = {s["id"]: s for s in TL["shots"]}
-T = lambda i: fr(shot[i]["a"])
-# hook: groove from 0 with a coin build; stop-hit on "birthday"
-hook_end = fr(TL["hookLink"][1])
-groove(0.0, hook_end, layers=("bass", "drums", "mel"), mel_gain=-8)
-for k in range(int((fr(TL["coins"][0]["f1"]) - fr(TL["coins"][0]["f0"])) / 0.0625)):
-    M(I.snare(0.15 + 0.03 * k, R, 0.12, buzz=True), fr(TL["coins"][0]["f0"]) + k * 0.0625, -20)
-for m in (53, 65, 69, 72, 77):
-    M(I.brass(I.m2f(m), 0.5, 0.8, R, kind="stab"), hook_end - 0.02, -15)
-M(I.cymbal(0.7, R, 2.2), hook_end - 0.02, -16)
-cue(hook_end, "music: hook stop-hit")
-# story groove until "Silence", dead stop; restart on "See?"; stop on "Wait"
-g1a, g1b = T(2), T(5)
-groove(g1a, g1b, mel_gain=-7)
-cue(g1a, "music: story groove")
-g2a, g2b = T(6), T(11)
-groove(g2a, g2b, mel_gain=-7)
-cue(g2a, "music: groove resumes")
-# celebration stabs from the confetti to "Wait"
-tc0 = fr(TL["confetti"][0])
-for k in range(int((g2b - tc0) / (2 * Q))):
-    for m in (65, 69, 72):
-        M(I.brass(I.m2f(m + (0 if k % 2 == 0 else 2)), 0.25, 0.6, R, kind="stab"), tc0 + k * 2 * Q + Q, -17)
-# explanation: golden pad, half-time plucks; the web riser; handshake groove; the coin; the build to "guaranteed"
-e0, e1 = T(12), fr(TL["webBuild"][1])
-PAD = [["Dm", "Bb"], ["F", "C"]]
-pt = e0
-pc = 0
+# hook: groove from 0, stop-hit on the slap; a soft pad under the rest of Dave's line
+groove(0.0, t_slap, layers=("bass", "drums", "mel"), mel_gain=-8)
+stab(t_slap - 0.02, (53, 65, 69, 72, 77), -15)
+M(I.cymbal(0.7, R, 2.2), t_slap - 0.02, -17)
+M(I.pad([I.m2f(m) for m in (53, 60, 65, 69)], T(3) - t_slap + 0.3, 0.35, R, att=0.25, rel=0.4, warm=1100), t_slap + 0.1, -17)
+cue(t_slap, "music: hook stop-hit on the slap")
+# the setup groove from the laugh to Gary's question; a low "dun-dun" under the stakes
+groove(T(3), T(7), mel_gain=-7)
+cue(T(3), "music: setup groove")
+t_ste = line_end(3) + 0.03
+for k, m in enumerate((38, 38, 37)):
+    stab(t_ste + 0.2 * k, (m, m + 12), -12, dur=0.18 if k < 2 else 0.5, kind="soft")
+# crickets: no music. roll call -> Gary's money -> guest 17: a ticking tension pulse in D minor that builds to the scratch
+p0 = T(8)
+nb = int((t_fz - p0) / (Q / 2))
+for k in range(nb):
+    t = p0 + k * Q / 2
+    u = k / max(1, nb - 1)
+    if k % 2 == 0:
+        M(kick(0.55 + 0.35 * u), t, -10)
+        M(I.pluck(I.m2f(38 if (k // 8) % 2 == 0 else 37), 0.8, R, dur=0.4, bright=0.3), t, -6)
+    M(hat(R, 0.15 + 0.15 * u), t, -18 + 3 * u, p=-0.3)
+    if k % 4 == 2:
+        M(I.pluck(I.m2f([62, 65, 69, 65][(k // 4) % 4]), 0.5, R, dur=0.3, bright=0.6), t, -14, p=0.3)
+cue(p0, "music: tension pulse (roll call)")
+# the scratch kills it; the hand goes up over a held tremolo chord; the match: the hit
+M(I.pad([I.m2f(m) for m in (50, 57, 62, 64)], r1 - r0 + 0.1, 0.4, R, att=0.6, rel=0.05, warm=1500), r0, -14)
+stab(t_me, (41, 53, 65, 69, 72, 77), -12, dur=0.6)
+M(I.cymbal(0.9, R, 2.4), t_me, -17)
+M(I.timpani(87.3, 1.0, R, 1.6), t_me, -15)
+cue(t_m, "music: match hit")
+# celebration groove from the match into Dave's win, brass stabs on the off-beats
+groove(t_m + 0.25, T(13), mel_gain=-7, energy=1.15)
+for k in range(int((T(13) - t_m - 0.25) / (2 * Q))):
+    stab(t_m + 0.25 + k * 2 * Q + Q, (65 + (0 if k % 2 == 0 else 2), 69 + (0 if k % 2 == 0 else 1), 72), -17, 0.25, vel=0.6)
+cue(t_m + 0.25, "music: celebration")
+# "Here's what Gary missed": the groove drops to a hanging pad
+M(I.pad([I.m2f(m) for m in (50, 57, 62, 65)], T(14) - T(13) + 0.4, 0.4, R, att=0.15, rel=0.6, warm=1000), T(13), -12)
+cue(T(13), "music: drop (pad)")
+# the explanation: golden pad + half-time plucks until the web is built, horn swell on the last pair
+e0, e1 = T(14), fr(TL["webBuild"][1])
+pt, pc = e0, 0
 while pt < e1 - 0.1:
-    name = ["Dm", "Bb", "F", "C"][pc % 4]
-    root, tri = CHORD[name]
+    root, tri = CHORD[["Dm", "Bb", "F", "C"][pc % 4]]
     seg = min(2.0, e1 - pt)
     M(I.pad([I.m2f(m) for m in tri] + [I.m2f(root + 12)], seg, 0.5, R, att=0.4, rel=0.6, warm=1200), pt, -9)
     for k in range(int(seg / (2 * Q))):
@@ -401,53 +433,46 @@ while pt < e1 - 0.1:
     pt += seg
     pc += 1
 cue(e0, "music: explanation pad")
-for m in (53, 60, 65, 69, 72, 77):
-    M(I.brass(I.m2f(m), 0.6, 0.7, R, kind="horn"), e1, -15)
-hs0 = T(14)
-groove(hs0, T(15) + 1.0, layers=("bass", "chords", "mel"), mel_gain=-9, prog=["F", "Bb", "C", "F"], mel_inst="musicbox")
-cue(hs0, "music: handshake pizzicato")
-b0, b1 = T(15) + 1.0, tfl
-roll_n = int((b1 - b0) / 0.0625)
-for k in range(roll_n):
-    u = k / max(1, roll_n - 1)
-    M(I.snare(0.12 + 0.55 * u ** 2, R, 0.12, buzz=True), b0 + k * 0.0625, -16)
-for k in range(int((b1 - b0) / Q)):
-    M(I.pluck(I.m2f(41 + [0, 2, 4, 5, 7, 9, 11, 12][min(7, k * 8 // max(1, int((b1 - b0) / Q)))]), 0.8, R, dur=0.5, bright=0.4), b0 + k * Q, -6)
-for m in (41, 53, 60, 65, 69, 72, 77):
-    M(I.brass(I.m2f(m), 1.2, 0.9, R, kind="horn"), tfl, -10)
-cue(b0, "music: build to guaranteed")
-# stadium: anthem chords (brass) at 72 bpm-ish half notes
+stab(e1, (53, 60, 65, 69, 72, 77), -15, dur=0.7, kind="horn", vel=0.6)
+# the coin: snare roll up to the landing, a hit on "flip"
+cf0, cf1 = fr(TL["coins"][0]["f0"]) - 0.6, fr(TL["coins"][0]["f1"])
+for k in range(int((cf1 - cf0) / 0.0625)):
+    u = k / max(1, int((cf1 - cf0) / 0.0625) - 1)
+    M(I.snare(0.12 + 0.5 * u ** 2, R, 0.12, buzz=True), cf0 + k * 0.0625, -17)
+stab(cf1, (41, 53, 60, 65, 69, 72), -11, dur=0.9, kind="horn", vel=0.85)
+M(I.cymbal(0.7, R, 2.2), cf1, -17)
+cue(cf1, "music: coin-flip hit")
+# stadium: anthem chords (brass) on half notes
 s17a, s17b = T(17), T(18)
 an = ["F", "Bb", "C", "F", "Dm", "Bb", "C", "F"]
 q2 = (s17b - s17a) / len(an)
 for k, name in enumerate(an):
     root, tri = CHORD[name]
-    for m in [root, root + 12] + [x for x in tri]:
+    for m in [root, root + 12] + list(tri):
         M(I.brass(I.m2f(m), q2 * 0.95, 0.6, R, kind="soft" if m < 50 else "horn"), s17a + k * q2, -13)
     M(I.timpani(I.m2f(root), 0.5, R, 1.4), s17a + k * q2, -16)
 cue(s17a, "music: stadium anthem")
-# Gary alone: a slow music-box "Happy Birthday" (public-domain melody), then a swell under the crane
-hb = [(0, .75, 60), (.75, .25, 60), (1, 1, 62), (2, 1, 60), (3, 1, 65), (4, 2, 64),
-      (6, .75, 60), (6.75, .25, 60), (7, 1, 62), (8, 1, 60), (9, 1, 67), (10, 2, 65)]
-s18a = T(18) + 0.2
-qh = 0.36
-for b, l, m in hb:
-    M(I.musicbox(I.m2f(m + 12), 0.55, R, dur=1.4), s18a + b * qh, -8, p=0.2)
-for k, name in enumerate(["F", "C", "C", "F"]):
+# the twist: a slow music-box "Happy Birthday" (public-domain melody), a swell under the crane, the hit on "Same"
+hb = [(0, .75, 60), (.75, .25, 60), (1, 1, 62), (2, 1, 60), (3, 1, 65), (4, 2, 64)]
+s18a, qh = T(18) + 0.2, 0.36
+for b_, l_, m in hb:
+    M(I.musicbox(I.m2f(m + 12), 0.55, R, dur=1.4), s18a + b_ * qh, -8, p=0.2)
+for k, name in enumerate(["F", "C"]):
     root, tri = CHORD[name]
     M(I.pad([I.m2f(x) for x in tri], 3 * qh, 0.35, R, att=0.3, rel=0.5, warm=900), s18a + k * 3 * qh, -16)
 tsw = fr(TL["cues"]["need"]) - 0.6
-M(I.pad([I.m2f(m) for m in (53, 60, 65, 69, 72)], 2.2, 0.6, R, att=1.6, rel=0.5, warm=1500), tsw, -10)
-M(I.cymbal(0.5, R, 2.5), tsw + 1.6, -22)
-cue(s18a, "music: music-box Happy Birthday")
-# the ending: groove reprise, button chord on "bet"
-t19 = T(19)
-tb = fr(TL["cues"]["bet"])
-groove(t19, tb, mel_gain=-7, energy=1.1)
-for m in (41, 53, 65, 69, 72, 77, 81):
-    M(I.brass(I.m2f(m), 0.6, 0.85, R, kind="stab"), tb, -11)
+t_same = fr(TL["cues"]["same"])
+M(I.pad([I.m2f(m) for m in (53, 60, 65, 69, 72)], t_same - tsw + 0.2, 0.6, R, att=1.2, rel=0.2, warm=1500), tsw, -10)
+stab(t_same, (41, 53, 60, 65, 69, 72, 77), -14, dur=0.8, kind="horn", vel=0.9)
+M(I.cymbal(0.8, R, 2.4), t_same, -16)
+cue(t_same, "music: 'same number' hit")
+# the ending: groove reprise from "Good thing", button chord on "twin"
+t_end0 = fr(min(w["s"] for w in WORDS if w["line"] == 16)) - 0.05
+tb = fr(TL["cues"]["twin"])
+groove(t_end0, tb, mel_gain=-7, energy=1.1)
+stab(tb, (41, 53, 65, 69, 72, 77, 81), -11, dur=0.85)
 M(I.cymbal(0.8, R, 2.0), tb, -16)
-cue(t19, "music: reprise")
+cue(t_end0, "music: reprise")
 cue(tb, "music: button")
 # room reverb on the music
 mus = mus + convolve_st(mus.mean(0), make_ir(1.1, 3, hf=1.3)) * dbg(-13)
@@ -464,7 +489,8 @@ for w in WORDS:
     mask[ns(w["s"]): ns(w["e"] + 0.05)] = 1.0
 mask = ndimage.maximum_filter1d(mask, ns(0.18))
 mask = ndimage.uniform_filter1d(mask, ns(0.12))
-duck = dbg(-4.0 * mask)
+duck = dbg(-5.5 * mask)
+sfx_duck = dbg(-3.0 * mask)
 
 def lufs(x):
     v = integrated(x)
@@ -477,7 +503,7 @@ m_l = lufs(mus)
 mus = mus * dbg(-17.0 - 6.5 - m_l)
 mus = mus * duck[None, :]
 s_l = lufs(sfx)
-sfx = sfx * dbg(-17.0 - 9.0 - s_l)
+sfx = sfx * dbg(-17.0 - 9.0 - s_l) * sfx_duck[None, :]
 mix = voice + mus + sfx
 # master: loudness to -14 LUFS, then a look-ahead peak limiter to -1 dBTP
 def limit(mix, ceil_db=-1.3):

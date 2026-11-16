@@ -143,10 +143,14 @@ lighting 5-6, ink 6, textures 5-6, characters 7, depth 6-7, composition 6-7 (fro
 ## Gotchas
 - **Linux / CPU-only containers** (proven on The Birthday Bet, `examples/birthday-bet/`):
   - Render with Playwright's `chrome-headless-shell` and `chromiumOptions: { gl: "swangle" }` (software WebGL).
-  - Expect about 7.5 s per 1080x1920 frame, so check stills first.
+  - Expect about 7.5-10 s per 1080x1920 frame per worker, so check stills first.
   - Then render the shots as parallel, resumable chunks (`scripts/render-chunks.mjs`) and join them with ffmpeg concat.
   - Render at 1080x1920 here, not 2K.
 - **Time every cue from words.json by word** (`cue(line, "word")` in story.ts), not by hand-typed frame numbers. Export the timeline to JSON for the sound script.
+- **Several TTS voices** (dialogue): pick Kokoro voices by measured pitch so they read as different people, and level-match each line's RMS before joining (`examples/birthday-bet/voice/gen_voice.py`). Give dialogue captions a name tag.
+- **Freeze-frame:** wrap the shot layers in Remotion's `<Freeze frame={f0} active={frozen}>` so the canvas stays mounted (@remotion/three bridges the frame context), then desaturate it with a CSS filter.
+- **Top-of-frame graphics vs. speech bubbles:** in a close-up a bubble over the head lands under the stakes or counter graphics, or off the top of the frame. Slide the framing so the speaker sits off centre and put the bubble beside the head (`slide` in story.ts, `nearBubble` in cast.ts). Scale far bubbles with distance so front-row ones don't cover faces.
+- **Confetti in a close-up:** 3D confetti leaves a tight frame within a few frames. Use screen-space confetti there (`Confetti` in Overlay.tsx), and keep the 3D burst for wide shots.
 - **Additive glow lines** (pair webs, beams): scale each line's brightness by about sqrt(253 / count), or a dense web blows out to white.
 - **Golden light in an enclosed square:** surrounding houses throw shadows about h / tan(el) long (12 m houses at el 24 cast ~27 m), so the whole square falls into violet-blue shade even with `sunEl` raised. That reads as dusk or night-blue, which suits an explanation beat (the reference does the same) and makes glow effects pop. If the ground must stay lit, turn off `castShadow` on the town batch for golden shots.
 - Kenney nature-kit materials are teal: recolour them by material name in build.ts.

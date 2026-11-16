@@ -1,13 +1,20 @@
 # The Birthday Bet: a birthday-paradox short made with this skill
 
-**Watch:** [`birthday_paradox_short.mp4`](birthday_paradox_short.mp4) (68 s, 1080x1920, burned-in captions). The QA record is in [`qa_report.md`](qa_report.md).
+**Watch:** [`birthday_paradox_short.mp4`](birthday_paradox_short.mp4) (burned-in captions). The source here is v3, "Would you take this bet?" (55 s). The MP4 is still the v1 cut (68 s, one narrator) until the v3 render is committed. The QA record is in [`qa_report.md`](qa_report.md).
 
 ![poster](poster.jpg)
 
-A 68 s vertical short (1080x1920, 30 fps) about the birthday paradox: "Put just 23 people in a room, and it's a coin
-flip that two of them share a birthday." It is built from `templates/bridge/` and `templates/audio/`, with these additions:
+A 55 s vertical short (1080x1920, 30 fps) about the birthday paradox. Dave dares the camera, "Twenty-three people. I bet
+two of them share a birthday", the whole party bets against him, and the viewer is asked whether they would too. The
+answer (a coin flip) is withheld until second 37. `SCRIPT.md` has the script, the sources and why v3 replaced v1.
+It is built from `templates/bridge/` and `templates/audio/`, with these additions:
 - **Burned-in captions** (`Captions.tsx`) so the short works with the sound off. They show 1-4 word chunks, numbers as
-  digits, and key words in yellow, timed to `words.json`.
+  digits, key words in yellow and a name tag over dialogue, timed to `words.json`.
+- **Story graphics for the sound-off viewer** (`Overlay.tsx`): the hook title, Dave's $100 bill slapping the lens, a
+  "$2,200 AT RISK" pill that flips to "DAVE WINS", a live "CHECKED n/23 · MATCHES 0" counter during the roll call, the
+  "253 = 253" twist card, screen-space confetti cannons and the "COMMENT YOUR BIRTHDAY" call to action.
+- **A record-scratch freeze-frame** after "September ninth!": `<Freeze>` holds the 3D layers, desaturated, with a creeping
+  zoom and a white flash.
 - **Every cue comes from the voice.** `story.ts` looks shots, camera keys and acting beats up by word (`cue(line, "word")`),
   so re-voicing a line moves its pictures with it. `scripts/dump-timeline.mjs` exports the same timeline for the sound.
 - **New world** (`world.ts`, `build.ts`):
@@ -16,28 +23,30 @@ flip that two of them share a birthday." It is built from `templates/bridge/` an
   - a 3D gold coin, confetti, and a football stadium for the 2014 World Cup fact.
 - **New cast pieces** (`toon.ts`, `cast.ts`):
   - party hats, glasses, jersey numbers;
-  - wink, sad and talk faces;
-  - handshake, cheer, cash and palm poses;
+  - wink, sad and talk faces, and mouth flaps while a character's line is mid-word;
+  - cheer, cash, fan-of-cash, palm and a slow raise-a-hand pose;
   - number tags, speech bubbles, calendar pages, "?" marks, cricket chirps and sparkles.
-- **Narration with timings:** the voice is Kokoro-82M TTS (`voice/gen_voice.py`, Apache-2.0 model). Word timings come from
-  the TTS itself and were checked against Whisper (median offset 0.01 s).
+- **Four voices with timings:** Kokoro-82M TTS (`voice/gen_voice.py`, Apache-2.0 model): narrator `am_michael`, Dave
+  `am_fenrir`, Gary `am_onyx`, guest 17 `af_bella`, picked by measured pitch (121 / 148 / 92 / 202 Hz) so they read as
+  four people, and level-matched per line. Word timings come from the TTS itself and were checked against Whisper (median
+  offset 0.004 s).
 - **Sound** (`audio/sound.py`):
-  - an original score whose sections follow the picture, ducked under the voice;
-  - about 80 synthesized SFX cues;
+  - an original score whose sections follow the picture (a ticking tension pulse under the roll call that the record
+    scratch kills), ducked under the voice;
+  - about 70 synthesized SFX cues (lens slap, cash riffle, counter ticks, record scratch, crickets, confetti cannons...);
   - a master at -14.5 LUFS and -1 dBTP.
   `audio/levels.py` is an objective level check, for containers where nobody can listen.
 
 ## Facts and sources
 See `SCRIPT.md`. In short:
-- 23 people give a 50.7 % chance of a match, from 253 pairs. 50 people give 97 % and 70 give 99.9 %.
+- 23 people give a 50.7 % chance of a match, from 253 pairs.
 - For a coin-flip chance that someone shares one given birthday, you need 253 other people.
 - In 2014, 16 of the 32 World Cup squads of 23 had a shared birthday (BBC).
-- 9 September is the most common US birthday.
 
 ## Build (Linux, no GPU)
 ```bash
 npm install && npm run fonts                                # Remotion 4 + R3F 9 + postprocessing, fonts into public/
-python voice/gen_voice.py am_michael 1.2                    # needs `pip install kokoro soundfile` (Python <= 3.12)
+python voice/gen_voice.py                                   # needs `pip install kokoro soundfile` (Python <= 3.12)
 cp voice/words.json src/videos/birthday/words.json
 node scripts/dump-timeline.mjs                              # out/timeline.json
 python audio/sound.py && python audio/levels.py             # out/audio/mix.wav (+ stems, cues.md)

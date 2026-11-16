@@ -12,8 +12,8 @@ import { TONE, CHAR, untone, twoTone } from "./shade";
 import { NOINK } from "./ink";
 import { Pool, Actor, Fx, stage, hh } from "./cast";
 import {
-  FPS, SHOTS, V3, camAt, ShotDef, G, N, R, GARY, NINE, SEVENTEEN, RING2, RING3, PITCH, SQUAD, CUP_PAIR, COINS, HOOK_LINK, MATCH_LINK,
-  GARY_LINES, SAMPLE_PAIRS, WEB_BUILD, GROW50, GROW70, FLARE, CONFETTI, CUP_LINK, SH, clamp01, smooth, easeOut,
+  FPS, SHOTS, V3, camAt, ShotDef, G, N, R, GARY, NINE, SEVENTEEN, PITCH, SQUAD, CUP_PAIR, COINS,
+  GARY_LINES, SAMPLE_PAIRS, WEB_BUILD, CONFETTI, CUP_LINK, SH, clamp01, smooth, easeOut,
 } from "./story";
 
 // ---------------- assets: fonts (canvas text + captions); no external models ----------------
@@ -92,7 +92,7 @@ const ribbonTex = (key: string, box: string, rib: string) => ctex(key, 256, 256,
 
 const BALLOON_COLS = ["#e2453c", "#3f6fb5", "#f2b53a", "#2f8a4f", "#d9577a", "#8c5ac9", "#2fa6a0", "#ffffff"];
 const BALLOON_AT = [-14, 14, 74, 140, 223, 266, 305].map((d) => (d * Math.PI) / 180);
-const MAXL = 2560;
+const MAXL = 320; // 253 pairs + Gary's 22 + the match
 /** twist of the coin about its own axis so the face art stands upright on screen (found on test stills) */
 const COIN_TWIST = 0;
 
@@ -418,16 +418,17 @@ export class World {
     const grow = (f0: number, n = 6) => clamp01((f - f0) / n);
     const pairs: [number, number][] = [];
     for (let i = 1; i <= N; i++) for (let j = i + 1; j <= N; j++) pairs.push([i, j]);
-    if (id === 1 && f >= HOOK_LINK[0]) out.push([P(NINE), P(SEVENTEEN), clamp01((f - HOOK_LINK[0]) / (HOOK_LINK[1] - HOOK_LINK[0])), GOLD.map((v) => v * 1.3) as V3, 3]);
-    if ((id === 9 && f >= MATCH_LINK[0]) || id === 10) out.push([P(NINE), P(SEVENTEEN), id === 10 ? 1 : clamp01((f - MATCH_LINK[0]) / (MATCH_LINK[1] - MATCH_LINK[0])), GOLD.map((v) => v * 1.3) as V3, 3]);
-    if (id === 12 || id === 13) {
+    // the match across the ring, lit as the wide opens
+    if (id === 12) out.push([P(NINE), P(SEVENTEEN), grow(SH[12].a, 8), GOLD.map((v) => v * 1.3) as V3, 3]);
+    // Gary's 22 lines: drawn one by one in shot 14, held in shot 15
+    if (id === 14 || id === 15) {
       const others = Array.from({ length: N }, (_, i) => i + 1).filter((k) => k !== GARY).sort((a, b) => Math.abs(a - GARY - 0.1) - Math.abs(b - GARY - 0.1));
       others.forEach((k, i) => {
-        const f0 = id === 13 ? -99 : GARY_LINES[0] + (i * (GARY_LINES[1] - GARY_LINES[0])) / 21;
+        const f0 = id === 15 ? -99 : GARY_LINES[0] + (i * (GARY_LINES[1] - GARY_LINES[0])) / 21;
         if (f >= f0) out.push([P(GARY), P(k), grow(f0, 5), RED, 1.4]);
       });
     }
-    if (id === 13) {
+    if (id === 15) {
       for (const [a, b, f0] of SAMPLE_PAIRS) if (f >= f0 && f < WEB_BUILD[0] + 4) out.push([P(a), P(b), grow(f0, 4), WHITE, 2]);
       const rest = pairs.filter(([a, b]) => a !== GARY && b !== GARY);
       rest.forEach(([a, b], i) => {
@@ -435,25 +436,9 @@ export class World {
         if (f >= f0) out.push([P(a), P(b), grow(f0, 6), GOLD, 1]);
       });
     }
-    if (id === 15) {
-      const pulse = (a: number, b: number) => 0.75 + 0.5 * Math.max(0, Math.sin((f - SH[15].a) * 0.16 - (a + b) * 0.28));
-      for (const [a, b] of pairs) out.push([P(a), P(b), 1, GOLD.map((v) => v * pulse(a, b)) as V3, 1]);
-    }
     if (id === 16) {
-      // everyone present so far (ring, then the two outer rings as they pop in); each newcomer's lines draw as it lands
-      const people: { p: V3; f0: number }[] = [];
-      for (let k = 1; k <= N; k++) people.push({ p: P(k), f0: -99 });
-      for (const [gr, tt] of [[RING2, GROW50], [RING3, GROW70]] as const)
-        for (let j = 1; j <= gr.n; j++) { const g = G(j, gr.r, gr.n, gr.a0); people.push({ p: [g[0], Y, g[2]], f0: Math.round(tt[0] + ((j - 1) * (tt[1] - tt[0])) / gr.n) + 3 }); }
-      // additive lines: keep the total glow roughly constant as the web densifies (2415 lines would blow out to white)
-      const flare = f >= FLARE ? 1 + 0.8 * Math.exp(-(f - FLARE) / 9) : 1;
-      const live: [number, number, number][] = [];
-      for (let i = 0; i < people.length; i++) for (let j = i + 1; j < people.length; j++) {
-        const f0 = Math.max(people[i].f0, people[j].f0);
-        if (f >= f0) live.push([i, j, f0]);
-      }
-      const kk = 0.85 * Math.min(1, Math.sqrt(253 / Math.max(253, live.length))) * flare;
-      for (const [i, j, f0] of live) out.push([people[i].p, people[j].p, grow(f0, 8), GOLD.map((v) => v * kk) as V3, 1]);
+      const pulse = (a: number, b: number) => 0.75 + 0.5 * Math.max(0, Math.sin((f - SH[16].a) * 0.16 - (a + b) * 0.28));
+      for (const [a, b] of pairs) out.push([P(a), P(b), 1, GOLD.map((v) => v * pulse(a, b)) as V3, 1]);
     }
     if (id === 17 && f >= CUP_LINK[0]) { const a = SQUAD(CUP_PAIR[0]), b = SQUAD(CUP_PAIR[1]); out.push([[a[0], Y + 0.1, a[2]], [b[0], Y + 0.1, b[2]], clamp01((f - CUP_LINK[0]) / (CUP_LINK[1] - CUP_LINK[0])), GOLD.map((v) => v * 1.3) as V3, 3]); }
 
@@ -478,8 +463,7 @@ export class World {
     this.coin.visible = false;
     if (!c || f < c.f0 - 1) return;
     const u = clamp01((f - c.f0) / (c.f1 - c.f0)), hover = Math.max(0, f - c.f1);
-    if (id === 1 && hover > 10) return;
-    const y0 = id === 1 ? 1.62 : 1.2, y1 = id === 1 ? 3.0 : 4.1;
+    const y0 = 1.2, y1 = 4.1;
     const y = y0 + (y1 - y0) * easeOut(u) + 0.9 * Math.sin(Math.PI * u) + 0.04 * Math.sin(hover * 0.2);
     this.coin.visible = true;
     this.coin.position.set(0, y, 0);
