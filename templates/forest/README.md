@@ -1,12 +1,12 @@
 # The Forest Snitch (second example short)
 
-A ~70 s vertical short on "how nature can expose buried bodies" (forensic botany), built from `templates/bridge/` and the
+A ~63 s vertical short on "how nature can expose buried bodies" (forensic botany), built from `templates/bridge/` and the
 pipeline in `SKILL.md`. Story, characters, script and voice are our own; facts and sources are in `SCRIPT.md`.
 
-Beats: hook ("If you bury a body in the woods, the forest will snitch on you") → Gary, a shovel and a very heavy rug →
-the dig → the grass turns brown in a rectangle → regrows greener → mushrooms → the ground sinks → Luckily / Unluckily →
-why (loosened soil, nitrogen, the dog-pee-on-the-lawn analogy, the "corpse finder" mushroom) → search teams and drones →
-picnic callback.
+Beats (v2 script): hook ("You can hide a body from the police. But you can't hide it from the grass.") → Gary, a shovel
+and a very heavy rug ("the rug is wearing shoes") → the burial → Luckily / Unluckily + open loop ("it snitches three ways,
+the last one is the creepiest") → snitch 1 the grass (brown rectangle, greener, why, the dog-pee analogy) → snitch 2
+mushrooms (the "corpse finder") → snitch 3 the ground sinks → search teams and drones → picnic callback.
 
 ## What is new compared to the bridge template
 | File | What changed |
