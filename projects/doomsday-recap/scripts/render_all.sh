@@ -1,10 +1,16 @@
 #!/bin/bash
-# Final render: Recap24 in 6 chunks on 2 workers (each its own browser = its own SwiftShader GPU process).
+# Final render of Recap24 in short chunks (120 frames, ~10 min each) on 2 workers, each its own browser / SwiftShader
+# GPU process. Resumable: finished chunks (out/final/chunk_s<start>.mp4) are skipped, so a recycled container only
+# loses the chunks that were in flight. Writes out/final/DONE when every chunk exists.
 cd "$(dirname "$0")/.."
-CH=("0-778" "779-1557" "1558-2336" "2337-3115" "3116-3894" "3895-4671")
-worker() { for i in "$@"; do
-  [ -f out/final/chunk_$i.mp4 ] && continue
-  PROPS='{"dpr":0.6}' CRF=16 node scripts/render.mjs out/final/part_$i.mp4 ${CH[$i]} 1 Recap24 1 > out/final/chunk_$i.log 2>&1 && mv out/final/part_$i.mp4 out/final/chunk_$i.mp4
+LAST=4671; STEP=120
+STARTS=(0 779); for ((s=1558; s<=LAST; s+=STEP)); do STARTS+=($s); done
+end_of() { local i=$1; local n=$((i+1)); if [ $n -lt ${#STARTS[@]} ]; then echo $((STARTS[n]-1)); else echo $LAST; fi; }
+SERVE=$(node scripts/bundle.mjs | tail -1); export SERVE
+worker() { local w=$1; for ((i=w; i<${#STARTS[@]}; i+=2)); do
+  s=${STARTS[$i]}; e=$(end_of $i); name=$(printf "chunk_s%05d" $s)
+  [ -f out/final/$name.mp4 ] && continue
+  PROPS='{"dpr":0.6}' CRF=16 node scripts/render.mjs out/final/part_$s.mp4 $s-$e 1 Recap24 1 > out/final/logs/$name.log 2>&1 && mv out/final/part_$s.mp4 out/final/$name.mp4
 done; }
-worker 0 2 4 & worker 1 3 5 & wait
-touch out/final/DONE
+worker 0 & worker 1 & wait
+n=$(ls out/final/chunk_s*.mp4 | wc -l); [ "$n" -eq "${#STARTS[@]}" ] && touch out/final/DONE
