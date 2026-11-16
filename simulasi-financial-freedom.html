@@ -29,7 +29,6 @@
   --hero-ink-2: #b9d6cc;
   --hero-line: rgba(241, 247, 244, 0.18);
   --s-dana: #008a72;
-  --s-banding: #dd5a2a;
   --b-biaya: #2a78d6;
   --b-zakat: #c98a00;
   --b-tumbuh: #008a72;
@@ -63,7 +62,6 @@
     --hero-ink-2: #a9cbbf;
     --hero-line: rgba(238, 246, 242, 0.16);
     --s-dana: #22a888;
-    --s-banding: #de6a35;
     --b-biaya: #3987e5;
     --b-zakat: #c98500;
     --b-tumbuh: #22a888;
@@ -93,7 +91,6 @@
   --hero-ink-2: #a9cbbf;
   --hero-line: rgba(238, 246, 242, 0.16);
   --s-dana: #22a888;
-  --s-banding: #de6a35;
   --b-biaya: #3987e5;
   --b-zakat: #c98500;
   --b-tumbuh: #22a888;
@@ -298,27 +295,9 @@ input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
 .toggle button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
 .toggle button:disabled { opacity: 0.45; cursor: not-allowed; }
 
-/* Comparison status */
-.status {
-  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: start;
-  padding: 12px 14px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line);
-}
-.pill {
-  display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 2px 10px 2px 8px;
-  font-size: 12.5px; font-weight: 700; white-space: nowrap;
-}
-.pill.good { background: var(--good-soft); color: var(--good); }
-.pill.bad { background: var(--bad-soft); color: var(--bad); }
-.pill svg { width: 12px; height: 12px; }
-.status-text { font-size: 14px; color: var(--ink-2); }
-.status-text strong { color: var(--ink); }
-
 /* Chart */
-.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--ink-2); }
-.legend span { display: inline-flex; align-items: center; gap: 8px; }
 .key { width: 18px; height: 2px; border-radius: 2px; display: inline-block; }
 .key.req { background: var(--s-dana); }
-.key.cmp { background: var(--s-banding); }
 .chart-host { position: relative; width: 100%; min-width: 0; }
 .chart-host svg { display: block; width: 100%; height: auto; touch-action: pan-y; }
 .chart-host svg:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
@@ -327,11 +306,9 @@ input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
 .tick { fill: var(--muted); font-family: var(--font-mono); font-size: 11px; font-variant-numeric: tabular-nums; }
 .ln { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
 .ln.req { stroke: var(--s-dana); }
-.ln.cmp { stroke: var(--s-banding); }
 .area.req { fill: var(--s-dana); opacity: 0.1; }
 .dot { stroke: var(--surface); stroke-width: 2; }
 .dot.req { fill: var(--s-dana); }
-.dot.cmp { fill: var(--s-banding); }
 .annot { fill: var(--ink-2); font-size: 12px; font-weight: 600; font-family: var(--font-body); }
 .xhair { stroke: var(--line-strong); stroke-width: 1; }
 .tip {
@@ -447,12 +424,7 @@ tr.dead td { color: var(--muted); }
           <span class="num"><input id="tahun" type="number" min="5" max="100" step="1" value="50" inputmode="numeric"><span class="unit">th</span></span>
         </div>
         <input id="tahunRange" type="range" min="5" max="100" step="1" value="50" aria-label="Lama simulasi dalam tahun">
-      </div>
-
-      <div class="field">
-        <label class="field-label" for="banding">Dana pembanding</label>
-        <div class="rp"><span>Rp</span><input id="banding" type="text" inputmode="numeric" autocomplete="off" placeholder="Kosong = aturan 4%"></div>
-        <p class="help" id="bandingHelp">Masukkan dana yang Anda miliki atau targetkan. Jika kosong, dipakai aturan 4% (25× biaya hidup setahun).</p>
+        <p class="help">Berapa tahun ke depan yang ditampilkan di grafik dan tabel. Tidak mengubah dana yang dibutuhkan.</p>
       </div>
     </aside>
 
@@ -481,7 +453,7 @@ tr.dead td { color: var(--muted); }
         <p class="callout" id="splitCallout"></p>
       </section>
 
-      <section class="panel" aria-labelledby="chartTitle">
+      <section class="panel" id="chartPanel" aria-labelledby="chartTitle">
         <div class="panel-head">
           <div>
             <h2 id="chartTitle">Perjalanan dana</h2>
@@ -492,8 +464,6 @@ tr.dead td { color: var(--muted); }
             <button type="button" id="modeReal" aria-pressed="false">Nilai hari ini</button>
           </div>
         </div>
-        <div class="status" id="cmpStatus"></div>
-        <div class="legend" id="legend"></div>
         <div class="chart-host" id="chartHost">
           <div class="tip" id="tip" hidden></div>
         </div>
@@ -511,15 +481,11 @@ tr.dead td { color: var(--muted); }
         </div>
       </section>
 
-      <section class="panel" aria-labelledby="tableTitle">
+      <section class="panel" id="tablePanel" aria-labelledby="tableTitle">
         <div class="panel-head">
           <div>
             <h2 id="tableTitle">Rincian per tahun</h2>
             <p class="sub" id="tableSub"></p>
-          </div>
-          <div class="toggle" role="group" aria-label="Dana yang ditampilkan di tabel">
-            <button type="button" id="tblReq" aria-pressed="true">Dana dibutuhkan</button>
-            <button type="button" id="tblCmp" aria-pressed="false">Dana pembanding</button>
           </div>
         </div>
         <div class="table-wrap tall">
@@ -558,9 +524,9 @@ tr.dead td { color: var(--muted); }
 (function () {
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
-  var DEFAULTS = { biaya: 100000000, inflasi: 2.5, imbal: 6, zakat: 2.5, tahun: 50, banding: 0 };
+  var DEFAULTS = { biaya: 100000000, inflasi: 2.5, imbal: 6, zakat: 2.5, tahun: 50 };
   var STORE = 'simulasi-ff-v1';
-  var state = { mode: 'nom', table: 'req', chart: null, hoverT: null };
+  var state = { mode: 'nom', chart: null, hoverT: null };
 
   /* ---------- Formatting (id-ID) ---------- */
   var nfCache = {};
@@ -653,8 +619,7 @@ tr.dead td { color: var(--muted); }
       i: numVal('inflasi', 0, 15, DEFAULTS.inflasi) / 100,
       r: numVal('imbal', 0, 20, DEFAULTS.imbal) / 100,
       z: numVal('zakat', 0, 10, DEFAULTS.zakat) / 100,
-      years: Math.round(numVal('tahun', 5, 100, DEFAULTS.tahun)),
-      banding: parseRp($('banding').value)
+      years: Math.round(numVal('tahun', 5, 100, DEFAULTS.tahun))
     };
   }
   function setInputs(v) {
@@ -662,13 +627,12 @@ tr.dead td { color: var(--muted); }
     ['inflasi', 'imbal', 'zakat', 'tahun'].forEach(function (k) {
       $(k).value = v[k]; $(k + 'Range').value = v[k];
     });
-    $('banding').value = v.banding ? fmtNum(v.banding, 0) : '';
   }
   function save(inp) {
     try {
       localStorage.setItem(STORE, JSON.stringify({
-        biaya: inp.M, inflasi: inp.i * 100, imbal: inp.r * 100, zakat: inp.z * 100, tahun: inp.years, banding: inp.banding,
-        mode: state.mode, table: state.table
+        biaya: inp.M, inflasi: inp.i * 100, imbal: inp.r * 100, zakat: inp.z * 100, tahun: inp.years,
+        mode: state.mode
       }));
     } catch (e) { /* storage unavailable */ }
   }
@@ -758,38 +722,6 @@ tr.dead td { color: var(--muted); }
     }
   }
 
-  /* ---------- Render: comparison status ---------- */
-  var ICON_OK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.3l2.2 2.2 4.8-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var ICON_DOWN = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2v7.5M2.8 6.5L6 9.7l3.2-3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-  function renderStatus(p, mdl, cmp, cmpName, longSim) {
-    var box = $('cmpStatus');
-    box.textContent = '';
-    var pill = document.createElement('span');
-    var txt = document.createElement('p'); txt.className = 'status-text';
-    var head = document.createElement('strong');
-    head.textContent = cmpName + ': ' + rpShort(cmp, 2, true) + '. ';
-    txt.appendChild(head);
-    var ok = isFinite(mdl.req) && cmp >= mdl.req * (1 - 1e-9);
-    if (ok) {
-      pill.className = 'pill good'; pill.innerHTML = ICON_OK + '<span>Tidak menyusut</span>';
-      var surplus = cmp - mdl.req;
-      txt.appendChild(document.createTextNode(surplus > 1
-        ? 'Dana ini ' + rpShort(surplus, 2, true) + ' di atas kebutuhan minimum, jadi tumbuh lebih cepat dari inflasi.'
-        : 'Dana ini tepat di kebutuhan minimum.'));
-    } else {
-      pill.className = 'pill bad'; pill.innerHTML = ICON_DOWN + '<span>Menyusut</span>';
-      var parts = [];
-      if (isFinite(mdl.req)) parts.push('Kurang ' + rpShort(mdl.req - cmp, 2, true) + ' dari kebutuhan minimum.');
-      if (longSim.firstShrink) parts.push('Nominalnya mulai turun di tahun ke-' + longSim.firstShrink + '.');
-      if (longSim.depletedYear) parts.push('Dana habis di tahun ke-' + longSim.depletedYear + '.');
-      else parts.push('Dana belum habis dalam 300 tahun, tetapi daya belinya terus turun.');
-      txt.appendChild(document.createTextNode(parts.join(' ')));
-    }
-    box.appendChild(pill);
-    box.appendChild(txt);
-  }
-
   /* ---------- Chart ---------- */
   function niceTicks(max, count) {
     var raw = max / count;
@@ -815,13 +747,11 @@ tr.dead td { color: var(--muted); }
     if (!d) return;
     var W = Math.max(280, Math.floor(host.clientWidth));
     var H = W < 560 ? 250 : 320;
-    var mg = { l: 58, r: 18, t: 14, b: 34 };
+    var mg = { l: 58, r: 18, t: 30, b: 34 };
     var pw = W - mg.l - mg.r, ph = H - mg.t - mg.b;
     var real = state.mode === 'real';
     var defl = function (t) { return real ? Math.pow(1 + d.i, t) : 1; };
-    var series = [];
-    if (d.req) series.push({ cls: 'req', name: 'Dana dibutuhkan', vals: d.req.map(function (v, t) { return v / defl(t); }) });
-    series.push({ cls: 'cmp', name: d.cmpName, vals: d.cmp.map(function (v, t) { return v / defl(t); }) });
+    var series = [{ cls: 'req', name: 'Dana dibutuhkan', vals: d.req.map(function (v, t) { return v / defl(t); }) }];
     var max = 0;
     series.forEach(function (s) { s.vals.forEach(function (v) { if (v > max) max = v; }); });
     var ticks = niceTicks(max || 1, W < 560 ? 4 : 5);
@@ -842,13 +772,18 @@ tr.dead td { color: var(--muted); }
     svg += '<line class="base" x1="' + mg.l + '" x2="' + (W - mg.r) + '" y1="' + f(y(0)) + '" y2="' + f(y(0)) + '"/>';
     var step = N <= 12 ? 1 : N <= 25 ? 5 : N <= 60 ? 10 : 20;
     if (W < 420 && step < 10 && N > 12) step = 10;
-    for (var t = 0; t <= N; t += step) {
-      var lbl = t === 0 ? 'Kini' : (t + (t === N || t + step > N ? ' th' : ''));
-      svg += '<text class="tick" x="' + f(x(t)) + '" y="' + (H - 10) + '" text-anchor="' + (t === 0 ? 'start' : 'middle') + '">' + lbl + '</text>';
+    var xt = [];
+    for (var t = 0; t <= N; t += step) xt.push(t);
+    if (xt[xt.length - 1] !== N) {
+      // Keep the final year label clear of the last regular tick.
+      if (x(N) - x(xt[xt.length - 1]) > 56) xt.push(N); else xt[xt.length - 1] = N;
     }
-    if (N % step !== 0 && (N % step) > step * 0.4) {
-      svg += '<text class="tick" x="' + f(x(N)) + '" y="' + (H - 10) + '" text-anchor="end">' + N + ' th</text>';
-    }
+    xt.forEach(function (tt, k) {
+      var last = k === xt.length - 1;
+      var lbl = tt === 0 ? 'Kini' : tt + (last ? ' th' : '');
+      var anchor = tt === 0 ? 'start' : last ? 'end' : 'middle';
+      svg += '<text class="tick" x="' + f(x(tt)) + '" y="' + (H - 10) + '" text-anchor="' + anchor + '">' + lbl + '</text>';
+    });
     series.forEach(function (s) {
       var pts = s.vals.map(function (v, t) { return f(x(t)) + ',' + f(y(v)); });
       if (s.cls === 'req') {
@@ -856,16 +791,9 @@ tr.dead td { color: var(--muted); }
       }
       svg += '<path class="ln ' + s.cls + '" d="M' + pts.join(' L') + '"/>';
     });
-    series.forEach(function (s) {
-      var lastV = s.vals[N];
-      svg += '<circle class="dot ' + s.cls + '" cx="' + f(x(N)) + '" cy="' + f(y(lastV)) + '" r="4"/>';
-    });
-    if (d.cmpDead) {
-      var tx = x(d.cmpDead), ty = y(0);
-      var anchor = tx > W - 140 ? 'end' : tx < mg.l + 80 ? 'start' : 'middle';
-      svg += '<circle class="dot cmp" cx="' + f(tx) + '" cy="' + f(ty) + '" r="4"/>';
-      svg += '<text class="annot" x="' + f(tx) + '" y="' + f(ty - 12) + '" text-anchor="' + anchor + '">Habis tahun ke-' + d.cmpDead + '</text>';
-    }
+    var lastV = series[0].vals[N];
+    svg += '<circle class="dot req" cx="' + f(x(N)) + '" cy="' + f(y(lastV)) + '" r="4"/>';
+    svg += '<text class="annot" x="' + f(x(N)) + '" y="' + f(y(lastV) - 12) + '" text-anchor="end">' + rpShort(lastV) + '</text>';
     svg += '<g id="hoverG" visibility="hidden"><line class="xhair" id="xh" x1="0" x2="0" y1="' + mg.t + '" y2="' + f(y(0)) + '"/>';
     series.forEach(function (s, idx) {
       svg += '<circle class="dot ' + s.cls + '" id="hd' + idx + '" cx="0" cy="0" r="4.5"/>';
@@ -941,20 +869,6 @@ tr.dead td { color: var(--muted); }
     return geo;
   }
 
-  function renderLegend(d) {
-    var leg = $('legend');
-    leg.textContent = '';
-    var items = [];
-    if (d.req) items.push({ cls: 'req', name: 'Dana dibutuhkan (' + rpShort(d.req[0], 2, true) + ')' });
-    items.push({ cls: 'cmp', name: d.cmpName + ' (' + rpShort(d.cmp[0], 2, true) + ')' });
-    items.forEach(function (it) {
-      var s = document.createElement('span');
-      var k = document.createElement('i'); k.className = 'key ' + it.cls;
-      s.appendChild(k); s.appendChild(document.createTextNode(it.name));
-      leg.appendChild(s);
-    });
-  }
-
   /* ---------- Sensitivity ---------- */
   function renderSens(p) {
     var r0 = Math.round(p.r * 1000) / 10, i0 = Math.round(p.i * 1000) / 10;
@@ -990,14 +904,9 @@ tr.dead td { color: var(--muted); }
   }
 
   /* ---------- Year table ---------- */
-  function renderTable(p, mdl, reqSim, cmpSim, cmpName) {
-    var useReq = state.table === 'req' && reqSim;
-    var sim = useReq ? reqSim : cmpSim;
-    $('tblReq').setAttribute('aria-pressed', String(!!useReq));
-    $('tblCmp').setAttribute('aria-pressed', String(!useReq));
-    $('tblReq').disabled = !reqSim;
-    $('tableSub').textContent = (useReq ? 'Dana dibutuhkan, ' + rpShort(mdl.req, 2, true) : cmpName + ', ' + rpShort(sim.rows[0].start, 2, true)) +
-      '. Semua angka nominal (rupiah pada tahun itu).';
+  function renderTable(mdl, sim) {
+    $('tableSub').textContent = 'Mulai dari dana ' + rpShort(mdl.req, 2, true) + '. Semua angka dalam rupiah nominal pada tahun itu. ' +
+      'Kolom perubahan selalu sama dengan inflasi, tanda dana tidak menyusut.';
     var tbl = $('yearTable');
     tbl.textContent = '';
     var cols = ['Tahun', 'Dana awal tahun', 'Biaya hidup / bulan', 'Biaya hidup setahun', 'Hasil investasi', 'Zakat maal', 'Dana akhir tahun', 'Perubahan'];
@@ -1064,7 +973,6 @@ tr.dead td { color: var(--muted); }
   }
 
   /* ---------- Main update ---------- */
-  var current = null;
   function update() {
     var inp = readInputs();
     var bad = !(inp.M > 0);
@@ -1073,45 +981,32 @@ tr.dead td { color: var(--muted); }
     var p = { M: inp.M, i: inp.i, r: inp.r, z: inp.z };
     var mdl = model(p);
     var annual = 12 * p.M;
-    var ruleFund = 25 * annual;
-    var cmp = inp.banding > 0 ? inp.banding : ruleFund;
-    var cmpName = inp.banding > 0 ? 'Dana pembanding' : 'Aturan 4%';
-
     $('biayaHelp').textContent = 'Setara ' + rpWords(annual) + ' per tahun, dalam nilai uang hari ini.';
-    $('bandingHelp').textContent = inp.banding > 0
-      ? 'Dibandingkan dengan dana yang dibutuhkan pada grafik dan tabel. Kosongkan untuk kembali ke aturan 4%.'
-      : 'Masukkan dana yang Anda miliki atau targetkan. Jika kosong, dipakai aturan 4%: 25× biaya hidup setahun = ' + rpShort(ruleFund, 2, true) + '.';
     Array.prototype.forEach.call(document.querySelectorAll('[data-biaya]'), function (b) {
       b.setAttribute('aria-pressed', String(Number(b.getAttribute('data-biaya')) === inp.M));
     });
 
     var N = inp.years;
     var reqSim = isFinite(mdl.req) ? simulate(mdl.req, p, mdl, N) : null;
-    var cmpSim = simulate(cmp, p, mdl, N);
-    var longSim = simulate(cmp, p, mdl, 300);
 
     renderHero(p, mdl);
     renderSplit(p, mdl, reqSim);
-    renderStatus(p, mdl, cmp, cmpName, longSim);
 
-    var toSeries = function (sim, F0) { return [F0].concat(sim.rows.map(function (r) { return r.end; })); };
-    state.chart = {
-      N: N, i: p.i, cmpName: cmpName,
-      req: reqSim ? toSeries(reqSim, mdl.req) : null,
-      cmp: toSeries(cmpSim, cmp),
-      cmpDead: cmpSim.depletedYear
-    };
-    renderLegend(state.chart);
-    $('chartSub').textContent = (state.mode === 'real'
-      ? 'Saldo dana di akhir setiap tahun, dalam nilai uang hari ini (sudah dikurangi inflasi). Garis datar berarti daya beli tetap.'
-      : 'Saldo dana di akhir setiap tahun dalam rupiah nominal, setelah biaya hidup dan zakat.');
-    drawChart();
+    $('chartPanel').hidden = !reqSim;
+    $('tablePanel').hidden = !reqSim;
+    if (reqSim) {
+      state.chart = { N: N, i: p.i, req: [mdl.req].concat(reqSim.rows.map(function (r) { return r.end; })) };
+      $('chartSub').textContent = (state.mode === 'real'
+        ? 'Saldo dana dibutuhkan di akhir setiap tahun, dalam nilai uang hari ini. Garis datar berarti daya belinya tetap.'
+        : 'Saldo dana dibutuhkan di akhir setiap tahun dalam rupiah nominal, setelah biaya hidup dan zakat. Naik mengikuti inflasi.');
+      drawChart();
+      renderTable(mdl, reqSim);
+    } else {
+      state.chart = null;
+    }
 
     renderSens(p);
-    if (!reqSim) state.table = 'cmp';
-    renderTable(p, mdl, reqSim, cmpSim, cmpName);
     renderMethod(p, mdl);
-    current = { p: p, mdl: mdl, reqSim: reqSim, cmpSim: cmpSim, cmpName: cmpName };
     save(inp);
   }
 
@@ -1127,14 +1022,12 @@ tr.dead td { color: var(--muted); }
     });
     rng.addEventListener('input', function () { num.value = rng.value; update(); });
   });
-  ['biaya', 'banding'].forEach(function (k) {
-    $(k).addEventListener('input', function () { formatRpField($(k)); update(); });
-  });
+  $('biaya').addEventListener('input', function () { formatRpField($('biaya')); update(); });
   Array.prototype.forEach.call(document.querySelectorAll('[data-biaya]'), function (b) {
     b.addEventListener('click', function () { $('biaya').value = fmtNum(Number(b.getAttribute('data-biaya')), 0); update(); });
   });
   $('resetBtn').addEventListener('click', function () {
-    setInputs(DEFAULTS); state.mode = 'nom'; state.table = 'req'; syncMode(); update();
+    setInputs(DEFAULTS); state.mode = 'nom'; syncMode(); update();
   });
   function syncMode() {
     $('modeNom').setAttribute('aria-pressed', String(state.mode === 'nom'));
@@ -1142,8 +1035,6 @@ tr.dead td { color: var(--muted); }
   }
   $('modeNom').addEventListener('click', function () { state.mode = 'nom'; syncMode(); update(); });
   $('modeReal').addEventListener('click', function () { state.mode = 'real'; syncMode(); update(); });
-  $('tblReq').addEventListener('click', function () { state.table = 'req'; update(); });
-  $('tblCmp').addEventListener('click', function () { state.table = 'cmp'; update(); });
 
   var saved = load();
   if (saved) {
@@ -1152,11 +1043,9 @@ tr.dead td { color: var(--muted); }
       inflasi: isFinite(saved.inflasi) ? +(+saved.inflasi).toFixed(2) : DEFAULTS.inflasi,
       imbal: isFinite(saved.imbal) ? +(+saved.imbal).toFixed(2) : DEFAULTS.imbal,
       zakat: isFinite(saved.zakat) ? +(+saved.zakat).toFixed(2) : DEFAULTS.zakat,
-      tahun: isFinite(saved.tahun) ? saved.tahun : DEFAULTS.tahun,
-      banding: Number(saved.banding) > 0 ? Number(saved.banding) : 0
+      tahun: isFinite(saved.tahun) ? saved.tahun : DEFAULTS.tahun
     });
     if (saved.mode === 'real') state.mode = 'real';
-    if (saved.table === 'cmp') state.table = 'cmp';
     syncMode();
   }
   update();
