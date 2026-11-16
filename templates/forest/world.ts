@@ -243,10 +243,14 @@ export class World {
     const b = new Batch();
     const grassM = lam("grassHD", () => ({ map: grassHD() }));
     const hx = PW / 2, hz = PL / 2, BIG = 1200;
-    b.add(groundQuad(-BIG, BIG, hz, BIG), grassM);
-    b.add(groundQuad(-BIG, BIG, -BIG, -hz), grassM);
-    b.add(groundQuad(-BIG, -hx, -hz, hz), grassM);
-    b.add(groundQuad(hx, BIG, -hz, hz), grassM);
+    // one full grid of cells (every cell shares whole edges with its neighbours: no T-junction cracks for the ink pass
+    // to draw as dotted lines), the patch cell left open; finer near the clearing and around the lawn
+    const xs = [-BIG, -300, -100, -40, -15, -5, -2, -hx, hx, 2, 5, 15, 40, 100, 300, BIG];
+    const zs = [-BIG, -460, -430, -410, -380, -300, -100, -40, -15, -5, -2, -hz, hz, 2, 5, 15, 40, 100, 300, BIG];
+    for (let i = 0; i + 1 < xs.length; i++) for (let j = 0; j + 1 < zs.length; j++) {
+      if (xs[i] === -hx && zs[j] === -hz) continue; // the patch opening
+      b.add(groundQuad(xs[i], xs[i + 1], zs[j], zs[j + 1]), grassM);
+    }
 
     // ---- the forest around the clearing ----
     const r = rng(4242), U = (a: number, c: number) => a + (c - a) * r();
@@ -329,6 +333,15 @@ export class World {
     const capM = lam("rugEndM", () => ({ map: rugEnd() }));
     for (const s of [-1, 1]) { const c = new THREE.Mesh(new THREE.CircleGeometry(0.2, 24), capM); c.position.z = s * 0.95; c.rotation.y = s > 0 ? 0 : Math.PI; this.rug.add(c); }
     this.rug.add(rugBody);
+    // a pair of shoes poking out of the -z end: the cartoon way to say what is rolled up in there
+    const shoeM = lam("shoe", () => ({ color: "#3a2a20" })), sockM = lam("sock", () => ({ color: "#e9e1d2" }));
+    for (const sx of [-0.075, 0.075]) {
+      const ankle = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.032, 0.1, 12).rotateX(Math.PI / 2), sockM);
+      ankle.position.set(sx, 0.0, -0.99);
+      const shoe = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), shoeM);
+      shoe.scale.set(0.05, 0.1, 0.055); shoe.position.set(sx, 0.05, -1.07); shoe.rotation.x = -0.25;
+      this.rug.add(ankle, shoe);
+    }
     this.rug.traverse((o) => { o.castShadow = true; o.receiveShadow = true; });
     R.add(this.rug);
     // mushrooms

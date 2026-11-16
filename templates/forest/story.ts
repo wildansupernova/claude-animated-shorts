@@ -100,7 +100,7 @@ export const patchAt = (id: number, f: number): Patch => {
     case 3: {
       if (f < DIG_A) { // dragged behind Gary across the clearing
         const k = garyWalk(f);
-        return { ...patchStory(0), rug: { x: 0, y: 0, rot: 0, up: false, vis: true, drag: [k.x - 1.25 * k.dx, 0.2, k.z - 1.25 * k.dz] } };
+        return { ...patchStory(0), rug: { x: 0, y: 0, rot: 0, up: false, vis: true, drag: [k.x - 1.15 * k.dx, 0.2, k.z - 1.15 * k.dz] } };
       }
       return patchStory(f);
     }
@@ -161,10 +161,10 @@ export const GHOOK: V3 = [-1.35, 0, 1.3];
 const S1d = (f: number) => dolly([GHOOK[0] + 0.5, 1.62, GHOOK[2] - 2.3], [GHOOK[0], 1.42, GHOOK[2]], pushK(f, 100, 0.004), { fov: 36, roll: -0.04 });
 // 2: meet Gary at the tree line (looking out of the clearing at the trees behind him)
 const S2a = (f: number) => dolly([G2[0] + 1.2, 1.55, G2[2] - 4.6], [G2[0] + 0.25, 1.15, G2[2]], pushK(f, 122, 0.0022), { fov: 40 });
-const S2b = (f: number) => dolly([G2[0] + 1.75, 1.05, G2[2] - 2.7], [G2[0] + 0.85, 0.45, G2[2] - 0.2], pushK(f, 183, 0.0025, 0.006, 24), { fov: 40, roll: 0.03 });
+const S2b = (f: number) => dolly([G2[0] + 1.85, 1.15, G2[2] - 3.1], [G2[0] + 0.85, 0.3, G2[2] - 0.75], pushK(f, 183, 0.0025, 0.006, 24), { fov: 40, roll: 0.03 });
 const S2c = (f: number) => dolly([G2[0] + 0.55, 1.6, G2[2] - 2.25], [G2[0] + 0.05, 1.5, G2[2]], pushK(f, 214, 0.003), { fov: 38, roll: -0.04 });
 // 3: the deed
-const S3a = (f: number) => dolly([3.2, 2.7, -5.6], [-4.2, 0.7, 3.4], pushK(f, 246, 0.0016), { fov: 46 });
+const S3a = (f: number) => dolly([1.2, 4.6, -4.4], [-4.4, 0.3, 3.0], pushK(f, 246, 0.0016), { fov: 46 });
 const S3b = (f: number) => dolly([2.9, 1.5, -4.0], [0.2, 0.75, -0.8], pushK(f, 293, 0.0025), { fov: 42, roll: 0.03 });
 const S3c = (f: number) => dolly([0.95, 1.25, 3.7], [0.45, -0.15, 0.2], pushK(f, 318, 0.0025), { fov: 42, roll: -0.03 });
 const S3d = (f: number) => dolly([1.6, 4.6, -3.3], [0, 0, -0.1], pushK(f, 354, 0.0018), { fov: 42 });
