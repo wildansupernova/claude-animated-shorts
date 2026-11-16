@@ -174,7 +174,7 @@ const sightLines = (): Ray[] => {
   }
   return out;
 };
-const SUN_SHOT: Record<number, { az?: number; el?: number }> = { 5: { az: 60, el: 52 }, 7: { az: 100, el: 52 }, 8: { az: 70 } };
+const SUN_SHOT: Record<number, { az?: number; el?: number }> = { 6: { az: 60, el: 52 }, 9: { az: 100, el: 52 }, 4: { az: 70 } };
 
 export class World {
   root = new THREE.Group();
@@ -334,13 +334,17 @@ export class World {
     for (const s of [-1, 1]) { const c = new THREE.Mesh(new THREE.CircleGeometry(0.2, 24), capM); c.position.z = s * 0.95; c.rotation.y = s > 0 ? 0 : Math.PI; this.rug.add(c); }
     this.rug.add(rugBody);
     // a pair of shoes poking out of the -z end: the cartoon way to say what is rolled up in there
-    const shoeM = lam("shoe", () => ({ color: "#3a2a20" })), sockM = lam("sock", () => ({ color: "#e9e1d2" }));
-    for (const sx of [-0.075, 0.075]) {
-      const ankle = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.032, 0.1, 12).rotateX(Math.PI / 2), sockM);
-      ankle.position.set(sx, 0.0, -0.99);
-      const shoe = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), shoeM);
-      shoe.scale.set(0.05, 0.1, 0.055); shoe.position.set(sx, 0.05, -1.07); shoe.rotation.x = -0.25;
-      this.rug.add(ankle, shoe);
+    // (lace-up brown shoes, splayed: toe cap, darker sole, white sock + ankle)
+    const shoeM = lam("shoe", () => ({ color: "#b0703f" })), soleM = lam("sole", () => ({ color: "#3b2416" })), sockM = lam("sock", () => ({ color: "#f1ebe0" }));
+    for (const s of [-1, 1]) {
+      const foot = new THREE.Group();
+      const ankle = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.12, 12).rotateX(Math.PI / 2), sockM); ankle.position.set(0, 0, 0.06);
+      const heel = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), shoeM); heel.scale.set(0.048, 0.05, 0.045);
+      const toe = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), shoeM); toe.scale.set(0.05, 0.085, 0.05); toe.position.set(0, 0.07, -0.012);
+      const sole = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 18).rotateX(Math.PI / 2), soleM); sole.scale.set(0.046, 0.11, 0.012); sole.position.set(0, 0.035, -0.05);
+      foot.add(ankle, heel, toe, sole);
+      foot.position.set(s * 0.075, -0.02, -1.08); foot.rotation.set(-0.2, 0, -s * 0.35);
+      this.rug.add(foot);
     }
     this.rug.traverse((o) => { o.castShadow = true; o.receiveShadow = true; });
     R.add(this.rug);
@@ -493,7 +497,7 @@ export class World {
     // mushrooms: pop in story order; the big one with the eyes pops last; inner ones hidden under the blanket
     for (const m of this.shrooms) {
       let k: number;
-      if (m.i === 200) k = id === 13 ? pop((f - 2036) / 6) : 0;
+      if (m.i === 200) k = P.pop;
       else if (m.i === 100) k = pop((P.mush - (MUSH0 + 26)) / 5);
       else k = pop((P.mush - (MUSH0 + 2.6 * m.i)) / 5);
       if (P.blanket && m.inner && m.i !== 200) k = 0;
@@ -553,12 +557,12 @@ export class World {
     this.posePatch(P, id, f);
     // lawn spot: burns brown on "burns the grass brown", greener ring on "grows back greener"
     const SU = this.spotU;
-    SU.uDead.value = id === 10 ? smooth((f - 1366) / 30) * (1 - smooth((f - 1430) / 20)) : 0;
-    SU.uLush.value = id === 10 ? smooth((f - 1430) / 22) * 1.6 : 0;
-    SU.uR0.value = 0.55 + 0.25 * smooth((f - 1366) / 30); SU.uR1.value = 0.95;
-    this.spotTufts.visible = id === 10 && f >= 1436;
-    if (this.spotTufts.visible) this.spotTufts.scale.set(1, smooth((f - 1436) / 18) + 0.01, 1);
-    this.drone.visible = id === 12 && f >= 1790;
+    SU.uDead.value = id === 7 ? smooth((f - 998) / 24) * (1 - smooth((f - 1046) / 16)) : 0;
+    SU.uLush.value = id === 7 ? smooth((f - 1050) / 20) * 1.6 : 0;
+    SU.uR0.value = 0.55 + 0.25 * smooth((f - 998) / 24); SU.uR1.value = 0.95;
+    this.spotTufts.visible = id === 7 && f >= 1054;
+    if (this.spotTufts.visible) this.spotTufts.scale.set(1, smooth((f - 1054) / 16) + 0.01, 1);
+    this.drone.visible = id === 10 && f >= 1586;
     if (this.drone.visible) {
       const d = droneAt(f);
       this.drone.position.set(...d); this.drone.rotation.set(0.12, Math.atan2(-(d[0] - 1.5), -(d[2] + 3.2)) + Math.PI, 0.04 * Math.sin(f * 0.13));

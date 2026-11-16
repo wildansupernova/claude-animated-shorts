@@ -5,7 +5,7 @@ import { renderMedia, selectComposition } from "@remotion/renderer";
 import path from "node:path";
 import fs from "node:fs";
 const [comp, dir, conc = "3", only = ""] = process.argv.slice(2);
-const CH = [[0, 122], [122, 246], [246, 440], [440, 562], [562, 719], [719, 788], [788, 908], [908, 1086], [1086, 1270], [1270, 1505], [1505, 1703], [1703, 1914], [1914, 2115]];
+const CH = [[0, 120], [120, 259], [259, 356], [356, 560], [560, 729], [729, 950], [950, 1105], [1105, 1323], [1323, 1516], [1516, 1712], [1712, 1890]];
 const browserExecutable = "/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell";
 const chromiumOptions = { gl: "swangle" };
 fs.mkdirSync(dir, { recursive: true });

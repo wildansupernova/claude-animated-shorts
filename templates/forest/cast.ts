@@ -7,7 +7,7 @@ import {
   Outfit, Expr, FrontOpts, SideOpts, GARY, SEARCHER, PICNIC, HOMEOWNER,
 } from "./toon";
 import {
-  FPS, SHOTS, V3, smooth, clamp01, G2, GHOOK, DIGAT, DIG_A, DIG_B, digK, garyWalk, SPOT, LAWN, CF, HIDE, PEEK, patchAt,
+  FPS, SHOTS, V3, smooth, clamp01, G2, GHOOK, DIGAT, DIG_A, DIG_B, digK, garyWalk, garyAway, burialG, SPOT, LAWN, CF, HIDE, PEEK, patchAt,
 } from "./story";
 import { LIGHTS } from "./lights";
 import { NOINK } from "./ink";
@@ -254,99 +254,92 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
   LNAME = s.light;
   findSun(cam, SUN);
   switch (id) {
-    case 1: {
-      gary(cam, f, out, GHOOK[0], GHOOK[2], { expr: "nervous", look: f >= 100 ? 1 : -1 }, f >= 100);
-      if (f >= 85) shroomEyes(cam, out, smooth((f - 88) / 6), f < 93 ? -0.8 : 0);
-      break;
-    }
+    case 1: gary(cam, f, out, GHOOK[0], GHOOK[2], { expr: "nervous", look: f >= 37 && f < 60 ? 1 : -1 }, f >= 37); break;
     case 2: {
-      const list: [number, Expr][] = [[122, "smile"], [183, "neutral"], [214, "grin"]];
-      gary(cam, f, out, G2[0], G2[2], { expr: exprAt(f, list), prop: ["shovel", 0.12], look: f >= 183 && f < 214 ? 1 : 0 }, false, list);
+      const list: [number, Expr][] = [[120, "smile"], [176, "neutral"], [211, "smile"]];
+      gary(cam, f, out, G2[0], G2[2], { expr: exprAt(f, list), prop: ["shovel", 0.12], look: f >= 176 && f < 211 ? 1 : 0 }, false, list);
       break;
     }
     case 3: {
-      if (f < DIG_A) {
-        const w = garyWalk(f), view = viewOf(cam, w.x, w.z, w.dx, w.dz);
-        const ph = ((f / FPS) * 1.6) % 1;
-        const so: SideOpts = { phase: w.moving ? ph : 0, expr: "whistle", mode: w.moving ? "march" : "stand", stomp: 0.55, stride: view.fs * 0.8 };
-        out.places.push(person(cam, GW, w.x, 0, w.z, view, { mode: w.moving ? "stroll" : "stand", phase: ph, expr: "whistle", facing: 0 }, so));
-        blob(out, w.x, 0, w.z, 1.1);
-      } else if (f < DIG_B) {
-        gary(cam, f, out, DIGAT[0], DIGAT[2], { expr: "stern", prop: ["shovel", q(digK(f), 12)] });
-        dirt(out, f);
-      } else if (f < 354) gary(cam, f, out, DIGAT[0] + 0.5, DIGAT[2] + 0.2, { expr: f < 337 ? "smile" : "grin", prop: ["shovel", 0.1], look: -1 });
-      else if (f < 413) gary(cam, f, out, DIGAT[0] + 0.25, DIGAT[2], { expr: "smile", prop: ["shovel", q(0.35 + 0.35 * Math.max(0, Math.sin((f - 354) * 0.45)), 12)] });
+      const g = burialG(f);
+      if (f < 282) {
+        gary(cam, f, out, DIGAT[0], DIGAT[2], { expr: "stern", prop: ["shovel", q(digK(g), 12)] });
+        dirt(out, g);
+      } else if (f < 298) gary(cam, f, out, DIGAT[0] + 0.5, DIGAT[2] + 0.2, { expr: "grin", prop: ["shovel", 0.1], look: -1 });
+      else if (f < 328) gary(cam, f, out, DIGAT[0] + 0.25, DIGAT[2], { expr: "smile", prop: ["shovel", q(0.35 + 0.35 * Math.max(0, Math.sin((f - 298) * 0.45)), 12)] });
       else {
-        gary(cam, f, out, 1.15, -1.4, { expr: "grin", prop: ["shovel", 0.12], tilt: -3 });
-        sparkles(out, f, 416, [[1.55, 1.75, -1.35], [0.85, 1.95, -1.2], [1.7, 1.25, -1.1]], 0.3);
+        const w = garyAway(f), view = viewOf(cam, w.x, w.z, w.dx, w.dz), ph = ((f / FPS) * 1.6) % 1;
+        const so: SideOpts = { phase: w.moving ? ph : 0, expr: "whistle", mode: w.moving ? "march" : "stand", stomp: 0.55, stride: view.fs * 0.8 };
+        out.places.push(person(cam, GW, w.x, 0, w.z, view, { mode: w.moving ? "stroll" : "stand", phase: ph, expr: "whistle", prop: ["shovel", 0.1] }, so));
+        blob(out, w.x, 0, w.z, 1.1);
       }
       break;
     }
-    case 5: {
-      const P: V3[] = [[0.3, 0.3, -0.6], [-0.25, 0.4, 0.3], [0.1, 0.35, 0.9], [-0.35, 0.3, -0.9]];
-      sparkles(out, f, 602, P, 0.28); sparkles(out, f, 620, P.map(([x, y, z]) => [-x, y + 0.05, -z * 0.8] as V3), 0.34);
+    case 4: {
+      if (f < 403) {
+        const list: [number, Expr][] = [[356, "nervous"], [377, "relief"]];
+        gary(cam, f, out, HIDE[0], HIDE[2], { expr: exprAt(f, list), look: f < 377 ? (Math.floor((f - 356) / 10) % 2 ? 1 : -1) : 0 }, f < 377, list);
+      }
       break;
     }
-    case 8: {
-      const list: [number, Expr][] = [[908, "nervous"], [943, "relief"]];
-      gary(cam, f, out, HIDE[0], HIDE[2], { expr: exprAt(f, list), look: f < 943 ? (Math.floor((f - 908) / 14) % 2 ? 1 : -1) : 0 }, f < 943, list);
-      break;
-    }
-    case 9: {
-      if (f < 1153) {
-        const g = 300 + ((f - 1086) % 27);
+    case 6: {
+      if (f < 803) {
+        const P: V3[] = [[0.3, 0.3, -0.6], [-0.25, 0.4, 0.3], [0.1, 0.35, 0.9], [-0.35, 0.3, -0.9]];
+        sparkles(out, f, 754, P, 0.28); sparkles(out, f, 771, P.map(([x, y, z]) => [-x, y + 0.05, -z * 0.8] as V3), 0.34);
+      } else if (f < 859) {
+        const g = 300 + ((f - 803) % 27);
         gary(cam, f, out, DIGAT[0], DIGAT[2], { expr: "stern", prop: ["shovel", q(digK(g), 12)] });
         dirt(out, g);
-      } else if (f >= 1222) sparkles(out, f, 1226, [[1.45, 0.85, -1.75], [0.7, 0.95, -1.6]], 0.3);
+      } else if (f >= 898) sparkles(out, f, 912, [[1.45, 0.85, -1.75], [0.7, 0.95, -1.6]], 0.3);
       break;
     }
-    case 10: {
-      // the dog: lifts its leg on "peeing" (1295), done by "lawn" (1330); trots to the side for the close-ups
-      const lift = smooth((f - 1290) / 6) * (1 - smooth((f - 1332) / 6)), pee = clamp01((f - 1298) / 8) * (1 - smooth((f - 1326) / 5));
-      const away = f >= 1341;
+    case 7: {
+      // the dog lifts its leg on "pee" (986), done by "spot"; trots to the side for the close-ups
+      const lift = smooth((f - 978) / 6) * (1 - smooth((f - 1010) / 6)), pee = clamp01((f - 986) / 8) * (1 - smooth((f - 1006) / 5));
+      const away = f >= 996;
       const dx = away ? -2.2 : 0, dz = away ? -0.6 : 0;
-      const r = cam.right, ox = 0.32; // the dog's rear sits over the spot
+      const r = cam.right, ox = 0.32;
       const dogX = SPOT[0] + dx + r.x * ox, dogZ = SPOT[2] + dz + r.z * ox;
       const wag = q(Math.sin(f * 0.9) * 3, 2), bl = lidAt(t, 33) > 0.5 ? 1 : 0;
       out.places.push({ key: `dog|${q(lift, 12)}|${q(pee, 12)}|${wag}|${bl}`, x: dogX, y: 0, z: dogZ, size: [900, 1500, 1.5],
         draw: (p) => { p.g.save(); p.g.translate(40, 975 - 470 * 0.74); p.g.scale(0.74, 0.74); fxDog(p, q(lift, 12), q(pee, 12), wag, bl); p.g.restore(); } });
       blob(out, dogX, 0, dogZ, 1.0, 0.7);
       const hx = LAWN[0] - 2.0, hz = LAWN[2] - 2.6;
-      const list: [number, Expr][] = [[1270, "smile"], [1295, "stern"], [1370, "pained"], [1449, "shock"]];
+      const list: [number, Expr][] = [[946, "smile"], [978, "stern"], [1000, "pained"], [1069, "shock"]];
       out.places.push(person(cam, { i: 21, o: HOMEOWNER, okey: "home" }, hx, 0, hz, STILL, { mode: "stand", expr: exprAt(f, list), blink: lidAt(t, 21, swapsOf(list)), look: 1 }, {}));
       blob(out, hx, 0, hz);
-      if (f >= 1449) sparkles(out, f, 1452, [[SPOT[0] + 0.3, 0.3, SPOT[2]], [SPOT[0] - 0.3, 0.35, SPOT[2] + 0.2]], 0.3);
+      if (f >= 1069) sparkles(out, f, 1072, [[SPOT[0] + 0.3, 0.3, SPOT[2]], [SPOT[0] - 0.3, 0.35, SPOT[2] + 0.2]], 0.3);
       break;
     }
-    case 11: {
-      if (f >= 1609) shroomEyes(cam, out, f < 1668 ? 0.15 : smooth((f - 1668) / 6), f < 1640 ? -0.8 : 0);
+    case 8: {
+      if (f >= 1251) shroomEyes(cam, out, f < 1290 ? 0.15 : smooth((f - 1290) / 6), f < 1272 ? -0.8 : 0);
       break;
     }
-    case 12: {
-      // the search team walks in a line across the clearing toward the patch; the lead stops and points on "match"
+    case 10: {
+      // the search team walks in a line toward the patch; the lead stops and points on "match"
       for (let i = 0; i < 3; i++) {
-        const stop = i === 0 ? 1768 : 1772 + i * 3;
-        const u = Math.min(f, stop) - 1703, x = -7.6 + 0.028 * u - (i === 0 ? 0 : 0.35), z = (i - 1) * 0.78;
+        const stop = i === 0 ? 1572 : 1576 + i * 3;
+        const u = Math.min(f, stop) - 1516, x = -7.6 + 0.028 * u - (i === 0 ? 0 : 0.35), z = (i - 1) * 0.78;
         const moving = f < stop;
         const view = viewOf(cam, x, z, 1, 0), ph = ((f / FPS) * 1.4 + i * 0.33) % 1;
         const o = SEARCHER(i), who: Who = { i: 40 + i, o, okey: `srch${i}` };
-        const expr: Expr = i === 0 && f >= 1768 ? "stern" : "neutral";
+        const expr: Expr = i === 0 && f >= 1572 ? "stern" : "neutral";
         if (moving) out.places.push(person(cam, who, x, 0, z, view, { mode: "stroll", phase: ph, expr, blink: lidAt(t, 40 + i) }, { phase: ph, expr, mode: "march", stomp: 0.5, stride: view.fs * 0.65, blink: lidAt(t, 40 + i) }));
         else out.places.push(person(cam, who, x, 0, z, STILL, { mode: "stand", expr, wave: i === 0 ? 0.6 : undefined, facing: 1, blink: lidAt(t, 40 + i) }, {}));
         blob(out, x, 0, z);
       }
       break;
     }
-    case 13: {
-      const shock = f >= 2038;
+    case 11: {
+      const shock = f >= 1818;
       const seats: [number, number, number, Expr][] = [[-0.38, -0.6, 0, "smile_closed"], [0.42, -0.25, 1, "grin"], [-0.05, 0.62, 2, "laugh"]];
       for (const [x, z, k, e] of seats) {
         const expr: Expr = shock ? "shock" : e;
         out.places.push(person(cam, { i: 60 + k, o: PICNIC[k], okey: `pic${k}` }, x, 0.03, z, STILL,
-          { mode: "sit", expr, blink: lidAt(t, 60 + k, [2038 / FPS]), look: shock ? (x > 0 ? -1 : 1) : 0 }, {}, k === 2 ? 0.95 : 1));
+          { mode: "sit", expr, blink: lidAt(t, 60 + k, [1818 / FPS]), look: shock ? (x > 0 ? -1 : 1) : 0 }, {}, k === 2 ? 0.95 : 1));
         blob(out, x, 0.03, z, 1.2);
       }
-      if (f >= 2038) out.fx.push({ key: `burst${q(clamp01((f - 2038) / 8), 16)}`, cw: 500, ch: 500, draw: (p) => fxBurst(p, q(clamp01((f - 2038) / 8), 16)),
+      if (f >= 1818) out.fx.push({ key: `burst${q(clamp01((f - 1818) / 8), 16)}`, cw: 500, ch: 500, draw: (p) => fxBurst(p, q(clamp01((f - 1818) / 8), 16)),
         x: 0.08, y: 0.25, z: -0.45, w: 0.55, h: 0.55 });
       gary(cam, f, out, PEEK[0], PEEK[2], { expr: "nervous", look: 1 }, true);
       break;
