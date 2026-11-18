@@ -17,7 +17,7 @@ characters, story, synthesized score and SFX, and Kokoro TTS voices (AI-generate
 `claude/keen-ride-9bfoie` is not a video (a financial-freedom simulator page), so it is not included here.
 
 ## Rendered MP4s
-Only `birthday-bet/birthday_paradox_short.mp4` (41 MB share encode) is in git. The other renders are larger than
+Only `birthday-bet/birthday_paradox_short.mp4` (41 MB share encode) and `ocean-fun-facts/videos/jelly/jelly_final.mp4` (20 MB share encode) are in git. The other renders are larger than
 GitHub's file limits and were git-ignored, so rebuild them from source with each folder's build notes.
 
 ## Rebuilding: what to know

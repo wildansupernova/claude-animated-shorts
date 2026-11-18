@@ -38,7 +38,7 @@ Voice: Kokoro TTS `am_puck` (AI voice; disclose as AI-generated where the platfo
 - **Hashtags:** #octopus #inky #animals #ocean #funfacts #escape #didyouknow #shorts
 - **Sources:** National Geographic; NPR; Time; Live Science; Irish Times; Boston Globe.
 
-## 6. The Jellyfish That Starts Over (`out/jelly/jelly_final.mp4`, 65 s)
+## 6. The Jellyfish That Starts Over (`videos/jelly/jelly_final.mp4`, 65 s, share encode in git)
 - **Hook:** "This jellyfish doesn't die of old age... it just starts over." (viral-hooks Cat 08 negation; see `videos/jelly/SCRIPT.md`)
 - **Title:** This Jellyfish Never Dies of Old Age. It Starts Over. 🪼
 - **YouTube title (≤100 chars):** This Jellyfish Never Dies of Old Age. It Starts Over. 🪼 #shorts
