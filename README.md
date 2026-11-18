@@ -11,14 +11,13 @@ Proven on **The Bridge That Fell for a Song**, a 67 s short about the 1831 Broug
 |---|---|
 | `SKILL.md` | The skill: the full pipeline, every rule, every fix, and the final look values |
 | `templates/bridge/` | The full source of the bridge short: world, characters, ink, lens blur, grade, story/camera |
-| `templates/forest/` | Second example: "The Forest Snitch" (forensic botany), procedural forest world, burned-in captions, its own score/SFX mix |
 | `templates/audio/` | The synthesized sound: SFX, march music, the mix with ducking and loudness |
 | `templates/scripts/` | Stills, side-by-side sheets, shot merge and frame-by-frame QA helpers |
 | `references/STYLE_BIBLE.md` | The script and visual formula measured from 20 reference shorts |
 | `references/reports/` | Seven measured reports: motion, depth, textures, characters, lighting, outlines, grade |
 | `references/frames/` | 38 full-size reference frames (540x960) to compare your frames against |
 | `references/sheets/` | 20 contact sheets, one per reference short, 60 frames each (1,200 frames) |
-| `examples/birthday-bet/` | A second short built with the skill: the birthday paradox as a bet, with four TTS voices, burned-in captions with speaker tags, on-screen stakes and a counter, voice-timed cues and a CPU-only Linux render |
+| `videos-done/` | Every finished short made with the skill (birthday paradox, Doomsday recap, Forest Snitch, Fritz Haber, Henrietta Lacks, five ocean fun-facts), each with its script, source, voice and build notes so it can be rebuilt. Index: `videos-done/README.md` |
 
 ## Install
 1. Copy this folder to `~/.claude/skills/cartoon-3d-short/` (clone it there, or download the ZIP).

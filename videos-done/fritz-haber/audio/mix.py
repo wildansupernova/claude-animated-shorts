@@ -1,7 +1,7 @@
-# Final mix of the Henrietta Lacks short: the voice (unprocessed: 24 kHz -> 48 kHz resample only) + original score
-# (ducked under the speech, per-section level automation relative to the voice) + synthesized SFX stem (lightly ducked).
-# One master gain on the whole mix to -14 LUFS integrated, own 4x-oversampled look-ahead limiter for <= -1 dBTP,
-# exactly 1806/30 s = 2,889,600 samples, 48 kHz / stereo / 16-bit (TPDF dither). Same chain as the Haber mix.
+# Final mix of the Haber short: the voice (unprocessed: 24 kHz -> 48 kHz resample only) + original score (ducked under
+# the speech, per-section level automation relative to the voice) + synthesized SFX stem (lightly ducked). One master
+# gain on the whole mix to -14 LUFS integrated, own 4x-oversampled look-ahead limiter for <= -1 dBTP, exactly
+# 2051/30 s = 3,281,600 samples, 48 kHz / stereo / 16-bit (TPDF dither).
 # Writes mix.wav, stems/{voice,music,sfx}.wav (pre-master balance, 24-bit; mix = limiter(G * sum)), cues.md.
 # Rendered stems are cached in _cache/ (delete it after changing music.py / sfx.py).
 import os
@@ -15,32 +15,29 @@ from dsp import (SR, ns, st, dbg, read_wav, write_wav, integrated, momentary, sh
 import timeline as T
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-VOICE_DIR = "/home/user/claude-animated-shorts/shorts/henrietta/voice"
+VOICE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "voice")
 CACHE = os.path.join(HERE, "_cache")
-N = ns(T.DUR)                    # 2,889,600 samples = 60.2 s
-assert N == 2889600, N
+N = ns(T.DUR)                    # 3,281,600 samples = 68.3667 s
+assert N == 3281600, N
 TARGET_LUFS = -14.0
 CEIL_DBTP = -1.3                 # limiter ceiling (spec: true peak <= -1 dBTP, margin for dither / resampling)
 DUCK_DB = -3.0                   # music dip while the voice speaks (key = words.json), as the template
 SFX_DUCK_DB = -2.0               # lighter dip on the SFX stem, same key
 
-# music level per section, LU relative to the voice in that section (after ducking): the hook and the rocket peak run
-# hotter, the exam room, the near-silent death / 'Unluckily' moments and the sober porch much softer.
-MUSIC_TARGET = {"hook": -8.5, "americana": -11.0, "exam": -14.0, "lab": -10.5, "explain": -11.0, "death": -19.0, "montage": -11.0,
-                "rocket": -11.0, "papers": -10.5, "swell": -10.5, "lownote": -21.0, "sober": -13.5, "relief": -12.0, "ending": -11.0}
+# music level per section, LU relative to the voice in that section (after ducking). The template's "+3 dB music"
+# standard puts the bed at about -10 LU (old -13); the hook runs hotter, the night / dark / morning cues softer.
+MUSIC_TARGET = {"hook": -8.0, "invent": -10.0, "bright": -9.0, "war": -10.0, "gas": -9.0, "somber": -13.0, "morning": -13.0,
+                "sneaky": -11.0, "fanfare": -10.0, "dark": -14.0, "return": -10.0}
 
-# music rides (start, end, dB) to keep quiet words on top (from the per-word margin analysis)
-DIPS = [(3.50, 4.35, -3.0),    # 'space' lift under 'and they've even been to'
-        (4.35, 4.90, -6.0),    # hook riser under the soft 'space' (the flash owns 4.90)
-        (22.20, 22.75, -3.0),  # A7/E chord under the long, fading 'days'
-        (22.78, 23.05, -3.0),  # bright entry under 'Hers'
-        (28.55, 29.35, -3.0),  # under 'switched hers off'
-        (39.50, 40.30, -3.0),  # rocket peak under 'into orbit'
-        (41.65, 42.30, -4.0),  # under 'studies'
-        (51.00, 51.42, -3.0),  # under the soft 'In' (2023)
-        (53.80, 54.75, -3.0),  # under 'sold her cells'
-        (57.85, 59.85, -3.0),  # 'and this time, the world knows her name': soft voice
-        (59.15, 59.82, -7.0)]  # the final chord starts on 'name' and blooms right after the word
+# music rides (start, end, dB) to keep quiet words on top (filled after listening tests / margin analysis)
+DIPS = [(4.15, 4.80, -6.0),    # hook riser under "...was the air" (the flash owns 4.80)
+        (11.80, 12.12, -4.0),  # tune re-enters under the soft "it" after the cannon
+        (23.95, 24.62, -4.0),  # lab build under "ammonia"
+        (25.45, 26.00, -3.5),  # the lift under "thin air"
+        (27.55, 28.15, -4.0),  # turn to D minor under "Earth"
+        (34.15, 35.95, -3.0),  # trench tutti under "his process keeps its guns firing"
+        (41.75, 42.47, -4.0),  # panic stabs under "trenches"
+        (67.34, 67.95, -4.0)]  # after the final hit's transient, under "warfare"
 
 
 def log(*a):
@@ -160,10 +157,10 @@ def lufs(x):
     return v if np.isfinite(v) else -99.0
 
 
-REPORT = [("hook", 0.0, 4.9), ("farm", 4.9, 10.93), ("street", 10.93, 14.7), ("exam", 14.7, 19.43), ("lab", 19.43, 25.13),
-          ("explain", 25.13, 29.4), ("death", 29.4, 31.37), ("montage", 31.37, 38.3), ("rocket", 38.3, 40.17),
-          ("papers", 40.17, 42.3), ("protected", 42.3, 44.27), ("unluckily", 44.27, 46.0), ("porch", 46.0, 51.2),
-          ("court", 51.2, 54.7), ("ending", 54.7, T.DUR)]
+REPORT = [("hook", 0.0, 4.87), ("farm/sea/farm", 4.87, 16.57), ("lab", 16.57, 24.67), ("flask+crowd", 24.67, 28.07),
+          ("factory/sea", 28.07, 34.77), ("trench", 34.77, 36.03), ("Ypres+gas", 36.03, 42.5), ("night", 42.5, 46.23),
+          ("morning/Alps", 46.23, 52.33), ("Nobel", 52.33, 54.4), ("lab2", 54.4, 58.1), ("camp/candle", 58.1, 62.7),
+          ("ending", 62.7, T.DUR)]
 
 
 def section_table(v, m, s, words):
@@ -264,11 +261,9 @@ def main():
     assert y.shape == (2, N)
     os.makedirs(os.path.join(HERE, "stems"), exist_ok=True)
     write_wav(os.path.join(HERE, "mix.wav"), y, bits=16, dither=True)
-    # stems as 32-bit float: the source voice peaks at full scale and its 48 kHz resample has inter-sample overs (> 0 dBFS)
-    # that a fixed-point stem would clip
-    import soundfile as sf
-    for nm, x in (("voice", v), ("music", m), ("sfx", s_st)):
-        sf.write(os.path.join(HERE, "stems", nm + ".wav"), np.ascontiguousarray(x.T, dtype=np.float32), SR, subtype="FLOAT")
+    write_wav(os.path.join(HERE, "stems", "voice.wav"), v, bits=24)
+    write_wav(os.path.join(HERE, "stems", "music.wav"), m, bits=24)
+    write_wav(os.path.join(HERE, "stems", "sfx.wav"), s_st, bits=24)
     log("wrote mix + stems")
 
     yq, _ = read_wav(os.path.join(HERE, "mix.wav"))
@@ -280,7 +275,7 @@ def main():
     rows = section_table(gv, gm, gs, words)
     wm = word_margins(gv, gm, gs, words)
     eb = ffmpeg_ebur(os.path.join(HERE, "mix.wav"))
-    stats = dict(I=I_, TP=TP, LRA=LRA, Mmax=Mmax, Smax=Smax, G=G, gr=gr_stats, v_ref=v_ref, v_tp=true_peak(v), n=yq.shape[1],
+    stats = dict(I=I_, TP=TP, LRA=LRA, Mmax=Mmax, Smax=Smax, G=G, gr=gr_stats, v_ref=v_ref, n=yq.shape[1],
                  voice_I=lufs(gv), music_I=lufs(gm), sfx_I=lufs(gs), sec_gains=sec_gains)
     log(json.dumps({k: (round(v_, 3) if isinstance(v_, float) else v_) for k, v_ in stats.items() if k not in ("gr", "sec_gains")}))
     log("GR", gr_stats, "section gains", {k: round(x, 1) for k, x in sec_gains.items()})
@@ -298,38 +293,37 @@ def write_cues(C, b, st_, rows, eb):
     L = []
     w = L.append
     gr = st_["gr"]
-    w("# The Woman Who Never Stopped (Henrietta Lacks) - sound cue sheet")
+    w("# Bread and Bombs from Thin Air (Fritz Haber) - sound cue sheet")
     w("")
     w("Original score + SFX, all synthesized in numpy/scipy (`instruments.py`, `sfx_gen.py`, placed by `music.py` / `sfx.py`, "
-      "mixed by `mix.py`; pipeline adapted from the Haber short). No samples; no vocal sounds (no voices, laughter or coughs).")
+      "mixed by `mix.py`; pipeline adapted from `templates/audio/`). No samples, no vocal sounds in the SFX.")
     w("")
     w("## Output")
-    w(f"- `mix.wav`: 48 kHz stereo 16-bit (TPDF dither), {st_['n']:,} samples = {st_['n'] / SR:.4f} s ({T.TOTAL} frames @ 30 fps), voice from t = 0.")
-    w(f"- `stems/voice|music|sfx.wav`: 48 kHz 32-bit float, pre-master balance (voice = voice.wav untouched, 24 -> 48 kHz). "
+    w(f"- `mix.wav`: 48 kHz stereo 16-bit (TPDF dither), {st_['n']:,} samples = {st_['n'] / SR:.4f} s (2051 frames @ 30 fps), voice from t = 0.")
+    w(f"- `stems/voice|music|sfx.wav`: 24-bit, pre-master balance (voice = voice.wav untouched, 24 -> 48 kHz). "
       f"mix = limiter({st_['G']:+.2f} dB x (voice + music + sfx)), last 0.3 s faded.")
-    w(f"- Loudness: **{st_['I']:.1f} LUFS** integrated, **{st_['TP']:.1f} dBTP** true peak (own BS.1770-4 meter; ffmpeg ebur128 cross-check), "
+    w(f"- Loudness: **{st_['I']:.1f} LUFS** integrated, **{st_['TP']:.1f} dBTP** true peak (own BS.1770-4 meter; ffmpeg ebur128 agrees), "
       f"LRA {st_['LRA']:.1f} LU.")
-    w(f"- Voice alone {st_['v_ref']:.1f} LUFS, peaks {st_['v_tp']:.1f} dBTP: with {st_['G']:+.1f} dB its peaks hit the limiter "
-      f"(ceiling {CEIL_DBTP} dBTP, max {gr['max']:.1f} dB, >0.5 dB on {gr['pct_over_0_5']:.0f} % of samples), as in the Haber mix.")
+    w(f"- Getting there needs {st_['G']:+.1f} dB on the whole mix: the voice alone is {st_['v_ref']:.1f} LUFS with peaks at -1.6 dBTP, so its "
+      f"peaks are limited (ceiling {CEIL_DBTP} dBTP, max {gr['max']:.1f} dB, >0.5 dB on {gr['pct_over_0_5']:.0f} % of samples). Music + SFX alone never reach the limiter.")
     w("")
-    w("## Levels")
-    w("- Music ducked -3 dB under speech (key = words.json), then set per section to a target under the voice (LU): " +
-      ", ".join(f"{k} {v:+.1f}" for k, v in MUSIC_TARGET.items()) + ".")
-    if DIPS:
-        w("- Music rides under quiet words: " + ", ".join(f"{a:.2f}-{b:.2f} {d:+.1f} dB" for a, b, d in DIPS) + ".")
+    w("## Levels (user standard: music +3 dB, SFX -6 dB, voice unchanged; applied the way the template does)")
+    w("- Music ducked -3 dB under speech (key = words.json), then per section to a target under the voice (LU): " +
+      ", ".join(f"{k} {v:+.0f}" for k, v in MUSIC_TARGET.items()) + ".")
+    w("- Music rides under quiet key words: " + ", ".join(f"{a:.2f}-{b:.2f} {d:+.0f} dB" for a, b, d in DIPS) + ".")
     w(f"- SFX events at naive level - 6 dB (LU vs voice, max momentary), beds at their integrated level; SFX stem ducked {SFX_DUCK_DB:.0f} dB under speech.")
-    w("- Voice vs bed (music + SFX), LU: " + "; ".join(f"{r[0]} {r[7]:.1f}" for r in rows) + ".")
+    w("- Voice vs bed (music + SFX), LU: " + "; ".join(f"{r[0]} {r[7]:.1f} (speech p10 {r[8]:.1f})" for r in rows) + ".")
     w("")
-    w("## Music map (one piece on the hook motif (A) F-E-D-A | G-F-E-C# -> D)")
-    w("| s | music |")
-    w("|---|---|")
+    w("## Music map (one piece built on the hook's bell motif D-A-G-F-E | D-A-Bb-A-C#)")
+    w("| s | frame | music |")
+    w("|---|---|---|")
     for t, d in sorted(b.cues):
-        w(f"| {t:.2f} | {d} |")
+        w(f"| {t:.2f} | {int(round(t * T.FPS))} | {d} |")
     w("")
-    w("## SFX (s; naive -> applied LU vs voice; beds marked)")
+    w("## SFX (s; naive -> applied LU; beds marked)")
     groups = {}
     for c in sorted(C, key=lambda c: c.t):
-        g = groups.setdefault(c.group, dict(ts=[], c=c))
+        g = groups.setdefault(c.name, dict(ts=[], c=c))
         g["ts"].append(c.t)
     for name, g in sorted(groups.items(), key=lambda kv: kv[1]["ts"][0]):
         c = g["c"]

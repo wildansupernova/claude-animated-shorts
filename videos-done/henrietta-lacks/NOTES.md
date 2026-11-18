@@ -25,7 +25,7 @@ COMP=HenriettaShort OUTDIR=out/henrietta/seg node scripts/render_patches.mjs 685
 ```
 
 ```bash
-python3 shorts/henrietta/scripts/assemble.py
+python3 videos-done/henrietta-lacks/scripts/assemble.py
 ```
 
 ## QA fixes

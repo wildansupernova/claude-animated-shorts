@@ -1,5 +1,5 @@
 // Timeline of the Henrietta Lacks short ("The Woman Who Never Stopped"): shots timed to the voice words
-// (shorts/henrietta/voice/words.json, Kokoro am_fenrir), the camera grammar of the bridge/Haber shorts (continuous
+// (videos-done/henrietta-lacks/voice/words.json, Kokoro am_fenrir), the camera grammar of the bridge/Haber shorts (continuous
 // slow push-ins, smootherstep glides, cuts on big reframes, 7-frame kicks). One world (world.ts) holds the sets far
 // apart: FARM + TOWN (origin, z 60), HOSPITAL (60, -100), LAB (x 200), CELLS (z 800, the microscope world),
 // SPACE (z -1500) and LAUNCH (z 300).

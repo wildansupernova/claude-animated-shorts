@@ -1,5 +1,5 @@
 // Timeline of the Haber short ("Bread and Bombs from Thin Air"): shots timed to the voice words
-// (shorts/haber/voice/words.json, Kokoro am_fenrir), story time per shot and the camera grammar of the bridge short:
+// (videos-done/fritz-haber/voice/words.json, Kokoro am_fenrir), story time per shot and the camera grammar of the bridge short:
 // continuous slow push-ins; symmetric smootherstep glides 18-40 f; big reframes are cuts; impacts are 7-frame kicks.
 // One world (world.ts) holds five sets far apart: FARM (origin), LAB (x 200), SEA (x -300), TRENCH (z 300, with the
 // night CAMP at x 80) and ALPS (z -400). Each shot's cameras look at one set.
