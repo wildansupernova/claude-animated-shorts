@@ -264,12 +264,12 @@ add(B(10), B(11), [LAB, { d: 1, draw: (g, f) => {
   const phase = n % 2;
   if (phase === 0) J(g, 780, 690, { f, R: 42, expr: "happy", seed: 4, tent: 0.7 });
   else PO(g, 780, 752, { f, grow: 0.5, expr: "baby", s: 0.75, seed: 4 });
-  if (n > 0) poof(g, 780, 700, f, Math.round(fWatched + (n - 1) * ((fTimes + 4 - fWatched) / 10)), 46);
+  if (n > 0) { const t0 = Math.round(fWatched + (n - 1) * ((fTimes + 4 - fWatched) / 10)); if (f - t0 < 5) sparkle(g, 860, 650, 26 * (1 - (f - t0) / 5) + 8); }
   // calendar 2009 -> 2011
   const yr = f < fTwo - 2 ? "2009" : "2011";
   rr(g, 790, 190, 200, 190, 12, "#ffffff", 6); rr(g, 790, 190, 200, 50, 12, "#e8322e", 6);
   g.fillStyle = INKC; g.font = "900 64px CapFont"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(yr, 890, 312);
-  who(g, SCIENTIST, 300, 1880, 1000, f, 21, { expr: n >= 10 ? "grin" : n > 4 ? "smile" : "neutral", facing: 1, look: 0.6 });
+  who(g, SCIENTIST, 300, 2180, 1000, f, 21, { expr: n >= 10 ? "grin" : n > 4 ? "smile" : "neutral", facing: 1, look: 0.6 });
 } }], camKeys([{ f: B(10), c: { z: 1.0, y: 960 }, creep: 0.0012 }, { f: fTen, c: { z: 1.12, x: 560, y: 820 }, dur: 14 }]), { bg: "#cfe2dc" });
 
 // 12 LUCKILY, IT NEVER DIES OF OLD AGE
@@ -317,9 +317,10 @@ const DNABG: Layer = { key: "dnabg", d: 0.3, bounds: BIG, res: 0.6, paint: (g) =
   for (let i = 0; i < 70; i++) ell(g, BIG[0] + rnd(7, i) * (BIG[2] - BIG[0]), BIG[1] + rnd(8, i) * (BIG[3] - BIG[1]), 3 + rnd(9, i) * 5, 3 + rnd(9, i) * 5, "rgba(180,160,255,0.25)", 0);
 } };
 add(B(14), B(15), [DNABG, { d: 1, draw: (g, f) => {
-  const show = pop(f, fDNA - 8, 10);
+  const show = pop(f, B(14) + 2, 12);
   const hot = f > fExtra - 2 ? [3, 7, 14] : [];
-  if (show > 0) at(g, 540, 640, show, (gg) => dna(gg, 0, -430, 430, f, 150, hot, easeOut(ramp(f, fRepair, fRepair + 12))));
+  if (show > 0) at(g, 540, 640, show * (1 + 0.06 * Math.max(0, 1 - Math.abs(f - fDNA) / 6)), (gg) => dna(gg, 0, -430, 430, f, 150, hot, easeOut(ramp(f, fRepair, fRepair + 12))));
+  if (f > fDNA - 2 && f < fDNA + 14) { g.save(); g.globalAlpha = 1 - (f - fDNA + 2) / 16; sparkles(g, 540, 640, 300, f, 8); g.restore(); }
   // duplicated gene blocks pop out next to the helix
   if (f > fCopies - 4) [[-330, 330], [330, 520], [-330, 840]].forEach(([dx, y], i) => {
     const k = pop(f, fCopies - 4 + i * 3, 8);
