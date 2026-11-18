@@ -1,0 +1,19 @@
+# speed | pause after (s) | text
+1.07 | 0.26 | At *fourteen*, strangers' blood saved his life. So he paid it back... {1,173|one thousand, one hundred and seventy-three} *times*.
+1.17 | 0.08 | James Harrison, from Australia, had major chest surgery in {1951...|nineteen fifty-one...} and needed *thirteen* units of blood.
+1.17 | 0.10 | So he made a promise: as soon as he was old enough, he'd *give* *blood* too.
+1.13 | 0.14 | At eighteen, he kept it. Even though he *hated* *needles*.
+1.17 | 0.10 | Years later, doctors found his plasma was packed with a powerful antibody called {anti-D.|anti-dee.}
+1.17 | 0.06 | If a mother's blood is {Rh-negative,|R H negative,} and her baby's is {Rh-positive,|R H positive,}
+1.17 | 0.10 | her body can learn to treat the baby's blood like an *invader*... and *attack* it.
+1.09 | 0.14 | Babies were born sick, brain-damaged... or not at all.
+1.17 | 0.08 | His antibodies became a *medicine*: a shot that stops the mother's body from learning to attack.
+1.11 | 0.12 | In {1967,|nineteen sixty-seven,} the first mother got it.
+1.19 | 0.08 | He kept coming back every few weeks... for over *sixty* *years*.
+1.11 | 0.16 | One of the mothers who needed that shot... was his own *daughter*.
+1.15 | 0.08 | Australians called him the Man with the *Golden* *Arm*.
+1.13 | 0.10 | Luckily, that arm kept going until he was *eighty-one*.
+1.04 | 0.18 | Unluckily... he never once watched the *needle*.
+1.13 | 0.10 | His donations are estimated to have protected {2.4|two point four} *million* babies.
+1.09 | 0.12 | He died in {2025,|twenty twenty-five,} at eighty-eight.
+1.07 | 0.00 | Now scientists are trying to make {anti-D|anti-dee} in a lab... so his promise never has to *end*.

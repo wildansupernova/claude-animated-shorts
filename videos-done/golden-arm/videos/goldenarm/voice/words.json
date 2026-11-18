@@ -1,0 +1,1465 @@
+[
+{
+"w": "At",
+"s": 0.255,
+"e": 0.43,
+"emph": false,
+"line": 0
+},
+{
+"w": "fourteen,",
+"s": 0.43,
+"e": 0.98,
+"emph": true,
+"line": 0
+},
+{
+"w": "strangers'",
+"s": 1.03,
+"e": 1.593,
+"emph": false,
+"line": 0
+},
+{
+"w": "blood",
+"s": 1.593,
+"e": 1.943,
+"emph": false,
+"line": 0
+},
+{
+"w": "saved",
+"s": 1.943,
+"e": 2.268,
+"emph": false,
+"line": 0
+},
+{
+"w": "his",
+"s": 2.268,
+"e": 2.43,
+"emph": false,
+"line": 0
+},
+{
+"w": "life.",
+"s": 2.43,
+"e": 2.83,
+"emph": false,
+"line": 0
+},
+{
+"w": "So",
+"s": 2.905,
+"e": 3.018,
+"emph": false,
+"line": 0
+},
+{
+"w": "he",
+"s": 3.018,
+"e": 3.13,
+"emph": false,
+"line": 0
+},
+{
+"w": "paid",
+"s": 3.13,
+"e": 3.368,
+"emph": false,
+"line": 0
+},
+{
+"w": "it",
+"s": 3.368,
+"e": 3.48,
+"emph": false,
+"line": 0
+},
+{
+"w": "back...",
+"s": 3.48,
+"e": 3.93,
+"emph": false,
+"line": 0
+},
+{
+"w": "1,173",
+"s": 4.055,
+"e": 6.23,
+"emph": false,
+"line": 0
+},
+{
+"w": "times.",
+"s": 6.23,
+"e": 6.776,
+"emph": true,
+"line": 0
+},
+{
+"w": "James",
+"s": 7.211,
+"e": 7.536,
+"emph": false,
+"line": 1
+},
+{
+"w": "Harrison,",
+"s": 7.536,
+"e": 7.986,
+"emph": false,
+"line": 1
+},
+{
+"w": "from",
+"s": 8.024,
+"e": 8.161,
+"emph": false,
+"line": 1
+},
+{
+"w": "Australia,",
+"s": 8.161,
+"e": 8.736,
+"emph": false,
+"line": 1
+},
+{
+"w": "had",
+"s": 8.786,
+"e": 8.986,
+"emph": false,
+"line": 1
+},
+{
+"w": "major",
+"s": 8.986,
+"e": 9.299,
+"emph": false,
+"line": 1
+},
+{
+"w": "chest",
+"s": 9.299,
+"e": 9.649,
+"emph": false,
+"line": 1
+},
+{
+"w": "surgery",
+"s": 9.649,
+"e": 10.111,
+"emph": false,
+"line": 1
+},
+{
+"w": "in",
+"s": 10.111,
+"e": 10.236,
+"emph": false,
+"line": 1
+},
+{
+"w": "1951...",
+"s": 10.236,
+"e": 11.311,
+"emph": false,
+"line": 1
+},
+{
+"w": "and",
+"s": 11.436,
+"e": 11.561,
+"emph": false,
+"line": 1
+},
+{
+"w": "needed",
+"s": 11.561,
+"e": 11.899,
+"emph": false,
+"line": 1
+},
+{
+"w": "thirteen",
+"s": 11.899,
+"e": 12.411,
+"emph": true,
+"line": 1
+},
+{
+"w": "units",
+"s": 12.411,
+"e": 12.699,
+"emph": false,
+"line": 1
+},
+{
+"w": "of",
+"s": 12.699,
+"e": 12.786,
+"emph": false,
+"line": 1
+},
+{
+"w": "blood.",
+"s": 12.786,
+"e": 13.182,
+"emph": false,
+"line": 1
+},
+{
+"w": "So",
+"s": 13.412,
+"e": 13.5,
+"emph": false,
+"line": 2
+},
+{
+"w": "he",
+"s": 13.5,
+"e": 13.587,
+"emph": false,
+"line": 2
+},
+{
+"w": "made",
+"s": 13.587,
+"e": 13.75,
+"emph": false,
+"line": 2
+},
+{
+"w": "a",
+"s": 13.75,
+"e": 13.812,
+"emph": false,
+"line": 2
+},
+{
+"w": "promise:",
+"s": 13.812,
+"e": 14.312,
+"emph": false,
+"line": 2
+},
+{
+"w": "as",
+"s": 14.362,
+"e": 14.487,
+"emph": false,
+"line": 2
+},
+{
+"w": "soon",
+"s": 14.487,
+"e": 14.625,
+"emph": false,
+"line": 2
+},
+{
+"w": "as",
+"s": 14.625,
+"e": 14.7,
+"emph": false,
+"line": 2
+},
+{
+"w": "he",
+"s": 14.7,
+"e": 14.775,
+"emph": false,
+"line": 2
+},
+{
+"w": "was",
+"s": 14.775,
+"e": 14.912,
+"emph": false,
+"line": 2
+},
+{
+"w": "old",
+"s": 14.912,
+"e": 15.125,
+"emph": false,
+"line": 2
+},
+{
+"w": "enough,",
+"s": 15.125,
+"e": 15.412,
+"emph": false,
+"line": 2
+},
+{
+"w": "he'd",
+"s": 15.45,
+"e": 15.587,
+"emph": false,
+"line": 2
+},
+{
+"w": "give",
+"s": 15.587,
+"e": 15.787,
+"emph": true,
+"line": 2
+},
+{
+"w": "blood",
+"s": 15.787,
+"e": 16.075,
+"emph": true,
+"line": 2
+},
+{
+"w": "too.",
+"s": 16.075,
+"e": 16.425,
+"emph": false,
+"line": 2
+},
+{
+"w": "At",
+"s": 16.65,
+"e": 16.763,
+"emph": false,
+"line": 3
+},
+{
+"w": "eighteen,",
+"s": 16.763,
+"e": 17.125,
+"emph": false,
+"line": 3
+},
+{
+"w": "he",
+"s": 17.163,
+"e": 17.275,
+"emph": false,
+"line": 3
+},
+{
+"w": "kept",
+"s": 17.275,
+"e": 17.55,
+"emph": false,
+"line": 3
+},
+{
+"w": "it.",
+"s": 17.55,
+"e": 17.7,
+"emph": false,
+"line": 3
+},
+{
+"w": "Even",
+"s": 17.775,
+"e": 18.013,
+"emph": false,
+"line": 3
+},
+{
+"w": "though",
+"s": 18.013,
+"e": 18.138,
+"emph": false,
+"line": 3
+},
+{
+"w": "he",
+"s": 18.138,
+"e": 18.225,
+"emph": false,
+"line": 3
+},
+{
+"w": "hated",
+"s": 18.225,
+"e": 18.525,
+"emph": true,
+"line": 3
+},
+{
+"w": "needles.",
+"s": 18.525,
+"e": 19.064,
+"emph": true,
+"line": 3
+},
+{
+"w": "Years",
+"s": 19.354,
+"e": 19.629,
+"emph": false,
+"line": 4
+},
+{
+"w": "later,",
+"s": 19.629,
+"e": 19.929,
+"emph": false,
+"line": 4
+},
+{
+"w": "doctors",
+"s": 19.979,
+"e": 20.429,
+"emph": false,
+"line": 4
+},
+{
+"w": "found",
+"s": 20.429,
+"e": 20.691,
+"emph": false,
+"line": 4
+},
+{
+"w": "his",
+"s": 20.691,
+"e": 20.854,
+"emph": false,
+"line": 4
+},
+{
+"w": "plasma",
+"s": 20.854,
+"e": 21.304,
+"emph": false,
+"line": 4
+},
+{
+"w": "was",
+"s": 21.304,
+"e": 21.466,
+"emph": false,
+"line": 4
+},
+{
+"w": "packed",
+"s": 21.466,
+"e": 21.829,
+"emph": false,
+"line": 4
+},
+{
+"w": "with",
+"s": 21.829,
+"e": 21.966,
+"emph": false,
+"line": 4
+},
+{
+"w": "a",
+"s": 21.966,
+"e": 22.041,
+"emph": false,
+"line": 4
+},
+{
+"w": "powerful",
+"s": 22.041,
+"e": 22.579,
+"emph": false,
+"line": 4
+},
+{
+"w": "antibody",
+"s": 22.579,
+"e": 23.104,
+"emph": false,
+"line": 4
+},
+{
+"w": "called",
+"s": 23.104,
+"e": 23.404,
+"emph": false,
+"line": 4
+},
+{
+"w": "anti-D.",
+"s": 23.404,
+"e": 23.997,
+"emph": false,
+"line": 4
+},
+{
+"w": "If",
+"s": 24.222,
+"e": 24.334,
+"emph": false,
+"line": 5
+},
+{
+"w": "a",
+"s": 24.334,
+"e": 24.397,
+"emph": false,
+"line": 5
+},
+{
+"w": "mother's",
+"s": 24.397,
+"e": 24.772,
+"emph": false,
+"line": 5
+},
+{
+"w": "blood",
+"s": 24.772,
+"e": 25.034,
+"emph": false,
+"line": 5
+},
+{
+"w": "is",
+"s": 25.034,
+"e": 25.172,
+"emph": false,
+"line": 5
+},
+{
+"w": "Rh-negative,",
+"s": 25.172,
+"e": 26.147,
+"emph": false,
+"line": 5
+},
+{
+"w": "and",
+"s": 26.222,
+"e": 26.334,
+"emph": false,
+"line": 5
+},
+{
+"w": "her",
+"s": 26.334,
+"e": 26.447,
+"emph": false,
+"line": 5
+},
+{
+"w": "baby's",
+"s": 26.447,
+"e": 26.897,
+"emph": false,
+"line": 5
+},
+{
+"w": "is",
+"s": 26.897,
+"e": 27.047,
+"emph": false,
+"line": 5
+},
+{
+"w": "Rh-positive,",
+"s": 27.047,
+"e": 28.039,
+"emph": false,
+"line": 5
+},
+{
+"w": "her",
+"s": 28.224,
+"e": 28.324,
+"emph": false,
+"line": 6
+},
+{
+"w": "body",
+"s": 28.324,
+"e": 28.649,
+"emph": false,
+"line": 6
+},
+{
+"w": "can",
+"s": 28.649,
+"e": 28.799,
+"emph": false,
+"line": 6
+},
+{
+"w": "learn",
+"s": 28.799,
+"e": 29.024,
+"emph": false,
+"line": 6
+},
+{
+"w": "to",
+"s": 29.024,
+"e": 29.149,
+"emph": false,
+"line": 6
+},
+{
+"w": "treat",
+"s": 29.149,
+"e": 29.387,
+"emph": false,
+"line": 6
+},
+{
+"w": "the",
+"s": 29.387,
+"e": 29.474,
+"emph": false,
+"line": 6
+},
+{
+"w": "baby's",
+"s": 29.474,
+"e": 29.849,
+"emph": false,
+"line": 6
+},
+{
+"w": "blood",
+"s": 29.849,
+"e": 30.174,
+"emph": false,
+"line": 6
+},
+{
+"w": "like",
+"s": 30.174,
+"e": 30.362,
+"emph": false,
+"line": 6
+},
+{
+"w": "an",
+"s": 30.362,
+"e": 30.437,
+"emph": false,
+"line": 6
+},
+{
+"w": "invader...",
+"s": 30.437,
+"e": 31.049,
+"emph": true,
+"line": 6
+},
+{
+"w": "and",
+"s": 31.174,
+"e": 31.287,
+"emph": false,
+"line": 6
+},
+{
+"w": "attack",
+"s": 31.287,
+"e": 31.674,
+"emph": true,
+"line": 6
+},
+{
+"w": "it.",
+"s": 31.674,
+"e": 31.84,
+"emph": false,
+"line": 6
+},
+{
+"w": "Babies",
+"s": 32.09,
+"e": 32.428,
+"emph": false,
+"line": 7
+},
+{
+"w": "were",
+"s": 32.428,
+"e": 32.54,
+"emph": false,
+"line": 7
+},
+{
+"w": "born",
+"s": 32.54,
+"e": 32.828,
+"emph": false,
+"line": 7
+},
+{
+"w": "sick,",
+"s": 32.828,
+"e": 33.04,
+"emph": false,
+"line": 7
+},
+{
+"w": "brain-damaged...",
+"s": 33.09,
+"e": 33.865,
+"emph": false,
+"line": 7
+},
+{
+"w": "or",
+"s": 33.99,
+"e": 34.115,
+"emph": false,
+"line": 7
+},
+{
+"w": "not",
+"s": 34.115,
+"e": 34.328,
+"emph": false,
+"line": 7
+},
+{
+"w": "at",
+"s": 34.328,
+"e": 34.415,
+"emph": false,
+"line": 7
+},
+{
+"w": "all.",
+"s": 34.415,
+"e": 34.733,
+"emph": false,
+"line": 7
+},
+{
+"w": "His",
+"s": 35.023,
+"e": 35.21,
+"emph": false,
+"line": 8
+},
+{
+"w": "antibodies",
+"s": 35.21,
+"e": 35.823,
+"emph": false,
+"line": 8
+},
+{
+"w": "became",
+"s": 35.823,
+"e": 36.16,
+"emph": false,
+"line": 8
+},
+{
+"w": "a",
+"s": 36.16,
+"e": 36.223,
+"emph": false,
+"line": 8
+},
+{
+"w": "medicine:",
+"s": 36.223,
+"e": 36.823,
+"emph": true,
+"line": 8
+},
+{
+"w": "a",
+"s": 36.923,
+"e": 37.035,
+"emph": false,
+"line": 8
+},
+{
+"w": "shot",
+"s": 37.035,
+"e": 37.323,
+"emph": false,
+"line": 8
+},
+{
+"w": "that",
+"s": 37.323,
+"e": 37.498,
+"emph": false,
+"line": 8
+},
+{
+"w": "stops",
+"s": 37.498,
+"e": 37.835,
+"emph": false,
+"line": 8
+},
+{
+"w": "the",
+"s": 37.835,
+"e": 37.923,
+"emph": false,
+"line": 8
+},
+{
+"w": "mother's",
+"s": 37.923,
+"e": 38.273,
+"emph": false,
+"line": 8
+},
+{
+"w": "body",
+"s": 38.273,
+"e": 38.623,
+"emph": false,
+"line": 8
+},
+{
+"w": "from",
+"s": 38.623,
+"e": 38.798,
+"emph": false,
+"line": 8
+},
+{
+"w": "learning",
+"s": 38.798,
+"e": 39.173,
+"emph": false,
+"line": 8
+},
+{
+"w": "to",
+"s": 39.173,
+"e": 39.323,
+"emph": false,
+"line": 8
+},
+{
+"w": "attack.",
+"s": 39.323,
+"e": 39.8,
+"emph": false,
+"line": 8
+},
+{
+"w": "In",
+"s": 40.03,
+"e": 40.118,
+"emph": false,
+"line": 9
+},
+{
+"w": "1967,",
+"s": 40.118,
+"e": 41.255,
+"emph": false,
+"line": 9
+},
+{
+"w": "the",
+"s": 41.318,
+"e": 41.405,
+"emph": false,
+"line": 9
+},
+{
+"w": "first",
+"s": 41.405,
+"e": 41.643,
+"emph": false,
+"line": 9
+},
+{
+"w": "mother",
+"s": 41.643,
+"e": 41.855,
+"emph": false,
+"line": 9
+},
+{
+"w": "got",
+"s": 41.855,
+"e": 42.055,
+"emph": false,
+"line": 9
+},
+{
+"w": "it.",
+"s": 42.055,
+"e": 42.219,
+"emph": false,
+"line": 9
+},
+{
+"w": "He",
+"s": 42.464,
+"e": 42.564,
+"emph": false,
+"line": 10
+},
+{
+"w": "kept",
+"s": 42.564,
+"e": 42.814,
+"emph": false,
+"line": 10
+},
+{
+"w": "coming",
+"s": 42.814,
+"e": 43.064,
+"emph": false,
+"line": 10
+},
+{
+"w": "back",
+"s": 43.064,
+"e": 43.339,
+"emph": false,
+"line": 10
+},
+{
+"w": "every",
+"s": 43.339,
+"e": 43.614,
+"emph": false,
+"line": 10
+},
+{
+"w": "few",
+"s": 43.614,
+"e": 43.839,
+"emph": false,
+"line": 10
+},
+{
+"w": "weeks...",
+"s": 43.839,
+"e": 44.164,
+"emph": false,
+"line": 10
+},
+{
+"w": "for",
+"s": 44.251,
+"e": 44.351,
+"emph": false,
+"line": 10
+},
+{
+"w": "over",
+"s": 44.351,
+"e": 44.589,
+"emph": false,
+"line": 10
+},
+{
+"w": "sixty",
+"s": 44.589,
+"e": 44.939,
+"emph": true,
+"line": 10
+},
+{
+"w": "years.",
+"s": 44.939,
+"e": 45.383,
+"emph": true,
+"line": 10
+},
+{
+"w": "One",
+"s": 45.613,
+"e": 45.726,
+"emph": false,
+"line": 11
+},
+{
+"w": "of",
+"s": 45.726,
+"e": 45.801,
+"emph": false,
+"line": 11
+},
+{
+"w": "the",
+"s": 45.801,
+"e": 45.888,
+"emph": false,
+"line": 11
+},
+{
+"w": "mothers",
+"s": 45.888,
+"e": 46.226,
+"emph": false,
+"line": 11
+},
+{
+"w": "who",
+"s": 46.226,
+"e": 46.338,
+"emph": false,
+"line": 11
+},
+{
+"w": "needed",
+"s": 46.338,
+"e": 46.638,
+"emph": false,
+"line": 11
+},
+{
+"w": "that",
+"s": 46.638,
+"e": 46.901,
+"emph": false,
+"line": 11
+},
+{
+"w": "shot...",
+"s": 46.901,
+"e": 47.288,
+"emph": false,
+"line": 11
+},
+{
+"w": "was",
+"s": 47.376,
+"e": 47.526,
+"emph": false,
+"line": 11
+},
+{
+"w": "his",
+"s": 47.526,
+"e": 47.713,
+"emph": false,
+"line": 11
+},
+{
+"w": "own",
+"s": 47.713,
+"e": 47.938,
+"emph": false,
+"line": 11
+},
+{
+"w": "daughter.",
+"s": 47.938,
+"e": 48.395,
+"emph": true,
+"line": 11
+},
+{
+"w": "Australians",
+"s": 48.705,
+"e": 49.28,
+"emph": false,
+"line": 12
+},
+{
+"w": "called",
+"s": 49.28,
+"e": 49.518,
+"emph": false,
+"line": 12
+},
+{
+"w": "him",
+"s": 49.518,
+"e": 49.643,
+"emph": false,
+"line": 12
+},
+{
+"w": "the",
+"s": 49.643,
+"e": 49.73,
+"emph": false,
+"line": 12
+},
+{
+"w": "Man",
+"s": 49.73,
+"e": 50.018,
+"emph": false,
+"line": 12
+},
+{
+"w": "with",
+"s": 50.018,
+"e": 50.118,
+"emph": false,
+"line": 12
+},
+{
+"w": "the",
+"s": 50.118,
+"e": 50.205,
+"emph": false,
+"line": 12
+},
+{
+"w": "Golden",
+"s": 50.205,
+"e": 50.555,
+"emph": true,
+"line": 12
+},
+{
+"w": "Arm.",
+"s": 50.555,
+"e": 50.898,
+"emph": true,
+"line": 12
+},
+{
+"w": "Luckily,",
+"s": 51.128,
+"e": 51.528,
+"emph": false,
+"line": 13
+},
+{
+"w": "that",
+"s": 51.578,
+"e": 51.753,
+"emph": false,
+"line": 13
+},
+{
+"w": "arm",
+"s": 51.753,
+"e": 52.003,
+"emph": false,
+"line": 13
+},
+{
+"w": "kept",
+"s": 52.003,
+"e": 52.228,
+"emph": false,
+"line": 13
+},
+{
+"w": "going",
+"s": 52.228,
+"e": 52.515,
+"emph": false,
+"line": 13
+},
+{
+"w": "until",
+"s": 52.515,
+"e": 52.74,
+"emph": false,
+"line": 13
+},
+{
+"w": "he",
+"s": 52.74,
+"e": 52.815,
+"emph": false,
+"line": 13
+},
+{
+"w": "was",
+"s": 52.815,
+"e": 52.928,
+"emph": false,
+"line": 13
+},
+{
+"w": "eighty-one.",
+"s": 52.928,
+"e": 53.468,
+"emph": true,
+"line": 13
+},
+{
+"w": "Unluckily...",
+"s": 53.718,
+"e": 54.293,
+"emph": false,
+"line": 14
+},
+{
+"w": "he",
+"s": 54.38,
+"e": 54.468,
+"emph": false,
+"line": 14
+},
+{
+"w": "never",
+"s": 54.468,
+"e": 54.68,
+"emph": false,
+"line": 14
+},
+{
+"w": "once",
+"s": 54.68,
+"e": 54.893,
+"emph": false,
+"line": 14
+},
+{
+"w": "watched",
+"s": 54.893,
+"e": 55.205,
+"emph": false,
+"line": 14
+},
+{
+"w": "the",
+"s": 55.205,
+"e": 55.293,
+"emph": false,
+"line": 14
+},
+{
+"w": "needle.",
+"s": 55.293,
+"e": 55.703,
+"emph": true,
+"line": 14
+},
+{
+"w": "His",
+"s": 56.033,
+"e": 56.208,
+"emph": false,
+"line": 15
+},
+{
+"w": "donations",
+"s": 56.208,
+"e": 56.833,
+"emph": false,
+"line": 15
+},
+{
+"w": "are",
+"s": 56.833,
+"e": 56.971,
+"emph": false,
+"line": 15
+},
+{
+"w": "estimated",
+"s": 56.971,
+"e": 57.558,
+"emph": false,
+"line": 15
+},
+{
+"w": "to",
+"s": 57.558,
+"e": 57.646,
+"emph": false,
+"line": 15
+},
+{
+"w": "have",
+"s": 57.646,
+"e": 57.758,
+"emph": false,
+"line": 15
+},
+{
+"w": "protected",
+"s": 57.758,
+"e": 58.296,
+"emph": false,
+"line": 15
+},
+{
+"w": "2.4",
+"s": 58.296,
+"e": 59.058,
+"emph": false,
+"line": 15
+},
+{
+"w": "million",
+"s": 59.058,
+"e": 59.383,
+"emph": true,
+"line": 15
+},
+{
+"w": "babies.",
+"s": 59.383,
+"e": 59.959,
+"emph": false,
+"line": 15
+},
+{
+"w": "He",
+"s": 60.209,
+"e": 60.309,
+"emph": false,
+"line": 16
+},
+{
+"w": "died",
+"s": 60.309,
+"e": 60.547,
+"emph": false,
+"line": 16
+},
+{
+"w": "in",
+"s": 60.547,
+"e": 60.634,
+"emph": false,
+"line": 16
+},
+{
+"w": "2025,",
+"s": 60.634,
+"e": 61.459,
+"emph": false,
+"line": 16
+},
+{
+"w": "at",
+"s": 61.509,
+"e": 61.634,
+"emph": false,
+"line": 16
+},
+{
+"w": "eighty-eight.",
+"s": 61.634,
+"e": 62.124,
+"emph": false,
+"line": 16
+},
+{
+"w": "Now",
+"s": 62.444,
+"e": 62.681,
+"emph": false,
+"line": 17
+},
+{
+"w": "scientists",
+"s": 62.681,
+"e": 63.256,
+"emph": false,
+"line": 17
+},
+{
+"w": "are",
+"s": 63.256,
+"e": 63.344,
+"emph": false,
+"line": 17
+},
+{
+"w": "trying",
+"s": 63.344,
+"e": 63.631,
+"emph": false,
+"line": 17
+},
+{
+"w": "to",
+"s": 63.631,
+"e": 63.706,
+"emph": false,
+"line": 17
+},
+{
+"w": "make",
+"s": 63.706,
+"e": 63.919,
+"emph": false,
+"line": 17
+},
+{
+"w": "anti-D",
+"s": 63.919,
+"e": 64.519,
+"emph": false,
+"line": 17
+},
+{
+"w": "in",
+"s": 64.519,
+"e": 64.606,
+"emph": false,
+"line": 17
+},
+{
+"w": "a",
+"s": 64.606,
+"e": 64.694,
+"emph": false,
+"line": 17
+},
+{
+"w": "lab...",
+"s": 64.694,
+"e": 65.169,
+"emph": false,
+"line": 17
+},
+{
+"w": "so",
+"s": 65.294,
+"e": 65.456,
+"emph": false,
+"line": 17
+},
+{
+"w": "his",
+"s": 65.456,
+"e": 65.631,
+"emph": false,
+"line": 17
+},
+{
+"w": "promise",
+"s": 65.631,
+"e": 66.056,
+"emph": false,
+"line": 17
+},
+{
+"w": "never",
+"s": 66.056,
+"e": 66.394,
+"emph": false,
+"line": 17
+},
+{
+"w": "has",
+"s": 66.394,
+"e": 66.594,
+"emph": false,
+"line": 17
+},
+{
+"w": "to",
+"s": 66.594,
+"e": 66.719,
+"emph": false,
+"line": 17
+},
+{
+"w": "end.",
+"s": 66.719,
+"e": 67.078,
+"emph": true,
+"line": 17
+}
+]
