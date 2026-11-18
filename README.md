@@ -18,6 +18,7 @@ Proven on **The Bridge That Fell for a Song**, a 67 s short about the 1831 Broug
 | `references/frames/` | 38 full-size reference frames (540x960) to compare your frames against |
 | `references/sheets/` | 20 contact sheets, one per reference short, 60 frames each (1,200 frames) |
 | `videos-done/` | Every finished short made with the skill (birthday paradox, Doomsday recap, Forest Snitch, Fritz Haber, Henrietta Lacks, five ocean fun-facts), each with its script, source, voice and build notes so it can be rebuilt. Index: `videos-done/README.md` |
+| `CLAUDE.md`, `.claude/skills/video-workflow/` | Agent guide for this repo, picked up automatically by Claude Code: how videos are made and archived, Tigris hosting (`TIGRIS_STORAGE_*` env vars, `scripts/tigris.py`), posting with the Buffer connector, and deleting the upload once the posts are sent |
 
 ## Install
 1. Copy this folder to `~/.claude/skills/cartoon-3d-short/` (clone it there, or download the ZIP).
