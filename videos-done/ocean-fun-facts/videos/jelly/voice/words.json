@@ -1,0 +1,1458 @@
+[
+{
+"w": "This",
+"s": 0.255,
+"e": 0.468,
+"emph": false,
+"line": 0
+},
+{
+"w": "jellyfish",
+"s": 0.468,
+"e": 1.03,
+"emph": false,
+"line": 0
+},
+{
+"w": "doesn't",
+"s": 1.03,
+"e": 1.305,
+"emph": false,
+"line": 0
+},
+{
+"w": "die",
+"s": 1.305,
+"e": 1.542,
+"emph": false,
+"line": 0
+},
+{
+"w": "of",
+"s": 1.542,
+"e": 1.63,
+"emph": false,
+"line": 0
+},
+{
+"w": "old",
+"s": 1.63,
+"e": 1.88,
+"emph": true,
+"line": 0
+},
+{
+"w": "age...",
+"s": 1.88,
+"e": 2.305,
+"emph": true,
+"line": 0
+},
+{
+"w": "it",
+"s": 2.43,
+"e": 2.53,
+"emph": false,
+"line": 0
+},
+{
+"w": "just",
+"s": 2.53,
+"e": 2.692,
+"emph": false,
+"line": 0
+},
+{
+"w": "starts",
+"s": 2.692,
+"e": 3.03,
+"emph": true,
+"line": 0
+},
+{
+"w": "over.",
+"s": 3.03,
+"e": 3.489,
+"emph": true,
+"line": 0
+},
+{
+"w": "Meet",
+"s": 3.964,
+"e": 4.139,
+"emph": false,
+"line": 1
+},
+{
+"w": "the",
+"s": 4.139,
+"e": 4.289,
+"emph": false,
+"line": 1
+},
+{
+"w": "immortal",
+"s": 4.289,
+"e": 4.789,
+"emph": true,
+"line": 1
+},
+{
+"w": "jellyfish.",
+"s": 4.789,
+"e": 5.439,
+"emph": true,
+"line": 1
+},
+{
+"w": "It's",
+"s": 5.514,
+"e": 5.664,
+"emph": false,
+"line": 1
+},
+{
+"w": "smaller",
+"s": 5.664,
+"e": 6.052,
+"emph": false,
+"line": 1
+},
+{
+"w": "than",
+"s": 6.052,
+"e": 6.152,
+"emph": false,
+"line": 1
+},
+{
+"w": "your",
+"s": 6.152,
+"e": 6.264,
+"emph": false,
+"line": 1
+},
+{
+"w": "pinky",
+"s": 6.264,
+"e": 6.589,
+"emph": false,
+"line": 1
+},
+{
+"w": "nail.",
+"s": 6.589,
+"e": 6.998,
+"emph": false,
+"line": 1
+},
+{
+"w": "Normally,",
+"s": 7.228,
+"e": 7.678,
+"emph": false,
+"line": 2
+},
+{
+"w": "a",
+"s": 7.753,
+"e": 7.853,
+"emph": false,
+"line": 2
+},
+{
+"w": "jellyfish's",
+"s": 7.853,
+"e": 8.428,
+"emph": false,
+"line": 2
+},
+{
+"w": "life",
+"s": 8.428,
+"e": 8.703,
+"emph": false,
+"line": 2
+},
+{
+"w": "only",
+"s": 8.703,
+"e": 8.953,
+"emph": false,
+"line": 2
+},
+{
+"w": "goes",
+"s": 8.953,
+"e": 9.178,
+"emph": false,
+"line": 2
+},
+{
+"w": "one",
+"s": 9.178,
+"e": 9.378,
+"emph": true,
+"line": 2
+},
+{
+"w": "way.",
+"s": 9.378,
+"e": 9.687,
+"emph": true,
+"line": 2
+},
+{
+"w": "A",
+"s": 9.897,
+"e": 9.972,
+"emph": false,
+"line": 3
+},
+{
+"w": "tiny",
+"s": 9.972,
+"e": 10.297,
+"emph": false,
+"line": 3
+},
+{
+"w": "polyp,",
+"s": 10.297,
+"e": 10.622,
+"emph": false,
+"line": 3
+},
+{
+"w": "stuck",
+"s": 10.66,
+"e": 10.922,
+"emph": false,
+"line": 3
+},
+{
+"w": "to",
+"s": 10.922,
+"e": 11.022,
+"emph": false,
+"line": 3
+},
+{
+"w": "a",
+"s": 11.022,
+"e": 11.122,
+"emph": false,
+"line": 3
+},
+{
+"w": "rock,",
+"s": 11.122,
+"e": 11.422,
+"emph": false,
+"line": 3
+},
+{
+"w": "buds",
+"s": 11.472,
+"e": 11.71,
+"emph": false,
+"line": 3
+},
+{
+"w": "off",
+"s": 11.71,
+"e": 11.885,
+"emph": false,
+"line": 3
+},
+{
+"w": "a",
+"s": 11.885,
+"e": 11.947,
+"emph": false,
+"line": 3
+},
+{
+"w": "baby",
+"s": 11.947,
+"e": 12.222,
+"emph": false,
+"line": 3
+},
+{
+"w": "jellyfish.",
+"s": 12.222,
+"e": 12.847,
+"emph": false,
+"line": 3
+},
+{
+"w": "It",
+"s": 12.922,
+"e": 13.047,
+"emph": false,
+"line": 3
+},
+{
+"w": "grows",
+"s": 13.047,
+"e": 13.372,
+"emph": false,
+"line": 3
+},
+{
+"w": "up...",
+"s": 13.372,
+"e": 13.672,
+"emph": false,
+"line": 3
+},
+{
+"w": "and",
+"s": 13.797,
+"e": 13.91,
+"emph": false,
+"line": 3
+},
+{
+"w": "then,",
+"s": 13.91,
+"e": 14.097,
+"emph": false,
+"line": 3
+},
+{
+"w": "that's",
+"s": 14.147,
+"e": 14.447,
+"emph": false,
+"line": 3
+},
+{
+"w": "it.",
+"s": 14.447,
+"e": 14.613,
+"emph": true,
+"line": 3
+},
+{
+"w": "But",
+"s": 14.863,
+"e": 14.988,
+"emph": false,
+"line": 4
+},
+{
+"w": "starve",
+"s": 14.988,
+"e": 15.313,
+"emph": false,
+"line": 4
+},
+{
+"w": "this",
+"s": 15.313,
+"e": 15.513,
+"emph": false,
+"line": 4
+},
+{
+"w": "one,",
+"s": 15.513,
+"e": 15.713,
+"emph": false,
+"line": 4
+},
+{
+"w": "hurt",
+"s": 15.763,
+"e": 16.038,
+"emph": false,
+"line": 4
+},
+{
+"w": "it,",
+"s": 16.038,
+"e": 16.188,
+"emph": false,
+"line": 4
+},
+{
+"w": "or",
+"s": 16.263,
+"e": 16.425,
+"emph": false,
+"line": 4
+},
+{
+"w": "just",
+"s": 16.425,
+"e": 16.638,
+"emph": false,
+"line": 4
+},
+{
+"w": "let",
+"s": 16.638,
+"e": 16.775,
+"emph": false,
+"line": 4
+},
+{
+"w": "it",
+"s": 16.775,
+"e": 16.863,
+"emph": false,
+"line": 4
+},
+{
+"w": "get",
+"s": 16.863,
+"e": 17.038,
+"emph": false,
+"line": 4
+},
+{
+"w": "old...",
+"s": 17.038,
+"e": 17.469,
+"emph": true,
+"line": 4
+},
+{
+"w": "and",
+"s": 17.704,
+"e": 17.791,
+"emph": false,
+"line": 5
+},
+{
+"w": "it",
+"s": 17.791,
+"e": 17.941,
+"emph": false,
+"line": 5
+},
+{
+"w": "shrinks.",
+"s": 17.941,
+"e": 18.279,
+"emph": true,
+"line": 5
+},
+{
+"w": "Its",
+"s": 18.316,
+"e": 18.454,
+"emph": false,
+"line": 5
+},
+{
+"w": "tentacles",
+"s": 18.454,
+"e": 18.954,
+"emph": false,
+"line": 5
+},
+{
+"w": "pull",
+"s": 18.954,
+"e": 19.191,
+"emph": false,
+"line": 5
+},
+{
+"w": "in.",
+"s": 19.191,
+"e": 19.404,
+"emph": false,
+"line": 5
+},
+{
+"w": "It",
+"s": 19.479,
+"e": 19.691,
+"emph": false,
+"line": 5
+},
+{
+"w": "sinks",
+"s": 19.691,
+"e": 19.979,
+"emph": false,
+"line": 5
+},
+{
+"w": "to",
+"s": 19.979,
+"e": 20.066,
+"emph": false,
+"line": 5
+},
+{
+"w": "the",
+"s": 20.066,
+"e": 20.154,
+"emph": false,
+"line": 5
+},
+{
+"w": "bottom...",
+"s": 20.154,
+"e": 20.629,
+"emph": false,
+"line": 5
+},
+{
+"w": "and",
+"s": 20.729,
+"e": 20.854,
+"emph": false,
+"line": 5
+},
+{
+"w": "turns",
+"s": 20.854,
+"e": 21.191,
+"emph": false,
+"line": 5
+},
+{
+"w": "into",
+"s": 21.191,
+"e": 21.416,
+"emph": false,
+"line": 5
+},
+{
+"w": "a",
+"s": 21.416,
+"e": 21.479,
+"emph": false,
+"line": 5
+},
+{
+"w": "blob.",
+"s": 21.479,
+"e": 21.99,
+"emph": true,
+"line": 5
+},
+{
+"w": "In",
+"s": 22.24,
+"e": 22.328,
+"emph": false,
+"line": 6
+},
+{
+"w": "a",
+"s": 22.328,
+"e": 22.39,
+"emph": false,
+"line": 6
+},
+{
+"w": "couple",
+"s": 22.39,
+"e": 22.703,
+"emph": false,
+"line": 6
+},
+{
+"w": "of",
+"s": 22.703,
+"e": 22.79,
+"emph": false,
+"line": 6
+},
+{
+"w": "days,",
+"s": 22.79,
+"e": 23.14,
+"emph": false,
+"line": 6
+},
+{
+"w": "the",
+"s": 23.178,
+"e": 23.265,
+"emph": false,
+"line": 6
+},
+{
+"w": "blob",
+"s": 23.265,
+"e": 23.59,
+"emph": false,
+"line": 6
+},
+{
+"w": "grows",
+"s": 23.59,
+"e": 23.928,
+"emph": false,
+"line": 6
+},
+{
+"w": "roots...",
+"s": 23.928,
+"e": 24.315,
+"emph": false,
+"line": 6
+},
+{
+"w": "and",
+"s": 24.403,
+"e": 24.503,
+"emph": false,
+"line": 6
+},
+{
+"w": "becomes",
+"s": 24.503,
+"e": 24.853,
+"emph": false,
+"line": 6
+},
+{
+"w": "a",
+"s": 24.853,
+"e": 24.915,
+"emph": false,
+"line": 6
+},
+{
+"w": "baby",
+"s": 24.915,
+"e": 25.215,
+"emph": true,
+"line": 6
+},
+{
+"w": "polyp",
+"s": 25.215,
+"e": 25.54,
+"emph": false,
+"line": 6
+},
+{
+"w": "again.",
+"s": 25.54,
+"e": 25.944,
+"emph": false,
+"line": 6
+},
+{
+"w": "Then",
+"s": 26.194,
+"e": 26.307,
+"emph": false,
+"line": 7
+},
+{
+"w": "it",
+"s": 26.307,
+"e": 26.394,
+"emph": false,
+"line": 7
+},
+{
+"w": "buds",
+"s": 26.394,
+"e": 26.694,
+"emph": false,
+"line": 7
+},
+{
+"w": "brand",
+"s": 26.694,
+"e": 26.994,
+"emph": false,
+"line": 7
+},
+{
+"w": "new",
+"s": 26.994,
+"e": 27.169,
+"emph": false,
+"line": 7
+},
+{
+"w": "jellyfish.",
+"s": 27.169,
+"e": 27.844,
+"emph": false,
+"line": 7
+},
+{
+"w": "Life",
+"s": 27.944,
+"e": 28.194,
+"emph": false,
+"line": 7
+},
+{
+"w": "cycle:",
+"s": 28.194,
+"e": 28.494,
+"emph": false,
+"line": 7
+},
+{
+"w": "reset.",
+"s": 28.532,
+"e": 29.008,
+"emph": true,
+"line": 7
+},
+{
+"w": "It's",
+"s": 29.318,
+"e": 29.455,
+"emph": false,
+"line": 8
+},
+{
+"w": "like",
+"s": 29.455,
+"e": 29.605,
+"emph": false,
+"line": 8
+},
+{
+"w": "a",
+"s": 29.605,
+"e": 29.693,
+"emph": false,
+"line": 8
+},
+{
+"w": "butterfly",
+"s": 29.693,
+"e": 30.305,
+"emph": false,
+"line": 8
+},
+{
+"w": "crawling",
+"s": 30.305,
+"e": 30.718,
+"emph": false,
+"line": 8
+},
+{
+"w": "back",
+"s": 30.718,
+"e": 30.98,
+"emph": false,
+"line": 8
+},
+{
+"w": "into",
+"s": 30.98,
+"e": 31.218,
+"emph": false,
+"line": 8
+},
+{
+"w": "its",
+"s": 31.218,
+"e": 31.418,
+"emph": false,
+"line": 8
+},
+{
+"w": "cocoon...",
+"s": 31.418,
+"e": 32.068,
+"emph": false,
+"line": 8
+},
+{
+"w": "and",
+"s": 32.193,
+"e": 32.318,
+"emph": false,
+"line": 8
+},
+{
+"w": "coming",
+"s": 32.318,
+"e": 32.63,
+"emph": false,
+"line": 8
+},
+{
+"w": "out",
+"s": 32.63,
+"e": 32.755,
+"emph": false,
+"line": 8
+},
+{
+"w": "a",
+"s": 32.755,
+"e": 32.818,
+"emph": false,
+"line": 8
+},
+{
+"w": "caterpillar.",
+"s": 32.818,
+"e": 33.526,
+"emph": true,
+"line": 8
+},
+{
+"w": "The",
+"s": 33.796,
+"e": 33.871,
+"emph": false,
+"line": 9
+},
+{
+"w": "trick?",
+"s": 33.871,
+"e": 34.146,
+"emph": false,
+"line": 9
+},
+{
+"w": "Its",
+"s": 34.184,
+"e": 34.346,
+"emph": false,
+"line": 9
+},
+{
+"w": "cells",
+"s": 34.346,
+"e": 34.696,
+"emph": false,
+"line": 9
+},
+{
+"w": "can",
+"s": 34.696,
+"e": 34.884,
+"emph": false,
+"line": 9
+},
+{
+"w": "switch",
+"s": 34.884,
+"e": 35.209,
+"emph": false,
+"line": 9
+},
+{
+"w": "jobs.",
+"s": 35.209,
+"e": 35.721,
+"emph": true,
+"line": 9
+},
+{
+"w": "A",
+"s": 35.796,
+"e": 35.896,
+"emph": false,
+"line": 9
+},
+{
+"w": "skin",
+"s": 35.896,
+"e": 36.196,
+"emph": false,
+"line": 9
+},
+{
+"w": "cell",
+"s": 36.196,
+"e": 36.446,
+"emph": false,
+"line": 9
+},
+{
+"w": "can",
+"s": 36.446,
+"e": 36.621,
+"emph": false,
+"line": 9
+},
+{
+"w": "turn",
+"s": 36.621,
+"e": 36.884,
+"emph": false,
+"line": 9
+},
+{
+"w": "into",
+"s": 36.884,
+"e": 37.109,
+"emph": false,
+"line": 9
+},
+{
+"w": "a",
+"s": 37.109,
+"e": 37.171,
+"emph": false,
+"line": 9
+},
+{
+"w": "completely",
+"s": 37.171,
+"e": 37.696,
+"emph": false,
+"line": 9
+},
+{
+"w": "different",
+"s": 37.696,
+"e": 37.996,
+"emph": false,
+"line": 9
+},
+{
+"w": "kind",
+"s": 37.996,
+"e": 38.234,
+"emph": false,
+"line": 9
+},
+{
+"w": "of",
+"s": 38.234,
+"e": 38.334,
+"emph": false,
+"line": 9
+},
+{
+"w": "cell.",
+"s": 38.334,
+"e": 38.725,
+"emph": false,
+"line": 9
+},
+{
+"w": "In",
+"s": 38.98,
+"e": 39.08,
+"emph": false,
+"line": 10
+},
+{
+"w": "Japan,",
+"s": 39.08,
+"e": 39.505,
+"emph": false,
+"line": 10
+},
+{
+"w": "scientist",
+"s": 39.58,
+"e": 40.067,
+"emph": false,
+"line": 10
+},
+{
+"w": "Shin",
+"s": 40.067,
+"e": 40.305,
+"emph": false,
+"line": 10
+},
+{
+"w": "Kubota",
+"s": 40.305,
+"e": 40.842,
+"emph": false,
+"line": 10
+},
+{
+"w": "watched",
+"s": 40.842,
+"e": 41.217,
+"emph": false,
+"line": 10
+},
+{
+"w": "one",
+"s": 41.217,
+"e": 41.455,
+"emph": false,
+"line": 10
+},
+{
+"w": "immortal",
+"s": 41.455,
+"e": 41.955,
+"emph": false,
+"line": 10
+},
+{
+"w": "jellyfish",
+"s": 41.955,
+"e": 42.505,
+"emph": false,
+"line": 10
+},
+{
+"w": "do",
+"s": 42.505,
+"e": 42.68,
+"emph": false,
+"line": 10
+},
+{
+"w": "this",
+"s": 42.68,
+"e": 42.88,
+"emph": false,
+"line": 10
+},
+{
+"w": "ten",
+"s": 42.88,
+"e": 43.13,
+"emph": true,
+"line": 10
+},
+{
+"w": "times...",
+"s": 43.13,
+"e": 43.73,
+"emph": true,
+"line": 10
+},
+{
+"w": "in",
+"s": 43.855,
+"e": 43.942,
+"emph": false,
+"line": 10
+},
+{
+"w": "under",
+"s": 43.942,
+"e": 44.192,
+"emph": false,
+"line": 10
+},
+{
+"w": "two",
+"s": 44.192,
+"e": 44.405,
+"emph": false,
+"line": 10
+},
+{
+"w": "years.",
+"s": 44.405,
+"e": 44.88,
+"emph": false,
+"line": 10
+},
+{
+"w": "Luckily,",
+"s": 45.155,
+"e": 45.555,
+"emph": false,
+"line": 11
+},
+{
+"w": "it",
+"s": 45.605,
+"e": 45.705,
+"emph": false,
+"line": 11
+},
+{
+"w": "never",
+"s": 45.705,
+"e": 45.905,
+"emph": false,
+"line": 11
+},
+{
+"w": "dies",
+"s": 45.905,
+"e": 46.167,
+"emph": false,
+"line": 11
+},
+{
+"w": "of",
+"s": 46.167,
+"e": 46.242,
+"emph": false,
+"line": 11
+},
+{
+"w": "old",
+"s": 46.242,
+"e": 46.455,
+"emph": false,
+"line": 11
+},
+{
+"w": "age.",
+"s": 46.455,
+"e": 46.859,
+"emph": false,
+"line": 11
+},
+{
+"w": "Unluckily...",
+"s": 47.154,
+"e": 47.729,
+"emph": false,
+"line": 12
+},
+{
+"w": "it's",
+"s": 47.817,
+"e": 47.917,
+"emph": false,
+"line": 12
+},
+{
+"w": "still",
+"s": 47.917,
+"e": 48.117,
+"emph": false,
+"line": 12
+},
+{
+"w": "a",
+"s": 48.117,
+"e": 48.179,
+"emph": false,
+"line": 12
+},
+{
+"w": "snack.",
+"s": 48.179,
+"e": 48.69,
+"emph": true,
+"line": 12
+},
+{
+"w": "And",
+"s": 49.02,
+"e": 49.158,
+"emph": false,
+"line": 13
+},
+{
+"w": "it's",
+"s": 49.158,
+"e": 49.295,
+"emph": false,
+"line": 13
+},
+{
+"w": "spreading.",
+"s": 49.295,
+"e": 49.82,
+"emph": false,
+"line": 13
+},
+{
+"w": "Scientists",
+"s": 49.908,
+"e": 50.445,
+"emph": false,
+"line": 13
+},
+{
+"w": "think",
+"s": 50.445,
+"e": 50.633,
+"emph": false,
+"line": 13
+},
+{
+"w": "it",
+"s": 50.633,
+"e": 50.72,
+"emph": false,
+"line": 13
+},
+{
+"w": "hitched",
+"s": 50.72,
+"e": 51.02,
+"emph": false,
+"line": 13
+},
+{
+"w": "rides",
+"s": 51.02,
+"e": 51.37,
+"emph": false,
+"line": 13
+},
+{
+"w": "around",
+"s": 51.37,
+"e": 51.658,
+"emph": false,
+"line": 13
+},
+{
+"w": "the",
+"s": 51.658,
+"e": 51.745,
+"emph": false,
+"line": 13
+},
+{
+"w": "world",
+"s": 51.745,
+"e": 52.095,
+"emph": false,
+"line": 13
+},
+{
+"w": "in",
+"s": 52.095,
+"e": 52.258,
+"emph": false,
+"line": 13
+},
+{
+"w": "ships'",
+"s": 52.258,
+"e": 52.57,
+"emph": false,
+"line": 13
+},
+{
+"w": "ballast",
+"s": 52.57,
+"e": 52.995,
+"emph": true,
+"line": 13
+},
+{
+"w": "water.",
+"s": 52.995,
+"e": 53.433,
+"emph": true,
+"line": 13
+},
+{
+"w": "In",
+"s": 53.688,
+"e": 53.788,
+"emph": false,
+"line": 14
+},
+{
+"w": "2022,",
+"s": 53.788,
+"e": 54.588,
+"emph": false,
+"line": 14
+},
+{
+"w": "researchers",
+"s": 54.663,
+"e": 55.288,
+"emph": false,
+"line": 14
+},
+{
+"w": "in",
+"s": 55.288,
+"e": 55.45,
+"emph": false,
+"line": 14
+},
+{
+"w": "Spain",
+"s": 55.45,
+"e": 55.875,
+"emph": false,
+"line": 14
+},
+{
+"w": "read",
+"s": 55.875,
+"e": 56.075,
+"emph": false,
+"line": 14
+},
+{
+"w": "its",
+"s": 56.075,
+"e": 56.263,
+"emph": false,
+"line": 14
+},
+{
+"w": "DNA,",
+"s": 56.263,
+"e": 56.813,
+"emph": false,
+"line": 14
+},
+{
+"w": "and",
+"s": 56.888,
+"e": 57.013,
+"emph": false,
+"line": 14
+},
+{
+"w": "found",
+"s": 57.013,
+"e": 57.325,
+"emph": false,
+"line": 14
+},
+{
+"w": "extra",
+"s": 57.325,
+"e": 57.738,
+"emph": true,
+"line": 14
+},
+{
+"w": "copies",
+"s": 57.738,
+"e": 58.175,
+"emph": true,
+"line": 14
+},
+{
+"w": "of",
+"s": 58.175,
+"e": 58.3,
+"emph": false,
+"line": 14
+},
+{
+"w": "genes",
+"s": 58.3,
+"e": 58.713,
+"emph": false,
+"line": 14
+},
+{
+"w": "that",
+"s": 58.713,
+"e": 58.863,
+"emph": false,
+"line": 14
+},
+{
+"w": "repair",
+"s": 58.863,
+"e": 59.238,
+"emph": false,
+"line": 14
+},
+{
+"w": "it.",
+"s": 59.238,
+"e": 59.38,
+"emph": false,
+"line": 14
+},
+{
+"w": "So",
+"s": 59.681,
+"e": 59.868,
+"emph": false,
+"line": 15
+},
+{
+"w": "somewhere",
+"s": 59.868,
+"e": 60.28,
+"emph": false,
+"line": 15
+},
+{
+"w": "out",
+"s": 60.28,
+"e": 60.48,
+"emph": false,
+"line": 15
+},
+{
+"w": "there",
+"s": 60.48,
+"e": 60.681,
+"emph": false,
+"line": 15
+},
+{
+"w": "right",
+"s": 60.681,
+"e": 60.956,
+"emph": false,
+"line": 15
+},
+{
+"w": "now...",
+"s": 60.956,
+"e": 61.38,
+"emph": false,
+"line": 15
+},
+{
+"w": "a",
+"s": 61.53,
+"e": 61.643,
+"emph": false,
+"line": 15
+},
+{
+"w": "jellyfish",
+"s": 61.643,
+"e": 62.206,
+"emph": false,
+"line": 15
+},
+{
+"w": "is",
+"s": 62.206,
+"e": 62.331,
+"emph": false,
+"line": 15
+},
+{
+"w": "starting",
+"s": 62.331,
+"e": 62.78,
+"emph": false,
+"line": 15
+},
+{
+"w": "its",
+"s": 62.78,
+"e": 62.931,
+"emph": false,
+"line": 15
+},
+{
+"w": "eleventh",
+"s": 62.931,
+"e": 63.393,
+"emph": true,
+"line": 15
+},
+{
+"w": "childhood.",
+"s": 63.393,
+"e": 64.015,
+"emph": true,
+"line": 15
+}
+]

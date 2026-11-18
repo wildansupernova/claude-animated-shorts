@@ -1,0 +1,17 @@
+# speed | pause after (s) | text
+1.02 | 0.30 | This jellyfish doesn't die of *old* *age*... it just *starts* *over*.
+1.14 | 0.08 | Meet the *immortal* *jellyfish*. It's smaller than your pinky nail.
+1.12 | 0.06 | Normally, a jellyfish's life only goes *one* *way*.
+1.16 | 0.10 | A tiny polyp, stuck to a rock, buds off a baby jellyfish. It grows up... and then, that's *it*.
+1.06 | 0.06 | But starve this one, hurt it, or just let it get *old*...
+1.12 | 0.10 | and it *shrinks*. Its tentacles pull in. It sinks to the bottom... and turns into a *blob*.
+1.12 | 0.10 | In a couple of days, the blob grows roots... and becomes a *baby* polyp again.
+1.08 | 0.16 | Then it buds brand new jellyfish. Life cycle: *reset*.
+1.08 | 0.12 | It's like a butterfly crawling back into its cocoon... and coming out a *caterpillar*.
+1.14 | 0.08 | The trick? Its cells can switch *jobs*. A skin cell can turn into a completely different kind of cell.
+1.14 | 0.10 | In Japan, scientist Shin Kubota watched one immortal jellyfish do this *ten* *times*... in under two years.
+1.08 | 0.12 | Luckily, it never dies of old age.
+1.00 | 0.18 | Unluckily... it's still a *snack*.
+1.14 | 0.08 | And it's spreading. Scientists think it hitched rides around the world in ships' *ballast* *water*.
+1.14 | 0.10 | In {2022,|twenty twenty-two,} researchers in Spain read its DNA, and found *extra* *copies* of genes that repair it.
+1.00 | 0.00 | So somewhere out there right now... a jellyfish is starting its *eleventh* *childhood*.
