@@ -1,0 +1,254 @@
+[
+ {
+  "ch": 0,
+  "id": "H1",
+  "say": "Iron Man is coming back to Marvel. As the villain.",
+  "s": 0.5,
+  "e": 3.25
+ },
+ {
+  "ch": 0,
+  "id": "H2",
+  "say": "Before Avengers: Doomsday hits theaters on December eighteenth, here's every movie you need, in order.",
+  "s": 3.47,
+  "e": 8.77
+ },
+ {
+  "ch": 1,
+  "id": "X1",
+  "say": "It starts in 2000, with the X-Men.",
+  "s": 9.22,
+  "e": 11.52
+ },
+ {
+  "ch": 1,
+  "id": "X2",
+  "say": "Professor X wants mutants and humans to live in peace. His old friend Magneto wants mutants on top.",
+  "s": 11.74,
+  "e": 17.24
+ },
+ {
+  "ch": 1,
+  "id": "X3",
+  "say": "Remember these faces. Twenty-six years later, they're coming back.",
+  "s": 17.46,
+  "e": 20.66
+ },
+ {
+  "ch": 2,
+  "id": "I1",
+  "say": "In 2008, Tony Stark builds a suit of armor in a cave, and Marvel builds a whole universe around him.",
+  "s": 21.11,
+  "e": 26.91
+ },
+ {
+  "ch": 2,
+  "id": "I2",
+  "say": "A super soldier wakes up from the ice. A god of thunder falls from the sky.",
+  "s": 27.13,
+  "e": 31.18
+ },
+ {
+  "ch": 2,
+  "id": "I3",
+  "say": "And in 2012, they team up as the Avengers, to stop Thor's brother Loki and an alien army over New York.",
+  "s": 31.4,
+  "e": 37.2
+ },
+ {
+  "ch": 3,
+  "id": "T1",
+  "say": "Then [Thanos](/\u03b8\u02c8\u0251nOs/) collects all six Infinity Stones, snaps his fingers, and half of all life turns to dust.",
+  "s": 37.65,
+  "e": 43.2
+ },
+ {
+  "ch": 4,
+  "id": "E1",
+  "say": "In Endgame, the survivors travel back in time, steal the stones, and bring everyone home.",
+  "s": 43.65,
+  "e": 48.425
+ },
+ {
+  "ch": 4,
+  "id": "E2",
+  "say": "Tony snaps [Thanos](/\u03b8\u02c8\u0251nOs/) away, and dies a hero. Steve Rogers stays in the past, to finally have that dance with Peggy Carter.",
+  "s": 48.645,
+  "e": 55.145
+ },
+ {
+  "ch": 4,
+  "id": "E3",
+  "say": "But during the time heist, the 2012 Loki grabs the Tesseract, and vanishes.",
+  "s": 55.365,
+  "e": 59.765
+ },
+ {
+  "ch": 5,
+  "id": "L1",
+  "say": "He gets arrested by the TVA, an office that deletes any timeline that goes off script.",
+  "s": 60.215,
+  "e": 64.79
+ },
+ {
+  "ch": 5,
+  "id": "L2",
+  "say": "At the end of time, his variant Sylvie kills the man in charge, and one timeline explodes into infinite universes.",
+  "s": 65.01,
+  "e": 71.26
+ },
+ {
+  "ch": 5,
+  "id": "L3",
+  "say": "To save them all, Loki takes a throne at the end of time, and holds the multiverse together.",
+  "s": 71.48,
+  "e": 76.205
+ },
+ {
+  "ch": 6,
+  "id": "N1",
+  "say": "In No Way Home, a spell goes wrong. Villains from other universes pour in, along with two more Spider-Men.",
+  "s": 76.655,
+  "e": 82.155
+ },
+ {
+  "ch": 6,
+  "id": "N2",
+  "say": "To close the door, the whole world forgets Peter Parker ever existed.",
+  "s": 82.375,
+  "e": 86.1
+ },
+ {
+  "ch": 7,
+  "id": "M1",
+  "say": "Doctor Strange learns the scariest word in the multiverse: incursion. When two universes collide, both are destroyed.",
+  "s": 86.55,
+  "e": 92.875
+ },
+ {
+  "ch": 8,
+  "id": "W1",
+  "say": "[Shuri](/\u0283\u02c8\u028a\u0279i/) becomes the new Black Panther, and meets [Namor](/n\u02c8Am\u0254\u0279/), king of an underwater empire.",
+  "s": 93.325,
+  "e": 97.725
+ },
+ {
+  "ch": 9,
+  "id": "Q1",
+  "say": "Ant-Man and his daughter Cassie get pulled into the Quantum Realm, and fight an exiled conqueror.",
+  "s": 98.175,
+  "e": 102.95
+ },
+ {
+  "ch": 10,
+  "id": "V1",
+  "say": "In The Marvels, Monica [Rambeau](/\u0279\u00e6mb\u02c8O/) gets stranded in another universe, and wakes up next to Beast, from the X-Men.",
+  "s": 103.4,
+  "e": 109.125
+ },
+ {
+  "ch": 11,
+  "id": "D1",
+  "say": "Over in the old X-Men universe, Deadpool learns his world is dying, because its Wolverine is dead.",
+  "s": 109.575,
+  "e": 114.9
+ },
+ {
+  "ch": 11,
+  "id": "D2",
+  "say": "So he drags in the worst Wolverine in the multiverse, survives the Void, where forgotten heroes like Gambit end up, and saves his world.",
+  "s": 115.12,
+  "e": 122.095
+ },
+ {
+  "ch": 12,
+  "id": "B1",
+  "say": "Sam Wilson is Captain America now. He stops a giant Red Hulk, who happens to be the President, and decides to rebuild the Avengers.",
+  "s": 122.545,
+  "e": 129.895
+ },
+ {
+  "ch": 13,
+  "id": "U1",
+  "say": "Meanwhile, Yelena, Bucky and a team of misfits save New York from Bob, a hero with the power of a million exploding suns, and a darkness that turns people into shadows.",
+  "s": 130.345,
+  "e": 139.345
+ },
+ {
+  "ch": 13,
+  "id": "U2",
+  "say": "Fun fact: the asterisk in [Thunderbolts*](/\u03b8\u02c8\u028cnd\u0259\u0279b\u02ccOlts/) is real. It stands for, The New Avengers.",
+  "s": 139.565,
+  "e": 143.965
+ },
+ {
+  "ch": 13,
+  "id": "U3",
+  "say": "Fourteen months later, a ship from another universe arrives, with a big four on the side.",
+  "s": 144.185,
+  "e": 148.71
+ },
+ {
+  "ch": 14,
+  "id": "F1",
+  "say": "That's the Fantastic Four, from Earth [828](/\u02c8At tw\u02c8\u025bnti \u02c8At/), a retro-future world.",
+  "s": 149.16,
+  "e": 153.135
+ },
+ {
+  "ch": 14,
+  "id": "F2",
+  "say": "They beat [Galactus](/\u0261\u0259l\u02c8\u00e6kt\u0259s/), a planet eater who wanted their baby son, Franklin.",
+  "s": 153.355,
+  "e": 157.155
+ },
+ {
+  "ch": 14,
+  "id": "F3",
+  "say": "But four years later, someone comes to visit little Franklin. Someone in a metal mask.",
+  "s": 157.375,
+  "e": 161.875
+ },
+ {
+  "ch": 15,
+  "id": "S1",
+  "say": "And in Brand New Day, a forgotten Peter Parker faces a grieving young telepath named Jean Grey, and talks a raging Hulk back down.",
+  "s": 162.325,
+  "e": 169.325
+ },
+ {
+  "ch": 16,
+  "id": "Z1",
+  "say": "Which brings us to Doomsday. The multiverse is collapsing, and Doctor Doom is standing right in the middle of it.",
+  "s": 169.775,
+  "e": 175.275
+ },
+ {
+  "ch": 16,
+  "id": "Z2",
+  "say": "Heroes from three universes, the Avengers, the Fantastic Four, and the X-Men, have to fight side by side.",
+  "s": 175.495,
+  "e": 181.145
+ },
+ {
+  "ch": 16,
+  "id": "Z3",
+  "say": "Steve Rogers is back. Thor is back. Professor X and Magneto are back.",
+  "s": 181.365,
+  "e": 185.215
+ },
+ {
+  "ch": 16,
+  "id": "Z4",
+  "say": "And under Doom's mask? Robert Downey Junior. The man who started it all, as Iron Man.",
+  "s": 185.435,
+  "e": 190.11
+ },
+ {
+  "ch": 16,
+  "id": "Z5",
+  "say": "Avengers: Doomsday. December eighteenth.",
+  "s": 190.33,
+  "e": 192.705
+ }
+]
