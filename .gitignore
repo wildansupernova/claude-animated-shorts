@@ -1,0 +1,2 @@
+# rendered videos are too large for git; they live in shorts/<name>/out locally
+shorts/*/out/*.mp4
