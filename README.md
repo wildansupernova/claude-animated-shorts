@@ -17,6 +17,7 @@ Proven on **The Bridge That Fell for a Song**, a 67 s short about the 1831 Broug
 | `references/reports/` | Seven measured reports: motion, depth, textures, characters, lighting, outlines, grade |
 | `references/frames/` | 38 full-size reference frames (540x960) to compare your frames against |
 | `references/sheets/` | 20 contact sheets, one per reference short, 60 frames each (1,200 frames) |
+| `examples/birthday-bet/` | A second short built with the skill: the birthday paradox as a bet, with four TTS voices, burned-in captions with speaker tags, on-screen stakes and a counter, voice-timed cues and a CPU-only Linux render |
 
 ## Install
 1. Copy this folder to `~/.claude/skills/cartoon-3d-short/` (clone it there, or download the ZIP).
