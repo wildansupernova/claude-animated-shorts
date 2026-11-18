@@ -299,8 +299,8 @@ add(B(17), TOTAL, [LAB, { d: 1, draw: (g, f) => {
   rr(g, 120, 1000, 840, 40, 8, "#8a9aa8", 5); rr(g, 160, 1040, 30, 200, 6, "#7a8a98", 4); rr(g, 890, 1040, 30, 200, 6, "#7a8a98", 4);
   const glow = smooth(ramp(f, fLab - 8, fLab + 10));
   petri(g, 330, 960, 0.9, f, glow); petri(g, 690, 960, 0.9, f + 20, glow);
-  who(g, SCI, 160, 1900, 900, f, 61, { expr: "smile", facing: 1 });
-  who(g, { ...SCI, hair: "#c8763a", skin: "#f5d2b0", glasses: false }, 900, 1900, 900, f, 62, { expr: f > fLab ? "grin" : "smile", facing: -1 });
+  who(g, SCI, 160, 2020, 900, f, 61, { expr: "smile", facing: 1 });
+  who(g, { ...SCI, hair: "#c8763a", skin: "#f5d2b0", glasses: false }, 900, 2020, 900, f, 62, { expr: f > fLab ? "grin" : "smile", facing: -1 });
   if (f > fPromise2 - 6) {
     const k = easeOut(ramp(f, fPromise2 - 6, fPromise2 + 20));
     glowAt(g, 510, 600 - 120 * k, 360, 0.5 * k);
