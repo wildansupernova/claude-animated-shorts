@@ -1,6 +1,6 @@
-# Posting sheet: 5 ocean fun-fact shorts
+# Posting sheet: 6 ocean fun-fact shorts
 
-All five: 1080x1920, 30 fps, 60-72 s, H.264 + AAC, -14 LUFS (YouTube Shorts / TikTok / Reels ready).
+All six: 1080x1920, 30 fps, 60-72 s, H.264 + AAC, -14 LUFS (YouTube Shorts / TikTok / Reels ready).
 Voice: Kokoro TTS `am_puck` (AI voice; disclose as AI-generated where the platform asks). Captions are burned in.
 
 ## 1. The Navy That Hunted Fish Farts (`final/01_herring_fish_farts.mp4`, 69 s)
@@ -37,3 +37,13 @@ Voice: Kokoro TTS `am_puck` (AI voice; disclose as AI-generated where the platfo
 - **Description:** Inky lived at the National Aquarium of New Zealand. One night the lid was left open a crack. He squeezed out, crossed the floor, and poured himself into a 6-inch drain that runs 50 m to the ocean. Octopuses have no bones, only a beak. His tank mate Blotchy stayed put.
 - **Hashtags:** #octopus #inky #animals #ocean #funfacts #escape #didyouknow #shorts
 - **Sources:** National Geographic; NPR; Time; Live Science; Irish Times; Boston Globe.
+
+## 6. The Jellyfish That Starts Over (`out/jelly/jelly_final.mp4`, 65 s)
+- **Hook:** "This jellyfish doesn't die of old age... it just starts over." (viral-hooks Cat 08 negation; see `videos/jelly/SCRIPT.md`)
+- **Title:** This Jellyfish Never Dies of Old Age. It Starts Over. 🪼
+- **YouTube title (≤100 chars):** This Jellyfish Never Dies of Old Age. It Starts Over. 🪼 #shorts
+- **Description:** Turritopsis dohrnii, the "immortal jellyfish", is smaller than your pinky nail. Starve it, hurt it or let it get old, and it shrinks into a blob, grows roots and turns back into a baby polyp, which buds brand-new jellyfish. Its cells switch jobs (transdifferentiation). Shin Kubota in Japan watched one restart its life 10 times in under two years, and in 2022 researchers in Spain found extra copies of its DNA-repair genes. It still gets eaten, though.
+- **Comment question (Hook 3):** If you could turn back into a baby once, would you? 👇
+- **Hashtags:** #immortaljellyfish #jellyfish #ocean #science #biology #funfacts #didyouknow #shorts
+- **Sources:** Matsumoto, Piraino & Miglietta 2019 (G3); Piraino et al. 1996 (Biological Bulletin); Kubota 2011 (Biogeography 13); Miglietta & Lessios 2009 (Biological Invasions); Pascual-Torner et al. 2022 (PNAS); AMNH.
+

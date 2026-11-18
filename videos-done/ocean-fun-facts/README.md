@@ -1,6 +1,6 @@
 # Ocean fun-fact shorts (2.5D canvas pipeline)
 
-Five 60-72 s vertical (1080x1920, 30 fps) animated fact shorts with an expressive AI voice-over, word-by-word captions,
+Six 60-72 s vertical (1080x1920, 30 fps) animated fact shorts with an expressive AI voice-over, word-by-word captions,
 synthesized SFX and an original procedural score. This project is a fast CPU-only variant of the repo's cartoon short
 skill: instead of rendering a full three.js world per frame (over 30 s/frame without a GPU), every frame is painted on a
 Canvas2D in Remotion: layered painted sets with parallax, the skill's toon characters (`src/lib/toon.ts`), cartoon FX,
@@ -13,6 +13,7 @@ camera glides/push-ins/kicks and crossfades. A full short renders in about 8-15 
 | 3 | `videos/hagfish` | 2017: a truck spills 7,500 lb of hagfish onto Highway 101, slime everywhere |
 | 4 | `videos/eels` | Humboldt's eels vs horses (1800), proven by Kenneth Catania (2016-17) |
 | 5 | `videos/inky` | Inky the octopus escapes his aquarium down a drainpipe to the sea (2016) |
+| 6 | `videos/jelly` | The immortal jellyfish (*Turritopsis dohrnii*) turns back into a baby polyp instead of dying of old age |
 
 Each `videos/<name>/` holds `SCRIPT.md` (facts + sources), `voice/lines.txt` (per-line speed/pause, emphasis markup),
 `voice/voice.wav` + `voice/words.json` (word timings) and `cues.py` (SFX events, music sections). The pictures live in

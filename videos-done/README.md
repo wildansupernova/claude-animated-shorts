@@ -12,7 +12,7 @@ characters, story, synthesized score and SFX, and Kokoro TTS voices (AI-generate
 | `forest-snitch/` | **The Forest Snitch**: how nature exposes buried bodies (forensic botany) | ~63 s, 30 fps | `claude/amazing-albattani-rvlgbr` | `README.md`, `SCRIPT.md` |
 | `fritz-haber/` | **Bread and Bombs from Thin Air**: Fritz Haber, fertilizer and gas | 68 s, 30 fps | `claude/fritz-haber-short` (same commit as `claude/adoring-tesla-hqjljy`) | `NOTES.md`, `SCRIPT.md` |
 | `henrietta-lacks/` | **The Woman Who Never Stopped**: Henrietta Lacks and the HeLa cells | 60 s, 30 fps | `claude/henrietta-lacks-short` | `NOTES.md`, `SCRIPT.md` |
-| `ocean-fun-facts/` | Five ocean fun-fact shorts in one 2.5D Canvas project: **The Navy That Hunted Fish Farts** (69 s), **It Rained Whale** (71 s), **The Snot Highway** (72 s), **The Horses and the Electric Eels** (64 s), **Inky's Great Escape** (60 s) | 60-72 s, 30 fps | `ccr-9959e9ae-j7k2gj` | `README.md`, `POSTING.md`, `videos/<name>/SCRIPT.md` |
+| `ocean-fun-facts/` | Six ocean fun-fact shorts in one 2.5D Canvas project: **The Navy That Hunted Fish Farts** (69 s), **It Rained Whale** (71 s), **The Snot Highway** (72 s), **The Horses and the Electric Eels** (64 s), **Inky's Great Escape** (60 s), **The Jellyfish That Starts Over** (65 s, immortal jellyfish, hook picked with the viral-hooks skill) | 60-72 s, 30 fps | `ccr-9959e9ae-j7k2gj`; jellyfish from `claude/friendly-dirac-7nmz88` | `README.md`, `POSTING.md`, `videos/<name>/SCRIPT.md` |
 
 `claude/keen-ride-9bfoie` is not a video (a financial-freedom simulator page), so it is not included here.
 
@@ -26,7 +26,7 @@ GitHub's file limits and were git-ignored, so rebuild them from source with each
   (`npm install`, then the steps in their README). `fritz-haber`, `henrietta-lacks` and `forest-snitch` hold the
   source to drop into a Remotion project as `src/videos/<name>/`, registered in `Root.tsx`. The `henrietta-lacks` and
   `forest-snitch` notes describe this, and `fritz-haber` is set up the same way as `henrietta-lacks` (`Haber.tsx`).
-- **`ocean-fun-facts`** is a separate, faster Canvas2D project (8-15 min per short on 4 CPU cores). Its five shorts
+- **`ocean-fun-facts`** is a separate, faster Canvas2D project (8-15 min per short on 4 CPU cores). Its six shorts
   share `src/lib/`, `audio/` and `scripts/`, so they stay together in one folder.
 - **Voice tracks** are committed for every video except `forest-snitch`. Its `voice.wav` was not saved, so regenerate
   it with `scripts/tts.py am_michael 1.26`. `words.json` holds the timings the cut was made to, and a fresh Kokoro run
