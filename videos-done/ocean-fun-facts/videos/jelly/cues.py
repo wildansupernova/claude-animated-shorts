@@ -40,8 +40,8 @@ EVENTS = [
     (W("brand") + 0.1, "bubbles", {"seed": 3, "dur": 0.8, "rate": 30}, -10),
     (W("reset.") - 0.35, "tape_whirr", {"seed": 2, "dur": 0.5}, -8), (W("reset.") - 0.05, "impact", {"seed": 2, "f0": 70, "dur": 0.6, "crack": 0.4}, -6), (W("reset.") + 0.05, "ding", {"seed": 2}, -6),
     # butterfly -> cocoon -> caterpillar
-    (W("butterfly") - 0.2, "flaps", {"seed": 1, "dur": 1.6}, -10), (W("cocoon...") + 0.1, "slime", {"seed": 4, "dur": 0.4}, -10),
-    (W("cocoon...") + 0.4, "tape_whirr", {"seed": 3, "dur": 0.6}, -12), (W("caterpillar."), "boing", {"seed": 1, "f0": 160}, -6), (W("caterpillar.") + 0.35, "pop", {"seed": 9, "f0": 600}, -10),
+    (W("butterfly") - 0.2, "flaps", {"seed": 1, "dur": 1.6}, -10), (W("chrysalis...") + 0.1, "slime", {"seed": 4, "dur": 0.4}, -10),
+    (W("chrysalis...") + 0.4, "tape_whirr", {"seed": 3, "dur": 0.6}, -12), (W("caterpillar."), "boing", {"seed": 1, "f0": 160}, -6), (W("caterpillar.") + 0.35, "pop", {"seed": 9, "f0": 600}, -10),
     # cells switch jobs
     (W("trick?"), "sparkle", {"seed": 4}, -10), (W("switch") - 0.05, "whoosh", {"seed": 4, "dur": 0.4, "peak": 0.5}, -10), (W("jobs."), "pop", {"seed": 10, "f0": 900}, -8),
     (W("skin"), "whoosh", {"seed": 5, "dur": 0.5}, -12), (W("different") - 0.1, "zap", {"seed": 1, "dur": 0.6}, -8), (W("cell.") + 0.05, "ding", {"seed": 3, "f": 1318.5}, -8),

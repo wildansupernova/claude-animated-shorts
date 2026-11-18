@@ -79,7 +79,7 @@ const fStarve = w("starve"), fHurt = w("hurt"), fOld1 = w("old", 0, 4);
 const fShrinks = w("shrinks."), fTentacles = w("tentacles"), fIn = w("in", 0, 5), fSinks = w("sinks"), fBottom = w("bottom..."), fBlob = w("blob", 0, 5);
 const fCouple = w("couple"), fRoots = w("roots..."), fBecomes = w("becomes"), fBaby2 = w("baby", 0, 6), fAgain = w("again.");
 const fBuds2 = w("buds", 0, 7), fBrand = w("brand"), fLife = w("life", 0, 7), fReset = w("reset.");
-const fButterfly = w("butterfly"), fCrawling = w("crawling"), fCocoon = w("cocoon..."), fComing = w("coming"), fCaterpillar = w("caterpillar.");
+const fButterfly = w("butterfly"), fCrawling = w("crawling"), fCocoon = w("chrysalis..."), fComing = w("coming"), fCaterpillar = w("caterpillar.");
 const fTrick = w("trick?"), fSwitch = w("switch"), fJobs = w("jobs."), fSkin = w("skin"), fDifferent = w("different"), fCell2 = w("cell.");
 const fJapan = w("japan,"), fKubota = w("kubota"), fWatched = w("watched"), fTen = w("ten"), fTimes = w("times..."), fTwo = w("two", 0, 10), fYears = w("years.");
 const fLuckily = w("luckily,"), fNever = w("never", 0, 11);
@@ -134,7 +134,7 @@ add(B(2), B(3), [SEA, SNOW, { d: 1, draw: (g, f) => {
 // 4 THE NORMAL LIFE: polyp on a rock buds a baby jelly -> it grows up -> THE END (one panning shot)
 const babyPath = (f: number): [number, number, number] => {
   const u = clamp01((f - fBuds1 - 10) / Math.max(10, fItEnd - fBuds1 - 10));
-  return [lerp(440, 1560, smooth(u)), lerp(780, 640, smooth(u)) + Math.sin(f * 0.1) * 12, lerp(30, 160, easeOut(ramp(f, fGrows - 4, fGrows + 30)))];
+  return [lerp(450, 1560, smooth(u)), lerp(780, 640, smooth(u)) + Math.sin(f * 0.1) * 12, lerp(56, 160, easeOut(ramp(f, fGrows - 4, fGrows + 30)))];
 };
 add(B(3), B(4), [{ key: "sea4", d: 0.35, bounds: WIDE, res: 0.5, paint: (g) => { underwater(g, WIDE[0], WIDE[1], WIDE[2], WIDE[3], "#62c4ea", "#0f4478", 0.16, 7); } }, SNOW,
   bedLayer("bed4", 1190, "#e2c896", 6, WIDE), { d: 1, draw: (g, f) => {
@@ -240,13 +240,13 @@ add(B(9), B(10), [SCOPE, { d: 1, draw: (g, f) => {
     cell(g, f + seed * 7, 120, sw < 0.5 ? ca : cb, sw > 0 && sw < 1 ? "dizzy" : "smile", 0, seed);
     badge(g, x, y + 190, sw < 0.5 ? a : b, sw < 0.5 ? ca : cb, sw);
   };
-  g.save(); g.translate(210, 640); side(0, 0, 0, "MUSCLE", "GUT", "#e86a5a", "#f2a23a", 2); g.restore();
-  g.save(); g.translate(870, 640); side(0, 0, 0, "GUT", "MUSCLE", "#f2a23a", "#e86a5a", 4); g.restore();
+  g.save(); g.translate(255, 640); side(0, 0, 0, "MUSCLE", "GUT", "#e86a5a", "#f2a23a", 2); g.restore();
+  g.save(); g.translate(825, 640); side(0, 0, 0, "GUT", "MUSCLE", "#f2a23a", "#e86a5a", 4); g.restore();
   g.save(); g.translate(540, 820);
   cell(g, f, 150, neu > 0.5 ? "#a98ae8" : "#f4b88a", f > fDifferent - 4 && neu < 1 ? "shock" : neu >= 1 ? "proud" : "smile", neu, 6);
-  badge(g, 0, 260, neu < 0.5 ? "SKIN" : "NERVE", neu < 0.5 ? "#e8905a" : "#7a5ac9", neu);
+  badge(g, 0, 260, neu < 0.5 ? "SKIN" : "NEW JOB", neu < 0.5 ? "#e8905a" : "#7a5ac9", neu);
   g.restore();
-} }], camKeys([{ f: B(9), c: { z: 1.0, y: 900 }, creep: 0.0012 }, { f: fSkin, c: { z: 1.3, x: 540, y: 950 }, dur: 16 }]), { bg: "#14101e" });
+} }], camKeys([{ f: B(9), c: { z: 1.0, y: 900 }, creep: 0.0012 }, { f: fSkin, c: { z: 1.2, x: 540, y: 950 }, dur: 16 }]), { bg: "#14101e" });
 
 // 11 IN JAPAN, SHIN KUBOTA WATCHED ONE DO THIS TEN TIMES IN UNDER TWO YEARS
 const LAB: Layer = { key: "lab", d: 0.5, bounds: BIG, res: 0.8, paint: (g) => {
@@ -270,7 +270,7 @@ add(B(10), B(11), [LAB, { d: 1, draw: (g, f) => {
   rr(g, 790, 190, 200, 190, 12, "#ffffff", 6); rr(g, 790, 190, 200, 50, 12, "#e8322e", 6);
   g.fillStyle = INKC; g.font = "900 64px CapFont"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(yr, 890, 312);
   who(g, SCIENTIST, 300, 2180, 1000, f, 21, { expr: n >= 10 ? "grin" : n > 4 ? "smile" : "neutral", facing: 1, look: 0.6 });
-} }], camKeys([{ f: B(10), c: { z: 1.0, y: 960 }, creep: 0.0012 }, { f: fTen, c: { z: 1.12, x: 560, y: 820 }, dur: 14 }]), { bg: "#cfe2dc" });
+} }], camKeys([{ f: B(10), c: { z: 1.0, y: 960 }, creep: 0.0012 }, { f: fTen, c: { z: 1.1, x: 560, y: 930 }, dur: 14 }]), { bg: "#cfe2dc" });
 
 // 12 LUCKILY, IT NEVER DIES OF OLD AGE
 add(B(11), B(12), [SEA, SNOW, { d: 1, draw: (g, f) => {
@@ -302,7 +302,15 @@ add(B(13), B(14), [MAPBG, { d: 1, draw: (g, f) => {
     const k = ramp(f, PINS[i].f - 4, PINS[i].f + 6);
     if (k <= 0) continue;
     const [ax, ay] = mapXY(PINS[i - 1].ll[0], PINS[i - 1].ll[1], 40, 300, 1000), [bx, by] = mapXY(PINS[i].ll[0], PINS[i].ll[1], 40, 300, 1000);
-    g.save(); g.setLineDash([14, 12]); line(g, [[ax, ay], [lerp(ax, bx, k), lerp(ay, by, k)]], "#ffffff", 5); g.restore();
+    g.save(); g.setLineDash([14, 12]);
+    if (PINS[i].ll[0] - PINS[i - 1].ll[0] > 180) {
+      // the long way round is over land: go west across the Pacific instead (leave the map's left edge, re-enter on the right)
+      const [ex, ey] = mapXY(-180, 18, 40, 300, 1000), [rx, ry] = mapXY(180, 22, 40, 300, 1000);
+      const k1 = clamp01(k * 2), k2 = clamp01(k * 2 - 1);
+      line(g, [[ax, ay], [lerp(ax, ex, k1), lerp(ay, ey, k1)]], "#ffffff", 5);
+      if (k2 > 0) line(g, [[rx, ry], [lerp(rx, bx, k2), lerp(ry, by, k2)]], "#ffffff", 5);
+    } else line(g, [[ax, ay], [lerp(ax, bx, k), lerp(ay, by, k)]], "#ffffff", 5);
+    g.restore();
   }
   PINS.forEach((p) => { const [x, y] = mapXY(p.ll[0], p.ll[1], 40, 300, 1000); pin(g, x, y, pop(f, p.f - 2, 8) * 0.8); });
   // the ship under the captions

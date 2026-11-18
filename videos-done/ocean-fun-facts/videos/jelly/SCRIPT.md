@@ -1,4 +1,4 @@
-# "The Jellyfish That Starts Over": script v1 (2026-11-18)
+# "The Jellyfish That Starts Over": script v2 (2026-11-18)
 Working title from the user: *The Immortal Jellyfish That Can Age Backwards to Reset Its Entire Lifespan*.
 Format: ~63 s vertical short, sixth video of the ocean fun-fact series (same 2.5D canvas pipeline, voice and captions).
 Beats: hook (never dies of old age, starts over) → meet it (smaller than a pinky nail) → the normal one-way jellyfish
@@ -59,9 +59,9 @@ skill's rule: one stop-scroll hook plus one retention hook from a different cate
 6. and it shrinks. Its tentacles pull in. It sinks to the bottom... and turns into a blob.
 7. In a couple of days, the blob grows roots... and becomes a baby polyp again.
 8. Then it buds brand new jellyfish. Life cycle: reset.
-9. It's like a butterfly crawling back into its cocoon... and coming out a caterpillar.
+9. It's like a butterfly crawling back into its chrysalis... and coming out a caterpillar.
 10. The trick? Its cells can switch jobs. A skin cell can turn into a completely different kind of cell.
-11. In Japan, scientist Shin Kubota watched one immortal jellyfish do this ten times... in under two years.
+11. In Japan, scientist Shin Kubota watched one jellyfish and its clones do this ten times... in under two years.
 12. Luckily, it never dies of old age.
 13. Unluckily... it's still a snack.
 14. And it's spreading. Scientists think it hitched rides around the world in ships' ballast water.
@@ -76,11 +76,22 @@ skill's rule: one stop-scroll hook plus one retention hook from a different cate
 6. It shrinks, pulls in its tentacles, sinks, squashes into a blob (kick).
 7. The blob sprouts roots and a polyp grows up out of it.
 8. The polyp buds three new baby jellies; a RESET stamp with a circular arrow.
-9. Analogy: a butterfly flies into a cocoon; a confused caterpillar comes out.
-10. Microscope view: cell characters wearing job hats; the skin cell swaps its hat.
+9. Analogy: a butterfly flies into a (green, gold-dotted) chrysalis; a confused caterpillar comes out.
+10. Microscope view: cell characters with job badges that flip; the SKIN cell changes shape and its badge becomes NEW JOB.
 11. Lab: Kubota at a dish, tally 1 → 10 and a calendar 2009 → 2011.
 12. Halo and sparkles: never dies of old age.
 13. A fish swallows it (kick).
 14. World map: a cargo ship carries jellies in its ballast tank; dots pop on Italy, Spain, Florida, Panama, Japan.
 15. A DNA helix, glowing extra gene copies, a little wrench; "2022" tag.
 16. A baby polyp in a party hat with a cake and candle "11".
+
+## Review notes (independent fact + visual check, v1 → v2)
+- No factual errors found. Changes made for precision: butterflies form a **chrysalis** (moths spin cocoons); Kubota
+  followed one founder jellyfish **and its clones** (each reset used a new medusa budded from the previous polyp
+  colony, 18 May 2009 to 31 Mar 2011); the transdifferentiation card says **NEW JOB** instead of NERVE (the papers show
+  outer-skin cells becoming polyp tissue, not specifically nerve cells).
+- Kept as is: "doesn't die of old age" / "never dies of old age". The evidence is from the lab (Piraino et al. 1996:
+  every mature medusa tested reverted), which is how the species is described everywhere ("biologically immortal").
+- Visual fixes: microscope zoom no longer crops the side cells; the lab push-in keeps the scientist's face in frame;
+  the budding baby jellyfish is bigger; the Panama → Japan route crosses the Pacific instead of Africa and Asia.
+

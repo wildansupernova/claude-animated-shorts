@@ -163,8 +163,8 @@ export const polyp = (g: Ctx, o: PolypOpts = {}) => {
   buds.forEach((b, i) => {
     if (b <= 0.02) return;
     const p = stalk[Math.floor((stalk.length - 1) * (0.35 + 0.18 * i))], side = i % 2 ? 1 : -1;
-    g.save(); g.translate(p[0] + side * (22 + 30 * b), p[1] - 10 * b); g.rotate(side * 0.5);
-    jelly(g, { f, R: 34 * b, tent: 0.45, pulse: 0.3, expr: "baby", seed: seed + i * 7 });
+    g.save(); g.translate(p[0] + side * (26 + 52 * b), p[1] - 20 * b); g.rotate(side * 0.4);
+    jelly(g, { f, R: 56 * b, tent: 0.55, pulse: 0.3, expr: "baby", seed: seed + i * 7 });
     g.restore();
   });
   // hydranth (head): a cup with a tentacle crown
@@ -239,8 +239,11 @@ export const cocoon = (g: Ctx, f: number, s = 1, wiggle = 0) => {
   g.save(); g.scale(s, s); g.rotate(Math.sin(f * 0.5) * 0.12 * wiggle);
   line(g, [[0, -40], [0, -170]], "#d8d0c0", 5);
   const pts = smoothClosed([[0, -40], [55, 20], [62, 120], [30, 220], [0, 250], [-30, 220], [-62, 120], [-55, 20]], 5);
-  path(g, pts); g.fillStyle = lg(g, -60, 0, 60, 0, [[0, "#c9b36a"], [1, "#8a7a3a"]]); g.fill(); g.lineWidth = 6; g.strokeStyle = INKC; g.stroke();
-  for (let i = 0; i < 6; i++) { const y = 10 + i * 36; line(g, [[-50 + i * 4, y], [50 - i * 4, y + 12]], rgba(INKC, 0.35), 4); }
+  path(g, pts); g.fillStyle = lg(g, -60, 0, 60, 0, [[0, "#9ee0a8"], [0.6, "#5ab87a"], [1, "#3a8a5a"]]); g.fill(); g.lineWidth = 6; g.strokeStyle = INKC; g.stroke();
+  // gold band and dots of a butterfly chrysalis
+  g.beginPath(); g.moveTo(-58, 70); g.quadraticCurveTo(0, 90, 58, 70); g.lineWidth = 7; g.strokeStyle = "#e8b830"; g.stroke();
+  for (const [dx, dy] of [[-30, 20], [30, 22], [-18, 150], [18, 152], [0, 200]]) ell(g, dx, dy, 7, 7, "#f2c840", 2);
+  ell(g, -24, 60, 12, 40, "rgba(255,255,255,0.35)", 0, 0.2);
   g.restore();
 };
 export const caterpillar = (g: Ctx, f: number, s = 1, expr: Face = "confused") => {
@@ -282,7 +285,10 @@ export const badge = (g: Ctx, x: number, y: number, text: string, col: string, f
   const sx = Math.abs(Math.cos(flip * Math.PI)) || 0.02;
   g.scale(sx, 1);
   rr(g, -110, -40, 220, 80, 16, col, 6);
-  g.fillStyle = "#ffffff"; g.font = "900 46px CapFont"; g.textAlign = "center"; g.textBaseline = "middle";
+  g.font = "900 46px CapFont";
+  const tw = g.measureText(text).width;
+  if (tw > 186) g.font = `900 ${Math.floor((46 * 186) / tw)}px CapFont`;
+  g.fillStyle = "#ffffff"; g.textAlign = "center"; g.textBaseline = "middle";
   g.lineWidth = 8; g.strokeStyle = INKC; g.strokeText(text, 0, 3); g.fillText(text, 0, 3);
   g.restore();
 };
