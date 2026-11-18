@@ -1,0 +1,132 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Inter Display Black,120,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,-1,0,0,0,100,100,1,0,1,10,5,5,40,40,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.01,0:00:00.34,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}ONE {\c&H00FFFFFF&}MAN
+Dialogue: 0,0:00:00.34,0:00:01.08,Cap,,0,0,0,,{\pos(540,1300)}{\fscx74\fscy74\t(0,90,\fscx98\fscy98)\t(90,140,\fscx95\fscy95)}{\c&H00FFFFFF&}SAVED {\c&H004AD8FF&}BILLIONS
+Dialogue: 0,0:00:01.08,0:00:01.53,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}OF {\c&H00FFFFFF&}LIVES
+Dialogue: 0,0:00:01.53,0:00:01.89,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}AND {\c&H00FFFFFF&}HELPED
+Dialogue: 0,0:00:01.89,0:00:02.67,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}KILL {\c&H004AD8FF&}MILLIONS
+Dialogue: 0,0:00:02.67,0:00:03.41,Cap,,0,0,0,,{\pos(540,1300)}{\fscx70\fscy70\t(0,90,\fscx94\fscy94)\t(90,140,\fscx91\fscy91)}{\c&H00FFFFFF&}AND {\c&H00FFFFFF&}BOTH {\c&H00FFFFFF&}TIMES
+Dialogue: 0,0:00:03.41,0:00:03.89,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}HIS {\c&H00FFFFFF&}SECRET
+Dialogue: 0,0:00:03.89,0:00:04.21,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}WEAPON
+Dialogue: 0,0:00:04.21,0:00:04.79,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}WAS {\c&H00FFFFFF&}THE {\c&H004AD8FF&}AIR
+Dialogue: 0,0:00:04.79,0:00:05.94,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}IT'S {\c&H004AD8FF&}1909
+Dialogue: 0,0:00:05.94,0:00:06.43,Cap,,0,0,0,,{\pos(540,1300)}{\fscx72\fscy72\t(0,90,\fscx96\fscy96)\t(90,140,\fscx93\fscy93)}{\c&H00FFFFFF&}AND {\c&H00FFFFFF&}THE {\c&H00FFFFFF&}WORLD
+Dialogue: 0,0:00:06.43,0:00:06.96,Cap,,0,0,0,,{\pos(540,1300)}{\fscx74\fscy74\t(0,90,\fscx99\fscy99)\t(90,140,\fscx96\fscy96)}{\c&H00FFFFFF&}IS {\c&H00FFFFFF&}RUNNING {\c&H00FFFFFF&}OUT
+Dialogue: 0,0:00:06.96,0:00:07.70,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}OF {\c&H004AD8FF&}FERTILIZER
+Dialogue: 0,0:00:07.70,0:00:08.30,Cap,,0,0,0,,{\pos(540,1300)}{\fscx73\fscy73\t(0,90,\fscx97\fscy97)\t(90,140,\fscx94\fscy94)}{\c&H00FFFFFF&}THE {\c&H00FFFFFF&}BEST {\c&H00FFFFFF&}STUFF
+Dialogue: 0,0:00:08.30,0:00:09.17,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}IS {\c&H004AD8FF&}BIRD {\c&H004AD8FF&}POOP
+Dialogue: 0,0:00:09.17,0:00:09.41,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}AND {\c&H00FFFFFF&}IT'S
+Dialogue: 0,0:00:09.41,0:00:10.11,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}SO {\c&H00FFFFFF&}VALUABLE
+Dialogue: 0,0:00:10.11,0:00:10.71,Cap,,0,0,0,,{\pos(540,1300)}{\fscx69\fscy69\t(0,90,\fscx92\fscy92)\t(90,140,\fscx89\fscy89)}{\c&H00FFFFFF&}THAT {\c&H00FFFFFF&}COUNTRIES
+Dialogue: 0,0:00:10.71,0:00:11.07,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}LITERALLY
+Dialogue: 0,0:00:11.07,0:00:11.54,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}GO {\c&H00FFFFFF&}TO {\c&H004AD8FF&}WAR
+Dialogue: 0,0:00:11.54,0:00:11.97,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}OVER {\c&H00FFFFFF&}IT
+Dialogue: 0,0:00:11.97,0:00:12.74,Cap,,0,0,0,,{\pos(540,1300)}{\fscx66\fscy66\t(0,90,\fscx88\fscy88)\t(90,140,\fscx85\fscy85)}{\c&H00FFFFFF&}THE {\c&H00FFFFFF&}CRAZY {\c&H00FFFFFF&}PART?
+Dialogue: 0,0:00:12.74,0:00:13.23,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}EVERY {\c&H00FFFFFF&}BREATH
+Dialogue: 0,0:00:13.23,0:00:13.59,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}YOU {\c&H00FFFFFF&}TAKE
+Dialogue: 0,0:00:13.59,0:00:14.58,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}IS {\c&H004AD8FF&}78%
+Dialogue: 0,0:00:14.58,0:00:15.03,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}NITROGEN
+Dialogue: 0,0:00:15.03,0:00:15.52,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}BUT {\c&H00FFFFFF&}PLANTS
+Dialogue: 0,0:00:15.52,0:00:15.98,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}CAN'T {\c&H00FFFFFF&}CRACK
+Dialogue: 0,0:00:15.98,0:00:16.49,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}IT {\c&H00FFFFFF&}OPEN
+Dialogue: 0,0:00:16.49,0:00:17.14,Cap,,0,0,0,,{\pos(540,1300)}{\fscx74\fscy74\t(0,90,\fscx99\fscy99)\t(90,140,\fscx96\fscy96)}{\c&H00FFFFFF&}SO {\c&H00FFFFFF&}A {\c&H00FFFFFF&}STUBBORN
+Dialogue: 0,0:00:17.14,0:00:17.92,Cap,,0,0,0,,{\pos(540,1300)}{\fscx64\fscy64\t(0,90,\fscx86\fscy86)\t(90,140,\fscx83\fscy83)}{\c&H00FFFFFF&}GERMAN {\c&H00FFFFFF&}CHEMIST
+Dialogue: 0,0:00:17.92,0:00:18.59,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}FRITZ {\c&H004AD8FF&}HABER
+Dialogue: 0,0:00:18.59,0:00:19.24,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}SQUEEZES {\c&H004AD8FF&}AIR
+Dialogue: 0,0:00:19.24,0:00:20.02,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}200 TIMES
+Dialogue: 0,0:00:20.02,0:00:20.33,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}HARDER
+Dialogue: 0,0:00:20.33,0:00:20.92,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}THAN {\c&H00FFFFFF&}NORMAL
+Dialogue: 0,0:00:20.92,0:00:21.22,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}COOKS {\c&H00FFFFFF&}IT
+Dialogue: 0,0:00:21.22,0:00:22.30,Cap,,0,0,0,,{\pos(540,1300)}{\fscx71\fscy71\t(0,90,\fscx95\fscy95)\t(90,140,\fscx92\fscy92)}{\c&H00FFFFFF&}AT {\c&H004AD8FF&}500 DEGREES
+Dialogue: 0,0:00:22.30,0:00:22.73,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}AND {\c&H00FFFFFF&}HIS {\c&H00FFFFFF&}LITTLE
+Dialogue: 0,0:00:22.73,0:00:23.42,Cap,,0,0,0,,{\pos(540,1300)}{\fscx74\fscy74\t(0,90,\fscx98\fscy98)\t(90,140,\fscx95\fscy95)}{\c&H00FFFFFF&}STEEL {\c&H00FFFFFF&}MACHINE
+Dialogue: 0,0:00:23.42,0:00:24.07,Cap,,0,0,0,,{\pos(540,1300)}{\fscx67\fscy67\t(0,90,\fscx90\fscy90)\t(90,140,\fscx87\fscy87)}{\c&H00FFFFFF&}STARTS {\c&H00FFFFFF&}DRIPPING
+Dialogue: 0,0:00:24.07,0:00:24.60,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}AMMONIA
+Dialogue: 0,0:00:24.60,0:00:25.06,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}FERTILIZER
+Dialogue: 0,0:00:25.06,0:00:25.28,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}OUT {\c&H00FFFFFF&}OF
+Dialogue: 0,0:00:25.28,0:00:25.84,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}THIN {\c&H004AD8FF&}AIR
+Dialogue: 0,0:00:25.84,0:00:26.10,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}TODAY
+Dialogue: 0,0:00:26.10,0:00:26.52,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}THAT {\c&H00FFFFFF&}TRICK
+Dialogue: 0,0:00:26.52,0:00:26.92,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}FEEDS {\c&H00FFFFFF&}ABOUT
+Dialogue: 0,0:00:26.92,0:00:27.50,Cap,,0,0,0,,{\pos(540,1300)}{\fscx67\fscy67\t(0,90,\fscx90\fscy90)\t(90,140,\fscx87\fscy87)}{\c&H004AD8FF&}HALF {\c&H00FFFFFF&}THE {\c&H00FFFFFF&}PEOPLE
+Dialogue: 0,0:00:27.50,0:00:28.00,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}ON {\c&H004AD8FF&}EARTH
+Dialogue: 0,0:00:28.00,0:00:28.50,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}BUT {\c&H00FFFFFF&}THE {\c&H00FFFFFF&}SAME
+Dialogue: 0,0:00:28.50,0:00:28.96,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}NITROGEN
+Dialogue: 0,0:00:28.96,0:00:29.63,Cap,,0,0,0,,{\pos(540,1300)}{\fscx56\fscy56\t(0,90,\fscx75\fscy75)\t(90,140,\fscx73\fscy73)}{\c&H00FFFFFF&}THAT {\c&H00FFFFFF&}GROWS {\c&H00FFFFFF&}WHEAT
+Dialogue: 0,0:00:29.63,0:00:30.19,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}ALSO {\c&H00FFFFFF&}MAKES
+Dialogue: 0,0:00:30.19,0:00:31.03,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}EXPLOSIVES
+Dialogue: 0,0:00:31.03,0:00:31.26,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}AND {\c&H00FFFFFF&}WHEN
+Dialogue: 0,0:00:31.26,0:00:31.65,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}THE {\c&H00FFFFFF&}FIRST
+Dialogue: 0,0:00:31.65,0:00:32.20,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}WORLD {\c&H004AD8FF&}WAR
+Dialogue: 0,0:00:32.20,0:00:33.05,Cap,,0,0,0,,{\pos(540,1300)}{\fscx58\fscy58\t(0,90,\fscx78\fscy78)\t(90,140,\fscx75\fscy75)}{\c&H00FFFFFF&}CUTS {\c&H00FFFFFF&}GERMANY {\c&H00FFFFFF&}OFF
+Dialogue: 0,0:00:33.05,0:00:33.63,Cap,,0,0,0,,{\pos(540,1300)}{\fscx71\fscy71\t(0,90,\fscx95\fscy95)\t(90,140,\fscx92\fscy92)}{\c&H00FFFFFF&}FROM {\c&H00FFFFFF&}IMPORTED
+Dialogue: 0,0:00:33.63,0:00:34.11,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}NITRATES
+Dialogue: 0,0:00:34.11,0:00:34.70,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}HIS {\c&H00FFFFFF&}PROCESS
+Dialogue: 0,0:00:34.70,0:00:35.43,Cap,,0,0,0,,{\pos(540,1300)}{\fscx73\fscy73\t(0,90,\fscx97\fscy97)\t(90,140,\fscx94\fscy94)}{\c&H00FFFFFF&}KEEPS {\c&H00FFFFFF&}ITS {\c&H004AD8FF&}GUNS
+Dialogue: 0,0:00:35.43,0:00:35.96,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}FIRING
+Dialogue: 0,0:00:35.96,0:00:36.19,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}THEN {\c&H00FFFFFF&}HE
+Dialogue: 0,0:00:36.19,0:00:36.96,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}GOES {\c&H00FFFFFF&}FURTHER
+Dialogue: 0,0:00:36.96,0:00:37.52,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}NEAR {\c&H004AD8FF&}YPRES
+Dialogue: 0,0:00:37.52,0:00:38.06,Cap,,0,0,0,,{\pos(540,1300)}{\fscx74\fscy74\t(0,90,\fscx98\fscy98)\t(90,140,\fscx95\fscy95)}{\c&H00FFFFFF&}HE {\c&H00FFFFFF&}PERSONALLY
+Dialogue: 0,0:00:38.06,0:00:38.51,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}OVERSEES
+Dialogue: 0,0:00:38.51,0:00:39.92,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}168 TONS
+Dialogue: 0,0:00:39.92,0:00:40.91,Cap,,0,0,0,,{\pos(540,1300)}{\fscx67\fscy67\t(0,90,\fscx90\fscy90)\t(90,140,\fscx87\fscy87)}{\c&H00FFFFFF&}OF {\c&H004AD8FF&}CHLORINE {\c&H004AD8FF&}GAS
+Dialogue: 0,0:00:40.91,0:00:41.46,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}ROLLING {\c&H00FFFFFF&}INTO
+Dialogue: 0,0:00:41.46,0:00:42.43,Cap,,0,0,0,,{\pos(540,1300)}{\fscx64\fscy64\t(0,90,\fscx86\fscy86)\t(90,140,\fscx83\fscy83)}{\c&H00FFFFFF&}ENEMY {\c&H00FFFFFF&}TRENCHES
+Dialogue: 0,0:00:42.43,0:00:42.99,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}DAYS {\c&H00FFFFFF&}LATER
+Dialogue: 0,0:00:42.99,0:00:43.83,Cap,,0,0,0,,{\pos(540,1300)}{\fscx95\fscy95}{\c&H00FFFFFF&}HIS {\c&H00FFFFFF&}WIFE {\c&H00FFFFFF&}CLARA
+Dialogue: 0,0:00:43.83,0:00:44.33,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}A {\c&H00FFFFFF&}BRILLIANT
+Dialogue: 0,0:00:44.33,0:00:45.13,Cap,,0,0,0,,{\pos(540,1300)}{\fscx83\fscy83}{\c&H00FFFFFF&}CHEMIST {\c&H00FFFFFF&}HERSELF
+Dialogue: 0,0:00:45.13,0:00:45.48,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}TAKES {\c&H00FFFFFF&}HER
+Dialogue: 0,0:00:45.48,0:00:46.18,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}OWN {\c&H00FFFFFF&}LIFE
+Dialogue: 0,0:00:46.18,0:00:46.93,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78}{\c&H00FFFFFF&}THE {\c&H00FFFFFF&}NEXT {\c&H00FFFFFF&}MORNING
+Dialogue: 0,0:00:46.93,0:00:47.40,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}HE {\c&H00FFFFFF&}LEAVES
+Dialogue: 0,0:00:47.40,0:00:48.07,Cap,,0,0,0,,{\pos(540,1300)}{\fscx99\fscy99}{\c&H00FFFFFF&}FOR {\c&H00FFFFFF&}THE {\c&H00FFFFFF&}FRONT
+Dialogue: 0,0:00:48.07,0:00:48.68,Cap,,0,0,0,,{\pos(540,1300)}{\fscx74\fscy74\t(0,90,\fscx99\fscy99)\t(90,140,\fscx96\fscy96)}{\c&H00FFFFFF&}AFTER {\c&H00FFFFFF&}THE {\c&H004AD8FF&}WAR
+Dialogue: 0,0:00:48.68,0:00:49.12,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}HE'S {\c&H00FFFFFF&}WANTED
+Dialogue: 0,0:00:49.12,0:00:49.32,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}AS {\c&H00FFFFFF&}A
+Dialogue: 0,0:00:49.29,0:00:50.07,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}WAR {\c&H004AD8FF&}CRIMINAL
+Dialogue: 0,0:00:50.07,0:00:50.55,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}SO {\c&H00FFFFFF&}HE {\c&H00FFFFFF&}GROWS
+Dialogue: 0,0:00:50.55,0:00:50.99,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}A {\c&H004AD8FF&}BEARD
+Dialogue: 0,0:00:50.99,0:00:51.45,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}AND {\c&H00FFFFFF&}HIDES
+Dialogue: 0,0:00:51.45,0:00:52.28,Cap,,0,0,0,,{\pos(540,1300)}{\fscx70\fscy70\t(0,90,\fscx93\fscy93)\t(90,140,\fscx90\fscy90)}{\c&H00FFFFFF&}IN {\c&H004AD8FF&}SWITZERLAND
+Dialogue: 0,0:00:52.28,0:00:52.49,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}A {\c&H00FFFFFF&}FEW
+Dialogue: 0,0:00:52.49,0:00:53.01,Cap,,0,0,0,,{\pos(540,1300)}{\fscx76\fscy76\t(0,90,\fscx101\fscy101)\t(90,140,\fscx98\fscy98)}{\c&H00FFFFFF&}MONTHS {\c&H00FFFFFF&}LATER
+Dialogue: 0,0:00:53.01,0:00:53.29,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}HE {\c&H00FFFFFF&}WINS
+Dialogue: 0,0:00:53.29,0:00:54.32,Cap,,0,0,0,,{\pos(540,1300)}{\fscx70\fscy70\t(0,90,\fscx93\fscy93)\t(90,140,\fscx90\fscy90)}{\c&H00FFFFFF&}THE {\c&H004AD8FF&}NOBEL {\c&H004AD8FF&}PRIZE
+Dialogue: 0,0:00:54.32,0:00:54.63,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}LATER
+Dialogue: 0,0:00:54.63,0:00:55.34,Cap,,0,0,0,,{\pos(540,1300)}{\fscx74\fscy74\t(0,90,\fscx98\fscy98)\t(90,140,\fscx95\fscy95)}{\c&H00FFFFFF&}HIS {\c&H00FFFFFF&}INSTITUTE'S
+Dialogue: 0,0:00:55.34,0:00:55.89,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}PEST-KILLING
+Dialogue: 0,0:00:55.89,0:00:56.33,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}RESEARCH
+Dialogue: 0,0:00:56.33,0:00:57.09,Cap,,0,0,0,,{\pos(540,1300)}{\fscx73\fscy73\t(0,90,\fscx97\fscy97)\t(90,140,\fscx94\fscy94)}{\c&H00FFFFFF&}LEADS {\c&H00FFFFFF&}TO {\c&H00FFFFFF&}A {\c&H004AD8FF&}GAS
+Dialogue: 0,0:00:57.09,0:00:58.04,Cap,,0,0,0,,{\pos(540,1300)}{\fscx72\fscy72\t(0,90,\fscx96\fscy96)\t(90,140,\fscx93\fscy93)}{\c&H00FFFFFF&}CALLED {\c&H004AD8FF&}ZYKLON
+Dialogue: 0,0:00:58.04,0:00:58.79,Cap,,0,0,0,,{\pos(540,1300)}{\fscx88\fscy88}{\c&H00FFFFFF&}A {\c&H00FFFFFF&}LATER {\c&H00FFFFFF&}VERSION
+Dialogue: 0,0:00:58.79,0:00:59.16,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}BECOMES
+Dialogue: 0,0:00:59.16,0:00:59.64,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}THE {\c&H00FFFFFF&}NAZIS'
+Dialogue: 0,0:00:59.64,0:01:00.27,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}GAS {\c&H00FFFFFF&}CHAMBER
+Dialogue: 0,0:01:00.27,0:01:00.68,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}POISON
+Dialogue: 0,0:01:00.68,0:01:01.14,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}AND {\c&H00FFFFFF&}HIS {\c&H00FFFFFF&}OWN
+Dialogue: 0,0:01:01.14,0:01:01.62,Cap,,0,0,0,,{\pos(540,1300)}{\fscx100\fscy100}{\c&H00FFFFFF&}RELATIVES
+Dialogue: 0,0:01:01.62,0:01:02.64,Cap,,0,0,0,,{\pos(540,1300)}{\fscx87\fscy87}{\c&H00FFFFFF&}DIE {\c&H00FFFFFF&}IN {\c&H00FFFFFF&}THE {\c&H00FFFFFF&}CAMPS
+Dialogue: 0,0:01:02.64,0:01:02.86,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}SO
+Dialogue: 0,0:01:02.86,0:01:03.22,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}BY {\c&H00FFFFFF&}SOME
+Dialogue: 0,0:01:03.22,0:01:03.87,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}ESTIMATES
+Dialogue: 0,0:01:03.87,0:01:04.17,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}HALF {\c&H00FFFFFF&}THE
+Dialogue: 0,0:01:04.17,0:01:04.61,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}NITROGEN
+Dialogue: 0,0:01:04.61,0:01:05.12,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}IN {\c&H00FFFFFF&}YOUR {\c&H00FFFFFF&}BODY
+Dialogue: 0,0:01:05.12,0:01:05.54,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}WAS {\c&H00FFFFFF&}PULLED
+Dialogue: 0,0:01:05.54,0:01:06.04,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}FROM {\c&H00FFFFFF&}THE {\c&H004AD8FF&}AIR
+Dialogue: 0,0:01:06.04,0:01:06.26,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H00FFFFFF&}BY {\c&H00FFFFFF&}THE
+Dialogue: 0,0:01:06.26,0:01:06.77,Cap,,0,0,0,,{\pos(540,1300)}{\fscx78\fscy78\t(0,90,\fscx104\fscy104)\t(90,140,\fscx100\fscy100)}{\c&H004AD8FF&}FATHER {\c&H00FFFFFF&}OF
+Dialogue: 0,0:01:06.77,0:01:08.34,Cap,,0,0,0,,{\pos(540,1300)}{\fscx57\fscy57\t(0,90,\fscx76\fscy76)\t(90,140,\fscx74\fscy74)}{\c&H004AD8FF&}CHEMICAL {\c&H004AD8FF&}WARFARE
