@@ -256,11 +256,32 @@ export const heart = (g: Ctx, x: number, y: number, s: number, col = "#ff4d6a") 
   ell(g, -24, -36, 10, 7, "rgba(255,255,255,0.6)", 0, -0.5);
   g.restore();
 };
+/** lidded petri dish (seen from above at an angle) with a few tiny antibodies in pink culture gel */
 export const petri = (g: Ctx, x: number, y: number, s: number, f: number, glow = 1) => {
   g.save(); g.translate(x, y); g.scale(s, s);
-  if (glow > 0) { g.save(); g.globalCompositeOperation = "lighter"; g.fillStyle = rg(g, 0, 0, 10, 200, [[0, `rgba(255,210,90,${0.5 * glow})`], [1, "rgba(255,210,90,0)"]]); g.fillRect(-200, -200, 400, 400); g.restore(); }
-  ell(g, 0, 0, 150, 60, "rgba(220,240,255,0.6)", 6); ell(g, 0, -6, 130, 48, "rgba(255,240,180,0.6)", 3);
-  for (let i = 0; i < 6; i++) antibody(g, -90 + i * 36 + Math.sin(f * 0.1 + i) * 6, -10 + (i % 2) * 14, 0.28, GOLD, Math.sin(f * 0.05 + i) * 0.4, "happy");
+  if (glow > 0) { g.save(); g.globalCompositeOperation = "lighter"; g.fillStyle = rg(g, 0, 0, 10, 170, [[0, `rgba(255,210,90,${0.45 * glow})`], [1, "rgba(255,210,90,0)"]]); g.fillRect(-170, -170, 340, 340); g.restore(); }
+  ell(g, 0, 10, 110, 40, "rgba(200,220,235,0.9)", 5); ell(g, 0, 0, 104, 36, "#f6c4d4", 4);
+  for (let i = 0; i < 4; i++) antibody(g, -54 + i * 36, -2 + (i % 2) * 10, 0.17, GOLD, Math.sin(f * 0.05 + i) * 0.5, "happy");
+  ell(g, 6, -18, 112, 40, "rgba(230,245,255,0.35)", 4); // lid, slightly offset
+  ell(g, -40, -30, 36, 8, "rgba(255,255,255,0.7)", 0, -0.1);
+  g.restore();
+};
+export const flask = (g: Ctx, x: number, y: number, s: number, f: number, col = "#ffd25a") => {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  const body: P[] = [[-22, -200], [22, -200], [22, -120], [90, 0], [-90, 0], [-22, -120]];
+  g.save(); poly(g, body, "rgba(220,240,255,0.55)", 0); g.beginPath(); g.rect(-100, -70, 200, 80); g.clip(); poly(g, body, col, 0); g.restore();
+  poly(g, body, null, 6); rr(g, -30, -216, 60, 22, 6, "#c9ccd2", 4);
+  for (let i = 0; i < 4; i++) { const t = ((f * 0.02 + i / 4) % 1); ell(g, -30 + i * 20, -60 - t * 40, 6, 6, "rgba(255,255,255,0.8)", 2); }
+  g.restore();
+};
+export const microscope = (g: Ctx, x: number, y: number, s: number) => {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  rr(g, -110, -30, 220, 40, 10, "#3a3d47", 5); // base
+  rr(g, 40, -300, 40, 280, 14, "#4a4e5a", 5); // arm
+  rr(g, -80, -120, 140, 22, 6, "#5d6170", 4); // stage
+  g.save(); g.translate(-10, -270); g.rotate(-0.45); rr(g, -26, -120, 52, 230, 18, "#e8eef4", 5); rr(g, -20, -150, 40, 40, 8, "#3a3d47", 4); g.restore(); // tube + eyepiece
+  rr(g, -30, -170, 30, 50, 6, "#c9ccd2", 4); // objective
+  ell(g, 70, -150, 26, 26, "#c9ccd2", 4);
   g.restore();
 };
 // Australia outline (lon, lat) and an equirectangular projection centred on it

@@ -1,6 +1,6 @@
 # The Man with the Golden Arm (2.5D canvas short)
 
-A ~68 s vertical (1080x1920, 30 fps) animated fact short about James Harrison (1936-2025), the Australian plasma
+A 69 s vertical (1080x1920, 30 fps) animated fact short about James Harrison (1936-2025), the Australian plasma
 donor whose anti-D antibodies are estimated to have helped protect 2.4 million babies. Same fast CPU-only pipeline as
 `../ocean-fun-facts/` (Canvas2D in Remotion, toon characters, word-by-word captions, Kokoro TTS `am_puck`, procedural
 score + SFX). `src/lib/`, `scripts/`, `audio/` and `tools/` are copies of that project's, so this folder rebuilds on

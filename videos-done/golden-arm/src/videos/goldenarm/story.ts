@@ -9,7 +9,7 @@ import words from "../../../videos/goldenarm/voice/words.json";
 import {
   KID, jamesAt, NURSE, MOTHER, DAUGHTER, SCI, RED, GOLD, miniFace, bedBack, bedFront, ivStand, bloodBag, drop, donorChair, armRest, forearm,
   needleTube, plasmaMachine, sweat, counter, calendar, newspaper, balloon, stamp, nameTag, antibody, rbc, baby, crib, syringe, shield,
-  thought, heart, petri, australia, ausXY, flexArm,
+  thought, heart, petri, australia, ausXY, flexArm, flask, microscope,
 } from "./actors";
 import { bodyFront, Outfit, Expr } from "../../lib/toon";
 
@@ -141,19 +141,20 @@ add(B(2), B(3), [WARD, { d: 1, draw: (g, f) => {
 } }], camKeys([{ f: B(2), c: { z: 1.0, y: 880 }, creep: 0.0018 }]), { bg: "#d8e8e4" });
 
 // 4 AT EIGHTEEN, HE KEPT IT. EVEN THOUGH HE HATED NEEDLES.
-const donorScene = (g: Ctx, f: number, grey: number, expr: Expr, facing: -1 | 0 | 1, gold = 0, glasses = false, nurse = true) => {
-  plasmaMachine(g, 920, 1180, 1.0, f);
+const donorScene = (g: Ctx, f: number, grey: number, expr: Expr, facing: -1 | 0 | 1, gold = 0, glasses = false, kind: "bag" | "machine" = "machine", needle = 0, headTilt = 0) => {
+  if (kind === "machine") plasmaMachine(g, 920, 1180, 1.0, f);
+  else { ivStand(g, 900, 1180, 640); bloodBag(g, 900, 560, 1.0, 0.35 + 0.4 * ((f % 240) / 240)); }
   donorChair(g, 400, 1180, 1.0);
-  who(g, jamesAt(grey, glasses), 400, 1150, 820, f, 21, { expr, mode: "sit", facing, noShadow: true });
+  who(g, jamesAt(grey, glasses), 400, 1150, 820, f, 21, { expr, mode: "sit", facing, headTilt, noShadow: true });
   armRest(g, 430, 1070, 1.0);
   forearm(g, 440, 1045, 230, gold, "#3f6fb0");
-  needleTube(g, 560, 1040, 860, 1150, f);
-  if (nurse) who(g, NURSE, 760, 1900, 900, f, 31, { expr: "smile", facing: -1 });
+  needleTube(g, 560, 1040, kind === "machine" ? 860 : 900, kind === "machine" ? 1150 : 716, f);
+  if (needle > 0) { const dx = 260 * (1 - needle); syringe(g, 790 + dx, 985, 0.4, -0.12, "", true); ell(g, 930 + dx, 1000, 50, 42, "#9fd4ff", 5); }
 };
 add(B(3), B(4), [CLINIC, { d: 1, draw: (g, f) => {
-  const away = f > fHated - 4;
-  donorScene(g, f, 0, away ? "nervous" : f > fKept ? "smile" : "neutral", away ? -1 : 0);
-  if (away) sweat(g, 300, 470, 1, f);
+  const away = f > fHated - 6;
+  donorScene(g, f, 0, away ? "nervous" : f > fKept ? "smile" : "neutral", away ? -1 : 0, 0, false, "bag", f > fKept ? pop(f, fKept, 8) : 0, away ? -0.25 : 0);
+  if (away) sweat(g, 320, 740, 1, f);
   if (f > fEighteen - 4) calendar(g, 160, 260, pop(f, fEighteen - 4, 8) * 0.7, "AGE 18");
 } }], camKeys([{ f: B(3), c: { z: 1.0, y: 960 }, creep: 0.0015 }, { f: fHated, c: { z: 1.15, x: 470, y: 880 }, dur: 10 }]), { bg: "#f0e4d4" });
 
@@ -206,19 +207,20 @@ add(B(5), B(7), [VEIN, { d: 1, draw: (g, f) => {
 
 // 8 BABIES WERE BORN SICK... OR NOT AT ALL (quiet, empty crib)
 add(B(7), B(8), [{ key: "nursery", d: 0.5, bounds: BIG, res: 0.7, paint: (g) => { room(g, BIG[0], BIG[2], 1260, BIG[3], "#8a90a8", "#6a6a80", 540, BIG[1]); rr(g, 680, 220, 300, 360, 12, "#4a5a80", 8, "#a8acc0"); } },
-  { d: 1, draw: (g, f) => { crib(g, 470, 1180, 1.1); } },
+  { d: 1, draw: (g, f) => { const gone = ramp(f, fNotAll - 6, fNotAll + 12); if (gone < 1) { g.save(); g.globalAlpha = 1 - gone; baby(g, 400, 1040, 62, "sleep", "#c8d4e0"); g.restore(); } crib(g, 470, 1180, 1.1); } },
   { screen: true, op: "multiply", draw: (g) => { g.fillStyle = "rgba(120,130,170,0.55)"; g.fillRect(0, 0, W, H); } }],
   camKeys([{ f: B(7), c: { z: 1.0, y: 900 }, creep: 0.0012 }]), { bg: "#6a6a80" });
 
 // 9 THE MEDICINE: A SHOT THAT STOPS THE MOTHER'S BODY FROM LEARNING TO ATTACK
 add(B(8), B(9), [VEIN, { d: 1, draw: (g, f) => {
   momWithBelly(g, MOTHER, 250, f, 41, f > fShot ? "smile" : "neutral");
-  const sx = lerp(-300, 330, easeOut(ramp(f, fMedicine - 6, fMedicine + 8))), sy = 300;
-  if (f > fMedicine - 6) syringe(g, sx + (f > fShot ? 20 * Math.sin((f - fShot) * 0.6) * Math.max(0, 1 - (f - fShot) / 12) : 0), sy, 0.7, 0.3);
+  // the shot goes into the mother's arm (it stops HER body from learning to attack)
+  const inj = easeOut(ramp(f, fMedicine - 6, fShot + 2)), push = f > fShot ? Math.min(1, (f - fShot) / 6) : 0;
+  if (f > fMedicine - 6) syringe(g, lerp(700, 470, inj) - 16 * push, lerp(240, 510, inj) + 16 * push, 0.5, -Math.PI / 4, "ANTI-D", true);
+  if (f > fShot) glowAt(g, 330, 650, 120, 0.5 * (1 - ramp(f, fShot, fShot + 20)));
   bubble(g, f, (gg) => {
     babyCells(gg, f, "happy");
     baby(gg, BUB_X, BUB_Y - 70, 70, "happy");
-    shield(gg, BUB_X, BUB_Y, 230, easeOut(ramp(f, fShot, fShot + 12)), f);
     // the would-be attacker, "learning", gets crossed out
     if (f > fLearning - 8 && f < fAttack2 + 20) {
       const a = 1 - ramp(f, fAttack2 + 4, fAttack2 + 20);
@@ -235,15 +237,15 @@ add(B(9), B(10), [WARD, { d: 1, draw: (g, f) => {
   who(g, MOTHER, 360, 1150, 860, f, 41, { expr: "smile", facing: 1 });
   baby(g, 380, 760, 62, "happy");
   who(g, NURSE, 800, 1150, 860, f, 31, { expr: "smile", facing: -1 });
-  syringe(g, 640, 700, 0.42, 0, "ANTI-D", true);
+  syringe(g, 570, 590, 0.42, -0.1, "ANTI-D", true);
   if (f > fGot) heart(g, 520, 470, pop(f, fGot, 8) * 1.1);
 } }], camKeys([{ f: B(9), c: { z: 1.0, y: 900 }, creep: 0.0015 }]), { bg: "#d8e8e4" });
 
 // 11 HE KEPT COMING BACK EVERY FEW WEEKS... FOR OVER SIXTY YEARS (montage)
 add(B(10), B(11), [CLINIC, { d: 1, draw: (g, f) => {
   const u = clamp01((f - fKept2 + 4) / Math.max(1, fYears + 8 - fKept2));
-  const year = Math.round(lerp(1967, 2018, u));
-  donorScene(g, f, u * 0.9, "smile", 0, 0, u > 0.6, false);
+  const year = Math.round(lerp(1954, 2018, u));
+  donorScene(g, f, u * 0.9, "smile", 0, 0, u > 0.6, year < 1967 ? "bag" : "machine");
   calendar(g, 840, 300, 0.85, String(year));
   if (f > fSixty - 4) stamp(g, 540, 1580, pop(f, fSixty - 4, 9), "60+ YEARS", "#ff4d5a");
 } }], camKeys([{ f: B(10), c: { z: 1.0, y: 960 }, creep: 0.0012 }]), { bg: "#f0e4d4" });
@@ -269,11 +271,11 @@ add(B(12), B(13), [WARM, { d: 1, draw: (g, f) => {
 add(B(13), B(15), [CLINIC, { d: 1, draw: (g, f) => {
   const cols = ["#ff5a7a", "#4ad8ff", "#ffd84a", "#7cff4f"];
   "1173".split("").forEach((ch, i) => balloon(g, 640 + i * 110, 260 + (i % 2) * 50, 0.62, ch, cols[i], f, i));
-  const away = f > fNever - 4;
-  donorScene(g, f, 1, away ? "nervous" : "grin", away ? -1 : 0, 0.6, true, f > fUnluckily - 10);
-  if (away) sweat(g, 300, 470, 1, f);
+  const away = f > fUnluckily + 6;
+  donorScene(g, f, 1, away ? "nervous" : "grin", away ? -1 : 0, 0.6, true, "machine", f > fUnluckily - 4 ? pop(f, fUnluckily - 4, 8) : 0, away ? -0.25 : 0);
+  if (away) { sweat(g, 320, 740, 1, f); g.save(); g.setLineDash([12, 14]); line(g, [[350, 760], [250, 420]], "rgba(60,60,80,0.55)", 5); g.restore(); questionMark(g, 230, 360, 90 * pop(f, fUnluckily + 8, 6), "#ffd84a", -0.2); }
   if (f > fEightyOne - 4) calendar(g, 160, 260, pop(f, fEightyOne - 4, 8) * 0.7, "AGE 81");
-} }], camKeys([{ f: B(13), c: { z: 1.0, y: 960 }, creep: 0.0012 }, { f: fNever, c: { z: 1.3, x: 440, y: 800 }, dur: 14 }]), { kicks: [fNeedle + 2], kickAmp: 10, bg: "#f0e4d4" });
+} }], camKeys([{ f: B(13), c: { z: 1.0, y: 960 }, creep: 0.0012 }, { f: fUnluckily + 6, c: { z: 1.18, x: 520, y: 860 }, dur: 14 }]), { kicks: [fNeedle + 2], kickAmp: 10, bg: "#f0e4d4" });
 
 // 16 AN ESTIMATED 2.4 MILLION BABIES
 add(B(15), B(16), [WARM, { d: 1, draw: (g, f) => {
@@ -298,7 +300,9 @@ add(B(16), B(17), [CLINIC, { d: 1, draw: (g, f) => {
 add(B(17), TOTAL, [LAB, { d: 1, draw: (g, f) => {
   rr(g, 120, 1000, 840, 40, 8, "#8a9aa8", 5); rr(g, 160, 1040, 30, 200, 6, "#7a8a98", 4); rr(g, 890, 1040, 30, 200, 6, "#7a8a98", 4);
   const glow = smooth(ramp(f, fLab - 8, fLab + 10));
-  petri(g, 330, 960, 0.9, f, glow); petri(g, 690, 960, 0.9, f + 20, glow);
+  microscope(g, 300, 1000, 1.0);
+  petri(g, 560, 975, 0.8, f, glow); petri(g, 560, 905, 0.6, f + 20, glow * 0.8);
+  flask(g, 790, 1000, 0.9, f, "#ffd25a"); flask(g, 900, 1000, 0.6, f + 30, "#ffb8d0");
   who(g, SCI, 160, 2020, 900, f, 61, { expr: "smile", facing: 1 });
   who(g, { ...SCI, hair: "#c8763a", skin: "#f5d2b0", glasses: false }, 900, 2020, 900, f, 62, { expr: f > fLab ? "grin" : "smile", facing: -1 });
   if (f > fPromise2 - 6) {

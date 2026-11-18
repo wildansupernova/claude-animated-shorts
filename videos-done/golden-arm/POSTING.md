@@ -1,6 +1,6 @@
 # Posting sheet: The Man with the Golden Arm
 
-1080x1920, 30 fps, ~68 s, H.264 + AAC, -14 LUFS. Voice: Kokoro TTS `am_puck` (AI voice; disclose as AI-generated).
+1080x1920, 30 fps, 69 s, H.264 + AAC, -14 LUFS. Voice: Kokoro TTS `am_puck` (AI voice; disclose as AI-generated).
 Captions are burned in. Share encode: `videos/goldenarm/golden_arm_final.mp4`.
 
 - **Hook:** "At fourteen, strangers' blood saved his life. So he paid it back... 1,173 times." (viral-hooks Cat 07 story + Cat 09 number)
