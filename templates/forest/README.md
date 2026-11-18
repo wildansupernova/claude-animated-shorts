@@ -22,7 +22,7 @@ mushrooms (the "corpse finder") → snitch 3 the ground sinks → search teams a
 ## Run it
 1. Remotion project with `remotion`, `@remotion/three`, `three@0.169`, `@react-three/fiber@8`, `@react-three/postprocessing@2`, `postprocessing`.
 2. Copy this folder to `src/videos/forest/`, register `ForestShort` (`FOREST_FRAMES`, 30 fps, 1080x1920) in `Root.tsx`.
-3. Voice: `python scripts/tts.py am_michael 1.15`, then `python scripts/words.py` → copy `words.json` here.
+3. Voice: `python scripts/tts.py am_michael 1.26` (the v2 narration speed), then `python scripts/words.py` → copy `words.json` here.
 4. Stills: `node scripts/stills.mjs ForestShort out/forest/x_ 30,305,1310 0.5`.
 5. Film: `node scripts/chunks.mjs ForestShort out/forest/chunks 3`, concat the chunks, mux with `audio/out/mix.wav`.
 
