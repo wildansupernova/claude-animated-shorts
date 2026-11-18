@@ -1,0 +1,1696 @@
+[
+{
+"w": "In",
+"s": 0.255,
+"e": 0.355,
+"emph": false,
+"line": 0
+},
+{
+"w": "1970,",
+"s": 0.355,
+"e": 1.255,
+"emph": false,
+"line": 0
+},
+{
+"w": "Oregon",
+"s": 1.33,
+"e": 1.805,
+"emph": false,
+"line": 0
+},
+{
+"w": "got",
+"s": 1.805,
+"e": 2.03,
+"emph": false,
+"line": 0
+},
+{
+"w": "rid",
+"s": 2.03,
+"e": 2.218,
+"emph": false,
+"line": 0
+},
+{
+"w": "of",
+"s": 2.218,
+"e": 2.292,
+"emph": false,
+"line": 0
+},
+{
+"w": "a",
+"s": 2.292,
+"e": 2.393,
+"emph": false,
+"line": 0
+},
+{
+"w": "dead",
+"s": 2.393,
+"e": 2.68,
+"emph": false,
+"line": 0
+},
+{
+"w": "whale...",
+"s": 2.68,
+"e": 3.18,
+"emph": true,
+"line": 0
+},
+{
+"w": "with",
+"s": 3.305,
+"e": 3.455,
+"emph": false,
+"line": 0
+},
+{
+"w": "half",
+"s": 3.455,
+"e": 3.718,
+"emph": false,
+"line": 0
+},
+{
+"w": "a",
+"s": 3.718,
+"e": 3.78,
+"emph": false,
+"line": 0
+},
+{
+"w": "ton",
+"s": 3.78,
+"e": 3.993,
+"emph": false,
+"line": 0
+},
+{
+"w": "of",
+"s": 3.993,
+"e": 4.08,
+"emph": false,
+"line": 0
+},
+{
+"w": "dynamite.",
+"s": 4.08,
+"e": 4.642,
+"emph": true,
+"line": 0
+},
+{
+"w": "A",
+"s": 5.087,
+"e": 5.174,
+"emph": false,
+"line": 1
+},
+{
+"w": "forty-five",
+"s": 5.174,
+"e": 5.737,
+"emph": false,
+"line": 1
+},
+{
+"w": "foot",
+"s": 5.737,
+"e": 5.962,
+"emph": false,
+"line": 1
+},
+{
+"w": "sperm",
+"s": 5.962,
+"e": 6.287,
+"emph": false,
+"line": 1
+},
+{
+"w": "whale",
+"s": 6.287,
+"e": 6.587,
+"emph": false,
+"line": 1
+},
+{
+"w": "has",
+"s": 6.587,
+"e": 6.762,
+"emph": false,
+"line": 1
+},
+{
+"w": "washed",
+"s": 6.762,
+"e": 7.049,
+"emph": false,
+"line": 1
+},
+{
+"w": "up",
+"s": 7.049,
+"e": 7.199,
+"emph": false,
+"line": 1
+},
+{
+"w": "on",
+"s": 7.199,
+"e": 7.299,
+"emph": false,
+"line": 1
+},
+{
+"w": "a",
+"s": 7.299,
+"e": 7.362,
+"emph": false,
+"line": 1
+},
+{
+"w": "beach",
+"s": 7.362,
+"e": 7.612,
+"emph": false,
+"line": 1
+},
+{
+"w": "in",
+"s": 7.612,
+"e": 7.762,
+"emph": false,
+"line": 1
+},
+{
+"w": "Florence,",
+"s": 7.762,
+"e": 8.162,
+"emph": false,
+"line": 1
+},
+{
+"w": "Oregon.",
+"s": 8.212,
+"e": 8.763,
+"emph": false,
+"line": 1
+},
+{
+"w": "It",
+"s": 8.968,
+"e": 9.055,
+"emph": false,
+"line": 2
+},
+{
+"w": "weighs",
+"s": 9.055,
+"e": 9.243,
+"emph": false,
+"line": 2
+},
+{
+"w": "eight",
+"s": 9.243,
+"e": 9.418,
+"emph": false,
+"line": 2
+},
+{
+"w": "tons,",
+"s": 9.418,
+"e": 9.668,
+"emph": false,
+"line": 2
+},
+{
+"w": "and",
+"s": 9.705,
+"e": 9.805,
+"emph": false,
+"line": 2
+},
+{
+"w": "it",
+"s": 9.805,
+"e": 9.893,
+"emph": false,
+"line": 2
+},
+{
+"w": "stinks.",
+"s": 9.893,
+"e": 10.396,
+"emph": true,
+"line": 2
+},
+{
+"w": "The",
+"s": 10.621,
+"e": 10.721,
+"emph": false,
+"line": 3
+},
+{
+"w": "job",
+"s": 10.721,
+"e": 10.996,
+"emph": false,
+"line": 3
+},
+{
+"w": "goes",
+"s": 10.996,
+"e": 11.246,
+"emph": false,
+"line": 3
+},
+{
+"w": "to",
+"s": 11.246,
+"e": 11.334,
+"emph": false,
+"line": 3
+},
+{
+"w": "the",
+"s": 11.334,
+"e": 11.421,
+"emph": false,
+"line": 3
+},
+{
+"w": "Highway",
+"s": 11.421,
+"e": 11.759,
+"emph": true,
+"line": 3
+},
+{
+"w": "Division,",
+"s": 11.759,
+"e": 12.196,
+"emph": false,
+"line": 3
+},
+{
+"w": "because",
+"s": 12.246,
+"e": 12.521,
+"emph": false,
+"line": 3
+},
+{
+"w": "back",
+"s": 12.521,
+"e": 12.796,
+"emph": false,
+"line": 3
+},
+{
+"w": "then,",
+"s": 12.796,
+"e": 13.071,
+"emph": false,
+"line": 3
+},
+{
+"w": "Oregon's",
+"s": 13.146,
+"e": 13.671,
+"emph": false,
+"line": 3
+},
+{
+"w": "beaches",
+"s": 13.671,
+"e": 14.034,
+"emph": false,
+"line": 3
+},
+{
+"w": "legally",
+"s": 14.034,
+"e": 14.421,
+"emph": false,
+"line": 3
+},
+{
+"w": "counted",
+"s": 14.421,
+"e": 14.821,
+"emph": false,
+"line": 3
+},
+{
+"w": "as",
+"s": 14.821,
+"e": 14.971,
+"emph": false,
+"line": 3
+},
+{
+"w": "highways.",
+"s": 14.971,
+"e": 15.572,
+"emph": false,
+"line": 3
+},
+{
+"w": "So",
+"s": 15.782,
+"e": 15.87,
+"emph": false,
+"line": 4
+},
+{
+"w": "they",
+"s": 15.87,
+"e": 16.02,
+"emph": false,
+"line": 4
+},
+{
+"w": "treat",
+"s": 16.02,
+"e": 16.27,
+"emph": false,
+"line": 4
+},
+{
+"w": "it",
+"s": 16.27,
+"e": 16.345,
+"emph": false,
+"line": 4
+},
+{
+"w": "like",
+"s": 16.345,
+"e": 16.47,
+"emph": false,
+"line": 4
+},
+{
+"w": "a",
+"s": 16.47,
+"e": 16.545,
+"emph": false,
+"line": 4
+},
+{
+"w": "giant",
+"s": 16.545,
+"e": 16.857,
+"emph": false,
+"line": 4
+},
+{
+"w": "rock",
+"s": 16.857,
+"e": 17.095,
+"emph": true,
+"line": 4
+},
+{
+"w": "in",
+"s": 17.095,
+"e": 17.17,
+"emph": false,
+"line": 4
+},
+{
+"w": "the",
+"s": 17.17,
+"e": 17.257,
+"emph": false,
+"line": 4
+},
+{
+"w": "road.",
+"s": 17.257,
+"e": 17.669,
+"emph": false,
+"line": 4
+},
+{
+"w": "The",
+"s": 17.894,
+"e": 17.969,
+"emph": false,
+"line": 5
+},
+{
+"w": "plan?",
+"s": 17.969,
+"e": 18.344,
+"emph": false,
+"line": 5
+},
+{
+"w": "Blow",
+"s": 18.419,
+"e": 18.681,
+"emph": false,
+"line": 5
+},
+{
+"w": "it",
+"s": 18.681,
+"e": 18.756,
+"emph": false,
+"line": 5
+},
+{
+"w": "into",
+"s": 18.756,
+"e": 18.969,
+"emph": false,
+"line": 5
+},
+{
+"w": "tiny",
+"s": 18.969,
+"e": 19.294,
+"emph": false,
+"line": 5
+},
+{
+"w": "pieces,",
+"s": 19.294,
+"e": 19.719,
+"emph": false,
+"line": 5
+},
+{
+"w": "and",
+"s": 19.756,
+"e": 19.856,
+"emph": false,
+"line": 5
+},
+{
+"w": "let",
+"s": 19.856,
+"e": 19.981,
+"emph": false,
+"line": 5
+},
+{
+"w": "the",
+"s": 19.981,
+"e": 20.069,
+"emph": false,
+"line": 5
+},
+{
+"w": "seagulls",
+"s": 20.069,
+"e": 20.494,
+"emph": true,
+"line": 5
+},
+{
+"w": "eat",
+"s": 20.494,
+"e": 20.656,
+"emph": false,
+"line": 5
+},
+{
+"w": "the",
+"s": 20.656,
+"e": 20.744,
+"emph": false,
+"line": 5
+},
+{
+"w": "rest.",
+"s": 20.744,
+"e": 21.167,
+"emph": false,
+"line": 5
+},
+{
+"w": "One",
+"s": 21.397,
+"e": 21.622,
+"emph": false,
+"line": 6
+},
+{
+"w": "local,",
+"s": 21.622,
+"e": 21.972,
+"emph": false,
+"line": 6
+},
+{
+"w": "an",
+"s": 22.009,
+"e": 22.084,
+"emph": false,
+"line": 6
+},
+{
+"w": "explosives",
+"s": 22.084,
+"e": 22.747,
+"emph": false,
+"line": 6
+},
+{
+"w": "veteran",
+"s": 22.747,
+"e": 23.147,
+"emph": false,
+"line": 6
+},
+{
+"w": "named",
+"s": 23.147,
+"e": 23.422,
+"emph": false,
+"line": 6
+},
+{
+"w": "Walter,",
+"s": 23.422,
+"e": 23.897,
+"emph": true,
+"line": 6
+},
+{
+"w": "warns",
+"s": 23.972,
+"e": 24.347,
+"emph": false,
+"line": 6
+},
+{
+"w": "them:",
+"s": 24.347,
+"e": 24.622,
+"emph": false,
+"line": 6
+},
+{
+"w": "twenty",
+"s": 24.697,
+"e": 24.997,
+"emph": false,
+"line": 6
+},
+{
+"w": "sticks",
+"s": 24.997,
+"e": 25.322,
+"emph": true,
+"line": 6
+},
+{
+"w": "is",
+"s": 25.322,
+"e": 25.472,
+"emph": false,
+"line": 6
+},
+{
+"w": "plenty.",
+"s": 25.472,
+"e": 25.964,
+"emph": false,
+"line": 6
+},
+{
+"w": "They",
+"s": 26.194,
+"e": 26.294,
+"emph": false,
+"line": 7
+},
+{
+"w": "use",
+"s": 26.294,
+"e": 26.519,
+"emph": false,
+"line": 7
+},
+{
+"w": "twenty",
+"s": 26.519,
+"e": 26.819,
+"emph": false,
+"line": 7
+},
+{
+"w": "cases.",
+"s": 26.819,
+"e": 27.434,
+"emph": true,
+"line": 7
+},
+{
+"w": "Seventy-five",
+"s": 27.804,
+"e": 28.329,
+"emph": false,
+"line": 8
+},
+{
+"w": "people",
+"s": 28.329,
+"e": 28.629,
+"emph": false,
+"line": 8
+},
+{
+"w": "gather",
+"s": 28.629,
+"e": 28.929,
+"emph": false,
+"line": 8
+},
+{
+"w": "to",
+"s": 28.929,
+"e": 29.054,
+"emph": false,
+"line": 8
+},
+{
+"w": "watch.",
+"s": 29.054,
+"e": 29.429,
+"emph": false,
+"line": 8
+},
+{
+"w": "A",
+"s": 29.504,
+"e": 29.604,
+"emph": false,
+"line": 8
+},
+{
+"w": "TV",
+"s": 29.604,
+"e": 29.954,
+"emph": false,
+"line": 8
+},
+{
+"w": "crew",
+"s": 29.954,
+"e": 30.179,
+"emph": false,
+"line": 8
+},
+{
+"w": "starts",
+"s": 30.179,
+"e": 30.529,
+"emph": false,
+"line": 8
+},
+{
+"w": "rolling.",
+"s": 30.529,
+"e": 31.029,
+"emph": false,
+"line": 8
+},
+{
+"w": "Three...",
+"s": 31.329,
+"e": 31.567,
+"emph": false,
+"line": 9
+},
+{
+"w": "two...",
+"s": 31.567,
+"e": 31.829,
+"emph": false,
+"line": 9
+},
+{
+"w": "one...",
+"s": 31.929,
+"e": 32.413,
+"emph": false,
+"line": 9
+},
+{
+"w": "Boom!",
+"s": 32.688,
+"e": 33.229,
+"emph": true,
+"line": 10
+},
+{
+"w": "And",
+"s": 33.679,
+"e": 33.791,
+"emph": false,
+"line": 11
+},
+{
+"w": "then,",
+"s": 33.791,
+"e": 33.929,
+"emph": false,
+"line": 11
+},
+{
+"w": "it",
+"s": 33.966,
+"e": 34.041,
+"emph": false,
+"line": 11
+},
+{
+"w": "starts",
+"s": 34.041,
+"e": 34.254,
+"emph": false,
+"line": 11
+},
+{
+"w": "raining",
+"s": 34.254,
+"e": 34.604,
+"emph": true,
+"line": 11
+},
+{
+"w": "whale.",
+"s": 34.604,
+"e": 35.038,
+"emph": true,
+"line": 11
+},
+{
+"w": "Huge",
+"s": 35.288,
+"e": 35.563,
+"emph": false,
+"line": 12
+},
+{
+"w": "slabs",
+"s": 35.563,
+"e": 35.901,
+"emph": false,
+"line": 12
+},
+{
+"w": "of",
+"s": 35.901,
+"e": 35.988,
+"emph": false,
+"line": 12
+},
+{
+"w": "blubber",
+"s": 35.988,
+"e": 36.363,
+"emph": false,
+"line": 12
+},
+{
+"w": "fly",
+"s": 36.363,
+"e": 36.588,
+"emph": false,
+"line": 12
+},
+{
+"w": "hundreds",
+"s": 36.588,
+"e": 36.901,
+"emph": false,
+"line": 12
+},
+{
+"w": "of",
+"s": 36.901,
+"e": 36.988,
+"emph": false,
+"line": 12
+},
+{
+"w": "feet,",
+"s": 36.988,
+"e": 37.288,
+"emph": false,
+"line": 12
+},
+{
+"w": "splattering",
+"s": 37.363,
+"e": 37.801,
+"emph": false,
+"line": 12
+},
+{
+"w": "the",
+"s": 37.801,
+"e": 37.888,
+"emph": false,
+"line": 12
+},
+{
+"w": "crowd,",
+"s": 37.888,
+"e": 38.238,
+"emph": false,
+"line": 12
+},
+{
+"w": "the",
+"s": 38.276,
+"e": 38.363,
+"emph": false,
+"line": 12
+},
+{
+"w": "cars,",
+"s": 38.363,
+"e": 38.738,
+"emph": false,
+"line": 12
+},
+{
+"w": "and",
+"s": 38.776,
+"e": 38.876,
+"emph": false,
+"line": 12
+},
+{
+"w": "the",
+"s": 38.876,
+"e": 38.963,
+"emph": false,
+"line": 12
+},
+{
+"w": "dunes.",
+"s": 38.963,
+"e": 39.457,
+"emph": false,
+"line": 12
+},
+{
+"w": "Wait...",
+"s": 39.732,
+"e": 39.957,
+"emph": true,
+"line": 13
+},
+{
+"w": "weren't",
+"s": 40.045,
+"e": 40.22,
+"emph": false,
+"line": 13
+},
+{
+"w": "they",
+"s": 40.22,
+"e": 40.332,
+"emph": false,
+"line": 13
+},
+{
+"w": "supposed",
+"s": 40.332,
+"e": 40.67,
+"emph": false,
+"line": 13
+},
+{
+"w": "to",
+"s": 40.67,
+"e": 40.745,
+"emph": false,
+"line": 13
+},
+{
+"w": "be",
+"s": 40.745,
+"e": 40.857,
+"emph": false,
+"line": 13
+},
+{
+"w": "tiny",
+"s": 40.857,
+"e": 41.157,
+"emph": true,
+"line": 13
+},
+{
+"w": "pieces?",
+"s": 41.157,
+"e": 41.758,
+"emph": false,
+"line": 13
+},
+{
+"w": "You",
+"s": 42.068,
+"e": 42.168,
+"emph": false,
+"line": 14
+},
+{
+"w": "see,",
+"s": 42.168,
+"e": 42.343,
+"emph": false,
+"line": 14
+},
+{
+"w": "dynamite",
+"s": 42.393,
+"e": 42.893,
+"emph": false,
+"line": 14
+},
+{
+"w": "doesn't",
+"s": 42.893,
+"e": 43.156,
+"emph": false,
+"line": 14
+},
+{
+"w": "make",
+"s": 43.156,
+"e": 43.368,
+"emph": false,
+"line": 14
+},
+{
+"w": "things",
+"s": 43.368,
+"e": 43.668,
+"emph": false,
+"line": 14
+},
+{
+"w": "disappear.",
+"s": 43.668,
+"e": 44.243,
+"emph": false,
+"line": 14
+},
+{
+"w": "It",
+"s": 44.343,
+"e": 44.468,
+"emph": false,
+"line": 14
+},
+{
+"w": "just",
+"s": 44.468,
+"e": 44.693,
+"emph": false,
+"line": 14
+},
+{
+"w": "throws",
+"s": 44.693,
+"e": 45.043,
+"emph": true,
+"line": 14
+},
+{
+"w": "them.",
+"s": 45.043,
+"e": 45.356,
+"emph": false,
+"line": 14
+},
+{
+"w": "And",
+"s": 45.541,
+"e": 45.666,
+"emph": false,
+"line": 15
+},
+{
+"w": "tough,",
+"s": 45.666,
+"e": 45.941,
+"emph": false,
+"line": 15
+},
+{
+"w": "rubbery",
+"s": 45.991,
+"e": 46.341,
+"emph": false,
+"line": 15
+},
+{
+"w": "blubber",
+"s": 46.341,
+"e": 46.716,
+"emph": false,
+"line": 15
+},
+{
+"w": "doesn't",
+"s": 46.716,
+"e": 47.016,
+"emph": false,
+"line": 15
+},
+{
+"w": "shred",
+"s": 47.016,
+"e": 47.228,
+"emph": false,
+"line": 15
+},
+{
+"w": "into",
+"s": 47.228,
+"e": 47.441,
+"emph": false,
+"line": 15
+},
+{
+"w": "crumbs.",
+"s": 47.441,
+"e": 47.891,
+"emph": false,
+"line": 15
+},
+{
+"w": "It",
+"s": 47.928,
+"e": 48.041,
+"emph": false,
+"line": 15
+},
+{
+"w": "rips",
+"s": 48.041,
+"e": 48.253,
+"emph": false,
+"line": 15
+},
+{
+"w": "into",
+"s": 48.253,
+"e": 48.478,
+"emph": false,
+"line": 15
+},
+{
+"w": "slabs.",
+"s": 48.478,
+"e": 49.047,
+"emph": true,
+"line": 15
+},
+{
+"w": "It's",
+"s": 49.252,
+"e": 49.365,
+"emph": false,
+"line": 16
+},
+{
+"w": "like",
+"s": 49.365,
+"e": 49.527,
+"emph": false,
+"line": 16
+},
+{
+"w": "trying",
+"s": 49.527,
+"e": 49.815,
+"emph": false,
+"line": 16
+},
+{
+"w": "to",
+"s": 49.815,
+"e": 49.89,
+"emph": false,
+"line": 16
+},
+{
+"w": "get",
+"s": 49.89,
+"e": 50.052,
+"emph": false,
+"line": 16
+},
+{
+"w": "rid",
+"s": 50.052,
+"e": 50.19,
+"emph": false,
+"line": 16
+},
+{
+"w": "of",
+"s": 50.19,
+"e": 50.265,
+"emph": false,
+"line": 16
+},
+{
+"w": "a",
+"s": 50.265,
+"e": 50.327,
+"emph": false,
+"line": 16
+},
+{
+"w": "pudding",
+"s": 50.327,
+"e": 50.665,
+"emph": false,
+"line": 16
+},
+{
+"w": "with",
+"s": 50.665,
+"e": 50.79,
+"emph": false,
+"line": 16
+},
+{
+"w": "a",
+"s": 50.79,
+"e": 50.89,
+"emph": false,
+"line": 16
+},
+{
+"w": "firecracker.",
+"s": 50.89,
+"e": 51.627,
+"emph": false,
+"line": 16
+},
+{
+"w": "You",
+"s": 51.702,
+"e": 51.815,
+"emph": false,
+"line": 16
+},
+{
+"w": "don't",
+"s": 51.815,
+"e": 52.002,
+"emph": false,
+"line": 16
+},
+{
+"w": "get",
+"s": 52.002,
+"e": 52.177,
+"emph": false,
+"line": 16
+},
+{
+"w": "less",
+"s": 52.177,
+"e": 52.402,
+"emph": false,
+"line": 16
+},
+{
+"w": "pudding.",
+"s": 52.402,
+"e": 52.902,
+"emph": false,
+"line": 16
+},
+{
+"w": "You",
+"s": 53.002,
+"e": 53.127,
+"emph": false,
+"line": 16
+},
+{
+"w": "get",
+"s": 53.127,
+"e": 53.302,
+"emph": false,
+"line": 16
+},
+{
+"w": "pudding",
+"s": 53.302,
+"e": 53.577,
+"emph": false,
+"line": 16
+},
+{
+"w": "everywhere.",
+"s": 53.577,
+"e": 54.212,
+"emph": true,
+"line": 16
+},
+{
+"w": "Even",
+"s": 54.422,
+"e": 54.697,
+"emph": false,
+"line": 17
+},
+{
+"w": "worse,",
+"s": 54.697,
+"e": 54.972,
+"emph": false,
+"line": 17
+},
+{
+"w": "the",
+"s": 55.01,
+"e": 55.097,
+"emph": false,
+"line": 17
+},
+{
+"w": "blast",
+"s": 55.097,
+"e": 55.447,
+"emph": false,
+"line": 17
+},
+{
+"w": "scared",
+"s": 55.447,
+"e": 55.735,
+"emph": false,
+"line": 17
+},
+{
+"w": "off",
+"s": 55.735,
+"e": 55.922,
+"emph": false,
+"line": 17
+},
+{
+"w": "every",
+"s": 55.922,
+"e": 56.235,
+"emph": false,
+"line": 17
+},
+{
+"w": "seagull,",
+"s": 56.235,
+"e": 56.697,
+"emph": true,
+"line": 17
+},
+{
+"w": "and",
+"s": 56.747,
+"e": 56.872,
+"emph": false,
+"line": 17
+},
+{
+"w": "most",
+"s": 56.872,
+"e": 57.11,
+"emph": false,
+"line": 17
+},
+{
+"w": "of",
+"s": 57.11,
+"e": 57.185,
+"emph": false,
+"line": 17
+},
+{
+"w": "the",
+"s": 57.185,
+"e": 57.272,
+"emph": false,
+"line": 17
+},
+{
+"w": "whale",
+"s": 57.272,
+"e": 57.56,
+"emph": false,
+"line": 17
+},
+{
+"w": "is",
+"s": 57.56,
+"e": 57.647,
+"emph": false,
+"line": 17
+},
+{
+"w": "still",
+"s": 57.647,
+"e": 57.922,
+"emph": false,
+"line": 17
+},
+{
+"w": "lying",
+"s": 57.922,
+"e": 58.222,
+"emph": false,
+"line": 17
+},
+{
+"w": "there.",
+"s": 58.222,
+"e": 58.518,
+"emph": false,
+"line": 17
+},
+{
+"w": "Oh,",
+"s": 58.748,
+"e": 58.973,
+"emph": false,
+"line": 18
+},
+{
+"w": "and",
+"s": 59.023,
+"e": 59.148,
+"emph": false,
+"line": 18
+},
+{
+"w": "one",
+"s": 59.148,
+"e": 59.373,
+"emph": false,
+"line": 18
+},
+{
+"w": "slab",
+"s": 59.373,
+"e": 59.736,
+"emph": false,
+"line": 18
+},
+{
+"w": "flattened",
+"s": 59.736,
+"e": 60.061,
+"emph": true,
+"line": 18
+},
+{
+"w": "a",
+"s": 60.061,
+"e": 60.123,
+"emph": false,
+"line": 18
+},
+{
+"w": "brand-new",
+"s": 60.123,
+"e": 60.523,
+"emph": false,
+"line": 18
+},
+{
+"w": "car",
+"s": 60.523,
+"e": 60.786,
+"emph": false,
+"line": 18
+},
+{
+"w": "in",
+"s": 60.786,
+"e": 60.861,
+"emph": false,
+"line": 18
+},
+{
+"w": "the",
+"s": 60.861,
+"e": 60.948,
+"emph": false,
+"line": 18
+},
+{
+"w": "parking",
+"s": 60.948,
+"e": 61.298,
+"emph": false,
+"line": 18
+},
+{
+"w": "lot.",
+"s": 61.298,
+"e": 61.562,
+"emph": false,
+"line": 18
+},
+{
+"w": "Whose",
+"s": 61.812,
+"e": 61.987,
+"emph": false,
+"line": 19
+},
+{
+"w": "car?",
+"s": 61.987,
+"e": 62.237,
+"emph": false,
+"line": 19
+},
+{
+"w": "Walter's.",
+"s": 62.287,
+"e": 62.737,
+"emph": true,
+"line": 19
+},
+{
+"w": "The",
+"s": 62.775,
+"e": 62.862,
+"emph": false,
+"line": 19
+},
+{
+"w": "guy",
+"s": 62.862,
+"e": 63.075,
+"emph": false,
+"line": 19
+},
+{
+"w": "who",
+"s": 63.075,
+"e": 63.187,
+"emph": false,
+"line": 19
+},
+{
+"w": "warned",
+"s": 63.187,
+"e": 63.45,
+"emph": false,
+"line": 19
+},
+{
+"w": "them.",
+"s": 63.45,
+"e": 63.74,
+"emph": false,
+"line": 19
+},
+{
+"w": "He'd",
+"s": 64.01,
+"e": 64.122,
+"emph": false,
+"line": 20
+},
+{
+"w": "just",
+"s": 64.122,
+"e": 64.285,
+"emph": false,
+"line": 20
+},
+{
+"w": "bought",
+"s": 64.285,
+"e": 64.522,
+"emph": false,
+"line": 20
+},
+{
+"w": "it",
+"s": 64.522,
+"e": 64.597,
+"emph": false,
+"line": 20
+},
+{
+"w": "in",
+"s": 64.597,
+"e": 64.672,
+"emph": false,
+"line": 20
+},
+{
+"w": "a",
+"s": 64.672,
+"e": 64.722,
+"emph": false,
+"line": 20
+},
+{
+"w": "\"Whale",
+"s": 64.785,
+"e": 64.997,
+"emph": false,
+"line": 20
+},
+{
+"w": "of",
+"s": 64.997,
+"e": 65.072,
+"emph": false,
+"line": 20
+},
+{
+"w": "a",
+"s": 65.072,
+"e": 65.135,
+"emph": false,
+"line": 20
+},
+{
+"w": "Deal\"",
+"s": 65.135,
+"e": 65.36,
+"emph": false,
+"line": 20
+},
+{
+"w": "sale.",
+"s": 65.422,
+"e": 65.853,
+"emph": false,
+"line": 20
+},
+{
+"w": "And",
+"s": 66.143,
+"e": 66.256,
+"emph": false,
+"line": 21
+},
+{
+"w": "in",
+"s": 66.256,
+"e": 66.343,
+"emph": false,
+"line": 21
+},
+{
+"w": "2020,",
+"s": 66.343,
+"e": 67.018,
+"emph": false,
+"line": 21
+},
+{
+"w": "the",
+"s": 67.056,
+"e": 67.156,
+"emph": false,
+"line": 21
+},
+{
+"w": "town",
+"s": 67.156,
+"e": 67.493,
+"emph": false,
+"line": 21
+},
+{
+"w": "named",
+"s": 67.493,
+"e": 67.731,
+"emph": false,
+"line": 21
+},
+{
+"w": "a",
+"s": 67.731,
+"e": 67.806,
+"emph": false,
+"line": 21
+},
+{
+"w": "park...",
+"s": 67.806,
+"e": 68.268,
+"emph": false,
+"line": 21
+},
+{
+"w": "Exploding",
+"s": 68.393,
+"e": 68.956,
+"emph": true,
+"line": 21
+},
+{
+"w": "Whale",
+"s": 68.956,
+"e": 69.293,
+"emph": true,
+"line": 21
+},
+{
+"w": "Memorial",
+"s": 69.293,
+"e": 69.793,
+"emph": true,
+"line": 21
+},
+{
+"w": "Park.",
+"s": 69.793,
+"e": 70.279,
+"emph": false,
+"line": 21
+}
+]

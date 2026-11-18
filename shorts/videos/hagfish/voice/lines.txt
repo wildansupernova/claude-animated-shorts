@@ -1,0 +1,20 @@
+# speed | pause after (s) | text
+1.10 | 0.30 | In {2017,|twenty seventeen,} one truck crash turned a highway in Oregon... into a river of *slime*.
+1.20 | 0.08 | It's summer, and a truck is cruising down Highway {101|one oh one} with thirteen containers of *hagfish*.
+1.22 | 0.08 | That's seven and a half thousand pounds of fish, on their way to Korea, where people actually *eat* them.
+1.12 | 0.12 | Then the driver hits roadworks... and *slams* on the brakes.
+1.22 | 0.08 | One container flies off and *smashes* into a car. The rest tip over.
+1.15 | 0.10 | And thousands of hagfish pour onto the *highway*.
+1.18 | 0.08 | Now, here's the thing about hagfish. When they panic, they make *slime*.
+1.05 | 0.14 | And these hagfish are *extremely* panicked.
+1.20 | 0.08 | Within minutes, cars are coated in thick, gooey slime, like they got *sneezed* on by a giant.
+1.02 | 0.16 | *Wait...* how does one fish make *that* much slime?
+1.15 | 0.06 | You see, a hagfish has rows of slime glands all along its body.
+1.18 | 0.06 | Inside them are tiny balls of super-thin threads, wound up tight like *yarn*.
+1.15 | 0.08 | When they hit water, they unravel, and the slime expands *ten* *thousand* times... in less than half a second.
+1.05 | 0.16 | It's basically a *snot* *airbag*.
+1.20 | 0.06 | In the ocean, it clogs the gills of *sharks* that try to bite them. The sharks spit them out, gagging, and swim away.
+1.20 | 0.10 | On Highway {101,|one oh one,} firefighters had to bring a *bulldozer* and fire hoses just to scrape the road clean.
+1.15 | 0.10 | Hagfish have been around for about three hundred million years. Longer than the *dinosaurs*.
+1.05 | 0.16 | And their whole survival plan? Being *disgusting*.
+1.00 | 0.00 | Honestly? It's *working*.

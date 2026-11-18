@@ -1,0 +1,19 @@
+# speed | pause after (s) | text
+1.08 | 0.30 | In {2016,|twenty sixteen,} an octopus pulled off a *prison* *break*... and nobody saw a thing.
+1.18 | 0.08 | His name is *Inky*, and he lives at the National Aquarium of New Zealand.
+1.18 | 0.08 | Fishermen found him on a reef, scarred from fights, and gave him a home.
+1.08 | 0.14 | Inky is curious. *A* *little* *too* curious.
+1.15 | 0.08 | One night, after a cleaning, the lid of his tank is left open... just a *crack*.
+1.05 | 0.12 | That's all he needs.
+1.20 | 0.06 | Inky squeezes out, slides down the glass, and crosses the floor in the *dark*.
+1.15 | 0.08 | He finds a drain hole, about six inches wide... and pours himself *inside*.
+1.15 | 0.12 | The pipe runs about fifty meters... straight into the *ocean*.
+1.18 | 0.10 | In the morning, the staff find an empty tank, and a *wet* *trail* across the floor.
+1.02 | 0.16 | *Wait...* how does an octopus the size of a rugby ball fit through a six-inch pipe?
+1.12 | 0.06 | You see, an octopus has *no* *bones*. At all.
+1.15 | 0.06 | The only hard part of its body is its *beak*. If that fits through a hole, the rest can follow.
+1.10 | 0.14 | It's basically a bag of jelly... with a *brain*.
+1.18 | 0.08 | And a very good brain. Octopuses can open jars, solve puzzles, and even recognize *faces*.
+1.10 | 0.12 | Inky was never seen again.
+1.15 | 0.10 | And his tank mate, *Blotchy*? He stayed right where he was.
+1.00 | 0.00 | Some octopuses just aren't escape artists.

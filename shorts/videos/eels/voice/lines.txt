@@ -1,0 +1,19 @@
+# speed | pause after (s) | text
+1.08 | 0.30 | In {1800,|eighteen hundred,} a scientist watched fish attack a herd of *horses*... and nobody believed him for two hundred years.
+1.18 | 0.08 | His name is Alexander von *Humboldt*, and he's exploring the grasslands of Venezuela.
+1.18 | 0.08 | He wants to catch *electric* *eels*. But touching one hurts. A lot.
+1.15 | 0.10 | So the local fishermen have an idea.
+1.18 | 0.10 | They round up about thirty horses... and drive them straight into the *eel* *pond*.
+1.20 | 0.06 | The eels rise up, press against the horses, and *zap* them, again and again.
+1.10 | 0.14 | Within minutes, two horses go down and *drown*.
+1.18 | 0.08 | Humboldt writes it all down. And the scientists back home call it *nonsense*.
+1.02 | 0.16 | *Wait...* why would a fish ever leave the water to attack?
+1.18 | 0.08 | Two hundred years later, a biologist named Kenneth *Catania* is moving eels with a metal net.
+1.05 | 0.14 | And they *leap* at him.
+1.15 | 0.06 | You see, underwater, an eel's shock spreads out in every direction, like ripples in a pool.
+1.15 | 0.06 | But if it leaps out and presses its chin against you, the electricity has only one way back to the water. *Straight* *through* *you*.
+1.18 | 0.06 | It's like yelling in a packed stadium, versus yelling right into someone's *ear*.
+1.12 | 0.10 | And the higher the eel leaps, the *stronger* the shock.
+1.10 | 0.12 | Humboldt was right all along.
+1.15 | 0.10 | And to prove it, Catania stuck his own arm in the tank... and let an eel *zap* him.
+1.00 | 0.00 | On *purpose*.

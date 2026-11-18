@@ -1,0 +1,19 @@
+# speed | pause after (s) | text
+1.10 | 0.30 | For over ten years, Sweden's navy hunted *Soviet* *submarines*... that turned out to be *fish* *farts*.
+1.18 | 0.10 | It's {1981.|nineteen eighty-one.} A real Soviet submarine has just run *aground*, right outside a Swedish naval base.
+1.20 | 0.10 | Sweden is *furious*, so the navy fills the sea with microphones, and listens day and night.
+1.08 | 0.08 | Then they hear it. A strange, crackling *hiss*, like bacon frying under the water.
+1.05 | 0.14 | *Submarine!*
+1.28 | 0.06 | Warships race out to hunt the intruder down... and find absolutely *nothing*.
+1.15 | 0.08 | But the hissing keeps coming back. Night after night. Year after year.
+1.22 | 0.08 | The Cold War ends. The Soviet Union *collapses*. But the submarines are still hissing.
+1.02 | 0.16 | *Wait.* Who's still driving Soviet submarines, when there's no Soviet Union?
+1.18 | 0.14 | So in {1996,|nineteen ninety-six,} the navy finally plays the tapes to two *biologists*.
+1.08 | 0.08 | You see, it's not a submarine. It's *herring*.
+1.22 | 0.06 | Herring gulp air at the surface and keep it in a *swim* *bladder*, a little balloon connected to their gut.
+1.15 | 0.08 | So when they let the air out, it comes out the *back*, in tiny, rapid bubbles.
+1.18 | 0.06 | Ever let the air squeak out of a balloon? Now picture *thousands* of fish doing it at once.
+1.18 | 0.08 | On sonar, that sounds a lot like a tiny submarine engine.
+1.12 | 0.12 | Scientists even gave it an official name: Fast Repetitive Tick. {F.R.T.|F. R. T.}
+1.15 | 0.10 | The discovery won an [Ig Nobel](/ˈɪɡ nObˈɛl/) Prize.
+1.00 | 0.00 | So for years, an entire navy was at war... with *fish* *farts*.

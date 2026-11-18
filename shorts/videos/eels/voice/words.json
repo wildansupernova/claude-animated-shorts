@@ -1,0 +1,1542 @@
+[
+{
+"w": "In",
+"s": 0.28,
+"e": 0.405,
+"emph": false,
+"line": 0
+},
+{
+"w": "1800,",
+"s": 0.405,
+"e": 1.28,
+"emph": false,
+"line": 0
+},
+{
+"w": "a",
+"s": 1.33,
+"e": 1.443,
+"emph": false,
+"line": 0
+},
+{
+"w": "scientist",
+"s": 1.443,
+"e": 2.093,
+"emph": false,
+"line": 0
+},
+{
+"w": "watched",
+"s": 2.093,
+"e": 2.493,
+"emph": false,
+"line": 0
+},
+{
+"w": "fish",
+"s": 2.493,
+"e": 2.83,
+"emph": false,
+"line": 0
+},
+{
+"w": "attack",
+"s": 2.83,
+"e": 3.143,
+"emph": false,
+"line": 0
+},
+{
+"w": "a",
+"s": 3.143,
+"e": 3.205,
+"emph": false,
+"line": 0
+},
+{
+"w": "herd",
+"s": 3.205,
+"e": 3.442,
+"emph": false,
+"line": 0
+},
+{
+"w": "of",
+"s": 3.442,
+"e": 3.53,
+"emph": false,
+"line": 0
+},
+{
+"w": "horses...",
+"s": 3.53,
+"e": 4.18,
+"emph": true,
+"line": 0
+},
+{
+"w": "and",
+"s": 4.305,
+"e": 4.43,
+"emph": false,
+"line": 0
+},
+{
+"w": "nobody",
+"s": 4.43,
+"e": 4.805,
+"emph": false,
+"line": 0
+},
+{
+"w": "believed",
+"s": 4.805,
+"e": 5.242,
+"emph": false,
+"line": 0
+},
+{
+"w": "him",
+"s": 5.242,
+"e": 5.43,
+"emph": false,
+"line": 0
+},
+{
+"w": "for",
+"s": 5.43,
+"e": 5.593,
+"emph": false,
+"line": 0
+},
+{
+"w": "two",
+"s": 5.593,
+"e": 5.805,
+"emph": false,
+"line": 0
+},
+{
+"w": "hundred",
+"s": 5.805,
+"e": 6.13,
+"emph": false,
+"line": 0
+},
+{
+"w": "years.",
+"s": 6.13,
+"e": 6.619,
+"emph": false,
+"line": 0
+},
+{
+"w": "His",
+"s": 7.069,
+"e": 7.269,
+"emph": false,
+"line": 1
+},
+{
+"w": "name",
+"s": 7.269,
+"e": 7.594,
+"emph": false,
+"line": 1
+},
+{
+"w": "is",
+"s": 7.594,
+"e": 7.744,
+"emph": false,
+"line": 1
+},
+{
+"w": "Alexander",
+"s": 7.744,
+"e": 8.419,
+"emph": false,
+"line": 1
+},
+{
+"w": "von",
+"s": 8.419,
+"e": 8.669,
+"emph": false,
+"line": 1
+},
+{
+"w": "Humboldt,",
+"s": 8.669,
+"e": 9.169,
+"emph": true,
+"line": 1
+},
+{
+"w": "and",
+"s": 9.244,
+"e": 9.356,
+"emph": false,
+"line": 1
+},
+{
+"w": "he's",
+"s": 9.356,
+"e": 9.544,
+"emph": false,
+"line": 1
+},
+{
+"w": "exploring",
+"s": 9.544,
+"e": 10.056,
+"emph": false,
+"line": 1
+},
+{
+"w": "the",
+"s": 10.056,
+"e": 10.144,
+"emph": false,
+"line": 1
+},
+{
+"w": "grasslands",
+"s": 10.144,
+"e": 10.781,
+"emph": false,
+"line": 1
+},
+{
+"w": "of",
+"s": 10.781,
+"e": 10.869,
+"emph": false,
+"line": 1
+},
+{
+"w": "Venezuela.",
+"s": 10.869,
+"e": 11.615,
+"emph": false,
+"line": 1
+},
+{
+"w": "He",
+"s": 11.82,
+"e": 11.908,
+"emph": false,
+"line": 2
+},
+{
+"w": "wants",
+"s": 11.908,
+"e": 12.083,
+"emph": false,
+"line": 2
+},
+{
+"w": "to",
+"s": 12.083,
+"e": 12.17,
+"emph": false,
+"line": 2
+},
+{
+"w": "catch",
+"s": 12.17,
+"e": 12.408,
+"emph": false,
+"line": 2
+},
+{
+"w": "electric",
+"s": 12.408,
+"e": 12.82,
+"emph": true,
+"line": 2
+},
+{
+"w": "eels.",
+"s": 12.82,
+"e": 13.195,
+"emph": true,
+"line": 2
+},
+{
+"w": "But",
+"s": 13.27,
+"e": 13.42,
+"emph": false,
+"line": 2
+},
+{
+"w": "touching",
+"s": 13.42,
+"e": 13.745,
+"emph": false,
+"line": 2
+},
+{
+"w": "one",
+"s": 13.745,
+"e": 13.92,
+"emph": false,
+"line": 2
+},
+{
+"w": "hurts.",
+"s": 13.92,
+"e": 14.245,
+"emph": false,
+"line": 2
+},
+{
+"w": "A",
+"s": 14.295,
+"e": 14.395,
+"emph": false,
+"line": 2
+},
+{
+"w": "lot.",
+"s": 14.395,
+"e": 14.71,
+"emph": false,
+"line": 2
+},
+{
+"w": "So",
+"s": 14.94,
+"e": 15.028,
+"emph": false,
+"line": 3
+},
+{
+"w": "the",
+"s": 15.028,
+"e": 15.115,
+"emph": false,
+"line": 3
+},
+{
+"w": "local",
+"s": 15.115,
+"e": 15.39,
+"emph": false,
+"line": 3
+},
+{
+"w": "fishermen",
+"s": 15.39,
+"e": 15.765,
+"emph": false,
+"line": 3
+},
+{
+"w": "have",
+"s": 15.765,
+"e": 15.928,
+"emph": false,
+"line": 3
+},
+{
+"w": "an",
+"s": 15.928,
+"e": 16.015,
+"emph": false,
+"line": 3
+},
+{
+"w": "idea.",
+"s": 16.015,
+"e": 16.474,
+"emph": false,
+"line": 3
+},
+{
+"w": "They",
+"s": 16.699,
+"e": 16.849,
+"emph": false,
+"line": 4
+},
+{
+"w": "round",
+"s": 16.849,
+"e": 17.112,
+"emph": false,
+"line": 4
+},
+{
+"w": "up",
+"s": 17.112,
+"e": 17.237,
+"emph": false,
+"line": 4
+},
+{
+"w": "about",
+"s": 17.237,
+"e": 17.537,
+"emph": false,
+"line": 4
+},
+{
+"w": "thirty",
+"s": 17.537,
+"e": 17.849,
+"emph": false,
+"line": 4
+},
+{
+"w": "horses...",
+"s": 17.849,
+"e": 18.424,
+"emph": false,
+"line": 4
+},
+{
+"w": "and",
+"s": 18.524,
+"e": 18.649,
+"emph": false,
+"line": 4
+},
+{
+"w": "drive",
+"s": 18.649,
+"e": 18.937,
+"emph": false,
+"line": 4
+},
+{
+"w": "them",
+"s": 18.937,
+"e": 19.099,
+"emph": false,
+"line": 4
+},
+{
+"w": "straight",
+"s": 19.099,
+"e": 19.387,
+"emph": false,
+"line": 4
+},
+{
+"w": "into",
+"s": 19.387,
+"e": 19.562,
+"emph": false,
+"line": 4
+},
+{
+"w": "the",
+"s": 19.562,
+"e": 19.674,
+"emph": false,
+"line": 4
+},
+{
+"w": "eel",
+"s": 19.674,
+"e": 19.899,
+"emph": true,
+"line": 4
+},
+{
+"w": "pond.",
+"s": 19.899,
+"e": 20.32,
+"emph": true,
+"line": 4
+},
+{
+"w": "The",
+"s": 20.545,
+"e": 20.67,
+"emph": false,
+"line": 5
+},
+{
+"w": "eels",
+"s": 20.67,
+"e": 20.945,
+"emph": false,
+"line": 5
+},
+{
+"w": "rise",
+"s": 20.945,
+"e": 21.233,
+"emph": false,
+"line": 5
+},
+{
+"w": "up,",
+"s": 21.233,
+"e": 21.395,
+"emph": false,
+"line": 5
+},
+{
+"w": "press",
+"s": 21.445,
+"e": 21.708,
+"emph": false,
+"line": 5
+},
+{
+"w": "against",
+"s": 21.708,
+"e": 21.983,
+"emph": false,
+"line": 5
+},
+{
+"w": "the",
+"s": 21.983,
+"e": 22.07,
+"emph": false,
+"line": 5
+},
+{
+"w": "horses,",
+"s": 22.07,
+"e": 22.52,
+"emph": false,
+"line": 5
+},
+{
+"w": "and",
+"s": 22.57,
+"e": 22.695,
+"emph": false,
+"line": 5
+},
+{
+"w": "zap",
+"s": 22.695,
+"e": 22.97,
+"emph": true,
+"line": 5
+},
+{
+"w": "them,",
+"s": 22.97,
+"e": 23.195,
+"emph": false,
+"line": 5
+},
+{
+"w": "again",
+"s": 23.27,
+"e": 23.595,
+"emph": false,
+"line": 5
+},
+{
+"w": "and",
+"s": 23.595,
+"e": 23.708,
+"emph": false,
+"line": 5
+},
+{
+"w": "again.",
+"s": 23.708,
+"e": 24.097,
+"emph": false,
+"line": 5
+},
+{
+"w": "Within",
+"s": 24.307,
+"e": 24.545,
+"emph": false,
+"line": 6
+},
+{
+"w": "minutes,",
+"s": 24.545,
+"e": 24.807,
+"emph": false,
+"line": 6
+},
+{
+"w": "two",
+"s": 24.857,
+"e": 25.057,
+"emph": false,
+"line": 6
+},
+{
+"w": "horses",
+"s": 25.057,
+"e": 25.395,
+"emph": false,
+"line": 6
+},
+{
+"w": "go",
+"s": 25.395,
+"e": 25.557,
+"emph": false,
+"line": 6
+},
+{
+"w": "down",
+"s": 25.557,
+"e": 25.795,
+"emph": false,
+"line": 6
+},
+{
+"w": "and",
+"s": 25.795,
+"e": 25.907,
+"emph": false,
+"line": 6
+},
+{
+"w": "drown.",
+"s": 25.907,
+"e": 26.36,
+"emph": true,
+"line": 6
+},
+{
+"w": "Humboldt",
+"s": 26.65,
+"e": 27.05,
+"emph": false,
+"line": 7
+},
+{
+"w": "writes",
+"s": 27.05,
+"e": 27.288,
+"emph": false,
+"line": 7
+},
+{
+"w": "it",
+"s": 27.288,
+"e": 27.363,
+"emph": false,
+"line": 7
+},
+{
+"w": "all",
+"s": 27.363,
+"e": 27.55,
+"emph": false,
+"line": 7
+},
+{
+"w": "down.",
+"s": 27.55,
+"e": 27.925,
+"emph": false,
+"line": 7
+},
+{
+"w": "And",
+"s": 27.988,
+"e": 28.113,
+"emph": false,
+"line": 7
+},
+{
+"w": "the",
+"s": 28.113,
+"e": 28.2,
+"emph": false,
+"line": 7
+},
+{
+"w": "scientists",
+"s": 28.2,
+"e": 28.7,
+"emph": false,
+"line": 7
+},
+{
+"w": "back",
+"s": 28.7,
+"e": 28.95,
+"emph": false,
+"line": 7
+},
+{
+"w": "home",
+"s": 28.95,
+"e": 29.2,
+"emph": false,
+"line": 7
+},
+{
+"w": "call",
+"s": 29.2,
+"e": 29.413,
+"emph": false,
+"line": 7
+},
+{
+"w": "it",
+"s": 29.413,
+"e": 29.5,
+"emph": false,
+"line": 7
+},
+{
+"w": "nonsense.",
+"s": 29.5,
+"e": 30.18,
+"emph": true,
+"line": 7
+},
+{
+"w": "Wait...",
+"s": 30.435,
+"e": 30.66,
+"emph": true,
+"line": 8
+},
+{
+"w": "why",
+"s": 30.76,
+"e": 30.923,
+"emph": false,
+"line": 8
+},
+{
+"w": "would",
+"s": 30.923,
+"e": 31.023,
+"emph": false,
+"line": 8
+},
+{
+"w": "a",
+"s": 31.023,
+"e": 31.098,
+"emph": false,
+"line": 8
+},
+{
+"w": "fish",
+"s": 31.098,
+"e": 31.41,
+"emph": false,
+"line": 8
+},
+{
+"w": "ever",
+"s": 31.41,
+"e": 31.635,
+"emph": false,
+"line": 8
+},
+{
+"w": "leave",
+"s": 31.635,
+"e": 31.823,
+"emph": false,
+"line": 8
+},
+{
+"w": "the",
+"s": 31.823,
+"e": 31.91,
+"emph": false,
+"line": 8
+},
+{
+"w": "water",
+"s": 31.91,
+"e": 32.21,
+"emph": false,
+"line": 8
+},
+{
+"w": "to",
+"s": 32.21,
+"e": 32.36,
+"emph": false,
+"line": 8
+},
+{
+"w": "attack?",
+"s": 32.36,
+"e": 32.863,
+"emph": false,
+"line": 8
+},
+{
+"w": "Two",
+"s": 33.173,
+"e": 33.348,
+"emph": false,
+"line": 9
+},
+{
+"w": "hundred",
+"s": 33.348,
+"e": 33.598,
+"emph": false,
+"line": 9
+},
+{
+"w": "years",
+"s": 33.598,
+"e": 33.873,
+"emph": false,
+"line": 9
+},
+{
+"w": "later,",
+"s": 33.873,
+"e": 34.223,
+"emph": false,
+"line": 9
+},
+{
+"w": "a",
+"s": 34.298,
+"e": 34.373,
+"emph": false,
+"line": 9
+},
+{
+"w": "biologist",
+"s": 34.373,
+"e": 35.023,
+"emph": false,
+"line": 9
+},
+{
+"w": "named",
+"s": 35.023,
+"e": 35.298,
+"emph": false,
+"line": 9
+},
+{
+"w": "Kenneth",
+"s": 35.298,
+"e": 35.623,
+"emph": false,
+"line": 9
+},
+{
+"w": "Catania",
+"s": 35.623,
+"e": 36.285,
+"emph": true,
+"line": 9
+},
+{
+"w": "is",
+"s": 36.285,
+"e": 36.448,
+"emph": false,
+"line": 9
+},
+{
+"w": "moving",
+"s": 36.448,
+"e": 36.785,
+"emph": false,
+"line": 9
+},
+{
+"w": "eels",
+"s": 36.785,
+"e": 37.173,
+"emph": false,
+"line": 9
+},
+{
+"w": "with",
+"s": 37.173,
+"e": 37.31,
+"emph": false,
+"line": 9
+},
+{
+"w": "a",
+"s": 37.31,
+"e": 37.373,
+"emph": false,
+"line": 9
+},
+{
+"w": "metal",
+"s": 37.373,
+"e": 37.673,
+"emph": false,
+"line": 9
+},
+{
+"w": "net.",
+"s": 37.673,
+"e": 37.936,
+"emph": false,
+"line": 9
+},
+{
+"w": "And",
+"s": 38.166,
+"e": 38.304,
+"emph": false,
+"line": 10
+},
+{
+"w": "they",
+"s": 38.304,
+"e": 38.441,
+"emph": false,
+"line": 10
+},
+{
+"w": "leap",
+"s": 38.441,
+"e": 38.666,
+"emph": true,
+"line": 10
+},
+{
+"w": "at",
+"s": 38.666,
+"e": 38.754,
+"emph": false,
+"line": 10
+},
+{
+"w": "him.",
+"s": 38.754,
+"e": 39.103,
+"emph": false,
+"line": 10
+},
+{
+"w": "You",
+"s": 39.393,
+"e": 39.53,
+"emph": false,
+"line": 11
+},
+{
+"w": "see,",
+"s": 39.53,
+"e": 39.718,
+"emph": false,
+"line": 11
+},
+{
+"w": "underwater,",
+"s": 39.755,
+"e": 40.268,
+"emph": false,
+"line": 11
+},
+{
+"w": "an",
+"s": 40.318,
+"e": 40.443,
+"emph": false,
+"line": 11
+},
+{
+"w": "eel's",
+"s": 40.443,
+"e": 40.755,
+"emph": false,
+"line": 11
+},
+{
+"w": "shock",
+"s": 40.755,
+"e": 41.043,
+"emph": false,
+"line": 11
+},
+{
+"w": "spreads",
+"s": 41.043,
+"e": 41.393,
+"emph": false,
+"line": 11
+},
+{
+"w": "out",
+"s": 41.393,
+"e": 41.58,
+"emph": false,
+"line": 11
+},
+{
+"w": "in",
+"s": 41.58,
+"e": 41.693,
+"emph": false,
+"line": 11
+},
+{
+"w": "every",
+"s": 41.693,
+"e": 41.993,
+"emph": false,
+"line": 11
+},
+{
+"w": "direction,",
+"s": 41.993,
+"e": 42.543,
+"emph": false,
+"line": 11
+},
+{
+"w": "like",
+"s": 42.618,
+"e": 42.843,
+"emph": false,
+"line": 11
+},
+{
+"w": "ripples",
+"s": 42.843,
+"e": 43.193,
+"emph": false,
+"line": 11
+},
+{
+"w": "in",
+"s": 43.193,
+"e": 43.28,
+"emph": false,
+"line": 11
+},
+{
+"w": "a",
+"s": 43.28,
+"e": 43.343,
+"emph": false,
+"line": 11
+},
+{
+"w": "pool.",
+"s": 43.343,
+"e": 43.728,
+"emph": false,
+"line": 11
+},
+{
+"w": "But",
+"s": 43.938,
+"e": 44.05,
+"emph": false,
+"line": 12
+},
+{
+"w": "if",
+"s": 44.05,
+"e": 44.15,
+"emph": false,
+"line": 12
+},
+{
+"w": "it",
+"s": 44.15,
+"e": 44.263,
+"emph": false,
+"line": 12
+},
+{
+"w": "leaps",
+"s": 44.263,
+"e": 44.563,
+"emph": false,
+"line": 12
+},
+{
+"w": "out",
+"s": 44.563,
+"e": 44.75,
+"emph": false,
+"line": 12
+},
+{
+"w": "and",
+"s": 44.75,
+"e": 44.863,
+"emph": false,
+"line": 12
+},
+{
+"w": "presses",
+"s": 44.863,
+"e": 45.263,
+"emph": false,
+"line": 12
+},
+{
+"w": "its",
+"s": 45.263,
+"e": 45.475,
+"emph": false,
+"line": 12
+},
+{
+"w": "chin",
+"s": 45.475,
+"e": 45.738,
+"emph": false,
+"line": 12
+},
+{
+"w": "against",
+"s": 45.738,
+"e": 46.113,
+"emph": false,
+"line": 12
+},
+{
+"w": "you,",
+"s": 46.113,
+"e": 46.313,
+"emph": false,
+"line": 12
+},
+{
+"w": "the",
+"s": 46.388,
+"e": 46.538,
+"emph": false,
+"line": 12
+},
+{
+"w": "electricity",
+"s": 46.538,
+"e": 47.188,
+"emph": false,
+"line": 12
+},
+{
+"w": "has",
+"s": 47.188,
+"e": 47.388,
+"emph": false,
+"line": 12
+},
+{
+"w": "only",
+"s": 47.388,
+"e": 47.725,
+"emph": false,
+"line": 12
+},
+{
+"w": "one",
+"s": 47.725,
+"e": 47.963,
+"emph": false,
+"line": 12
+},
+{
+"w": "way",
+"s": 47.963,
+"e": 48.163,
+"emph": false,
+"line": 12
+},
+{
+"w": "back",
+"s": 48.163,
+"e": 48.438,
+"emph": false,
+"line": 12
+},
+{
+"w": "to",
+"s": 48.438,
+"e": 48.525,
+"emph": false,
+"line": 12
+},
+{
+"w": "the",
+"s": 48.525,
+"e": 48.613,
+"emph": false,
+"line": 12
+},
+{
+"w": "water.",
+"s": 48.613,
+"e": 49.138,
+"emph": false,
+"line": 12
+},
+{
+"w": "Straight",
+"s": 49.275,
+"e": 49.625,
+"emph": true,
+"line": 12
+},
+{
+"w": "through",
+"s": 49.625,
+"e": 49.875,
+"emph": true,
+"line": 12
+},
+{
+"w": "you.",
+"s": 49.875,
+"e": 50.182,
+"emph": true,
+"line": 12
+},
+{
+"w": "It's",
+"s": 50.367,
+"e": 50.479,
+"emph": false,
+"line": 13
+},
+{
+"w": "like",
+"s": 50.479,
+"e": 50.692,
+"emph": false,
+"line": 13
+},
+{
+"w": "yelling",
+"s": 50.692,
+"e": 51.054,
+"emph": false,
+"line": 13
+},
+{
+"w": "in",
+"s": 51.054,
+"e": 51.129,
+"emph": false,
+"line": 13
+},
+{
+"w": "a",
+"s": 51.129,
+"e": 51.192,
+"emph": false,
+"line": 13
+},
+{
+"w": "packed",
+"s": 51.192,
+"e": 51.492,
+"emph": false,
+"line": 13
+},
+{
+"w": "stadium,",
+"s": 51.492,
+"e": 52.067,
+"emph": false,
+"line": 13
+},
+{
+"w": "versus",
+"s": 52.142,
+"e": 52.492,
+"emph": false,
+"line": 13
+},
+{
+"w": "yelling",
+"s": 52.492,
+"e": 52.867,
+"emph": false,
+"line": 13
+},
+{
+"w": "right",
+"s": 52.867,
+"e": 53.079,
+"emph": false,
+"line": 13
+},
+{
+"w": "into",
+"s": 53.079,
+"e": 53.292,
+"emph": false,
+"line": 13
+},
+{
+"w": "someone's",
+"s": 53.292,
+"e": 53.642,
+"emph": false,
+"line": 13
+},
+{
+"w": "ear.",
+"s": 53.642,
+"e": 53.963,
+"emph": true,
+"line": 13
+},
+{
+"w": "And",
+"s": 54.148,
+"e": 54.261,
+"emph": false,
+"line": 14
+},
+{
+"w": "the",
+"s": 54.261,
+"e": 54.348,
+"emph": false,
+"line": 14
+},
+{
+"w": "higher",
+"s": 54.348,
+"e": 54.636,
+"emph": false,
+"line": 14
+},
+{
+"w": "the",
+"s": 54.636,
+"e": 54.748,
+"emph": false,
+"line": 14
+},
+{
+"w": "eel",
+"s": 54.748,
+"e": 54.948,
+"emph": false,
+"line": 14
+},
+{
+"w": "leaps,",
+"s": 54.948,
+"e": 55.248,
+"emph": false,
+"line": 14
+},
+{
+"w": "the",
+"s": 55.286,
+"e": 55.373,
+"emph": false,
+"line": 14
+},
+{
+"w": "stronger",
+"s": 55.373,
+"e": 55.761,
+"emph": true,
+"line": 14
+},
+{
+"w": "the",
+"s": 55.761,
+"e": 55.886,
+"emph": false,
+"line": 14
+},
+{
+"w": "shock.",
+"s": 55.886,
+"e": 56.288,
+"emph": false,
+"line": 14
+},
+{
+"w": "Humboldt",
+"s": 56.538,
+"e": 56.851,
+"emph": false,
+"line": 15
+},
+{
+"w": "was",
+"s": 56.851,
+"e": 56.963,
+"emph": false,
+"line": 15
+},
+{
+"w": "right",
+"s": 56.963,
+"e": 57.151,
+"emph": false,
+"line": 15
+},
+{
+"w": "all",
+"s": 57.151,
+"e": 57.301,
+"emph": false,
+"line": 15
+},
+{
+"w": "along.",
+"s": 57.301,
+"e": 57.717,
+"emph": false,
+"line": 15
+},
+{
+"w": "And",
+"s": 57.987,
+"e": 58.099,
+"emph": false,
+"line": 16
+},
+{
+"w": "to",
+"s": 58.099,
+"e": 58.187,
+"emph": false,
+"line": 16
+},
+{
+"w": "prove",
+"s": 58.187,
+"e": 58.487,
+"emph": false,
+"line": 16
+},
+{
+"w": "it,",
+"s": 58.487,
+"e": 58.587,
+"emph": false,
+"line": 16
+},
+{
+"w": "Catania",
+"s": 58.637,
+"e": 59.187,
+"emph": false,
+"line": 16
+},
+{
+"w": "stuck",
+"s": 59.187,
+"e": 59.424,
+"emph": false,
+"line": 16
+},
+{
+"w": "his",
+"s": 59.424,
+"e": 59.587,
+"emph": false,
+"line": 16
+},
+{
+"w": "own",
+"s": 59.587,
+"e": 59.837,
+"emph": false,
+"line": 16
+},
+{
+"w": "arm",
+"s": 59.837,
+"e": 60.074,
+"emph": false,
+"line": 16
+},
+{
+"w": "in",
+"s": 60.074,
+"e": 60.149,
+"emph": false,
+"line": 16
+},
+{
+"w": "the",
+"s": 60.149,
+"e": 60.237,
+"emph": false,
+"line": 16
+},
+{
+"w": "tank...",
+"s": 60.237,
+"e": 60.687,
+"emph": false,
+"line": 16
+},
+{
+"w": "and",
+"s": 60.812,
+"e": 60.937,
+"emph": false,
+"line": 16
+},
+{
+"w": "let",
+"s": 60.937,
+"e": 61.074,
+"emph": false,
+"line": 16
+},
+{
+"w": "an",
+"s": 61.074,
+"e": 61.187,
+"emph": false,
+"line": 16
+},
+{
+"w": "eel",
+"s": 61.187,
+"e": 61.437,
+"emph": false,
+"line": 16
+},
+{
+"w": "zap",
+"s": 61.437,
+"e": 61.674,
+"emph": true,
+"line": 16
+},
+{
+"w": "him.",
+"s": 61.674,
+"e": 61.979,
+"emph": false,
+"line": 16
+},
+{
+"w": "On",
+"s": 62.254,
+"e": 62.429,
+"emph": false,
+"line": 17
+},
+{
+"w": "purpose.",
+"s": 62.429,
+"e": 63.092,
+"emph": true,
+"line": 17
+}
+]

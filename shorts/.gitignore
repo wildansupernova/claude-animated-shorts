@@ -1,0 +1,7 @@
+node_modules/
+out/
+final/
+voice_test/
+**/__pycache__/
+videos/*/mix.wav
+videos/*/mix_report.txt
