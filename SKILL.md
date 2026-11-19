@@ -102,6 +102,8 @@ lighting 5-6, ink 6, textures 5-6, characters 7, depth 6-7, composition 6-7 (fro
   contact shadow ~.5 under the feet + sun-direction tail by day; golden rim inner only (never an offset outer copy).
 - **Camera** (`story.ts`): cuts on big jumps, smootherstep glides 18-40 f, every hold creeps (no static hold ≥4 f),
   flip kicks decaying over 7 f on impacts, 4-4.6° rolls, foreground props (`FOREGROUND`) in ~1/3 of shots.
+  Pick a different featured move per beat with the `camera-moves` skill (`.claude/skills/camera-moves/SKILL.md`,
+  catalogue `references/CAMERA_MOVES.md`, demo reel in `experiments/camera-lab/`); a creep alone on every shot reads flat. Rolls are radians in code: 4° = 0.07, not 0.04.
 
 ## Look targets (measured from the reference; see references/reports/)
 - **Ink:**
