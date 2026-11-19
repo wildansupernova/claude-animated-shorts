@@ -535,10 +535,11 @@ const drawHead = (p: Pen, c: Hero, H: Blob, cx: number, hc: number, W: number, H
     default: break;
   }
   if (c.glasses && kind === "face") { const fx = cx + 7 * u * facing; for (const s of [-1, 1]) p.arc(fx + s * 13 * u, hc, 10.5 * u, 9.5 * u, 0, 360, 2.6 * u, INK); p.stroke([[fx - 3 * u, hc - 2 * u], [fx + 3 * u, hc - 2 * u]], 2.4 * u); }
-  if (c.mark) { // the black mark creeping up the side of the neck (Noriko, end of Minus One): below the jaw, veins reaching up
+  if (c.mark) { // the black mark on the side of her neck (end of Minus One): an inky stain where jaw meets collar
     const mx = cx - 0.5 * H.a, my = hc + 0.92 * H.b;
-    p.ell(mx, my + 8 * u, 13 * u, 11 * u, "#1a1420", 0);
-    for (let i = 0; i < 5; i++) { const a = rad(-150 + i * 26); p.stroke([[mx, my + 4 * u], [mx + Math.cos(a) * 16 * u, my + 4 * u + Math.sin(a) * 16 * u], [mx + Math.cos(a + 0.35) * 25 * u, my + 4 * u + Math.sin(a + 0.35) * 24 * u]], 2.4 * u, "#1a1420"); }
+    const st: P2[] = []; for (let i = 0; i < 18; i++) { const a = (i / 18) * Math.PI * 2, r = (i % 2 ? 11 : 17) * u * (0.85 + 0.3 * rnd(seed + 9, i)); st.push([mx + Math.cos(a) * r * 1.15, my + Math.sin(a) * r * 0.9]); }
+    p.poly(st, "#1a1420", 1.4 * u);
+    p.ell(mx - 2 * u, my - 2 * u, 5 * u, 4 * u, "#4a2a5a", 0);
   }
   // beards
   if (c.beard && c.beardK) {

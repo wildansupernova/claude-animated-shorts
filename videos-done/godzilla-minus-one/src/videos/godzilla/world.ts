@@ -145,7 +145,7 @@ export class World {
       this.cards.fx(sh, z.x + o[0], y + 0.05 + o[1], z.z + o[2], S * 0.75, S * 0.32, camW, { flat: true, soft: true, alpha: (z.alpha ?? 1) * 0.9 });
     }
     const col = z.tint ? new THREE.Color(z.tint) : this.cards.tint.clone();
-    this.cards.fx(tex, z.x + o[0], y + S * 0.475 + o[1], z.z + o[2], z.mirror ? -S : S, S, camW, { alpha: z.alpha, color: col, rot: z.roll });
+    this.cards.fx(tex, z.x + o[0], y + S * 0.475 + o[1], z.z + o[2], z.mirror ? -S : S, S, camW, { alpha: z.alpha, color: z.v === "sil" ? new THREE.Color(1, 1, 1) : col, rot: z.roll, soft: z.v === "sil" });
   }
 
   private actor(a: ActorSpec, f: number, o: readonly number[], camW: THREE.Vector3, camL: THREE.Vector3, tanH: number) {
@@ -178,7 +178,7 @@ export class World {
       case "bolt": tex = drawTex(`bolt${x.seed}${x.col}`, 200, 600, k, (p) => F2.bolt(p, x.seed ?? 1, x.col)); break;
       case "puff": tex = drawTex(`puff${x.col}${x.seed}`, 400, 300, k, (p) => F2.puff(p, x.col, x.seed ?? 1)); break;
       case "note": tex = drawTex(`note${x.col}`, 200, 260, k, (p) => F2.note(p, x.col)); break;
-      case "sign": tex = drawTex(`sign${x.text?.join("/")}${x.col}${x.col2}`, 1000, Math.round((1000 * h) / x.w), 0.6, (p) => F2.sign(p, 1000, Math.round((1000 * h) / x.w), x.text ?? [], { bg: x.col, fg: x.col2 })); break;
+      case "sign": tex = drawTex(`sign${x.text?.join("/")}${x.col}${x.col2}`, 1000, Math.round((1000 * h) / x.w), 0.6, (p) => F2.sign(p, 1000, Math.round((1000 * h) / x.w), x.text ?? [], { bg: x.col, fg: x.col2, size: (x.text?.length === 1 && x.text[0].length <= 3) ? Math.round((700 * h) / x.w) : undefined })); break;
       case "grave": tex = drawTex(`grave${x.text?.[0]}`, 300, 360, k, (p) => F2.grave(p, x.text?.[0] ?? "")); break;
       case "sparkle": tex = drawTex(`spk${x.col}`, 200, 200, k, (p) => F2.sparkle(p, x.col)); break;
       case "chess": tex = drawTex(`chess`, 400, 300, 0.8, (p) => F2.chess(p)); break;

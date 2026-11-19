@@ -73,10 +73,14 @@ const pushK = (f: number, f0: number, rate = 0.0025, punch = 0, n = 32) => {
 };
 const dolly = (pos: V3, look: V3, k: number, rest: Partial<Cam> = {}): CamIn => ({ pos: [look[0] + (pos[0] - look[0]) * k, look[1] + (pos[1] - look[1]) * k, look[2] + (pos[2] - look[2]) * k], look, ...rest });
 /** a dolly key that creeps in from its start frame (p0: where a punch-in starts) */
-const D = (f0: number, pos: V3, look: V3, o: { fov?: number; roll?: number; rate?: number; punch?: number; n?: number; dur?: number; cut?: boolean; p0?: number } = {}): Key =>
+const D = (f0: number, pos: V3, look: V3, o: { fov?: number; roll?: number; rate?: number; punch?: number; n?: number; dur?: number; cut?: boolean; p0?: number; focus?: number } = {}): Key =>
   ({ f: f0, dur: o.dur, cut: o.cut, s: (f) => {
     const base = Math.exp(-(o.rate ?? 0.0025) * Math.max(0, f - f0));
     const pk = o.punch ? pushK(f, o.p0 ?? f0, 0, o.punch, o.n ?? 32) : 1;
+    if (o.focus) { // push toward a subject `focus` metres away, not toward the (far) look point
+      const d: V3 = [look[0] - pos[0], look[1] - pos[1], look[2] - pos[2]], Ld = Math.hypot(...d), m = (1 - base * pk) * o.focus / Ld;
+      return { pos: [pos[0] + d[0] * m, pos[1] + d[1] * m, pos[2] + d[2] * m], look, fov: o.fov ?? 40, roll: o.roll ?? 0 };
+    }
     return dolly(pos, look, base * pk, { fov: o.fov ?? 40, roll: o.roll ?? 0 });
   } });
 /** a moving camera given as a function, cut in at f0 */
@@ -126,8 +130,8 @@ const setBoard = (H: Handles, step: number, dead: number) => {
   const key = `${Math.round(step * 20)}|${dead > 0 ? 1 : 0}`;
   if (key === boardKey && boardTex) return;
   boardKey = key;
-  const c = (boardTex?.image as HTMLCanvasElement) ?? document.createElement("canvas"); c.width = 1200; c.height = 750;
-  const g = c.getContext("2d")!; g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, 1200, 750);
+  const c = (boardTex?.image as HTMLCanvasElement) ?? document.createElement("canvas"); c.width = 750; c.height = 1000;
+  const g = c.getContext("2d")!; g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, 750, 1000);
   drawBoard(new Pen(g), step, dead);
   if (!boardTex) { boardTex = new THREE.CanvasTexture(c); boardTex.colorSpace = THREE.SRGBColorSpace; }
   boardTex.needsUpdate = true;
@@ -156,37 +160,37 @@ const shot = (ch: number, a: number, b: number, place: PlaceId, look: LookId, ca
 const boatAt = (H: Handles, f: number, x = 0, z = 0, ry = 0) => { H.boat.visible = true; H.boat.position.set(x, 0.15 * Math.sin(f * 0.06), z); H.boat.rotation.set(0.012 * Math.sin(f * 0.05), ry, 0.02 * Math.sin(f * 0.043)); };
 const DECK = 2.1;
 const FISH = (e: Expr, o: Partial<ActorSpec> = {}): ActorSpec[] => [
-  { id: "fish1", x: 1.6, y: DECK, z: 0.9, expr: e, seed: 11, ...o },
-  { id: "fish2", x: -0.6, y: DECK, z: -0.4, expr: e, seed: 12, mirror: true, ...o },
-  { id: "fish3", x: 3.6, y: DECK, z: -0.2, expr: e, seed: 13, ...o },
+  { id: "fish1", x: 1.5, y: DECK, z: 0.6, expr: e, seed: 11, ...o },
+  { id: "fish2", x: 0.35, y: DECK, z: -0.2, expr: e, seed: 12, mirror: true, ...o },
+  { id: "fish3", x: 2.6, y: DECK, z: -0.4, expr: e, seed: 13, ...o },
 ];
 // "west" = far along -x; the false sun and the cloud sit there
-const WEST: V3 = [-1500, 0, -350];
+const WEST: V3 = [-1500, 0, -1100];
 
 // ===== HOOK (ch 0) =====
 const H1t = cue("H1", "twenty"), H1s = cue("H1", "sun"), H1r = cue("H1", "rise"), H1w = cue("H1", "in");
 const H2 = cue("H2", "it"), H2b = cue("H2", "bomb"), H2z = cue("H2", "godzilla");
 const H3 = cue("H3", "before"), H3z = cue("H3", "godzilla"), H3e = cue("H3", "everything");
 // 0 - "March first, 1954": the tuna boat alone on the night sea
-shot(0, 0, H1t - 2, "sea", "predawn", [D(0, [-26, 7, 30], [2, 3, 0], { fov: 40, rate: 0.0022 })],
-  (f, H) => { boatAt(H, f); return { actors: FISH("neutral", { look: -1 }), fx: [{ k: "glow", x: -8, y: 4.3, z: 1.9, w: 2.4, soft: true, col: "#ffcf7a" }] }; });
+shot(0, 0, H1t - 2, "sea", "predawn", [D(0, [-20, 9, 40], [0, 3, 0], { fov: 40, rate: 0.0022 })],
+  (f, H) => { boatAt(H, f); return { actors: FISH("neutral", { look: -1 }), fx: [{ k: "glow", x: -8, y: 3.6, z: 1.95, w: 1.4, soft: true, col: "#ffcf7a", alpha: 0.8 }] }; });
 // "Twenty-three fishermen watched": on deck, faces to the west
-shot(0, H1t - 2, H1s - 1, "sea", "predawn", [D(H1t - 2, [1.4, 3.6, -7.2], [1.4, 3.2, 0], { fov: 40, rate: 0.003 })],
+shot(0, H1t - 2, H1s - 1, "sea", "predawn", [D(H1t - 2, [1.5, 3.9, -7.6], [1.5, 3.2, 0], { fov: 40, rate: 0.003 })],
   (f, H) => { boatAt(H, f); return { actors: FISH("neutral", { look: 0 }) }; });
 // "the sun rise" - the light hits their faces
-shot(0, H1s - 1, H1w - 1, "sea", "westface", [D(H1s - 1, [1.4, 3.6, -6.4], [1.4, 3.25, 0], { fov: 40, rate: 0.004, punch: 0.008, n: 20 })],
+shot(0, H1s - 1, H1w - 1, "sea", "westface", [D(H1s - 1, [1.5, 3.8, -6.6], [1.5, 3.25, 0], { fov: 40, rate: 0.004, punch: 0.008, n: 20 })],
   (f, H) => { boatAt(H, f); return { actors: FISH(ex(f, [[0, "neutral"], [H1r, "shock"]]) as Expr) }; });
 // "in the west": a second sun on the horizon, the boat's mast against it
-shot(0, H1w - 1, H2 - 1, "sea", "westglow", [D(H1w - 1, [14, 3.2, 10], [-60, 9, -14], { fov: 44, rate: 0.0025 })],
+shot(0, H1w - 1, H2 - 1, "sea", "westglow", [D(H1w - 1, [8.5, 3.9, 6.5], [-62, 12, -46], { fov: 44, rate: 0.0025, focus: 8 })],
   (f, H) => { boatAt(H, f); const t = sm(f, H1w - 1, H2 + 10);
-    return { actors: [{ id: "fish1", x: 3.2, y: DECK, z: 1.5, expr: "shock", facing: -1, look: -1, seed: 11 }, { id: "fish3", x: 5.2, y: DECK, z: 0.6, expr: "shock", facing: -1, look: -1, seed: 13 }],
-      fx: [{ k: "fireball", x: WEST[0], y: 20 + 70 * t, z: WEST[2], w: 260 + 120 * t, soft: true, t: 0.6 + 0.4 * t }] }; });
+    return { actors: [{ id: "fish1", x: 3.0, y: DECK, z: 1.4, expr: "shock", facing: -1, look: -1, seed: 11 }, { id: "fish3", x: 4.2, y: DECK, z: 0.2, expr: "shock", facing: -1, look: -1, seed: 13 }],
+      fx: [{ k: "fireball", x: WEST[0], y: 20 + 90 * t, z: WEST[2], w: 380 + 160 * t, soft: true, t: 0.6 + 0.4 * t }] }; });
 // "It wasn't the sun. It was a hydrogen bomb": the mushroom cloud climbs over the horizon
 KICKS.push([H2b, 1.4]);
-shot(0, H2 - 1, H2z - 3, "sea", "westglow", [D(H2 - 1, [18, 4.5, 14], [-80, 40, -30], { fov: 48, rate: 0.002 }), D(H2b - 2, [12, 4, 10], [-80, 44, -30], { fov: 46, dur: 30, rate: 0.003, punch: 0.006 })],
+shot(0, H2 - 1, H2z - 3, "sea", "westglow", [D(H2 - 1, [9.5, 4.2, 7.5], [-74, 30, -54], { fov: 50, rate: 0.002, focus: 9 }), D(H2b - 2, [8.6, 4.1, 6.8], [-74, 33, -54], { fov: 48, dur: 30, rate: 0.003, punch: 0.006, p0: H2b - 2, focus: 9 })],
   (f, H) => { boatAt(H, f); const t = sm(f, H2 - 20, H2z + 20);
-    return { actors: [{ id: "fish1", x: 3.2, y: DECK, z: 1.5, expr: "shock", facing: -1, look: -1, seed: 11 }, { id: "fish2", x: 1.0, y: DECK, z: 0.6, expr: f > H2b ? "pained" : "shock", facing: -1, look: -1, seed: 12 }, { id: "fish3", x: 5.2, y: DECK, z: 0.6, expr: "shock", facing: -1, look: -1, seed: 13 }],
-      fx: [{ k: "glow", x: WEST[0], y: 60, z: WEST[2], w: 900, soft: true, col: "#ffb070", alpha: 0.6 }, { k: "mushroom", x: WEST[0], y: 420 * t + 40, z: WEST[2], w: 700, h: 875, t: 0.25 + 0.75 * t, seed: 1, soft: true }] }; });
+    return { actors: [{ id: "fish1", x: 3.0, y: DECK, z: 1.4, expr: "shock", facing: -1, look: -1, seed: 11 }, { id: "fish2", x: 2.2, y: DECK, z: 0.5, expr: f > H2b ? "pained" : "shock", facing: -1, look: -1, seed: 12 }, { id: "fish3", x: 4.2, y: DECK, z: 0.2, expr: "shock", facing: -1, look: -1, seed: 13 }],
+      fx: [{ k: "glow", x: WEST[0], y: 60, z: WEST[2], w: 900, soft: true, col: "#ffb070", alpha: 0.6 }, { k: "mushroom", x: WEST[0], y: 440 * t + 30, z: WEST[2], w: 720, h: 900, t: 0.25 + 0.75 * t, seed: 1, soft: true }] }; });
 // "and it gave birth to Godzilla": he rises out of the sea, roaring
 KICKS.push([H2z, 1.6]);
 shot(0, H2z - 3, H3 - 1, "sea", "stormsea", [D(H2z - 3, [10, 2.4, 70], [0, 34, -20], { fov: 46, rate: 0.003, punch: 0.008, n: 24 })],
@@ -194,35 +198,35 @@ shot(0, H2z - 3, H3 - 1, "sea", "stormsea", [D(H2z - 3, [10, 2.4, 70], [0, 34, -
     return { actors: [], zillas: [{ x: 0, y: -26 + 26 * r, z: -30, h: 52, v: "m1", pose: "roar", jaw: sm(f, H2z, H2z + 8), shadow: false }],
       particles: [...rise(f, 0, -2, -30, 220, 40, 30 * r + 2, 6, ["#e8f2fa", "#cfe0ec"]), ...rain(f, 0, 0, 40, 160, 60, 40)], particleSize: 0.5 }; });
 // "Before you watch Godzilla Minus Zero, here's everything you need to know": the cinema tonight, he peeks over the roof
-shot(0, H3 - 1, cue("O1", "white") - 1, "city", "cineNight", [D(H3 - 1, [-6, 1.6, 150], [14, 9, 196], { fov: 46, rate: 0.0018 }), D(H3e - 4, [-3, 1.5, 165], [14, 10, 198], { fov: 44, dur: 30, rate: 0.002 })],
+shot(0, H3 - 1, cue("O1", "white") - 1, "city", "cineNight", [D(H3 - 1, [-12, 1.7, 138], [18, 17, 204], { fov: 48, rate: 0.0018 }), D(H3e - 4, [-9, 1.6, 148], [18, 18, 206], { fov: 48, dur: 30, rate: 0.002 })],
   (f) => ({ actors: (["aud1", "aud2", "aud3", "aud4"] as CastId[]).map((id, i) => ({ id, x: 11.6 + (i % 2) * 0.5, y: 0.18, z: 182 + i * 1.4 + ((f / FPS) * 0.6) % 1.2, legs: "walk" as const, phase: f / FPS + i * 0.3, mirror: true, seed: 30 + i, expr: (i % 2 ? "grin" : "smile") as Expr })),
-    zillas: [{ x: 62, z: 236, h: 46, v: "m1", pose: f > H3z ? "roar" : "stand", jaw: sm(f, H3z, H3z + 10) * 0.8, mirror: true, shadow: false }] }));
+    zillas: [{ x: 50, z: 238, h: 46, v: "m1", pose: f > H3z ? "roar" : "stand", jaw: sm(f, H3z, H3z + 10) * 0.8, mirror: true, shadow: false }] }));
 
 // ===== GODZILLA 1954 (ch 1) =====
 const O1 = cue("O1", "white"), O1l = cue("O1", "lucky"), O1c = cue("O1", "the", 1), O1d = cue("O1", "death");
 const O2 = cue("O2", "eight"), O2m = cue("O2", "monster"), O2g = cue("O2", "gojira"), O2h = cue("O2", "gorilla"), O2w = cue("O2", "whale");
 const O3 = cue("O3", "inside"), O3h = cue("O3", "hundred"), O3s = cue("O3", "stomping"), O3t = cue("O3", "tokyo");
 // "White ash fell on their boat, the Lucky Dragon Number Five"
-shot(1, O1 - 1, O1c - 1, "sea", "ash", [D(O1 - 1, [16, 5.5, 18], [4, 3, 0], { fov: 42, rate: 0.002 }), D(O1l - 4, [14, 2.6, 10.5], [9, 1.6, 2.7], { fov: 40, dur: 30, rate: 0.0025 })],
-  (f, H) => { boatAt(H, f); return { actors: FISH("nervous", { pose: "reach", look: 1 }), particles: ashFall(f, 4, 1.6, 2, 520, 26, 12), particleSize: 0.12 }; });
+shot(1, O1 - 1, O1c - 1, "sea", "ash", [D(O1 - 1, [15, 5.5, 18], [3, 3, 0], { fov: 42, rate: 0.002 }), D(O1l - 4, [12.2, 2.4, 11.5], [8.2, 1.7, 2.7], { fov: 40, dur: 30, rate: 0.0025 })],
+  (f, H) => { boatAt(H, f); return { actors: FISH("nervous", { pose: "reach", look: 1 }), particles: ashFall(f, 6, 1.6, 4, 700, 26, 12, "#f8f6f0"), particleSize: 0.2 }; });
 // "The crew called it death ash."
 shot(1, O1c - 1, O2 - 1, "sea", "ash", [D(O1c - 1, [1.9, 3.75, 3.1], [1.6, 3.5, 0.9], { fov: 38, rate: 0.003, punch: 0.008, p0: O1d - 4, n: 24 })],
   (f, H) => { boatAt(H, f); return { actors: [{ id: "fish1", x: 1.6, y: DECK, z: 0.9, pose: "hold", expr: f >= O1d - 1 ? "shock" : "pained", seed: 11 }, { id: "fish2", x: -0.4, y: DECK, z: -1.2, expr: "nervous", seed: 12, mirror: true }],
     particles: ashFall(f, 1.6, 2.2, 1.5, 240, 5, 4), particleSize: 0.05 }; });
 // "Eight months later, Japan got a monster made of that fear": Ginza at night, 1954
 KICKS.push([O2m, 1.2]);
-shot(1, O2 - 1, O2g - 1, "city", "night54", [D(O2 - 1, [-5, 1.5, 70], [0, 24, -40], { fov: 50, rate: 0.0022, punch: 0.006, p0: O2m - 4, n: 26 })],
+shot(1, O2 - 1, O2g - 1, "city", "night54", [D(O2 - 1, [-5, 1.5, 70], [0, 24, -40], { fov: 50, rate: 0.0022, punch: 0.006, p0: O2m - 4, n: 26, focus: 40 })],
   (f) => { const w = (f - O2) / FPS;
     return { actors: [{ id: "folkM", x: -2.5, y: 0, z: 52 - w * 1.2, legs: "run", phase: w * 1.6, expr: "shock", seed: 41 }, { id: "folkW", x: 2.2, y: 0, z: 49 - w * 1.0, legs: "run", phase: w * 1.6 + 0.3, expr: "shock", seed: 42 }],
       zillas: [{ x: 2, z: -70 + w * 3, h: 50, v: "m1", pose: f > O2m - 2 ? "roar" : "walk", phase: w * 0.45, jaw: sm(f, O2m - 2, O2m + 8), glow: 0.15 }],
       fx: [{ k: "glow", x: -22, y: 8, z: -30, w: 26, soft: true, col: "#ff8a3a", alpha: 0.75 }, { k: "glow", x: 24, y: 6, z: -10, w: 22, soft: true, col: "#ff8a3a", alpha: 0.65 }],
       particles: rise(f, 0, 0, -20, 260, 60, 30, 3, ["#ffb347", "#ff7a2a", "#ffd27a"]), particleSize: 0.22 }; });
 // "Gojira: half gorilla, half whale." On the studio's painted sky: gorilla + whale = him
-shot(1, O2g - 1, O3 - 1, "studio", "stage", [D(O2g - 1, [0, 1.7, 8.6], [0, 1.55, 0], { fov: 40, rate: 0.0015 })],
+shot(1, O2g - 1, O3 - 1, "studio", "stage", [D(O2g - 1, [0, 1.8, 10.5], [0, 1.65, 0], { fov: 40, rate: 0.0015 })],
   (f) => { const g = sm(f, O2h - 3, O2h + 5), wh = sm(f, O2w - 3, O2w + 5), m = sm(f, O2w + 8, O2w + 20), z = sm(f, O2w + 18, O2w + 26);
     const fx: FxSpec[] = [];
-    if (m < 1) fx.push({ k: "gorilla", x: L(-1.25, -0.2, m), y: 1.25 + 0.15 * (1 - g), z: 0, w: Math.max(0.01, 1.7 * g), h: Math.max(0.01, 1.7 * g), alpha: g > 0 ? 1 - m * 0.9 : 0 },
-      { k: "whale", x: L(1.3, 0.2, m), y: 1.35, z: 0.1, w: Math.max(0.01, 2.2 * wh), h: Math.max(0.01, 1.4 * wh), alpha: wh > 0 ? 1 - m * 0.9 : 0 });
+    if (m < 1) fx.push({ k: "gorilla", x: L(-1.1, -0.2, m), y: 1.3 + 0.15 * (1 - g), z: 0, w: Math.max(0.01, 1.8 * g), h: Math.max(0.01, 1.8 * g), alpha: g > 0 ? 1 - m * 0.9 : 0 },
+      { k: "whale", x: L(1.15, 0.2, m), y: 1.45, z: 0.1, w: Math.max(0.01, 2.0 * wh), h: Math.max(0.01, 1.25 * wh), alpha: wh > 0 ? 1 - m * 0.9 : 0 });
     if (m > 0.6 && z < 1) fx.push({ k: "puff", x: 0, y: 1.3, z: 0.3, w: 2.8 * m, h: 2.1 * m, col: "#f4f1e8", seed: 3 });
     return { actors: [], fx, zillas: z > 0 ? [{ x: 0, z: 0, h: 2.5 * (0.6 + 0.4 * z), v: "showa", pose: "hop", eye: "friendly", alpha: z }] : [] }; });
 // "Inside, a stuntman sweated in a hundred-kilo rubber suit"
@@ -232,7 +236,7 @@ shot(1, O3 - 1, O3s - 2, "studio", "stage", [D(O3 - 1, [1.6, 1.9, 5.2], [0.2, 1.
     zillas: [{ x: -0.1, z: 0, h: 2.35, v: "suitOpen", pose: "stand", sweat: ((f - O3) / 40) % 1 }] }));
 // "stomping a tiny Tokyo": lens at miniature height, the suit walks down the toy street
 KICKS.push([O3s + 6, 0.8], [O3t, 1.0]);
-shot(1, O3s - 2, cue("Y1", "then") - 1, "studio", "stage", [D(O3s - 2, [0.5, 0.42, 3.0], [0, 1.0, -4], { fov: 48, rate: 0.002, punch: 0.006, p0: O3t - 3, n: 24 })],
+shot(1, O3s - 2, cue("Y1", "then") - 1, "studio", "stage", [D(O3s - 2, [0.5, 0.42, 3.0], [0, 1.0, -4], { fov: 48, rate: 0.002, punch: 0.006, p0: O3t - 3, n: 24, focus: 5 })],
   (f) => { const w = (f - O3s) / FPS, z = -5.2 + w * 0.9;
     return { actors: [], zillas: [{ x: 0, z, h: 2.35, v: "suit", pose: "walk", phase: w * 0.9 }],
       particles: [...dust(3, 0.2, 0, z + 0.3, at(f, O3s + 6, O3s + 30), 30, "#d8c8b0", 0.8, 0.6), ...dust(9, -0.2, 0, z + 0.3, at(f, O3t, O3t + 24), 30, "#d8c8b0", 0.8, 0.6)], particleSize: 0.06 }; });
@@ -242,23 +246,24 @@ const Y1 = cue("Y1", "then"), Y1w = cue("Y1", "weirdly"), Y1s = cue("Y1", "savin
 const Y2 = cue("Y2", "nearly"), Y2f = cue("Y2", "film", 1), Y2r = cue("Y2", "record");
 const BZ = 470; // beach: sand ring to r = 470, sea beyond (+z)
 // "Then he got famous, and weirdly friendly": he waves at kids on the beach
-shot(2, Y1 - 1, Y1s - 1, "island", "golden", [D(Y1 - 1, [3, 1.3, BZ - 22], [0, 15, BZ + 90], { fov: 46, rate: 0.002 }), D(Y1w - 3, [2, 1.2, BZ - 18], [0, 17, BZ + 90], { fov: 44, dur: 28, rate: 0.0025 })],
-  (f) => ({ actors: (["kid1", "kid2", "kid3"] as CastId[]).map((id, i) => ({ id, x: -1.6 + i * 1.5, z: BZ - 12 + (i % 2) * 0.8, pose: (i === 1 ? "wave" : "cheer") as Pose, wave: Math.sin(f * 0.3 + i), expr: "grin" as Expr, seed: 60 + i })),
+shot(2, Y1 - 1, Y1s - 1, "island", "golden", [D(Y1 - 1, [2.5, 2.2, BZ - 26], [0, 9, BZ + 90], { fov: 50, rate: 0.002, focus: 14 }), D(Y1w - 3, [2, 2.0, BZ - 23], [0, 10, BZ + 90], { fov: 50, dur: 28, rate: 0.0025, focus: 14 })],
+  (f) => ({ actors: (["kid1", "kid2", "kid3"] as CastId[]).map((id, i) => ({ id, x: -1.8 + i * 1.6, z: BZ - 16 + (i % 2) * 0.8, pose: (i === 1 ? "wave" : "cheer") as Pose, wave: Math.sin(f * 0.3 + i), expr: "grin" as Expr, seed: 60 + i })),
     zillas: [{ x: 0, y: -2.5, z: BZ + 95, h: 40, v: "showa", pose: f > Y1w - 2 ? "hop" : "wave", phase: f / 20, eye: "friendly", shadow: false }] }));
 // "saving Earth from other monsters": a 60s rival gets a punch
 KICKS.push([Y1f, 1.0]);
-shot(2, Y1s - 1, Y2 - 1, "island", "golden", [D(Y1s - 1, [-12, 4, BZ - 30], [0, 16, BZ + 100], { fov: 50, rate: 0.0025 })],
+shot(2, Y1s - 1, Y2 - 1, "island", "golden", [D(Y1s - 1, [0, 5, BZ - 60], [2, 17, BZ + 100], { fov: 50, rate: 0.0025 })],
   (f) => { const hit = sm(f, Y1f - 2, Y1f + 4);
     const fx: FxSpec[] = [{ k: "rival", x: 26 + 6 * hit, y: 16 + 2 * hit, z: BZ + 104, w: 36, h: 36, t: hit, rot: -0.25 * hit }];
     if (hit > 0.5 && f < Y1f + 14) fx.push({ k: "burst", x: 10, y: 22, z: BZ + 96, w: 18, t: at(f, Y1f, Y1f + 14), col: "#fff3b0" });
     return { actors: [], fx, zillas: [{ x: -22 + 6 * hit, y: -2.5, z: BZ + 100, h: 40, v: "showa", pose: hit > 0.3 ? "punch" : "stand", eye: "angry", shadow: false }] }; });
 // "Nearly forty films later, it's the longest-running film series on record": the parade of eras along the shore
 const PARADE: ZVar[] = ["showa", "heisei", "mv", "shin", "m1"];
-shot(2, Y2 - 1, cue("M1", "then") - 1, "island", "golden", [M(Y2 - 1, (f) => { const t = glide(at(f, Y2 - 1, Y2f)); return { pos: [L(-150, -20, t), 6, BZ - 70], look: [L(-120, 10, t), 20, BZ + 110], fov: 46 }; }),
-  M(Y2f - 2, (f) => { const t = glide(at(f, Y2f - 2, Y2r + 10)); return { pos: [L(-20, 0, t), L(6, 30, t), L(BZ - 70, BZ - 150, t)], look: [0, 22, BZ + 110], fov: L(46, 52, t) }; }, false, 34)],
+// the eras as a size-chart lineup on the water: Showa, Heisei, MonsterVerse, Shin, Minus One
+const PH: Record<string, number> = { showa: 28, heisei: 36, mv: 50, shin: 52, m1: 30 };
+shot(2, Y2 - 1, cue("M1", "then") - 1, "island", "golden", [M(Y2 - 1, (f) => { const t = glide(at(f, Y2 - 1, Y2r + 20)); return { pos: [L(-14, 8, t), L(7, 12, t), BZ - 14], look: [L(-6, 6, t), L(20, 26, t), BZ + 150], fov: 58 }; })],
   (f) => { const w = (f - Y2) / FPS;
-    return { actors: [], zillas: PARADE.map((v, i) => ({ x: -170 + i * 62 + w * 6, y: -2.5, z: BZ + 110 + (i % 2) * 14, h: v === "mv" ? 46 : 38 + i * 2, v, pose: "walk" as ZPose, phase: w * 0.5 + i * 0.2, shadow: false })),
-      fx: f > Y2r - 4 ? [{ k: "sign", x: 0, y: 62, z: BZ + 60, w: 70, h: 24, text: ["WORLD RECORD"], col: "#e8b33c", col2: "#2a1f36", alpha: sm(f, Y2r - 4, Y2r + 4) }] : [] }; });
+    const fx: FxSpec[] = f > Y2r - 4 ? [{ k: "sign", x: 0, y: 78, z: BZ + 150, w: 62, h: 17, text: ["WORLD RECORD"], col: "#e8b33c", col2: "#2a1f36", alpha: sm(f, Y2r - 4, Y2r + 4) }] : [];
+    return { actors: [], fx, zillas: PARADE.map((v, i) => ({ x: -50 + i * 25 + w * 1.5, y: -2.5, z: BZ + 150 + (i % 2) * 6, h: PH[v], v, pose: "walk" as ZPose, phase: w * 0.5 + i * 0.2, shadow: false })) }; });
 
 // ===== GODZILLA MINUS ONE (ch 3) =====
 const M1 = cue("M1", "then"), M1m = cue("M1", "minus");
@@ -283,34 +288,34 @@ shot(3, M2 - 1, M2j - 1, "ruins", "ruins", [M(M2 - 1, (f) => { const t = glide(a
   (f) => ({ actors: [{ id: "koichi", x: -2, z: 6, legs: "walk", phase: f / FPS, expr: "neutral", seed: 70 }, { id: "folkB", x: 3, z: 2, legs: "walk", phase: f / FPS + 0.4, expr: "neutral", seed: 71, mirror: true }],
     particles: rise(f, 0, 0, -10, 140, 120, 30, 1.2, ["#8a8070", "#a89a88"]), particleSize: 0.5 }));
 // "Japan has lost the war, and is at zero." A signboard reads 0
-shot(3, M2j - 1, M2t - 1, "ruins", "ruins", [D(M2j - 1, [3, 2.2, 10], [0, 3.2, -12], { fov: 42, rate: 0.002, punch: 0.008, p0: M2z - 4, n: 26 })],
+shot(3, M2j - 1, M2t - 1, "ruins", "ruins", [D(M2j - 1, [3, 2.2, 10], [0, 3.2, -12], { fov: 42, rate: 0.002, punch: 0.008, p0: M2z - 4, n: 26, focus: 18 })],
   () => ({ actors: [{ id: "koichi", x: -1.6, z: 2, expr: "neutral", look: 1, seed: 70 }, { id: "folkW", x: 1.8, z: 0.5, expr: "pained", seed: 72, mirror: true }],
     fx: [{ k: "sign", x: 0, y: 3.6, z: -12, w: 5, h: 4, text: ["0"], col: "#d8c8a0", col2: "#2a1f36" }] }));
 // "Then Godzilla drags it down to minus one." He looms; the 0 drops to −1
 KICKS.push([M2d, 1.5], [M2m, 1.0]);
-shot(3, M2t - 1, M3 - 1, "ruins", "ruins", [D(M2t - 1, [2.4, 1.6, 8], [0, 9, -40], { fov: 48, rate: 0.0025, punch: 0.007, p0: M2m - 3, n: 26 })],
+shot(3, M2t - 1, M3 - 1, "ruins", "ruins", [D(M2t - 1, [2.4, 1.6, 8], [0, 9, -40], { fov: 48, rate: 0.0025, punch: 0.007, p0: M2m - 3, n: 26, focus: 12 })],
   (f) => { const d = sm(f, M2d - 2, M2d + 8), neg = f >= M2m - 1;
     return { actors: [{ id: "koichi", x: -1.8, z: 2, expr: f > M2d ? "shock" : "neutral", look: 1, seed: 70 }],
       zillas: [{ x: 6, z: -95, h: 50, v: "m1", pose: f > M2d - 2 ? "roar" : "stand", jaw: d, mirror: true }],
       fx: [{ k: "sign", x: 0, y: 3.6 - 1.4 * d, z: -12, w: 5, h: 4, text: [neg ? "−1" : "0"], col: neg ? "#e0303a" : "#d8c8a0", col2: neg ? "#ffffff" : "#2a1f36", rot: 0.12 * d }],
       particles: dust(5, 0, 0, -12, at(f, M2d, M2d + 30), 60, "#a89a88", 3, 3), particleSize: 0.3 }; });
 // "Koichi Shikishima is a kamikaze pilot" by his Zero
-shot(3, M3 - 1, M3f - 2, "island", "day", [D(M3 - 1, [6.5, 1.7, 9.5], [2, 1.7, 2.5], { fov: 40, rate: 0.0025 })],
-  () => ({ actors: [{ id: "koichiP", x: 2.2, z: 4.2, expr: "neutral", seed: 80, flutter: 0.3 }] }));
+shot(3, M3 - 1, M3f - 2, "island", "day", [D(M3 - 1, [9, 1.5, 7], [3.4, 1.6, 1.8], { fov: 40, rate: 0.0025 })],
+  () => ({ actors: [{ id: "koichiP", x: 3.6, z: 2.6, expr: "neutral", seed: 80, flutter: 0.3 }] }));
 // "who faked engine trouble to stay alive": a puff of smoke, a nervous grin, a suspicious mechanic
-shot(3, M3f - 2, M4 - 1, "island", "day", [D(M3f - 2, [9, 2.2, 7.5], [4.4, 1.9, 1.6], { fov: 40, rate: 0.003 })],
-  (f) => ({ actors: [{ id: "koichiP", x: 3.6, z: 3.4, pose: "shrug", expr: "nervous", seed: 80 }, { id: "tachibana", x: 6.6, z: 2.6, pose: "cross", expr: "stern", look: -1, mirror: true, seed: 81 }],
-    fx: [{ k: "puff", x: 5.6, y: 2.4 + 0.8 * at(f, M3f, M3f + 40), z: 0.4, w: 2.4 * (0.6 + 0.4 * sm(f, M3f, M3f + 12)), h: 1.8, col: "#3a3a40", seed: 5, alpha: 1 - 0.6 * at(f, M3f + 20, M4) }] }));
+shot(3, M3f - 2, M4 - 1, "island", "day", [D(M3f - 2, [10.5, 1.8, 8.5], [5.2, 1.8, 1.6], { fov: 42, rate: 0.003 })],
+  (f) => ({ actors: [{ id: "koichiP", x: 4.4, z: 2.6, pose: "shrug", expr: "nervous", seed: 80 }, { id: "tachibana", x: 6.6, z: 3.8, pose: "cross", expr: "stern", look: -1, mirror: true, seed: 81 }],
+    fx: [{ k: "puff", x: 5.3, y: 2.6 + 0.9 * at(f, M3f, M3f + 40), z: 0.2, w: 2.8 * (0.6 + 0.4 * sm(f, M3f, M3f + 12)), h: 2.1, col: "#2e2e34", seed: 5, alpha: 1 - 0.6 * at(f, M3f + 20, M4) }] }));
 // "When Godzilla hits his island base": night, fires, a smaller Godzilla among the hangars
 KICKS.push([M4h, 1.4]);
-shot(3, M4 - 1, M4f - 2, "island", "islandNight", [D(M4 - 1, [-6, 1.4, 34], [-8, 8, -40], { fov: 48, rate: 0.003, punch: 0.006, p0: M4h - 3, n: 24 })],
-  (f) => ({ actors: [{ id: "tachibana", x: -3.5, z: 22, legs: "run", phase: f / 18, expr: "shock", seed: 81, mirror: true }, { id: "folkB", x: -9, z: 18, legs: "run", phase: f / 18 + 0.3, expr: "shock", seed: 82 }],
-    zillas: [{ x: -14, z: -38, h: 16, v: "m1", pose: f > M4h - 2 ? "roar" : "walk", phase: f / 50, jaw: sm(f, M4h - 2, M4h + 8), mirror: true }],
+shot(3, M4 - 1, M4f - 2, "island", "islandNight", [D(M4 - 1, [-7, 1.4, 16], [-10, 7.5, -40], { fov: 48, rate: 0.003, punch: 0.006, p0: M4h - 3, n: 24, focus: 20 })],
+  (f) => ({ actors: [{ id: "tachibana", x: -5.5, z: 8, legs: "run", phase: f / 18, expr: "shock", seed: 81, mirror: true }, { id: "folkB", x: -9, z: 4, legs: "run", phase: f / 18 + 0.3, expr: "shock", seed: 82 }],
+    zillas: [{ x: -12, z: -38, h: 16, v: "m1", pose: f > M4h - 2 ? "roar" : "walk", phase: f / 50, jaw: sm(f, M4h - 2, M4h + 8), mirror: true }],
     fx: [{ k: "glow", x: 10, y: 4, z: -52, w: 22, soft: true, col: "#ff8a3a", alpha: 0.8 }, { k: "glow", x: -40, y: 3, z: -58, w: 18, soft: true, col: "#ff8a3a", alpha: 0.7 }],
     particles: rise(f, -10, 0, -40, 200, 60, 20, 3, ["#ffb347", "#ff7a2a"]), particleSize: 0.2 }));
 // "he freezes," by the cockpit, the fire light on him
-shot(3, M4f - 2, M4a - 1, "island", "islandNight", [D(M4f - 2, [1.3, 2.75, 3.6], [0.7, 2.6, 0], { fov: 36, rate: 0.0035 })],
-  (f, H) => { H.zero.position.set(-1, 0, -0.2); return { actors: [{ id: "koichiP", x: 0.7, y: 0.55, z: 0.2, expr: "shock", blink: 0, seed: 80 }],
+shot(3, M4f - 2, M4a - 1, "island", "islandNight", [D(M4f - 2, [2.6, 1.5, 5.6], [2.2, 1.45, 2.8], { fov: 38, rate: 0.0035 })],
+  (f) => { return { actors: [{ id: "koichiP", x: 2.2, z: 2.8, expr: "shock", blink: 0, seed: 80 }],
     fx: [{ k: "glow", x: -6, y: 6, z: -14, w: 14, soft: true, col: "#ff8a3a", alpha: 0.6 + 0.2 * Math.sin(f * 0.4) }] }; });
 // "and almost everyone dies." The tail sweeps the base
 KICKS.push([M4a + 6, 1.2]);
@@ -320,36 +325,36 @@ shot(3, M4a - 1, M5 - 1, "island", "islandNight", [D(M4a - 1, [44, 14, 70], [-6,
       fx: [{ k: "burst", x: 14, y: 6, z: -55, w: 16 * (0.4 + b), t: b, col: "#ffb347" }, { k: "glow", x: 14, y: 6, z: -55, w: 40, soft: true, col: "#ff7a2a", alpha: 0.9 * (1 - 0.5 * b) }, { k: "glow", x: -40, y: 5, z: -60, w: 30, soft: true, col: "#ff8a3a", alpha: 0.7 }],
       particles: rise(f, 0, 0, -50, 300, 90, 30, 4, ["#ffb347", "#ff7a2a", "#ffd27a"]), particleSize: 0.35 }; });
 // "In burned-out Tokyo, he builds a family: Noriko, and an orphan baby, Akiko."
-shot(3, M5 - 1, M5n - 3, "ruins", "golden", [D(M5 - 1, [9, 3.4, 13], [0.5, 1.4, -3], { fov: 40, rate: 0.0022 })],
-  () => ({ actors: [{ id: "koichi", x: 1.6, z: 0.4, legs: "sit", pose: "sit", expr: "pained", seed: 70 }] }));
-shot(3, M5n - 3, M6 - 1, "ruins", "golden", [D(M5n - 3, [1.0, 1.65, 6.0], [0.2, 1.45, 0], { fov: 40, rate: 0.0025 }), D(M5b - 3, [0.0, 1.55, 3.6], [-0.4, 1.4, 0], { fov: 38, dur: 30, rate: 0.003 })],
+shot(3, M5 - 1, M5n - 3, "ruins", "golden", [D(M5 - 1, [-13.5, 2.6, 9], [-19.6, 1.3, -2.5], { fov: 40, rate: 0.0022 })],
+  () => ({ actors: [{ id: "koichi", x: -18.6, z: 0.4, legs: "sit", pose: "sit", expr: "pained", seed: 70 }] }));
+shot(3, M5n - 3, M6 - 1, "ruins", "golden", [D(M5n - 3, [-19.6, 1.65, 6.4], [-20.2, 1.4, 0], { fov: 40, rate: 0.0025 }), D(M5b - 3, [-20.2, 1.5, 4.4], [-20.5, 1.35, 0], { fov: 38, dur: 30, rate: 0.003 })],
   (f) => { const n = sm(f, M5n - 3, M5n + 14);
-    return { actors: [{ id: "koichi", x: 1.0, z: 0.2, expr: f > M5n + 10 ? "smile_closed" : "neutral", look: -1, seed: 70 },
-      { id: "norikoB", x: L(-3.6, -0.7, n), z: 0.4, legs: n < 1 ? "walk" : "stand", phase: f / 18, pose: "hold", expr: f > M5a ? "smile_closed" : "smile", seed: 73 }] }; });
+    return { actors: [{ id: "koichi", x: -19.55, z: 0.2, expr: f > M5n + 10 ? "smile_closed" : "neutral", look: -1, seed: 70 },
+      { id: "norikoB", x: L(-23.6, -20.65, n), z: 0.4, legs: n < 1 ? "walk" : "stand", phase: f / 18, pose: "hold", expr: f > M5a ? "smile_closed" : "smile", seed: 73 }] }; });
 // "Then Godzilla, mutated by the bomb tests," : Ginza, 1947; his plates light up
-shot(3, M6 - 1, M6c - 2, "city", "ginza", [D(M6 - 1, [-3, 1.6, 46], [4, 24, -40], { fov: 48, rate: 0.0022 })],
-  (f, H) => { const g = sm(f, M6m - 2, M6c - 2); H.tram.visible = true; H.tram.position.set(0, 0, 18 + (f - M6) * 0.08);
+shot(3, M6 - 1, M6c - 2, "city", "ginza", [D(M6 - 1, [-3, 1.6, 46], [4, 24, -40], { fov: 48, rate: 0.0022, focus: 30 })],
+  (f, H) => { const g = sm(f, M6m - 2, M6c - 2); H.tram.visible = true; H.tram.position.set(0, 0, -12 + (f - M6) * 0.06);
     return { actors: (["folkM", "folkW", "folkB", "folkM"] as CastId[]).map((id, i) => ({ id, x: -6 + i * 3.6, z: 30 - (i % 2) * 2 + (f - M6) * 0.05, legs: "run" as const, phase: f / 16 + i * 0.25, expr: "shock" as Expr, seed: 90 + i, mirror: i % 2 === 1 })),
       zillas: [{ x: 2, z: -62, h: 50, v: "m1", pose: "stand", glow: g }] }; });
 // "crushes Ginza." The heat ray, the blast
 KICKS.push([M6g, 2.0]);
-shot(3, M6c - 2, M6n - 2, "city", "ginza", [D(M6c - 2, [-46, 30, 90], [0, 18, -40], { fov: 48, rate: 0.002 })],
+shot(3, M6c - 2, M6n - 2, "city", "ginza", [D(M6c - 2, [-22, 30, 105], [16, 16, -30], { fov: 50, rate: 0.002 })],
   (f) => { const b = sm(f, M6g - 2, M6n), beam = f >= M6c && f < M6g + 6;
     const fx: FxSpec[] = [];
-    if (beam) fx.push({ k: "beam", x: 30, y: 26, z: -20, w: 70, h: 6, rot: -0.38, full: true, soft: true });
-    if (f >= M6g - 2) fx.push({ k: "glow", x: 50, y: 10, z: 10, w: 120 * (0.5 + b), soft: true, col: "#e8fbff", alpha: 1 - 0.4 * b }, { k: "mushroom", x: 50, y: 50 * b + 5, z: 10, w: 90, h: 112, t: 0.2 + 0.8 * b, seed: 0, soft: true });
+    if (beam) fx.push({ k: "beam", x: 26.5, y: 18.6, z: -38.5, w: 40, h: 6, rot: -1.08, full: true, soft: true });
+    if (f >= M6g - 2) fx.push({ k: "glow", x: 30, y: 4, z: -18, w: 60 * (0.5 + b), soft: true, col: "#e8fbff", alpha: 0.85 - 0.5 * b }, { k: "mushroom", x: 30, y: 40 * b + 4, z: -18, w: 70, h: 88, t: 0.2 + 0.8 * b, seed: 0, soft: true });
     return { actors: [], fx, zillas: [{ x: 2, z: -62, h: 50, v: "m1", pose: "breath", glow: 1, jaw: 0.9 }] }; });
 // "Noriko is swept away by the blast."
-shot(3, M6n - 2, M7 - 1, "city", "ginza", [D(M6n - 2, [0.5, 1.6, 4.4], [0.1, 1.5, 0], { fov: 40, rate: 0.003, punch: 0.008, p0: M6b - 3, n: 20 })],
+shot(3, M6n - 2, M7 - 1, "city", "ginza", [D(M6n - 2, [0.15, 1.55, 5.2], [0.05, 1.45, 0], { fov: 40, rate: 0.003, punch: 0.008, p0: M6b - 3, n: 20 })],
   (f) => { const gone = sm(f, M6b, M6b + 8), push = sm(f, M6i - 2, M6s);
-    return { actors: [{ id: "koichi", x: 0.6 + 0.4 * push, z: 0, expr: f > M6b ? "shock" : "nervous", roll: -0.15 * push, seed: 70, mirror: true },
-      { id: "noriko", x: -0.6 - 2.5 * gone, z: 0.2, pose: "reach", expr: "stern", alpha: 1 - gone, roll: 0.3 * gone, seed: 73 }],
+    return { actors: [{ id: "koichi", x: 0.45 + 0.4 * push, z: 0, expr: f > M6b ? "shock" : "nervous", roll: -0.15 * push, seed: 70, mirror: true },
+      { id: "noriko", x: -0.35 - 2.5 * gone, z: 0.2, pose: "reach", expr: "pained", alpha: 1 - gone, roll: 0.3 * gone, seed: 73 }],
       particles: dust(7, -0.5, 0, 0, at(f, M6b - 2, M6b + 30), 120, "#e8e2d4", 3.5, 1.5), particleSize: 0.08 }; });
 // "With no help from the government, old navy men plan": the planning hall
-shot(3, M7 - 1, M7s - 2, "rooms", "hall", [D(M7 - 1, [0, 2.4, 8.5], [0, 2.1, -5], { fov: 44, rate: 0.002 })],
+shot(3, M7 - 1, M7s - 2, "rooms", "hall", [D(M7 - 1, [1.2, 2.1, -4.4], [0, 1.1, 3.6], { fov: 50, rate: 0.002 })],
   (f, H) => { setBoard(H, 0, 0);
-    return { actors: [{ id: "noda", x: -3.6, z: -4.4, pose: "point", expr: "stern", seed: 100 },
-      ...(["navy1", "navy2", "navy3", "tachibana", "koichi", "navy2"] as CastId[]).map((id, i) => ({ id, x: (i % 2 ? 1 : -1) * (1.8 + Math.floor(i / 2) * 0.9), z: 1.3 + Math.floor(i / 2) * 1.8, legs: "sit" as const, pose: "sit" as Pose, expr: "stern" as Expr, seed: 101 + i, mirror: i % 2 === 0 }))] }; });
+    return { actors: [{ id: "noda", x: -1.25, z: -2.6, pose: "point", expr: "stern", seed: 100, mirror: true },
+      ...(["navy1", "navy2", "navy3", "tachibana", "koichi", "navy2"] as CastId[]).map((id, i) => ({ id, x: (i % 2 ? 1 : -1) * (0.85 + (Math.floor(i / 2) % 2) * 0.75), z: 1.4 + Math.floor(i / 2) * 1.8, legs: "sit" as const, pose: "sit" as Pose, expr: "stern" as Expr, seed: 101 + i, mirror: i % 2 === 0 }))] }; });
 // "to sink him in a ring of gas,": Sagami Bay, a ring of ships, bubbles, he drops
 shot(3, M7s - 2, M7t - 1, "sea", "sky", [D(M7s - 2, [70, 30, 110], [0, 0, 0], { fov: 46, rate: 0.002 })],
   (f, H) => { const s = sm(f, M7s, M7t + 10);
@@ -358,9 +363,9 @@ shot(3, M7s - 2, M7t - 1, "sea", "sky", [D(M7s - 2, [70, 30, 110], [0, 0, 0], { 
     return { actors: [], zillas: [{ x: 0, y: -10 - 40 * s, z: 0, h: 50, v: "m1", pose: "roar", jaw: 0.5, shadow: false }],
       particles: rise(f, 0, -1, 0, 500, 80, 6, 4, ["#ffffff", "#d8eef8"]), particleSize: 0.7 }; });
 // "then yank him up so fast the pressure kills him." The chalk plan
-shot(3, M7t - 1, M8 - 1, "rooms", "hall", [D(M7t - 1, [0, 2.6, 1.2], [0, 2.6, -5.85], { fov: 46, rate: 0.0025, punch: 0.006, p0: M7k - 3, n: 22 })],
+shot(3, M7t - 1, M8 - 1, "rooms", "hall", [D(M7t - 1, [0, 2.9, 0.9], [0, 2.9, -5.85], { fov: 50, rate: 0.0025, punch: 0.006, p0: M7k - 3, n: 22 })],
   (f, H) => { setBoard(H, 1 + sm(f, M7t, M7u + 6), f >= M7k - 1 ? 1 : 0);
-    return { actors: [{ id: "noda", x: -4.2, z: -4.0, pose: "point", expr: f > M7k ? "grin" : "stern", seed: 100 }] }; });
+    return { actors: [] }; });
 // "Koichi flies a plane full of explosives,": the Shinden over the bay
 shot(3, M8 - 1, M8s - 1, "sea", "sky", [M(M8 - 1, (f) => { const z = 260 - (f - M8) * 1.6; return { pos: [14, 30, z + 26], look: [0, 27, z - 10], fov: 44 }; })],
   (f, H) => { const z = 260 - (f - M8) * 1.6; H.shinden.visible = true; H.shinden.position.set(0, 28 + 0.4 * Math.sin(f * 0.1), z); H.shinden.rotation.set(0.08 * Math.sin(f * 0.07), Math.PI / 2, 0);
@@ -370,15 +375,15 @@ KICKS.push([M8m + 2, 2.0]);
 shot(3, M8s - 1, M9 - 1, "sea", "sky", [D(M8s - 1, [70, 26, 70], [0, 32, 0], { fov: 46, rate: 0.002, punch: 0.006, p0: M8m - 3, n: 22 })],
   (f, H) => { const t = at(f, M8s - 1, M8m + 2); H.shinden.visible = t < 1; H.shinden.position.set(L(80, 10, t), L(30, 40, t), L(40, 0, t)); H.shinden.rotation.set(0, Math.atan2(40, 70) + Math.PI, 0.1);
     const b = at(f, M8m + 2, M9 + 4);
-    const fx: FxSpec[] = f > M8m + 1 ? [{ k: "burst", x: 6, y: 42, z: 2, w: 30 * (0.5 + b), t: b, col: "#fff3b0" }, { k: "glow", x: 6, y: 42, z: 2, w: 70, soft: true, col: "#ffcf7a", alpha: 1 - b }] : [];
+    const fx: FxSpec[] = f > M8m + 1 ? [{ k: "burst", x: 6, y: 42, z: 2, w: 30 * (0.5 + b), t: b, col: "#fff3b0" }, { k: "glow", x: 6, y: 42, z: 2, w: 40, soft: true, col: "#ffcf7a", alpha: 0.8 * (1 - b) }] : [];
     return { actors: [], fx, zillas: [{ x: 0, y: -12, z: 0, h: 52, v: "m1", pose: "breath", jaw: 1, glow: 0.4 + 0.5 * t, mirror: true, shadow: false }] }; });
 // "But this time, he ejects. He chooses to live." Under a parachute
-shot(3, M9 - 1, M10 - 1, "sea", "sky", [M(M9 - 1, (f) => { const y = 36 - (f - M9) * 0.05; return { pos: [2.4, y + 0.9, 7.5], look: [0, y + 1.6, 0], fov: 42 }; })],
+shot(3, M9 - 1, M10 - 1, "sea", "sky", [M(M9 - 1, (f) => { const y = 36 - (f - M9) * 0.05; return { pos: [3, y + 1.8, 10.5], look: [0, y + 2.3, 0], fov: 42 }; })],
   (f) => { const y = 36 - (f - M9) * 0.05, o = sm(f, M9e, M9e + 10);
     return { actors: [{ id: "koichiP", x: 0, y, z: 0, pose: "cheer", legs: "fly", expr: f > M9c ? "relief" : "shock", flutter: 0.6, seed: 80, shadow: false }],
       fx: [{ k: "chute", x: 0, y: y + 2.6 + 1.6 * o, z: -0.1, w: 1 + 3.4 * o, h: 0.7 + 2.3 * o }, { k: "puff", x: -40, y: 20, z: -80, w: 30, h: 22, col: "#8a8a92", seed: 2 }] }; });
 // "And Noriko is alive, with a strange black mark on her neck."
-shot(3, M10 - 1, M11 - 1, "rooms", "hospital", [D(M10 - 1, [101.6, 1.6, 0.6], [100.1, 1.3, -2.8], { fov: 40, rate: 0.002 }), D(M10m - 4, [99.75, 1.32, -1.9], [99.95, 1.22, -2.95], { fov: 36, dur: 32, rate: 0.003 })],
+shot(3, M10 - 1, M11 - 1, "rooms", "hospital", [D(M10 - 1, [101.6, 1.6, 0.6], [100.1, 1.3, -2.8], { fov: 40, rate: 0.002 }), D(M10m - 4, [99.6, 1.45, -1.2], [99.95, 1.3, -3.0], { fov: 38, dur: 32, rate: 0.003 })],
   () => ({ actors: [{ id: "norikoH", x: 100.0, y: 0.55, z: -3.0, legs: "sit", pose: "sit", expr: "smile_closed", seed: 73 }, { id: "koichi", x: 101.5, z: -1.6, expr: "relief", look: -1, seed: 70, mirror: true }] }));
 // "While deep in the sea, Godzilla's flesh starts growing back."
 shot(3, M11 - 1, cue("A1", "the") - 1, "sea", "underwater", [D(M11 - 1, [14, -24, 40], [0, -40, -10], { fov: 46, rate: 0.0025, punch: 0.006, p0: M11b - 3, n: 24 })],
@@ -389,15 +394,17 @@ shot(3, M11 - 1, cue("A1", "the") - 1, "sea", "underwater", [D(M11 - 1, [14, -24
 const A1 = cue("A1", "the"), A1b = cue("A1", "beat"), A1o = cue("A1", "oscar");
 const A2 = cue("A2", "the"), A2t = cue("A2", "toys");
 const TEAM: CastId[] = ["vfx1", "vfx2", "vfx3", "vfx4"];
-shot(4, A1 - 1, A1b - 2, "rooms", "oscar", [D(A1 - 1, [200, 2.6, 13], [200.5, 3.4, -2], { fov: 46, rate: 0.002 })],
-  () => ({ actors: TEAM.map((id, i) => ({ id, x: 195.6 + i * 0.85, y: 1.2, z: 0.5, expr: (i % 2 ? "nervous" : "smile") as Expr, seed: 110 + i, pose: "idle" as Pose })),
-    fx: [{ k: "bag", x: 199.4, y: 1.2 + 0.55, z: 1.4, w: 1.1, text: ["$15M"], seed: 0 }, { k: "bag", x: 204, y: 1.2 + 2.6, z: -3.5, w: 5.2, text: ["$$$"], seed: 1 }, { k: "bag", x: 208.5, y: 1.2 + 2.3, z: -5, w: 4.6, text: ["$$$"], seed: 1 }] }));
+const BAGS = (d: number): FxSpec[] => [{ k: "bag", x: 202.9, y: 1.2 + 1.7 * (1 - 0.7 * d), z: -3.5, w: 3.4 * (1 - 0.7 * d), text: ["$$$"], seed: 1, alpha: 1 - 0.8 * d }, { k: "bag", x: 204.6, y: 1.2 + 1.5 * (1 - 0.7 * d), z: -5.5, w: 3.0 * (1 - 0.7 * d), text: ["$$$"], seed: 1, alpha: 1 - 0.8 * d }];
+const TEAMX = [198.0, 198.75, 199.5, 200.25];
+shot(4, A1 - 1, A1b - 2, "rooms", "oscar", [D(A1 - 1, [200.5, 2.4, 11], [200.7, 2.7, -1.5], { fov: 46, rate: 0.002 })],
+  () => ({ actors: TEAM.map((id, i) => ({ id, x: TEAMX[i], y: 1.2, z: 0.5, expr: (i % 2 ? "nervous" : "smile") as Expr, seed: 110 + i, pose: "idle" as Pose })),
+    fx: [{ k: "bag", x: 201.2, y: 1.2 + 0.5, z: 1.0, w: 1.0, text: ["$15M"], seed: 0 }, ...BAGS(0)] }));
 KICKS.push([A1b, 1.0]);
-shot(4, A1b - 2, A2 - 1, "rooms", "oscar", [D(A1b - 2, [200, 2.6, 13], [200, 3.6, -2], { fov: 46, rate: 0.0025, punch: 0.006, p0: A1o - 3, n: 24 })],
+shot(4, A1b - 2, A2 - 1, "rooms", "oscar", [D(A1b - 2, [200.5, 2.4, 11], [200.7, 2.9, -1.5], { fov: 46, rate: 0.0025, punch: 0.006, p0: A1o - 3, n: 24 })],
   (f) => { const d = sm(f, A1b, A1b + 14), s = sm(f, A1o - 4, A1o + 4);
-    const fx: FxSpec[] = [{ k: "bag", x: 204, y: 1.2 + 2.6 * (1 - 0.7 * d), z: -3.5, w: 5.2 * (1 - 0.7 * d), text: ["$$$"], seed: 1, alpha: 1 - 0.8 * d }, { k: "bag", x: 208.5, y: 1.2 + 2.3 * (1 - 0.7 * d), z: -5, w: 4.6 * (1 - 0.7 * d), text: ["$$$"], seed: 1, alpha: 1 - 0.8 * d }];
-    if (s > 0) fx.push({ k: "statue", x: 201.6, y: 1.2 + 2.4 * s, z: -1.5, w: 1.6 * s, h: 4.8 * s, t: s > 0.9 ? 1 : 0 }, { k: "glow", x: 201.6, y: 3.6, z: -1.8, w: 7 * s, soft: true, col: "#ffd27a", alpha: 0.6 * s });
-    return { actors: TEAM.map((id, i) => ({ id, x: 195.6 + i * 0.85, y: 1.2, z: 0.5, pose: "cheer" as Pose, expr: "laugh" as Expr, seed: 110 + i })), fx }; });
+    const fx: FxSpec[] = BAGS(d);
+    if (s > 0) fx.push({ k: "statue", x: 202.0, y: 1.2 + 2.0 * s, z: -1.2, w: 1.35 * s, h: 4.0 * s, t: s > 0.9 ? 1 : 0 }, { k: "glow", x: 202.0, y: 3.2, z: -1.5, w: 6 * s, soft: true, col: "#ffd27a", alpha: 0.55 * s });
+    return { actors: TEAM.map((id, i) => ({ id, x: TEAMX[i], y: 1.2, z: 0.5, pose: "cheer" as Pose, expr: "laugh" as Expr, seed: 110 + i })), fx }; });
 shot(4, A2 - 1, cue("Z1", "now") - 1, "rooms", "oscar", [D(A2 - 1, [200.3, 2.35, 5.6], [200.3, 2.3, 0.5], { fov: 40, rate: 0.0025, punch: 0.006, p0: A2t - 3, n: 22 })],
   (f) => ({ actors: TEAM.map((id, i) => ({ id, x: 199.0 + i * 0.85, y: 1.2, z: 0.5, pose: "cheer" as Pose, expr: (i % 2 ? "laugh" : "grin") as Expr, seed: 110 + i })),
     particles: confetti(f, 200.3, 1.4, 0.8, 320, 6, 5), particleSize: 0.06 }));
@@ -419,28 +426,27 @@ shot(5, Z1s - 3, Z2 - 1, "ruins", "ruins", [D(Z1s - 3, [0.8, 1.5, -167.5], [0, 2
 shot(5, Z2 - 1, Z2k - 1, "sea", "stormGold", [D(Z2 - 1, [40, 6, 70], [0, 70, -400], { fov: 50, rate: 0.002 }), D(Z2t - 4, [30, 5, 50], [-20, 110, -500], { fov: 46, dur: 30, rate: 0.003, punch: 0.006, p0: Z2t - 2, n: 24 })],
   (f) => { const fl = f >= Z2t - 2 ? Math.max(sm(f, Z2t - 2, Z2t + 4) * (1 - at(f, Z2t + 10, Z2k)), 0.25) : 0;
     const fx: FxSpec[] = [Z2g, Z2l, Z2l + 8, Z2t, Z2t + 6].filter((b) => f >= b && f < b + 5).map((b) => ({ k: "bolt" as const, x: -160 + (b % 7) * 50, y: 140, z: -600, w: 40, h: 140, seed: b, col: "#ffe27a" }));
-    if (fl > 0) fx.push({ k: "three", x: -40, y: 170, z: -620, w: 320, h: 256, t: fl });
-    return { actors: [], fx, zillas: [{ x: 60, y: -6, z: -230, h: 50, v: "sil", glow: 0.35, rim: "#ffb050", mirror: true, shadow: false }],
+    if (fl > 0) fx.push({ k: "three", x: -40, y: 170, z: -620, w: 320, h: 256, t: fl, soft: true, alpha: 0.92 });
+    return { actors: [], fx, zillas: [{ x: 28, y: -6, z: -230, h: 50, v: "sil", glow: 0.35, rim: "#ffb050", mirror: true, shadow: false }],
       particles: rain(f, 20, 0, 30, 200, 60, 40), particleSize: 0.4 }; });
 // "So keep an eye on that mark."
-shot(5, Z2k - 1, Z3 - 1, "ruins", "golden", [D(Z2k - 1, [0.95, 1.5, 1.7], [0.05, 1.42, 0], { fov: 36, rate: 0.003, punch: 0.008, p0: Z2m - 4, n: 22 })],
+shot(5, Z2k - 1, Z3 - 1, "ruins", "golden", [D(Z2k - 1, [1.0, 1.55, 2.4], [0.05, 1.4, 0], { fov: 38, rate: 0.003, punch: 0.008, p0: Z2m - 4, n: 22 })],
   () => ({ actors: [{ id: "norikoM", x: 0, z: 0, expr: "neutral", look: -1, seed: 73 }] }));
 // "Twenty-three fishermen saw a false sunrise." Back on the boat
-shot(5, Z3 - 1, Z3s - 2, "sea", "dawn", [D(Z3 - 1, [16, 3.4, 12], [-60, 8, -14], { fov: 44, rate: 0.002 })],
+shot(5, Z3 - 1, Z3s - 2, "sea", "dawn", [D(Z3 - 1, [8.5, 3.9, 6.5], [-62, 12, -46], { fov: 44, rate: 0.002, focus: 8 })],
   (f, H) => { boatAt(H, f);
-    return { actors: [{ id: "fish1", x: 3.2, y: DECK, z: 1.5, expr: "neutral", facing: -1, look: -1, seed: 11 }, { id: "fish3", x: 5.2, y: DECK, z: 0.6, expr: "neutral", facing: -1, look: -1, seed: 13 }],
-      fx: [{ k: "fireball", x: WEST[0], y: 60, z: WEST[2], w: 300, soft: true, t: 0.8 }] }; });
+    return { actors: [{ id: "fish1", x: 3.0, y: DECK, z: 1.4, expr: "neutral", facing: -1, look: -1, seed: 11 }, { id: "fish3", x: 4.2, y: DECK, z: 0.2, expr: "neutral", facing: -1, look: -1, seed: 13 }],
+      fx: [{ k: "fireball", x: WEST[0], y: 90, z: WEST[2], w: 480, soft: true, t: 0.85 }] }; });
 // "Seventy-two years later, we're still watching" : the cinema, the screen shows him walking at sunrise
-shot(5, Z3s - 2, Z3w - 2, "rooms", "cinema", [D(Z3s - 2, [300, 3.2, 14], [300, 5, -11], { fov: 46, rate: 0.002 })],
+shot(5, Z3s - 2, Z3w - 2, "rooms", "cinema", [D(Z3s - 2, [300, 5.2, 16], [300, 5.8, -11], { fov: 46, rate: 0.002 })],
+  (f, H) => { setScreen(H, f); return { actors: [] }; });
+shot(5, Z3w - 2, Z3k - 4, "rooms", "cinema", [D(Z3w - 2, [300.35, 1.25, -4.2], [300.35, 1.0, 0.3], { fov: 44, rate: 0.003 })],
   (f, H) => { setScreen(H, f);
-    return { actors: (["aud1", "aud2", "aud3", "aud4"] as CastId[]).map((id, i) => ({ id, x: 297.2 + i * 1.6, y: 0.9, z: 4.8, legs: "sit" as const, pose: "sit" as Pose, expr: "neutral" as Expr, seed: 130 + i })) }; });
-shot(5, Z3w - 2, Z3k - 4, "rooms", "cinema", [D(Z3w - 2, [300.4, 2.3, -1.5], [300.4, 1.85, 4.8], { fov: 40, rate: 0.003 })],
-  (f, H) => { setScreen(H, f);
-    return { actors: (["aud1", "aud2", "aud3", "aud4"] as CastId[]).map((id, i) => ({ id, x: 298.0 + i * 0.95, y: 0.9, z: 4.8, legs: "sit" as const, pose: (i % 2 ? "sit" : "hold") as Pose, expr: (i === 1 ? "shock" : i === 2 ? "grin" : "smile") as Expr, seed: 130 + i })) }; });
+    return { actors: (["aud1", "aud2", "aud3"] as CastId[]).map((id, i) => ({ id, x: 299.6 + i * 0.75, y: 0, z: 0.35, legs: "sit" as const, pose: (i === 1 ? "sit" : "hold") as Pose, expr: (i === 1 ? "shock" : i === 2 ? "grin" : "smile") as Expr, seed: 130 + i })) }; });
 // "it walk." : on the horizon at dawn; end title
 shot(5, Z3k - 4, TOTAL, "sea", "dawn", [M(Z3k - 4, (f) => { const t = glide(at(f, Z3k - 4, TOTAL)); return { pos: [L(30, 10, t), L(3, 6, t), L(120, 160, t)], look: [0, 30, -200], fov: 46 }; })],
   (f) => { const w = (f - Z3k) / FPS;
-    return { actors: [], zillas: [{ x: -60 + w * 6, y: -4, z: -260, h: 54, v: "sil", pose: "walk", phase: w * 0.35, glow: 0.7, rim: "#ffb070", shadow: false }],
+    return { actors: [], zillas: [{ x: -16 + w * 4, y: -4, z: -300, h: 70, v: "sil", pose: "walk", phase: w * 0.35, glow: 0.7, rim: "#ffb070", shadow: false }],
       fx: [{ k: "fireball", x: 10, y: 34, z: -520, w: 160, soft: true, t: 0.7 }] }; });
 
 KICKS = KICKS.sort((a, b) => a[0] - b[0]);
@@ -451,3 +457,7 @@ export const FLASHES: [number, number, string][] = [[H1s - 1, 4, "#fff2d0"], [H2
 /** lightning strobes: frames where the picture flares */
 export const LIGHTNING = [Z2g, Z2l, Z2l + 8, Z2t, Z2t + 6];
 export const CUES = { H3, O1, Y1, M1, A1, Z1, Z3k, END: Z3k + 12 };
+/** picture timeline for the sound script (scripts/timeline.mjs writes it to audio/timeline.json) */
+export const TIMELINE = { total: TOTAL, fps: FPS, shots: S.map((s) => ({ a: s.a, b: s.b, ch: s.ch, place: s.place, look: s.look })), kicks: KICKS, flashes: FLASHES, lightning: LIGHTNING,
+  cues: { ...CUES, H1s, H2b, H2z, O1, O2m, O3, O2h, O2w, O3h, O3s, O3t, Y1w, Y1f, Y2r, M1m, M2d, M2m, M3f, M4h, M4a, M5n, M6m, M6c, M6g, M6b, M7, M7s, M7t, M7k, M8, M8m, M9e, M9c, M10, M11, M11b,
+    A1b, A1o, A2, A2t, Z1h, Z2g, Z2l, Z2t, Z3, Z3s, Z3w } };

@@ -1,0 +1,520 @@
+{
+ "total": 3300,
+ "fps": 30,
+ "shots": [
+  {
+   "a": 0,
+   "b": 71,
+   "ch": 0,
+   "place": "sea",
+   "look": "predawn"
+  },
+  {
+   "a": 71,
+   "b": 107,
+   "ch": 0,
+   "place": "sea",
+   "look": "predawn"
+  },
+  {
+   "a": 107,
+   "b": 126,
+   "ch": 0,
+   "place": "sea",
+   "look": "westface"
+  },
+  {
+   "a": 126,
+   "b": 162,
+   "ch": 0,
+   "place": "sea",
+   "look": "westglow"
+  },
+  {
+   "a": 162,
+   "b": 249,
+   "ch": 0,
+   "place": "sea",
+   "look": "westglow"
+  },
+  {
+   "a": 249,
+   "b": 285,
+   "ch": 0,
+   "place": "sea",
+   "look": "stormsea"
+  },
+  {
+   "a": 285,
+   "b": 407,
+   "ch": 0,
+   "place": "city",
+   "look": "cineNight"
+  },
+  {
+   "a": 407,
+   "b": 442,
+   "ch": 1,
+   "place": "sea",
+   "look": "ash"
+  },
+  {
+   "a": 442,
+   "b": 542,
+   "ch": 1,
+   "place": "sea",
+   "look": "ash"
+  },
+  {
+   "a": 542,
+   "b": 626,
+   "ch": 1,
+   "place": "city",
+   "look": "night54"
+  },
+  {
+   "a": 626,
+   "b": 697,
+   "ch": 1,
+   "place": "studio",
+   "look": "stage"
+  },
+  {
+   "a": 697,
+   "b": 783,
+   "ch": 1,
+   "place": "studio",
+   "look": "stage"
+  },
+  {
+   "a": 783,
+   "b": 847,
+   "ch": 1,
+   "place": "studio",
+   "look": "stage"
+  },
+  {
+   "a": 847,
+   "b": 906,
+   "ch": 2,
+   "place": "island",
+   "look": "golden"
+  },
+  {
+   "a": 906,
+   "b": 966,
+   "ch": 2,
+   "place": "island",
+   "look": "golden"
+  },
+  {
+   "a": 966,
+   "b": 1097,
+   "ch": 2,
+   "place": "island",
+   "look": "golden"
+  },
+  {
+   "a": 1097,
+   "b": 1160,
+   "ch": 3,
+   "place": "sea",
+   "look": "stormsea"
+  },
+  {
+   "a": 1160,
+   "b": 1207,
+   "ch": 3,
+   "place": "ruins",
+   "look": "ruins"
+  },
+  {
+   "a": 1207,
+   "b": 1273,
+   "ch": 3,
+   "place": "ruins",
+   "look": "ruins"
+  },
+  {
+   "a": 1273,
+   "b": 1351,
+   "ch": 3,
+   "place": "ruins",
+   "look": "ruins"
+  },
+  {
+   "a": 1351,
+   "b": 1422,
+   "ch": 3,
+   "place": "island",
+   "look": "day"
+  },
+  {
+   "a": 1422,
+   "b": 1493,
+   "ch": 3,
+   "place": "island",
+   "look": "day"
+  },
+  {
+   "a": 1493,
+   "b": 1546,
+   "ch": 3,
+   "place": "island",
+   "look": "islandNight"
+  },
+  {
+   "a": 1546,
+   "b": 1567,
+   "ch": 3,
+   "place": "island",
+   "look": "islandNight"
+  },
+  {
+   "a": 1567,
+   "b": 1624,
+   "ch": 3,
+   "place": "island",
+   "look": "islandNight"
+  },
+  {
+   "a": 1624,
+   "b": 1685,
+   "ch": 3,
+   "place": "ruins",
+   "look": "golden"
+  },
+  {
+   "a": 1685,
+   "b": 1762,
+   "ch": 3,
+   "place": "ruins",
+   "look": "golden"
+  },
+  {
+   "a": 1762,
+   "b": 1823,
+   "ch": 3,
+   "place": "city",
+   "look": "ginza"
+  },
+  {
+   "a": 1823,
+   "b": 1855,
+   "ch": 3,
+   "place": "city",
+   "look": "ginza"
+  },
+  {
+   "a": 1855,
+   "b": 1929,
+   "ch": 3,
+   "place": "city",
+   "look": "ginza"
+  },
+  {
+   "a": 1929,
+   "b": 2010,
+   "ch": 3,
+   "place": "rooms",
+   "look": "hall"
+  },
+  {
+   "a": 2010,
+   "b": 2055,
+   "ch": 3,
+   "place": "sea",
+   "look": "sky"
+  },
+  {
+   "a": 2055,
+   "b": 2139,
+   "ch": 3,
+   "place": "rooms",
+   "look": "hall"
+  },
+  {
+   "a": 2139,
+   "b": 2201,
+   "ch": 3,
+   "place": "sea",
+   "look": "sky"
+  },
+  {
+   "a": 2201,
+   "b": 2261,
+   "ch": 3,
+   "place": "sea",
+   "look": "sky"
+  },
+  {
+   "a": 2261,
+   "b": 2341,
+   "ch": 3,
+   "place": "sea",
+   "look": "sky"
+  },
+  {
+   "a": 2341,
+   "b": 2449,
+   "ch": 3,
+   "place": "rooms",
+   "look": "hospital"
+  },
+  {
+   "a": 2449,
+   "b": 2548,
+   "ch": 3,
+   "place": "sea",
+   "look": "underwater"
+  },
+  {
+   "a": 2548,
+   "b": 2619,
+   "ch": 4,
+   "place": "rooms",
+   "look": "oscar"
+  },
+  {
+   "a": 2619,
+   "b": 2699,
+   "ch": 4,
+   "place": "rooms",
+   "look": "oscar"
+  },
+  {
+   "a": 2699,
+   "b": 2785,
+   "ch": 4,
+   "place": "rooms",
+   "look": "oscar"
+  },
+  {
+   "a": 2785,
+   "b": 2852,
+   "ch": 5,
+   "place": "ruins",
+   "look": "ruins"
+  },
+  {
+   "a": 2852,
+   "b": 2921,
+   "ch": 5,
+   "place": "ruins",
+   "look": "ruins"
+  },
+  {
+   "a": 2921,
+   "b": 3008,
+   "ch": 5,
+   "place": "sea",
+   "look": "stormGold"
+  },
+  {
+   "a": 3008,
+   "b": 3064,
+   "ch": 5,
+   "place": "ruins",
+   "look": "golden"
+  },
+  {
+   "a": 3064,
+   "b": 3130,
+   "ch": 5,
+   "place": "sea",
+   "look": "dawn"
+  },
+  {
+   "a": 3130,
+   "b": 3167,
+   "ch": 5,
+   "place": "rooms",
+   "look": "cinema"
+  },
+  {
+   "a": 3167,
+   "b": 3188,
+   "ch": 5,
+   "place": "rooms",
+   "look": "cinema"
+  },
+  {
+   "a": 3188,
+   "b": 3300,
+   "ch": 5,
+   "place": "sea",
+   "look": "dawn"
+  }
+ ],
+ "kicks": [
+  [
+   217,
+   1.4
+  ],
+  [
+   252,
+   1.6
+  ],
+  [
+   583,
+   1.2
+  ],
+  [
+   744,
+   0.7
+  ],
+  [
+   791,
+   0.8
+  ],
+  [
+   808,
+   1
+  ],
+  [
+   924,
+   1
+  ],
+  [
+   1123,
+   1.4
+  ],
+  [
+   1294,
+   1.5
+  ],
+  [
+   1316,
+   1
+  ],
+  [
+   1510,
+   1.4
+  ],
+  [
+   1574,
+   1.2
+  ],
+  [
+   1835,
+   2
+  ],
+  [
+   2235,
+   2
+  ],
+  [
+   2621,
+   1
+  ],
+  [
+   2893,
+   1
+  ]
+ ],
+ "flashes": [
+  [
+   107,
+   4,
+   "#fff2d0"
+  ],
+  [
+   249,
+   6,
+   "#ffffff"
+  ],
+  [
+   1123,
+   4,
+   "#ffffff"
+  ],
+  [
+   1835,
+   7,
+   "#ffffff"
+  ],
+  [
+   1897,
+   5,
+   "#fff6dc"
+  ],
+  [
+   2235,
+   6,
+   "#fff6dc"
+  ],
+  [
+   2645,
+   4,
+   "#fff2c0"
+  ],
+  [
+   2893,
+   4,
+   "#ffffff"
+  ]
+ ],
+ "lightning": [
+  2946,
+  2956,
+  2964,
+  2977,
+  2983
+ ],
+ "cues": {
+  "H3": 286,
+  "O1": 408,
+  "Y1": 848,
+  "M1": 1098,
+  "A1": 2549,
+  "Z1": 2786,
+  "Z3k": 3192,
+  "END": 3204,
+  "H1s": 108,
+  "H2b": 217,
+  "H2z": 252,
+  "O2m": 583,
+  "O3": 698,
+  "O2h": 651,
+  "O2w": 668,
+  "O3h": 744,
+  "O3s": 785,
+  "O3t": 808,
+  "Y1w": 878,
+  "Y1f": 924,
+  "Y2r": 1061,
+  "M1m": 1123,
+  "M2d": 1294,
+  "M2m": 1316,
+  "M3f": 1424,
+  "M4h": 1510,
+  "M4a": 1568,
+  "M5n": 1688,
+  "M6m": 1785,
+  "M6c": 1825,
+  "M6g": 1835,
+  "M6b": 1897,
+  "M7": 1930,
+  "M7s": 2012,
+  "M7t": 2056,
+  "M7k": 2106,
+  "M8": 2140,
+  "M8m": 2233,
+  "M9e": 2280,
+  "M9c": 2301,
+  "M10": 2342,
+  "M11": 2450,
+  "M11b": 2514,
+  "A1b": 2621,
+  "A1o": 2645,
+  "A2": 2700,
+  "A2t": 2735,
+  "Z1h": 2887,
+  "Z2g": 2946,
+  "Z2l": 2956,
+  "Z2t": 2977,
+  "Z3": 3065,
+  "Z3s": 3132,
+  "Z3w": 3169
+ }
+}

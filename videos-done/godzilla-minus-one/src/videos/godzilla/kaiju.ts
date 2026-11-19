@@ -291,34 +291,34 @@ export const statue = (p: Pen, shine = 0) => {
   p.stroke([[80, 170], [120, 175], [110, 300]], 4, mix(gold, INK, 0.4));
   if (shine) p.poly([[110, 80], [118, 110], [148, 118], [118, 126], [110, 156], [102, 126], [72, 118], [102, 110]], WHITE, 0);
 };
-/** the planning blackboard: sink in a ring of gas, then haul up fast. step 0..2 reveals the parts; box 1200 x 750 */
+/** the planning blackboard (portrait): sink him in a ring of gas, then haul him up fast. step 0..2; box 750 x 1000 */
 export const board = (p: Pen, step: number, dead = 0) => {
   const g = p.g;
-  p.poly([[0, 0], [1200, 0], [1200, 750], [0, 750]], "#6a4a30", 0);
-  p.poly([[30, 30], [1170, 30], [1170, 720], [30, 720]], "#2f4a3c", 6);
+  p.poly([[0, 0], [750, 0], [750, 1000], [0, 1000]], "#6a4a30", 0);
+  p.poly([[26, 26], [724, 26], [724, 974], [26, 974]], "#2f4a3c", 6);
   const chalk = "#eef2e6", ch = (pts: P2[], w = 7) => p.stroke(pts, w, chalk);
-  // sea line + depth
-  const wave: P2[] = []; for (let i = 0; i <= 40; i++) wave.push([60 + i * 27, 150 + 8 * Math.sin(i * 1.2)]);
+  const wave: P2[] = []; for (let i = 0; i <= 26; i++) wave.push([50 + i * 25, 190 + 8 * Math.sin(i * 1.2)]);
   ch(wave, 6);
-  g.font = "56px Bangers, 'Luckiest Guy', Impact, sans-serif"; g.fillStyle = chalk; g.textAlign = "center";
-  // the monster icon (chalk outline): sinks in step 1, rises in step 2
+  g.font = "64px Bangers, 'Luckiest Guy', Impact, sans-serif"; g.fillStyle = chalk; g.textAlign = "center";
+  g.fillText("SAGAMI BAY", 375, 120);
   const s1 = Math.min(1, Math.max(0, step)), s2 = Math.min(1, Math.max(0, step - 1));
-  const my = 250 + 300 * s1 - 300 * s2;
+  const my = 380 + 420 * s1 - 380 * s2, mx = 330;
   const icon = (x: number, y: number) => {
     ch([[x - 70, y + 60], [x - 50, y - 10], [x - 20, y - 60], [x + 10, y - 90], [x + 50, y - 95], [x + 70, y - 70], [x + 40, y - 50], [x + 30, y + 10], [x + 40, y + 60]], 7);
     for (let i = 0; i < 4; i++) ch([[x - 40 + i * 10, y - 20 - i * 20], [x - 70 + i * 12, y - 30 - i * 22], [x - 50 + i * 10, y - 5 - i * 20]], 5);
-    if (dead > 0) { for (const s of [-1, 1]) ch([[x + 35 - 10, y - 82 - 10 * s], [x + 35 + 10, y - 82 + 10 * s]], 6); }
+    if (dead > 0) { for (const s of [-1, 1]) ch([[x + 25, y - 92 - 10 * s], [x + 45, y - 72 + 10 * s]], 6); }
     else p.dot(x + 38, y - 78, 6, chalk);
   };
-  icon(330, my);
+  icon(mx, my);
   if (step > 0.2) { // ring of gas bubbles around him + arrow down
-    for (let i = 0; i < 14; i++) { const a = (i / 14) * Math.PI * 2, r = 150; p.ell(330 + Math.cos(a) * r, my + Math.sin(a) * r * 0.5, 14 + 6 * rnd(i, 1), 14 + 6 * rnd(i, 1), null, 0); p.arc(330 + Math.cos(a) * r, my + Math.sin(a) * r * 0.5, 14 + 6 * rnd(i, 1), 14 + 6 * rnd(i, 1), 0, 360, 5, chalk); }
-    ch([[560, 260], [560, 560]], 9); ch([[530, 520], [560, 565], [590, 520]], 9);
-    g.fillText("1. SINK", 690, 420);
+    for (let i = 0; i < 14; i++) { const a = (i / 14) * Math.PI * 2, r = 140; p.arc(mx + Math.cos(a) * r, my - 20 + Math.sin(a) * r * 0.55, 13 + 6 * rnd(i, 1), 13 + 6 * rnd(i, 1), 0, 360, 5, chalk); }
+    ch([[620, 300], [620, 640]], 10); ch([[588, 600], [620, 648], [652, 600]], 10);
+    g.fillText("1. SINK", 610, 720);
   }
-  if (step > 1.2) { // balloons + arrow up + pressure
-    for (let i = 0; i < 4; i++) { const bx = 250 + i * 55, by = my - 190 - (i % 2) * 30; p.arc(bx, by, 26, 32, 0, 360, 5, chalk); ch([[bx, by + 32], [330, my - 80]], 3); }
-    ch([[880, 600], [880, 250]], 9); ch([[850, 290], [880, 245], [910, 290]], 9);
-    g.fillText("2. YANK UP", 1010, 420);
+  if (step > 1.2) { // balloons + arrow up
+    for (let i = 0; i < 4; i++) { const bx = mx - 80 + i * 55, by = my - 200 - (i % 2) * 30; p.arc(bx, by, 24, 30, 0, 360, 5, chalk); ch([[bx, by + 30], [mx, my - 90]], 3); }
+    ch([[110, 900], [110, 560]], 10); ch([[78, 600], [110, 552], [142, 600]], 10);
+    g.fillText("2. YANK UP", 190, 950);
   }
+  if (dead > 0) { g.font = "80px Bangers, 'Luckiest Guy', Impact, sans-serif"; g.fillText("PRESSURE!", 400, 880); }
 };

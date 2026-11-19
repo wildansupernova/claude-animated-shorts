@@ -191,8 +191,8 @@ const makeBoat = () => { // Lucky Dragon No. 5: a wooden tuna boat, bow toward +
   const boom = new THREE.CylinderGeometry(0.08, 0.08, 6, 6); boom.rotateZ(Math.PI / 2 - 0.35); b.add(boom, col("#7a5a3a"), M4(7.5, 5, 0));
   b.add(new THREE.CylinderGeometry(0.45, 0.5, 1.6, 10), col("#3a3d47"), M4(-6.5, 5.6, 0));
   // line reels, buoys, crates on deck
-  for (let i = 0; i < 4; i++) b.add(new THREE.CylinderGeometry(0.5, 0.5, 0.6, 12), col("#8a6a4a"), M4(-3 + i * 2.2, 2.4, (i % 2 ? -1 : 1) * 1.2, 0));
-  for (let i = 0; i < 6; i++) b.add(new THREE.SphereGeometry(0.32, 10, 8), col(i % 2 ? "#e8b33c" : "#d8584a"), M4(1 + (i % 3) * 0.9, 2.45, -1.6 + Math.floor(i / 3) * 0.8));
+  for (let i = 0; i < 3; i++) b.add(new THREE.CylinderGeometry(0.45, 0.45, 0.55, 12), col("#8a6a4a"), M4(7 + i * 1.3, 2.35, (i % 2 ? -1 : 1) * 1.3, 0));
+  for (let i = 0; i < 6; i++) b.add(new THREE.SphereGeometry(0.3, 10, 8), col(i % 2 ? "#e8b33c" : "#d8584a"), M4(-4.6 + (i % 3) * 0.6, 2.4, 1.2 + Math.floor(i / 3) * 0.6));
   b.build(g);
   for (const s of [-1, 1]) { const n = label(6.5, 0.9, ["LUCKY DRAGON No.5"], "#efe9dc", "#2a2a36", 44); n.position.set(9, 1.1, s * 2.72); n.rotation.y = s > 0 ? 0 : Math.PI; n.rotation.y += s * -0.12; g.add(n); }
   const flag = label(1.2, 0.8, [""], "#d8584a", "#d8584a"); flag.position.set(5.6, 10.4, 0); g.add(flag);
@@ -286,7 +286,7 @@ export const buildPlaces = (root: THREE.Object3D) => {
       g.fillStyle = "#ffffffcc"; const R2 = rng(9); for (let i = 0; i < 9; i++) { const x = R2() * 512, y = 40 + R2() * 110; for (let k = 0; k < 5; k++) { g.beginPath(); g.ellipse(x + k * 18, y + (k % 2) * 6, 26, 14, 0, 0, 7); g.fill(); } }
       g.fillStyle = "#6a7a8a"; for (let x = 0; x < 512; x += 22) { const h = 10 + 30 * R2(); g.fillRect(x, 230 - h, 18, h + 30); }
     });
-    const cyc = new THREE.Mesh(new THREE.CylinderGeometry(26, 26, 16, 32, 1, true, -Math.PI / 2 - 1.2, 2.4), basic("cyc", () => ({ map: sky, side: THREE.DoubleSide })));
+    const cyc = new THREE.Mesh(new THREE.CylinderGeometry(26, 26, 16, 32, 1, true, Math.PI - 1.3, 2.6), basic("cyc", () => ({ map: sky, side: THREE.DoubleSide })));
     cyc.position.set(0, 8, 6); cyc.layers.set(NOINK); G.add(cyc);
     b.add(boxG(-60, 0, -40, 60, 30, -21), col("#26262c")); // black stage walls behind the cyclorama
     // the miniature city: 40-140 cm buildings, little roofs, tiny poles
@@ -342,10 +342,10 @@ export const buildPlaces = (root: THREE.Object3D) => {
   // ===== RUINS: burned-out Tokyo (1945-47) with the family shack; a rebuilt 1949 street at z < -100 =====
   {
     const b = new Batch(), G = groups.ruins;
-    ground(b, 1600, texMat("rubble", speckTex("#8a8070", ["#7a7060", "#9a9080", "#5a5048"], "rubble", 140, [3, 12])), 0, 8);
+    ground(b, 1600, texMat("rubble", speckTex("#7a7066", ["#6a6058", "#8a8276", "#4a423c", "#3a3432"], "rubble", 180, [3, 12])), 0, 8);
     const R = rng(33), char = col("#2e2826"), brick = texMat("brick", brickTex("#9a5a42", "brick")), conc = texMat("conc", winTex("#9a968c", "#2a2624", "conc"));
-    for (let i = 0; i < 160; i++) {
-      const x = -260 + R() * 520, z = -90 + R() * 260; if (Math.hypot(x, z) < 14 || (Math.abs(x) < 6 && z > -90)) continue;
+    for (let i = 0; i < 300; i++) {
+      const x = -260 + R() * 520, z = -90 + R() * 260; if (Math.hypot(x, z) < 14 || Math.hypot(x + 20, z) < 9 || (Math.abs(x) < 6 && z < -90)) continue;
       const k = R();
       if (k < 0.35) { const h = 1 + R() * 3; for (let j = 0; j < 3; j++) b.add(boxG(x + j * 1.2, 0, z, x + j * 1.2 + 0.18, h * (0.5 + 0.5 * R()), z + 0.18), char); b.add(boxG(x, h * 0.8, z, x + 2.6, h * 0.8 + 0.18, z + 0.18), char); }
       else if (k < 0.5) { const h = 5 + R() * 9; b.add(boxG(x, 0, z, x + 0.9, h, z + 0.9, 1), brick); }
@@ -359,9 +359,9 @@ export const buildPlaces = (root: THREE.Object3D) => {
       const roof = new THREE.BoxGeometry(w + 0.6, 0.12, d + 0.8); roof.rotateX(0.18); roof.translate(0, 2.65, 0); b.add(roof.applyMatrix4(m), texMat("tin", tinTex("#7a6a5a", "tin")));
       b.add(boxG(-0.5, 0, d / 2, 0.5, 1.9, d / 2 + 0.05).applyMatrix4(m), col("#4a3a2a"));
     };
-    shack(0, -4, 0, 4.6, 3.4);
-    for (let i = 0; i < 18; i++) shack(-80 + R() * 160, -60 + R() * 140, R() * 0.6 - 0.3, 3 + R() * 2, 2.5 + R());
-    b.add(new THREE.CylinderGeometry(0.03, 0.03, 4.5, 4).rotateZ(Math.PI / 2), col("#3a3030"), M4(3.6, 1.8, -1.5)); // laundry line
+    shack(-20, -4, 0, 4.6, 3.4);
+    for (let i = 0; i < 26; i++) { const x = -80 + R() * 160, z = -60 + R() * 140, ry = R() * 0.6 - 0.3, w = 3 + R() * 2, d = 2.5 + R(); if (Math.hypot(x, z) < 18 || Math.hypot(x + 20, z) < 16) continue; shack(x, z, ry, w, d); }
+    b.add(new THREE.CylinderGeometry(0.03, 0.03, 4.5, 4).rotateZ(Math.PI / 2), col("#3a3030"), M4(-16.4, 1.8, -1.5)); // laundry line
     // rebuilt 1949 street (z -140 .. -260): two-storey wooden shop-houses with tile roofs, poles and banners
     ground(b, 1, col("#8a8070"), 0.01);
     const ww = texMat("machiya", winTex("#8a6a4a", "#e8dcc0", "machiya")), tile = col("#3a3d47");
@@ -429,9 +429,9 @@ export const buildPlaces = (root: THREE.Object3D) => {
     };
     // planning hall: wood panels, blackboard, benches
     room(0, 18, 12, 6, texMat("panel", woodTex("#8a6a48", "panel")), texMat("hfloor", woodTex("#6a5040", "hfloor")));
-    for (let r = 0; r < 3; r++) for (const s of [-1, 1]) { b.add(boxG(s * 1.2 + (s > 0 ? 0 : -4), 0.45, 1 + r * 1.8, s * 1.2 + (s > 0 ? 4 : 0), 0.6, 1.5 + r * 1.8), col("#7a5a3a")); for (const x of [0.3, 3.7]) b.add(boxG(s * 1.2 + (s > 0 ? x : -x) - 0.06, 0, 1.1 + r * 1.8, s * 1.2 + (s > 0 ? x : -x) + 0.06, 0.45, 1.4 + r * 1.8), col("#5a4030")); }
-    b.add(boxG(-5.2, 0.9, -5.98, 5.2, 4.3, -5.9), col("#4a3420"));
-    H.board = new THREE.Mesh(new THREE.PlaneGeometry(10, 3.2), new THREE.MeshBasicMaterial({ color: "#ffffff" })); H.board.position.set(0, 2.6, -5.85); H.board.layers.set(NOINK); G.add(H.board);
+    for (let r = 0; r < 3; r++) for (const s of [-1, 1]) { b.add(boxG(s * 0.4 + (s > 0 ? 0 : -2.6), 0.45, 1.6 + r * 1.8, s * 0.4 + (s > 0 ? 2.6 : 0), 0.6, 2.1 + r * 1.8), col("#7a5a3a")); for (const x of [0.25, 2.35]) b.add(boxG(s * 0.4 + (s > 0 ? x : -x) - 0.06, 0, 1.7 + r * 1.8, s * 0.4 + (s > 0 ? x : -x) + 0.06, 0.45, 2.0 + r * 1.8), col("#5a4030")); }
+    b.add(boxG(-1.8, 0.55, -5.98, 1.8, 5.25, -5.9), col("#4a3420"));
+    H.board = new THREE.Mesh(new THREE.PlaneGeometry(3.3, 4.4), new THREE.MeshBasicMaterial({ color: "#ffffff" })); H.board.position.set(0, 2.9, -5.85); H.board.layers.set(NOINK); G.add(H.board);
     // hospital room
     room(100, 12, 10, 4.5, texMat("hwall", speckTex("#d8e2dc", ["#ccd8d2", "#e2eae4"], "hwall", 40, [6, 16])), texMat("hfl", tilesTex("#c8ccc4", "#bcc0b8", 4, "h")));
     b.add(boxG(97, 0, -4.8, 103, 0.55, -1.2), col("#c9ccd2")); b.add(boxG(97.1, 0.55, -4.7, 102.9, 0.85, -1.3), col("#f4f4f0")); b.add(boxG(97.4, 0.85, -4.6, 98.6, 1.1, -1.4), col("#ffffff"));
