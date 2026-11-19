@@ -82,7 +82,7 @@ export class CardPool {
     c.blob.rotation.z = Math.atan2(cam.x - x, cam.z - z);
   }
   /** an effect card of w x h metres centred at (x, y, z); flat = lying on the ground, face = billboard toward cam */
-  fx(tex: THREE.Texture, x: number, y: number, z: number, w: number, h: number, cam: THREE.Vector3, o: { flat?: boolean; rot?: number; alpha?: number; soft?: boolean; color?: THREE.Color; full?: boolean; yaw?: number } = {}) {
+  fx(tex: THREE.Texture, x: number, y: number, z: number, w: number, h: number, cam: THREE.Vector3, o: { flat?: boolean; rot?: number; alpha?: number; soft?: boolean; color?: THREE.Color; full?: boolean; yaw?: number; lean?: number } = {}) {
     const c = this.grab(), soft = o.soft || (o.alpha ?? 1) < 1;
     const m = soft ? c.soft : c.mat;
     m.map = tex; m.opacity = o.alpha ?? 1; m.color.copy(o.color ?? new THREE.Color(1, 1, 1));
@@ -90,7 +90,7 @@ export class CardPool {
     c.mesh.position.set(x, y, z); c.mesh.scale.set(w, h, 1);
     if (o.flat) c.mesh.rotation.set(-Math.PI / 2, 0, o.rot ?? 0, "XYZ");
     else if (o.full) { c.mesh.quaternion.copy(camQuat); c.mesh.rotateZ(o.rot ?? 0); }
-    else c.mesh.rotation.set(0, o.yaw ?? Math.atan2(cam.x - x, cam.z - z), o.rot ?? 0, "YXZ");
+    else c.mesh.rotation.set(o.lean ?? 0, o.yaw ?? Math.atan2(cam.x - x, cam.z - z), o.rot ?? 0, "YXZ");
   }
   end() { for (let i = this.n; i < this.cards.length; i++) { this.cards[i].mesh.visible = false; this.cards[i].blob.visible = false; } }
 }

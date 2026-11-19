@@ -194,7 +194,7 @@ const makeBoat = () => { // Lucky Dragon No. 5: a wooden tuna boat, bow toward +
   for (let i = 0; i < 3; i++) b.add(new THREE.CylinderGeometry(0.45, 0.45, 0.55, 12), col("#8a6a4a"), M4(7 + i * 1.3, 2.35, (i % 2 ? -1 : 1) * 1.3, 0));
   for (let i = 0; i < 6; i++) b.add(new THREE.SphereGeometry(0.3, 10, 8), col(i % 2 ? "#e8b33c" : "#d8584a"), M4(-4.6 + (i % 3) * 0.6, 2.4, 1.2 + Math.floor(i / 3) * 0.6));
   b.build(g);
-  for (const s of [-1, 1]) { const n = label(6.5, 0.9, ["LUCKY DRAGON No.5"], "#efe9dc", "#2a2a36", 44); n.position.set(9, 1.1, s * 2.72); n.rotation.y = s > 0 ? 0 : Math.PI; n.rotation.y += s * -0.12; g.add(n); }
+  for (const s of [-1, 1]) { const n = label(4.4, 0.75, ["LUCKY DRAGON 5"], "#efe9dc", "#2a2a36", 40); n.position.set(4, 1.15, s * 3.0); n.rotation.y = s > 0 ? 0 : Math.PI; g.add(n); }
   const flag = label(1.2, 0.8, [""], "#d8584a", "#d8584a"); flag.position.set(5.6, 10.4, 0); g.add(flag);
   return g;
 };

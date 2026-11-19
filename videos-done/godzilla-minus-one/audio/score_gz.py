@@ -266,9 +266,16 @@ def build_sfx():
         if s["look"] == "cinema":
             place(sfx, st(projector(d, r)) * 0.3, a)
     cue(0, "ambience beds per place")
-    # the bomb, his birth roar, roars on roar beats
+    # v2 camera punctuation: a "zip" on each snap zoom, a big whoosh on each whip pan
+    for f in TL.get("snaps", []):
+        n = ns(0.22); t = np.arange(n) / SR
+        zz = bp(r.standard_normal(n), 900, 7000, 2) * np.minimum(1, t / 0.18) ** 2 * np.exp(-np.maximum(0, t - 0.18) / 0.02)
+        place(sfx, st(fades(zz, 0.002, 0.02)) * 0.9, fr(f) - 0.18); cue(fr(f), "snap zip")
+    for f in TL.get("whips", []):
+        place(sfx, pan(G.whoosh(0.7, r, peak=0.45, f_lo=250, f_hi=3200, tail=0.25), 0.0), fr(f) - 0.32, gain=0.9); cue(fr(f), "whip whoosh")
+    # the bomb, his roar on frame 0, roars on roar beats
     place(sfx, st(big_blast(r)) * 0.55, fr(C["H2b"])); cue(fr(C["H2b"]), "H-bomb blast")
-    for f, p, g in [(C["H2z"], 1.0, 1.0), (C["H3"] + 50, 0.95, 0.5), (C["O2m"] - 2, 1.0, 0.7), (C["M1m"] - 2, 0.92, 1.0), (C["M2d"] - 2, 1.0, 0.7), (C["M4h"] - 2, 1.08, 0.7),
+    for f, p, g in [(0, 1.0, 1.15), (C["H3"] + 50, 0.95, 0.5), (C["O2m"] - 2, 1.0, 0.7), (C["M1m"] - 2, 0.92, 1.0), (C["M2d"] - 2, 1.0, 0.7), (C["M4h"] - 2, 1.08, 0.7),
                     (C["Z1h"] + 6, 0.95, 0.9)]:
         place(sfx, st(roar(r, 2.2, p)) * 0.45 * g, fr(f)); cue(fr(f), "kaiju roar (synth)")
     # footsteps: Ginza 1954 walk, studio suit stomps, the parade, the dawn walk

@@ -13,7 +13,8 @@ import { World } from "./world";
 import { InkPass } from "./ink";
 import { GradeEffect, GRADES } from "./grade";
 import { LOOKS } from "./looks";
-import { TOTAL, FLASHES, LIGHTNING, shotAt, SHOTS, CUES } from "./story";
+import { TOTAL, FLASHES, LIGHTNING, shotAt, SHOTS, CUES, camAt } from "./story";
+import { MotionBlur, camMotion, blurTiny } from "./blur";
 import WORDS from "./words.json";
 
 export const GODZILLA_FRAMES = TOTAL;
@@ -28,14 +29,19 @@ const Inner: React.FC<{ f: number }> = ({ f }) => {
     ink: new InkPass(scene, camera as THREE.PerspectiveCamera),
     tone: new ToneMappingEffect({ mode: ToneMappingMode.NEUTRAL }),
     grade: new GradeEffect(GRADES.day, 1),
+    mblur: new MotionBlur(),
   }), [camera, scene]);
   useEffect(() => () => fx.ink.dispose(), [fx]);
   const post = useMemo(() => (
     <EffectComposer multisampling={0} frameBufferType={THREE.HalfFloatType}>
       <primitive object={fx.ink} dispose={null} />
+      <primitive object={fx.mblur} dispose={null} />
     </EffectComposer>
   ), [fx]);
   const s = world.update(f, camera as THREE.PerspectiveCamera);
+  // camera motion blur over a 1-frame shutter, evaluated on the current shot's own path (never across a cut)
+  { const aspect = 9 / 16, m = camMotion(camAt(s, f - 1), camAt(s, f), aspect);
+    fx.mblur.set(blurTiny(m, 1920) ? { vel: [0, 0], rot: 0, zoom: 0 } : m, aspect); }
   const L = LOOKS[s.look];
   const g = L.grade;
   const tag = fx.grade as unknown as { _g?: string };

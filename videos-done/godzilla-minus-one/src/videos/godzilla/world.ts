@@ -100,12 +100,13 @@ export class World {
       this.applyLook(LOOKS[s.look as LookId] as Look, tmp, lkey);
     }
     this.skyU.t.value = f / FPS;
+    (this.H.water.material as THREE.MeshLambertMaterial).color.setScalar(s.look === "predawn" ? 0.45 : s.look === "stormsea" || s.look === "stormGold" ? 0.8 : 1);
     if ((globalThis as unknown as { __nosky?: boolean }).__nosky) this.sky.visible = false;
     // shot content
     const H = this.H;
     H.boat.visible = false; H.ships.forEach((m) => (m.visible = false)); H.tug.visible = false; H.shinden.visible = false; H.tram.visible = false;
     H.zero.visible = true; H.zero.position.set(0, 0, 0); H.zero.rotation.set(0, 0, 0);
-    const sc = s.scene(f, this.H);
+    const sc = s.scene(s.ramp ? s.ramp(f) : f, this.H);
     const camLocal = new THREE.Vector3(c.pos[0], c.pos[1], c.pos[2]);
     const G = this.groups[s.place];
     // cards are children of the root: convert local -> world
@@ -145,7 +146,9 @@ export class World {
       this.cards.fx(sh, z.x + o[0], y + 0.05 + o[1], z.z + o[2], S * 0.75, S * 0.32, camW, { flat: true, soft: true, alpha: (z.alpha ?? 1) * 0.9 });
     }
     const col = z.tint ? new THREE.Color(z.tint) : this.cards.tint.clone();
-    this.cards.fx(tex, z.x + o[0], y + S * 0.475 + o[1], z.z + o[2], z.mirror ? -S : S, S, camW, { alpha: z.alpha, color: z.v === "sil" ? new THREE.Color(1, 1, 1) : col, rot: z.roll, soft: z.v === "sil" });
+    // lean the card back toward a high camera so high angles still read (feet stay roughly planted)
+    const cy = y + S * 0.475, el = Math.atan2(camL.y - cy, Math.hypot(camL.x - z.x, camL.z - z.z)), lean = el > 0.35 ? -(el - 0.35) * 0.9 : 0;
+    this.cards.fx(tex, z.x + o[0], cy + o[1], z.z + o[2], z.mirror ? -S : S, S, camW, { alpha: z.alpha, color: z.v === "sil" ? new THREE.Color(1, 1, 1) : col, rot: z.roll, soft: z.v === "sil", lean, yaw: z.yaw });
   }
 
   private actor(a: ActorSpec, f: number, o: readonly number[], camW: THREE.Vector3, camL: THREE.Vector3, tanH: number) {
@@ -164,7 +167,9 @@ export class World {
       blink, look: a.look, glow: q(a.glow, 4), flutter: q(a.flutter, 4), wave: q(a.wave, 4), tilt: q(a.tilt, 1), headTilt: q(a.headTilt, 1), chair: a.chair };
     const key = `${a.id}|${JSON.stringify(opts)}`;
     const tex = drawTex(key, 600, 1000, k, (p: Pen) => drawHero(p, hero, opts));
-    this.cards.body(tex, a.x + o[0], y + o[1], a.z + o[2], camW, { s, roll: a.roll, alpha: a.alpha, mirror: a.mirror, shadow: a.shadow ?? y < 0.5 });
+    // lean back toward a high camera so a crane-down still reads (pivot at the feet)
+    const el = Math.atan2(camL.y - (y + 1.0 * s), Math.hypot(camL.x - a.x, camL.z - a.z)), lean = el > 0.35 ? -(el - 0.35) * 0.85 : 0;
+    this.cards.body(tex, a.x + o[0], y + o[1], a.z + o[2], camW, { s, roll: a.roll, alpha: a.alpha, mirror: a.mirror, shadow: a.shadow ?? y < 0.5, lean });
   }
 
   private effect(x: FxSpec, o: readonly number[], camW: THREE.Vector3) {

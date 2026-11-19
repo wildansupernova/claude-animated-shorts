@@ -2,16 +2,21 @@
  {
   "ch": 0,
   "id": "H1",
-  "say": "March first, 1954. Twenty-three fishermen watched the sun rise, in the west."
+  "say": "Godzilla was born from a real bomb."
  },
  {
   "ch": 0,
   "id": "H2",
-  "say": "It wasn't the sun. It was a hydrogen bomb, and it gave birth to Godzilla."
+  "say": "In 1954, twenty-three fishermen saw the sun rise, in the west."
  },
  {
   "ch": 0,
   "id": "H3",
+  "say": "It wasn't the sun. It was a hydrogen bomb."
+ },
+ {
+  "ch": 0,
+  "id": "H4",
   "say": "Before you watch Godzilla Minus Zero, here's everything you need to know."
  },
  {

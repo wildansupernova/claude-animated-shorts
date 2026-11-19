@@ -14,7 +14,7 @@ export type Look = {
 export const LOOKS = {
   day: { sky: ["#b8d0ec", "#6a9fe0", "#3373cc"], fog: "#b8d0ec", fogNear: 60, fogFar: 700, lit: [1.58, 1.5, 1.33], shade: [0.36, 0.35, 0.44], lift: [0.05, 0.06, 0.11], az: 75, el: 48, tint: "#ffffff", grade: "day" },
   golden: { sky: ["#ffc47c", "#e8967c", "#8a6f8a"], fog: "#efb489", fogNear: 60, fogFar: 700, lit: [1.5, 0.95, 0.55], shade: [0.2, 0.2, 0.38], lift: [0.04, 0.06, 0.17], az: 35, el: 14, tint: "#ffe2c4", grade: "golden", sun: "#ffcf9e" },
-  predawn: { sky: ["#5a5a8a", "#2c3468", "#121638"], stars: 0.45, fog: "#3a4272", fogNear: 60, fogFar: 900, lit: [0.8, 0.85, 1.15], shade: [0.18, 0.2, 0.36], lift: [0.04, 0.05, 0.12], az: 110, el: 30, tint: "#c0c8ee", grade: "day" },
+  predawn: { sky: ["#5a5a8a", "#2c3468", "#121638"], stars: 0.45, fog: "#3a4272", fogNear: 25, fogFar: 600, lit: [0.6, 0.65, 0.92], shade: [0.15, 0.17, 0.32], lift: [0.04, 0.05, 0.12], az: 110, el: 30, tint: "#c0c8ee", grade: "day" },
   westglow: { sky: ["#ffe2b0", "#f0907a", "#3a3270"], stars: 0.15, fog: "#e8a888", fogNear: 80, fogFar: 1100, lit: [1.6, 1.15, 0.8], shade: [0.22, 0.2, 0.4], lift: [0.05, 0.05, 0.14], az: 0, el: 4, tint: "#ffd8c0", grade: "golden", sun: "#fff2d0" },
   westface: { sky: ["#ffe2b0", "#f0907a", "#3a3270"], stars: 0.15, fog: "#e8a888", fogNear: 80, fogFar: 1100, lit: [1.62, 1.18, 0.82], shade: [0.24, 0.22, 0.42], lift: [0.05, 0.05, 0.14], az: 180, el: 8, tint: "#ffe0c8", grade: "golden" },
   ash: { sky: ["#cfcac0", "#aeaca8", "#8c8e96"], fog: "#c4c0b6", fogNear: 40, fogFar: 520, lit: [1.25, 1.22, 1.15], shade: [0.42, 0.42, 0.48], lift: [0.06, 0.06, 0.09], az: 80, el: 55, tint: "#e8e6e2", grade: "day" },
