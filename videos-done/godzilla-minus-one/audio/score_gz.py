@@ -267,10 +267,10 @@ def build_sfx():
             place(sfx, st(projector(d, r)) * 0.3, a)
     cue(0, "ambience beds per place")
     # the bomb, his birth roar, roars on roar beats
-    place(sfx, st(big_blast(r)) * 0.9, fr(C["H2b"])); cue(fr(C["H2b"]), "H-bomb blast")
+    place(sfx, st(big_blast(r)) * 0.55, fr(C["H2b"])); cue(fr(C["H2b"]), "H-bomb blast")
     for f, p, g in [(C["H2z"], 1.0, 1.0), (C["H3"] + 50, 0.95, 0.5), (C["O2m"] - 2, 1.0, 0.7), (C["M1m"] - 2, 0.92, 1.0), (C["M2d"] - 2, 1.0, 0.7), (C["M4h"] - 2, 1.08, 0.7),
                     (C["Z1h"] + 6, 0.95, 0.9)]:
-        place(sfx, st(roar(r, 2.2, p)) * 0.6 * g, fr(f)); cue(fr(f), "kaiju roar (synth)")
+        place(sfx, st(roar(r, 2.2, p)) * 0.45 * g, fr(f)); cue(fr(f), "kaiju roar (synth)")
     # footsteps: Ginza 1954 walk, studio suit stomps, the parade, the dawn walk
     for f0, f1, per, g in [(C["O1"] + 140, C["O2m"] - 4, 34, 0.7), (C["O3s"] + 6, C["Y1"], 24, 0.35), (C["Y2r"] - 120, C["M1"], 30, 0.35), (C["END"] - 40, TOTAL, 40, 0.4)]:
         for f in range(int(f0), int(f1), per):
@@ -291,20 +291,20 @@ def build_sfx():
     n = ns(fr(C["M6g"] - C["M6c"]) + 0.3); t = np.arange(n) / SR
     ray = bp(colored(n, r, 0.3), 1200, 6000, 2) * (0.6 + 0.4 * np.sin(2 * np.pi * 30 * t)) + np.sin(2 * np.pi * (300 + 600 * t) * t) * 0.2
     place(sfx, st(fades(ray, 0.03, 0.1)) * 0.5, fr(C["M6c"])); cue(fr(C["M6c"]), "heat ray")
-    place(sfx, st(big_blast(r, 5)) * 1.0, fr(C["M6g"])); cue(fr(C["M6g"]), "Ginza blast")
-    place(sfx, G.breeze(1.6, r, level=1.4, gust=0.6, bright=2000) * 0.8, fr(C["M6b"] - 4)); cue(fr(C["M6b"]), "blast wind")
+    place(sfx, st(big_blast(r, 5)) * 0.6, fr(C["M6g"])); cue(fr(C["M6g"]), "Ginza blast")
+    place(sfx, G.breeze(1.6, r, level=1.4, gust=0.6, bright=2000) * 0.45, fr(C["M6b"] - 4)); cue(fr(C["M6b"]), "blast wind")
     # planning: chalk strokes
     for f in [C["M7"] + 10, C["M7t"] + 4, C["M7t"] + 16, C["M7t"] + 30, C["M7k"] - 2]:
         place(sfx, st(chalk(r)) * 0.5, fr(f))
     # ring of gas: bubbles
     place(sfx, st(G.bubbles(fr(C["M7t"] - C["M7s"]) + 0.5, r, 30)) * 0.6, fr(C["M7s"])); cue(fr(C["M7s"]), "gas bubbles")
     # the plane: propeller drone, then the hit
-    place(sfx, st(prop_drone(fr(C["M8m"] - C["M8"]) + 0.2, r)) * 0.5, fr(C["M8"])); cue(fr(C["M8"]), "propeller")
-    place(sfx, st(big_blast(r, 3.5)) * 0.9, fr(C["M8m"] + 2))
+    place(sfx, st(prop_drone(fr(C["M8m"] - C["M8"]) + 0.2, r)) * 0.3, fr(C["M8"])); cue(fr(C["M8"]), "propeller")
+    place(sfx, st(big_blast(r, 3.5)) * 0.55, fr(C["M8m"] + 2))
     # parachute pop + wind
     n = ns(0.5); t = np.arange(n) / SR
     place(sfx, st(fades(lp(r.standard_normal(n), 1200) * np.exp(-t / 0.08), 0.001, 0.1)) * 0.6, fr(C["M9e"] + 2))
-    place(sfx, G.breeze(fr(C["M10"] - C["M9e"]), r, level=0.8) * 0.5, fr(C["M9e"]))
+    place(sfx, G.breeze(fr(C["M10"] - C["M9e"]), r, level=0.8) * 0.25, fr(C["M9e"]))
     # Oscar applause
     place(sfx, G.applause(fr(C["Z1"] - C["A1b"]) + 1.0, r, people=40) * 0.35, fr(C["A1b"])); cue(fr(C["A1b"]), "applause")
     # final tail: a last distant roar under the title
@@ -340,18 +340,19 @@ def main():
     for w in WORDS:
         key[ns(max(0, w["s"] - 0.08)):ns(w["e"] + 0.15)] = 1
     smk = signal.lfilter([1 - np.exp(-1 / (0.12 * SR))], [1, -np.exp(-1 / (0.12 * SR))], key)
-    duck = 10 ** (-4.5 * np.clip(smk, 0, 1) / 20)
+    duck = 10 ** (-6.0 * np.clip(smk, 0, 1) / 20)
+    sduck = 10 ** (-8.0 * np.clip(smk, 0, 1) / 20)
     lv, lm, ls = integrated(voice), integrated(mus), integrated(sfx)
     # standard mix of the skill: music bed + 3 dB over the old -9.5 LU, sfx - 6 dB from the old -2 LU
     mus *= 10 ** ((lv - 6.5 - lm) / 20)
     sfx *= 10 ** ((lv - 8.0 - ls) / 20)
     mus *= duck[None, :]
-    sfx *= (0.55 + 0.45 * duck)[None, :]
+    sfx *= sduck[None, :]
     ir = make_ir(1.1, 5)
     mus = 0.8 * mus + 0.2 * convolve_st(mus, ir)[:, :N]
     mix = voice + mus + sfx
     mix *= 10 ** ((-14.0 - integrated(mix)) / 20)
-    mix = limiter(mix, -1.6)
+    mix = limiter(mix, -2.2)
     for name, x in [("music", mus), ("sfx", sfx), ("voice", voice), ("mix", mix)]:
         sf.write(os.path.join(OUT, f"{name}.wav"), x.T.astype(np.float32), SR, subtype="PCM_24")
     rep = f"integrated {integrated(mix):.2f} LUFS, true peak {true_peak(mix):.2f} dBTP, length {mix.shape[1] / SR:.3f} s"

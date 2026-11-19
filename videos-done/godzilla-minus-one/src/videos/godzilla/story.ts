@@ -289,7 +289,7 @@ shot(3, M2 - 1, M2j - 1, "ruins", "ruins", [M(M2 - 1, (f) => { const t = glide(a
     particles: rise(f, 0, 0, -10, 140, 120, 30, 1.2, ["#8a8070", "#a89a88"]), particleSize: 0.5 }));
 // "Japan has lost the war, and is at zero." A signboard reads 0
 shot(3, M2j - 1, M2t - 1, "ruins", "ruins", [D(M2j - 1, [3, 2.2, 10], [0, 3.2, -12], { fov: 42, rate: 0.002, punch: 0.008, p0: M2z - 4, n: 26, focus: 18 })],
-  () => ({ actors: [{ id: "koichi", x: -1.6, z: 2, expr: "neutral", look: 1, seed: 70 }, { id: "folkW", x: 1.8, z: 0.5, expr: "pained", seed: 72, mirror: true }],
+  () => ({ actors: [{ id: "koichi", x: -0.9, z: 3.2, expr: "neutral", look: 1, seed: 70 }, { id: "folkW", x: 1.1, z: 1.5, expr: "pained", seed: 72, mirror: true }],
     fx: [{ k: "sign", x: 0, y: 3.6, z: -12, w: 5, h: 4, text: ["0"], col: "#d8c8a0", col2: "#2a1f36" }] }));
 // "Then Godzilla drags it down to minus one." He looms; the 0 drops to −1
 KICKS.push([M2d, 1.5], [M2m, 1.0]);
