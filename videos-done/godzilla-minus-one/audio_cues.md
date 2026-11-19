@@ -1,16 +1,18 @@
 # Sound cues
 
-integrated -14.43 LUFS, true peak -1.39 dBTP, length 110.000 s
+integrated -14.45 LUFS, true peak -1.56 dBTP, length 110.000 s
 
 -    0.00 s  ambience beds per place
--    7.23 s  H-bomb blast
--    7.23 s  impact x1.4
--    7.23 s  music: stinger
--    8.40 s  impact x1.6
--    8.40 s  kaiju roar (synth)
--    8.40 s  music: stinger
+-    0.00 s  kaiju roar (synth)
+-    1.87 s  impact x1.8
+-    1.87 s  music: stinger
+-    1.87 s  snap zip
+-    8.53 s  H-bomb blast
+-    8.53 s  impact x1.4
+-    8.53 s  music: stinger
 -   10.53 s  music: horn motif
 -   11.20 s  kaiju roar (synth)
+-   18.03 s  whip whoosh
 -   19.37 s  kaiju roar (synth)
 -   19.43 s  impact x1.2
 -   24.80 s  impact x0.7
@@ -22,11 +24,12 @@ integrated -14.43 LUFS, true peak -1.39 dBTP, length 110.000 s
 -   37.37 s  kaiju roar (synth)
 -   37.43 s  impact x1.4
 -   37.43 s  music: stinger
--   43.07 s  kaiju roar (synth)
--   43.13 s  impact x1.5
+-   43.03 s  kaiju roar (synth)
+-   43.10 s  impact x1.5
 -   43.87 s  impact x1
 -   50.27 s  kaiju roar (synth)
--   50.33 s  impact x1.4
+-   50.33 s  impact x1.6
+-   51.67 s  snap zip
 -   52.47 s  impact x1.2
 -   60.83 s  heat ray
 -   61.17 s  Ginza blast
@@ -40,6 +43,7 @@ integrated -14.43 LUFS, true peak -1.39 dBTP, length 110.000 s
 -   74.50 s  music: stinger
 -   87.37 s  applause
 -   87.37 s  impact x1
+-   92.83 s  whip whoosh
 -   96.43 s  impact x1
 -   96.43 s  kaiju roar (synth)
 -   96.43 s  music: stinger
@@ -47,4 +51,4 @@ integrated -14.43 LUFS, true peak -1.39 dBTP, length 110.000 s
 -   98.80 s  thunder
 -   99.43 s  thunder
 -  104.97 s  music: horn motif
--  106.80 s  music: stinger
+-  106.77 s  music: stinger
