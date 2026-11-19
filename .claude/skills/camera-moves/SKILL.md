@@ -12,7 +12,8 @@ skill helps pick a **different, motivated move for each beat**, and then build i
 - **Helpers:** `experiments/camera-lab/src/videos/camlab/moves.ts`. These are pure functions on `{pos, look, fov, roll}`
   and they stack, e.g. `roll(dolly(pan(base, 20), 0.3), 4)`. Copy the file next to a short's `story.ts`.
 - **Working examples:** `experiments/camera-lab/src/videos/camlab/variants.ts` has one camera plan per move. Every move
-  is demonstrated on the same 14 s story in the lab reel; the `#` numbers below are its clip numbers.
+  is demonstrated on the same 14 s story in the lab reel, `experiments/camera-lab/camera_moves_reel.mp4` (6:56); the
+  `#` numbers below are its clip numbers.
 
 ## How to plan the camera for a short
 1. **Write the beats first.** Use the script formula: hook, setting, escalation, mystery, "You see," pivot, explanation,
