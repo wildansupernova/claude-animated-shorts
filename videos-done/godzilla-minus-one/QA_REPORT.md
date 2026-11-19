@@ -1,9 +1,9 @@
 SPECS 1080x1920 24/1 fps, 2640 frames, 110.016 s; audio: aac 48000 Hz 2ch
 LOUDNESS I:         -14.5 LUFS | LRA:         2.0 LU | Peak:       -1.8 dBFS
 SILENCES none
-FRAMES 2640; black []; unplanned white []; frozen spans >=12f [(750, 769), (1691, 1708), (2134, 2156)]
-POPS (unplanned frame-diff spikes > 3x local median): [106, 466, 514, 516, 517, 518, 530, 745, 770, 869, 1078, 1122, 1135, 1191, 1358, 1412, 1674, 1786, 1904, 1998, 2010, 2030, 2039, 2040, 2093, 2123, 2124, 2125, 2126, 2134, 2160, 2178, 2179, 2180, 2380, 2562]
-MOTION mean diff 5.10; frames with diff<0.3 (held): 254 (10%)
+FRAMES 2640; black []; unplanned white []; frozen spans >=12f []
+POPS (unplanned frame-diff spikes > 3x local median): [106, 466, 514, 516, 517, 518, 530, 770, 869, 1078, 1122, 1135, 1191, 1358, 1412, 1674, 1786, 1904, 1998, 2010, 2030, 2039, 2093, 2178, 2179, 2180, 2380, 2562]
+MOTION mean diff 5.12; frames with diff<0.3 (held): 187 (7%)
 
 PER SHOT  (luma mean / std / p2 / p98 / saturation mean, medians over the shot)
   shot  0 f0-65: 0.504 / 0.143 / 0.140 / 0.879 / 0.291
@@ -20,7 +20,7 @@ PER SHOT  (luma mean / std / p2 / p98 / saturation mean, medians over the shot)
   shot 11 f558-625: 0.652 / 0.220 / 0.121 / 0.927 / 0.257
   shot 12 f626-677: 0.667 / 0.183 / 0.215 / 0.937 / 0.281
   shot 13 f678-724: 0.755 / 0.164 / 0.193 / 0.907 / 0.346
-  shot 14 f725-772: 0.777 / 0.149 / 0.194 / 0.907 / 0.349
+  shot 14 f725-772: 0.779 / 0.149 / 0.196 / 0.907 / 0.348
   shot 15 f773-877: 0.679 / 0.184 / 0.192 / 0.903 / 0.442
   shot 16 f878-927: 0.520 / 0.148 / 0.134 / 0.896 / 0.324
   shot 17 f928-965: 0.680 / 0.134 / 0.229 / 0.886 / 0.190
@@ -38,21 +38,29 @@ PER SHOT  (luma mean / std / p2 / p98 / saturation mean, medians over the shot)
   shot 29 f1484-1541: 0.709 / 0.194 / 0.126 / 0.943 / 0.161
   shot 30 f1542-1607: 0.468 / 0.127 / 0.131 / 0.833 / 0.379
   shot 31 f1608-1643: 0.664 / 0.124 / 0.190 / 0.888 / 0.603
-  shot 32 f1644-1710: 0.482 / 0.139 / 0.153 / 0.954 / 0.489
+  shot 32 f1644-1710: 0.483 / 0.139 / 0.153 / 0.954 / 0.487
   shot 33 f1711-1760: 0.767 / 0.171 / 0.206 / 0.961 / 0.385
   shot 34 f1761-1787: 0.739 / 0.185 / 0.206 / 0.961 / 0.403
   shot 35 f1788-1807: 0.733 / 0.223 / 0.199 / 0.962 / 0.240
   shot 36 f1808-1872: 0.798 / 0.178 / 0.206 / 0.970 / 0.254
-  shot 37 f1873-1957: 0.838 / 0.216 / 0.098 / 0.983 / 0.093
-  shot 38 f1958-2037: 0.386 / 0.120 / 0.129 / 0.720 / 0.640
-  shot 39 f2038-2094: 0.343 / 0.187 / 0.089 / 0.840 / 0.696
-  shot 40 f2095-2158: 0.413 / 0.209 / 0.090 / 0.837 / 0.695
+  shot 37 f1873-1957: 0.838 / 0.216 / 0.097 / 0.983 / 0.093
+  shot 38 f1958-2037: 0.386 / 0.120 / 0.129 / 0.720 / 0.639
+  shot 39 f2038-2094: 0.343 / 0.189 / 0.089 / 0.840 / 0.697
+  shot 40 f2095-2158: 0.425 / 0.212 / 0.094 / 0.837 / 0.694
   shot 41 f2159-2227: 0.309 / 0.203 / 0.059 / 0.883 / 0.763
   shot 42 f2228-2281: 0.665 / 0.201 / 0.196 / 0.925 / 0.181
   shot 43 f2282-2336: 0.675 / 0.184 / 0.188 / 0.914 / 0.161
   shot 44 f2337-2405: 0.498 / 0.129 / 0.117 / 0.732 / 0.409
-  shot 45 f2406-2450: 0.612 / 0.239 / 0.092 / 0.907 / 0.435
+  shot 45 f2406-2450: 0.612 / 0.240 / 0.092 / 0.907 / 0.435
   shot 46 f2451-2503: 0.743 / 0.180 / 0.179 / 0.962 / 0.251
   shot 47 f2504-2533: 0.382 / 0.274 / 0.074 / 0.917 / 0.583
   shot 48 f2534-2549: 0.288 / 0.157 / 0.084 / 0.839 / 0.634
   shot 49 f2550-2639: 0.664 / 0.198 / 0.080 / 0.933 / 0.385
+
+## Review notes (v2.1, 2026-11-19)
+- Specs: 1080x1920, 24 fps, 2640 frames, 110.0 s; AAC 48 kHz stereo; -14.5 LUFS integrated, peak -1.8 dBFS.
+- No black frames, no unplanned white frames, no frozen spans >= 12 f (v2 had three 0.8 s dead holds after moves landed;
+  v2.1 adds a creep to each: the punch pan, the blackboard after "kills", the Oscar statue).
+- The remaining "pops" are planned: subtitle page changes in calm shots, snap zooms, whip pans, overshoot-and-settle
+  reframes, the statue rising, card pose changes.
+- Chunk joins of re-rendered chunks checked by eye: seamless.

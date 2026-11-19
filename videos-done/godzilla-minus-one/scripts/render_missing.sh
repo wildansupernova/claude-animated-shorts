@@ -3,7 +3,7 @@
 cd "$(dirname "$0")/.."
 while pgrep -f "render.mjs out/final/manual_" >/dev/null; do sleep 10; done
 [ -f out/final/manual_2520.mp4 ] && [ ! -f out/final/chunk_s02520.mp4 ] && mv out/final/manual_2520.mp4 out/final/chunk_s02520.mp4
-export SERVE=$(ls -td /home/user/remotion-tmp/remotion-webpack-bundle-* | head -1)
+export SERVE=${SERVE:-$(ls -td /home/user/remotion-tmp/remotion-webpack-bundle-* | head -1)}
 LAST=2639; STEP=120; MISSING=()
 for ((s=0; s<=LAST; s+=STEP)); do [ -f out/final/$(printf "chunk_s%05d" $s).mp4 ] || MISSING+=($s); done
 echo "missing: ${MISSING[*]}"

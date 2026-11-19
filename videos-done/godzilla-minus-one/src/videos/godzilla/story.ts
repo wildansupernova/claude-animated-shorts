@@ -282,7 +282,7 @@ shot(2, Y1 - 1, Y1s - 1, "island", "golden", [K(Y1 - 1, (f) => lcreep(MV.mixCam(
     zillas: [{ x: 0, y: -2.5, z: BZ + 95, h: 40, v: "showa", pose: f > Y1w - 2 ? "hop" : "wave", phase: f / 20, eye: "friendly", shadow: false }] }));
 // "saving Earth from other monsters": pan with the punch from him to the rival, kick on the hit
 KICKS.push([Y1f, 1.0]);
-shot(2, Y1s - 1, Y2 - 1, "island", "golden", [K(Y1s - 1, (f) => MV.swing(C([0, 5, BZ - 60], [-20, 18, BZ + 100], 50), C([0, 5, BZ - 60], [22, 18, BZ + 104], 50), MV.prog(f, Y1f - 16, 18)))],
+shot(2, Y1s - 1, Y2 - 1, "island", "golden", [K(Y1s - 1, (f) => lcreep(MV.swing(C([0, 5, BZ - 60], [-20, 18, BZ + 100], 50), C([0, 5, BZ - 60], [22, 18, BZ + 104], 50), MV.prog(f, Y1f - 16, 18)), f, Y1f + 2, 0.003))],
   (f) => { const hit = sm(f, Y1f - 2, Y1f + 4);
     const fx: FxSpec[] = [{ k: "rival", x: 26 + 6 * hit, y: 16 + 2 * hit, z: BZ + 104, w: -36, h: 36, t: hit, rot: 0.25 * hit }];
     if (hit > 0.5 && f < Y1f + 14) fx.push({ k: "burst", x: 10, y: 22, z: BZ + 96, w: 18, t: at(f, Y1f, Y1f + 14), col: "#fff3b0" });
@@ -399,7 +399,7 @@ shot(3, M7s - 2, M7t - 1, "sea", "sky", [K(M7s - 2, (f) => MV.arc(C([0, 150, 70]
     return { actors: [], zillas: [{ x: 0, y: -10 - 30 * s, z: 0, h: 50, v: "m1", pose: "roar", jaw: 0.5, shadow: false }],
       particles: rise(f, 0, -1, 0, 500, 80, 6, 4, ["#ffffff", "#d8eef8"]), particleSize: 1.0 }; });
 // "then yank him up so fast the pressure kills him.": tilt up the board with the "up" arrow, push on "kills"
-shot(3, M7t - 1, M8 - 1, "rooms", "hall", [K(M7t - 1, (f) => MV.dolly(MV.swing(C([-0.7, 2.0, 0.0], [-0.7, 1.9, -5.85], 44), C([-0.7, 2.0, 0.0], [-0.6, 3.7, -5.85], 44), MV.prog(f, M7u - 22, 22)), 0.18 * MV.prog(f, M7k - 8, 16)))],
+shot(3, M7t - 1, M8 - 1, "rooms", "hall", [K(M7t - 1, (f) => MV.dolly(MV.swing(C([-0.7, 2.0, 0.0], [-0.7, 1.9, -5.85], 44), C([-0.7, 2.0, 0.0], [-0.6, 3.7, -5.85], 44), MV.prog(f, M7u - 22, 22)), 0.18 * MV.prog(f, M7k - 8, 16) + 0.0025 * Math.max(0, f - M7k - 8)))],
   (f, H) => { setBoard(H, 1 + sm(f, M7t, M7u + 6), f >= M7k - 1 ? 1 : 0); return { actors: [] }; });
 // "Koichi flies a plane full of explosives,": follow the Shinden over the bay
 const PLANE = (f: number): V3 => [0, 28 + 0.4 * Math.sin(f * 0.1), 260 - (f - M8) * 1.6];
@@ -441,7 +441,7 @@ shot(4, A1 - 1, A1b - 2, "rooms", "oscar", [K(A1 - 1, (f) => MV.mixCam(C([201.3,
     fx: [{ k: "bag", x: 201.2, y: 1.2 + 0.5, z: 1.0, w: 1.0, text: ["$15M"], seed: 0 }, ...BAGS(0)] }));
 // "and beat Hollywood to the Oscar for visual effects.": low angle, tilt up with the statue as it rises (triumph)
 KICKS.push([A1b, 1.0]);
-shot(4, A1b - 2, A2 - 1, "rooms", "oscar", [K(A1b - 2, (f) => MV.swing(C([201.0, 0.75, 7.0], [201.4, 1.9, -1.2], 46), C([201.0, 0.75, 7.0], [201.8, 3.4, -1.2], 46), MV.prog(f, A1o - 16, 16)))],
+shot(4, A1b - 2, A2 - 1, "rooms", "oscar", [K(A1b - 2, (f) => lcreep(MV.swing(C([201.0, 0.75, 7.0], [201.4, 1.9, -1.2], 46), C([201.0, 0.75, 7.0], [201.8, 3.4, -1.2], 46), MV.prog(f, A1o - 16, 16)), f, A1o, 0.003))],
   (f) => { const d = sm(f, A1b, A1b + 14), s = sm(f, A1o - 4, A1o + 4);
     const fx: FxSpec[] = BAGS(d);
     if (s > 0) fx.push({ k: "statue", x: 202.0, y: 1.2 + 2.0 * s, z: -1.2, w: 1.35 * s, h: 4.0 * s, t: s > 0.9 ? 1 : 0 }, { k: "glow", x: 202.0, y: 3.2, z: -1.5, w: 6 * s, soft: true, col: "#ffd27a", alpha: 0.55 * s });
