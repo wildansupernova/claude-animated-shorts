@@ -5,16 +5,16 @@ world with ink lines), narrated, **with subtitle captions** (the user asked for 
 "no captions" default) plus a title chip per chapter. Unofficial fan explainer: our own cartoon drawings (our own
 kaiju design), our own words, original synthesized music. No footage, logos, studio music or the film's own score.
 
-## Hook (from the viral-hooks skill, github.com/rediumvex/viral-hooks-skill, hooks-database.md)
-Three candidates, filled for this topic:
-1. **Cat 09 Specificity, formula 085 "[Specific date]: when everything changed"** (with a Cat 07 story opening):
-   "March first, 1954. Twenty-three fishermen watched the sun rise, in the west." — stop-scroll + story.
-2. **Cat 01 Curiosity, formula 001 "Nobody talks about..."**: "Nobody tells you Godzilla was born from a real bomb."
-3. **Cat 06 Question, formula 051 "Why does...?"**: "Why is the new Godzilla called Minus Zero?"
+## Hook
+**v2 (current):** *"Godzilla was born from a real bomb."* Godzilla is already on screen roaring in frame 1, with a snap
+zoom, kick and flash on "bomb" at 1.9 s: a curiosity gap plus a recognizable icon inside 2 seconds (the pattern of the
+Doomsday short's "Iron Man is coming back to Marvel. As the villain."). The false-sunrise story follows as the retention
+beat: *"In 1954, twenty-three fishermen saw the sun rise, in the west. It wasn't the sun. It was a hydrogen bomb."*
+Then the value promise: *"Before you watch Godzilla Minus Zero, here's everything you need to know."*
 
-Chosen: **#1**. The skill advises pairing a stop-scroll trigger (specificity) with a retention trigger (story); #1 is
-both, it is a strange image that is literally true (the Lucky Dragon crew described the flash as the sun rising in
-the west), and it leaves an open loop the next line closes ("It wasn't the sun."). The last line calls back to it.
+**v1 (replaced):** *"March first, 1954. Twenty-three fishermen watched the sun rise, in the west."* (viral-hooks Cat 09
+date + Cat 07 story). Review: frame 1 was a small dark boat, the first 2 s were only a date, the payoff came at 8 s and
+Godzilla first appeared at 8.3 s, too late for the scroll.
 
 ## Facts (checked 2026-11-19)
 - **Castle Bravo / Lucky Dragon No. 5:** the U.S. Castle Bravo H-bomb test at Bikini Atoll on March 1, 1954 dropped
@@ -55,12 +55,13 @@ No Minus Zero plot spoilers are used: only its setting and what the trailers sho
 because the video is the "watch this first" catch-up.
 
 ## Script (lines = caption units; chip = on-screen chapter title)
-Narration: Kokoro `af_heart`, speed 1.3 (AI voice); 323 words, 108.3 s. Times from `voice/lines_timed.json`.
+Narration: Kokoro `af_heart`, speed 1.3 (AI voice); 108.3 s. Times from `voice/lines_timed.json`.
 
 **HOOK**
-- `   0.5s` (H1) March first, 1954. Twenty-three fishermen watched the sun rise, in the west.
-- `   5.4s` (H2) It wasn't the sun. It was a hydrogen bomb, and it gave birth to Godzilla.
-- `   9.5s` (H3) Before you watch Godzilla Minus Zero, here's everything you need to know.
+- `   0.5s` (H1) Godzilla was born from a real bomb.
+- `   2.8s` (H2) In 1954, twenty-three fishermen saw the sun rise, in the west.
+- `   6.8s` (H3) It wasn't the sun. It was a hydrogen bomb.
+- `   9.5s` (H4) Before you watch Godzilla Minus Zero, here's everything you need to know.
 
 **GODZILLA · 1954**
 - `  13.6s` (O1) White ash fell on their boat, the Lucky Dragon Number Five. The crew called it death ash.

@@ -10,10 +10,35 @@ Everything here is our own: the kaiju design and all cartoon drawings (bean-head
 script, the voice (Kokoro TTS `af_heart`, AI-generated) and the music. No film footage, logos, studio roar or score.
 `SCRIPT.md` has the facts with sources, the hook choice and the timed script.
 
-## Hook
-Picked from the viral-hooks skill (github.com/rediumvex/viral-hooks-skill, `hooks-database.md`): Cat 09 specificity
-(formula 085, a date) opening into a Cat 07 story: *"March first, 1954. Twenty-three fishermen watched the sun rise,
-in the west."* The last line calls back to it. The two alternatives are in `SCRIPT.md`.
+## Hook (v2)
+*"Godzilla was born from a real bomb."* with Godzilla roaring on screen from frame 1 and a snap zoom on "bomb" (1.9 s):
+an icon plus a curiosity gap inside 2 seconds. The false-sunrise story ("twenty-three fishermen saw the sun rise, in the
+west. It wasn't the sun.") is now the retention beat, and the last line still calls back to it. v1's date opening and
+why it was replaced: `SCRIPT.md`.
+
+## Camera plan (v2, `.claude/skills/camera-moves`)
+One motivated move per beat from `moves.ts` (copied from `experiments/camera-lab`), never the same featured move twice
+in a row; the loud moves are budgeted (2 snap zooms, 2 whip pans, 1 dolly zoom, 1 speed ramp, shakes only on impacts),
+with camera motion blur (`blur.ts`, 1-frame shutter, never across a cut).
+
+| Beat | Move |
+|---|---|
+| "born from a real **bomb**" | crisp hold on the roaring head, pull-out, **snap zoom** + kick + flash on "bomb" |
+| "In 1954, twenty-three fishermen" | crane down from the night sky onto the deck |
+| "saw the sun rise" / "in the west" | fast push-in on the lit faces / pan from the crew to the false sun |
+| "It wasn't the sun" / "It was a hydrogen bomb" | slow lens zoom on the horizon / **dolly zoom**: the cloud looms behind the fisherman |
+| "Before you watch..." | pedestal down from Godzilla over the cinema roof to the marquee |
+| ash / Lucky Dragon / death ash | tilt down through the ash, truck to the hull name, growing dutch roll |
+| "Eight months later..." | **whip pan** to Ginza 1954, low angle |
+| gorilla / whale / the suit / toy Tokyo | overshoot-and-settle reframes, short orbit, follow the stomping suit |
+| friendly / punch / lineup of eras | crane up past the kids, pan with the punch, truck + crane to WORLD RECORD |
+| Minus One / 1945 / 0 / −1 | tilt up the rising Godzilla, crane down, push-in, tilt down with the falling sign |
+| Koichi / faked trouble / attack / "freezes" / deaths | pull-out from the goggles, pan engine → mechanic, low angle + shake, **snap zoom**, crane away |
+| family / Ginza / the blast / reaction | truck past ruins, short arc to the baby, tilt up to the plates, **speed ramp** + orbit, push + roll |
+| the plan / ring of gas / pressure | truck along the veterans, high-angle spin over the ships, tilt up the board |
+| plane / mouth / ejecting / Noriko / the deep | follow, **cockpit POV** into the jaws, crane out of the blast, pedestal ride down, push to the mark, tilt down |
+| Oscar | pull-out from the $15M bag, low angle on the rising statue, spring push onto the toys |
+| Minus Zero / ending | **whip pan** to 1949, tilt up to "so is he", growing roll under the lightning, lens zoom, pull out of the screen, crane out |
 
 ## Chapters
 | # | Chip | Content |
@@ -44,6 +69,7 @@ in the west."* The last line calls back to it. The two alternatives are in `SCRI
     end title, `Contact.tsx` one-frame-per-shot sheet, `ZillaSheet.tsx` / `CastSheet.tsx` flat drawing sheets.
 - `audio/score_gz.py`: score, SFX and mix (`audio/out/mix.wav`, about -14.4 LUFS, ≤ -1.4 dBTP); reads
   `audio/timeline.json` (written by `scripts/timeline.mjs`). `dsp.py`, `instruments.py`, `sfx_gen.py` are the shared synths.
+- `src/videos/godzilla/moves.ts` + `blur.ts`: camera move helpers and motion blur (from `experiments/camera-lab`).
 - `scripts/`: `stills.mjs`, `frames.mjs` (contact sheets), `timeline.mjs`, `bundle.mjs`, `render.mjs`,
   `render_all.sh` (3 resumable workers, 120-frame chunks), `finalize.sh` (concat, mux, share encode), `short_qa.py`.
 - `tools/montage.py`: tiles contact frames into labelled sheets.
