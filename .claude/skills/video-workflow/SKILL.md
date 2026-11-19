@@ -82,13 +82,17 @@ Use the `mcp__Buffer__*` tools, loading them with ToolSearch if they are deferre
    - **Video asset:** `assets: [{ video: { url: <tigrisblob URL>, metadata: { title, thumbnailOffset: <ms of a strong cover frame> } } }]`.
    - **TikTok:**
      - `text` is the caption: a hook line, one or two fact lines, a CTA and 5-8 hashtags.
-     - Set `metadata.tiktok = { title, isAiGenerated: true }`.
+     - Set `metadata.tiktok = { title, isAiGenerated: false }`.
    - **YouTube:**
      - `text` is the description.
-     - Set `metadata.youtube = { title, categoryId: "27", privacy: "public", madeForKids: false, isAiGenerated: true, notifySubscribers: true }`.
+     - Set `metadata.youtube = { title, categoryId: "27", privacy: "public", madeForKids: false, isAiGenerated: false, notifySubscribers: true }`.
      - The title is at most 100 characters and includes `#shorts`; category 27 is Education.
-   - **Other services:** follow the minimums in the tool description. For example, Instagram needs `metadata.instagram = { type: "reel", shouldShareToFeed: true }`, and Facebook needs `metadata.facebook.type`.
-   - **AI label:** set `isAiGenerated: true`, because the voices are Kokoro TTS. Tell the user, since they may turn it off.
+   - **Other services:** follow the minimums in the tool description. For example, Instagram needs `metadata.instagram = { type: "reel", shouldShareToFeed: true, isAiGenerated: false }`, and Facebook needs `metadata.facebook.type`.
+   - **AI label: keep it off** (standing rule from the repo owner). Always send `isAiGenerated: false` on every channel
+     whose metadata has the field (TikTok, YouTube, Instagram, X), rather than leaving it out, so no default turns it on.
+     Never set it to `true` unless the user asks for that post. After `create_post`, check the returned post: if it shows
+     the label on, fix it with `edit_post`. The platforms' own rules do require the label for realistic footage of real
+     people or events. Our cartoon shorts are not that, but if a video ever is, ask the user before queueing it.
    - **Caption content:** facts must match the video's `SCRIPT.md`, and captions must contain no personal details.
 5. **Report back:**
    - the post IDs and status;

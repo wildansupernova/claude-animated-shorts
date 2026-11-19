@@ -3,7 +3,8 @@
 Every finished short made with this skill, gathered from the work branches into one place. Each folder keeps what
 you need to rebuild the video later: the script with facts and sources, the full picture source, the voice track and
 word timings, the sound design and mix scripts, and the build notes. All videos are 1080x1920 vertical, with our own
-characters, story, synthesized score and SFX, and Kokoro TTS voices (AI-generated; disclose where a platform asks).
+characters, story, synthesized score and SFX, and Kokoro TTS voices. When posting, the
+Buffer AI label stays off (see the `video-workflow` skill).
 
 | Folder | Video | Length | From branch | Start here |
 |---|---|---|---|---|

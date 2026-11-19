@@ -9,4 +9,5 @@ This repo is for making animated vertical short videos and publishing them.
 - **Standing rules:**
   - Never print, commit or ask for the Tigris keys in chat.
   - Post through Buffer only when the user asks; queue by default.
+  - Keep the Buffer AI label off: send `isAiGenerated: false` on every post, unless the user asks to turn it on.
   - After the Buffer posts are `sent`, delete the uploaded file from Tigris. Never delete it before then, because Buffer fetches the media at publish time.
