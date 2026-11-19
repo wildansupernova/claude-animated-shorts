@@ -4,7 +4,7 @@
 # out/audio/reel.wav (audio/reel_audio.py). Output: out/camera_moves_reel.mp4
 set -euo pipefail
 cd "$(dirname "$0")/.."
-N=${N:-26}; CARD=${CARD:-36}; FPS=30
+N=${N:-26}; CARD=${CARD:-60}; FPS=30
 mkdir -p out/cardv out/clips
 for i in $(seq 0 $((N - 1))); do
   ii=$(printf "%02d" $i)

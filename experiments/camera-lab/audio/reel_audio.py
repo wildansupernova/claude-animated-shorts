@@ -13,7 +13,7 @@ from instruments import vibes, musicbox, glock, triangle, m2f
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 TL = json.load(open(os.path.join(ROOT, "out/timeline.json")))
 FPS, CLIP = TL["fps"], TL["clip"]
-CARD = int(os.environ.get("CARD_FRAMES", "36"))
+CARD = int(os.environ.get("CARD_FRAMES", "60"))
 CL = CLIP / FPS
 OUT = os.path.join(ROOT, "out/audio"); os.makedirs(OUT, exist_ok=True)
 fs = lambda f: f / FPS
