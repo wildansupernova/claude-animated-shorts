@@ -9,7 +9,7 @@ mkdir -p out/cardv out/clips
 for i in $(seq 0 $((N - 1))); do
   ii=$(printf "%02d" $i)
   [ -f out/cardv/card_$ii.mp4 ] || ffmpeg -v error -y -loop 1 -framerate $FPS -i out/cards/card_$ii.png -frames:v $CARD \
-    -vf "fade=in:0:4,fade=out:$((CARD - 4)):4,format=yuv420p" -c:v libx264 -crf 16 -preset medium -r $FPS out/cardv/card_$ii.mp4
+    -vf "fade=in:0:4,fade=out:$((CARD - 4)):4,format=yuv420p" -c:v libx264 -crf 16 -preset medium -r $FPS -video_track_timescale 90000 out/cardv/card_$ii.mp4
   a=$((i * 420)); ls out/reel/c_$(printf "%05d" $a)_*.mp4 > /dev/null
   : > out/clips/list_$ii.txt
   for k in 0 1 2 3; do s=$((a + k * 105)); f=$(ls out/reel/c_$(printf "%05d" $s)_*.mp4); echo "file '$(realpath $f)'" >> out/clips/list_$ii.txt; done
