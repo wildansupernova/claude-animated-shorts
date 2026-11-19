@@ -11,6 +11,7 @@ characters, story, synthesized score and SFX, and Kokoro TTS voices (AI-generate
 | `doomsday-recap/` | **The Road to Doomsday**: an animated recap of the films leading into Avengers: Doomsday (fan recap, our own drawings) | 3 min 15 s, 24 fps | `ccr-c7875b3a-drnzdt` | `README.md`, `SCRIPT.md`, `QA_REPORT.md` |
 | `forest-snitch/` | **The Forest Snitch**: how nature exposes buried bodies (forensic botany) | ~63 s, 30 fps | `claude/amazing-albattani-rvlgbr` | `README.md`, `SCRIPT.md` |
 | `fritz-haber/` | **Bread and Bombs from Thin Air**: Fritz Haber, fertilizer and gas | 68 s, 30 fps | `claude/fritz-haber-short` (same commit as `claude/adoring-tesla-hqjljy`) | `NOTES.md`, `SCRIPT.md` |
+| `godzilla-minus-one/` | **Before You Watch Godzilla Minus Zero**: Godzilla's 1954 origin (Lucky Dragon No. 5), 70 years of films and a full Godzilla Minus One recap (fan explainer, our own drawings, subtitles) | 110 s, 24 fps | `claude/admiring-curie-hbucug` | `README.md`, `SCRIPT.md` |
 | `henrietta-lacks/` | **The Woman Who Never Stopped**: Henrietta Lacks and the HeLa cells | 60 s, 30 fps | `claude/henrietta-lacks-short` | `NOTES.md`, `SCRIPT.md` |
 | `ocean-fun-facts/` | Five ocean fun-fact shorts in one 2.5D Canvas project: **The Navy That Hunted Fish Farts** (69 s), **It Rained Whale** (71 s), **The Snot Highway** (72 s), **The Horses and the Electric Eels** (64 s), **Inky's Great Escape** (60 s) | 60-72 s, 30 fps | `ccr-9959e9ae-j7k2gj` | `README.md`, `POSTING.md`, `videos/<name>/SCRIPT.md` |
 
@@ -21,8 +22,8 @@ Only `birthday-bet/birthday_paradox_short.mp4` (41 MB share encode) is in git. T
 GitHub's file limits and were git-ignored, so rebuild them from source with each folder's build notes.
 
 ## Rebuilding: what to know
-- **3D shorts** (`birthday-bet`, `doomsday-recap`, `forest-snitch`, `fritz-haber`, `henrietta-lacks`) are Remotion +
-  three.js projects built from `templates/bridge/`. `birthday-bet` and `doomsday-recap` are complete Remotion projects
+- **3D shorts** (`birthday-bet`, `doomsday-recap`, `forest-snitch`, `fritz-haber`, `godzilla-minus-one`, `henrietta-lacks`) are Remotion +
+  three.js projects built from `templates/bridge/`. `birthday-bet`, `doomsday-recap` and `godzilla-minus-one` are complete Remotion projects
   (`npm install`, then the steps in their README). `fritz-haber`, `henrietta-lacks` and `forest-snitch` hold the
   source to drop into a Remotion project as `src/videos/<name>/`, registered in `Root.tsx`. The `henrietta-lacks` and
   `forest-snitch` notes describe this, and `fritz-haber` is set up the same way as `henrietta-lacks` (`Haber.tsx`).
