@@ -96,3 +96,12 @@ Checks: `node scripts/frames.mjs out/contact Contact all 0.4 && python3 tools/mo
 - Speech-to-text check (faster-whisper base.en) reads the names back correctly (Gojira, Koichi Shikishima, Noriko,
   Akiko, Ginza). Voice-over-bed margin per line ≥ 4 dB (median 12 dB) after ducking SFX 8 dB under speech.
 - The MP4s are git-ignored except the share encode when it is under 50 MB.
+
+## Posted (2026-11-19, v2.1, Buffer "My Organization", share now)
+| Channel | Buffer post | Sent (Asia/Jakarta) | Link |
+|---|---|---|---|
+| TikTok @ohmygoshfunfact | `6aff1d4770751782c0cf896c` | 23:03 | https://tiktok.com/@ohmygoshfunfact/video/7709913320194641204 |
+| YouTube OhMyGosh Fun Fact (Short, Education) | `6aff20133deb096f739d34fe` | 23:13 | https://www.youtube.com/watch?v=mXRPU3d-Iak |
+
+AI-generated label off at the owner's request. The Tigris copy (`wildan-video/godzilla-minus-zero/godzilla_minus_zero_share.mp4`)
+was deleted after both posts were `sent` (public URL now 404).
