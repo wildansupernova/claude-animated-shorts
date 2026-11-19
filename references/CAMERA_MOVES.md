@@ -39,7 +39,7 @@ table below), with the push-in kept as the quiet default between them.
 
 ## The moves
 
-Columns: **Demo** = number in the lab reel. **Feel** = what it does to the viewer. **Beat** = where it fits in our script
+Columns: **Demo** = number in the lab reel (`experiments/camera-lab/camera_moves_reel.mp4`). **Feel** = what it does to the viewer. **Beat** = where it fits in our script
 formula (hook, setting, escalation, snap, explanation, consequence, twist). **Build** = the helper and the numbers.
 
 ### Moving the whole camera

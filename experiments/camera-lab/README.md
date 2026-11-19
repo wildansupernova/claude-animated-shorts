@@ -22,6 +22,9 @@ Beats: S1 hook (kid and toast), S2 the table and a measuring stick, S3 the toast
 garden, where the kid stands on a 3 m table and a second toast lands butter side up.
 
 ## The reel
+**Watch it:** `camera_moves_reel.mp4` in this folder (6:56, 720x1280, 49 MB, -14 LUFS). Each clip is a 2 s numbered
+title card followed by the 14 s story.
+
 | # | Move | # | Move |
 |---|---|---|---|
 | 00 | Baseline (what our shorts do today) | 13 | Whip pan |
@@ -61,7 +64,9 @@ Set `OUTDIR=out/reel` for the chunk render (`assemble.sh` reads `out/reel/`), an
   the EffectComposer renders blank frames under Remotion. `package.json` pins 3.0.4 / 6.37.8 / 9.4.0, which work.
 - **MSAA 0 gives blank frames** in this composer. MSAA 2 costs the same as 4.
 - **Speed:** at 720x1280 with ink, lens blur, motion blur and bloom, one worker takes about 2 s per frame; four workers
-  together take about 1.3 s per frame. The 26 clips (10,920 frames) take about 4 hours on 4 CPU cores.
+  together take about 1.3 s per frame. The 26 clips (10,920 frames) took 4 h 07 min on 4 CPU cores.
+- **Committed copy:** the full assembled reel is 130 MB, over GitHub's 100 MB limit. The committed file is re-encoded
+  with `-preset slow -tune animation -crf 27` and AAC 96k, which looks the same at 100 % and fits in 49 MB.
 - **Clamp easing input.** A custom ease like `u => u ** 3` must get `u` clamped to 0..1 (`prog()` does this), or the
   move runs backwards before its cue.
 - **Characters from above:** cards are yaw-only billboards, so from a high camera they go edge-on. `world.ts` leans them
