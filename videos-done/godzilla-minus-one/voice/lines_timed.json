@@ -1,0 +1,170 @@
+[
+ {
+  "ch": 0,
+  "id": "H1",
+  "say": "March first, 1954. Twenty-three fishermen watched the sun rise, in the west.",
+  "s": 0.5,
+  "e": 5.15
+ },
+ {
+  "ch": 0,
+  "id": "H2",
+  "say": "It wasn't the sun. It was a hydrogen bomb, and it gave birth to Godzilla.",
+  "s": 5.37,
+  "e": 9.27
+ },
+ {
+  "ch": 0,
+  "id": "H3",
+  "say": "Before you watch Godzilla Minus Zero, here's everything you need to know.",
+  "s": 9.49,
+  "e": 13.115
+ },
+ {
+  "ch": 1,
+  "id": "O1",
+  "say": "White ash fell on their boat, the Lucky Dragon Number Five. The crew called it death ash.",
+  "s": 13.565,
+  "e": 17.815
+ },
+ {
+  "ch": 1,
+  "id": "O2",
+  "say": "Eight months later, Japan got a monster made of that fear. [Gojira](/\u0261O\u02a4\u02c8\u026a\u0279\u0259/): half gorilla, half whale.",
+  "s": 18.035,
+  "e": 22.985
+ },
+ {
+  "ch": 1,
+  "id": "O3",
+  "say": "Inside, a stuntman sweated in a hundred-kilo rubber suit, stomping a tiny Tokyo.",
+  "s": 23.205,
+  "e": 27.78
+ },
+ {
+  "ch": 2,
+  "id": "Y1",
+  "say": "Then he got famous, and weirdly friendly, saving Earth from other monsters.",
+  "s": 28.23,
+  "e": 31.955
+ },
+ {
+  "ch": 2,
+  "id": "Y2",
+  "say": "Nearly forty films later, it's the longest-running film series on record.",
+  "s": 32.175,
+  "e": 36.1
+ },
+ {
+  "ch": 3,
+  "id": "M1",
+  "say": "Then came Godzilla Minus One.",
+  "s": 36.55,
+  "e": 38.425
+ },
+ {
+  "ch": 3,
+  "id": "M2",
+  "say": "It's 1945. Japan has lost the war, and is at zero. Then Godzilla drags it down to minus one.",
+  "s": 38.645,
+  "e": 44.795
+ },
+ {
+  "ch": 3,
+  "id": "M3",
+  "say": "[Koichi](/k\u02c8Oi\u02a7i/) [Shikishima](/\u0283\u02cciki\u0283\u02c8im\u0259/) is a kamikaze pilot who faked engine trouble to stay alive.",
+  "s": 45.015,
+  "e": 49.515
+ },
+ {
+  "ch": 3,
+  "id": "M4",
+  "say": "When Godzilla hits his island base, he freezes, and almost everyone dies.",
+  "s": 49.735,
+  "e": 53.91
+ },
+ {
+  "ch": 3,
+  "id": "M5",
+  "say": "In burned-out Tokyo, he builds a family: [Noriko](/n\u02c8\u0254\u0279ikO/), and an orphan baby, [Akiko](/\u0251k\u02c8ikO/).",
+  "s": 54.13,
+  "e": 58.48
+ },
+ {
+  "ch": 3,
+  "id": "M6",
+  "say": "Then Godzilla, mutated by the bomb tests, crushes [Ginza](/\u0261\u02c8\u026anz\u0259/). [Noriko](/n\u02c8\u0254\u0279ikO/) is swept away by the blast.",
+  "s": 58.7,
+  "e": 64.05
+ },
+ {
+  "ch": 3,
+  "id": "M7",
+  "say": "With no help from the government, old navy men plan to sink him in a ring of gas, then yank him up so fast the pressure kills him.",
+  "s": 64.27,
+  "e": 71.07
+ },
+ {
+  "ch": 3,
+  "id": "M8",
+  "say": "[Koichi](/k\u02c8Oi\u02a7i/) flies a plane full of explosives, straight into Godzilla's mouth.",
+  "s": 71.29,
+  "e": 75.115
+ },
+ {
+  "ch": 3,
+  "id": "M9",
+  "say": "But this time, he ejects. He chooses to live.",
+  "s": 75.335,
+  "e": 77.81
+ },
+ {
+  "ch": 3,
+  "id": "M10",
+  "say": "And [Noriko](/n\u02c8\u0254\u0279ikO/) is alive, with a strange black mark on her neck.",
+  "s": 78.03,
+  "e": 81.38
+ },
+ {
+  "ch": 3,
+  "id": "M11",
+  "say": "While deep in the sea, Godzilla's flesh starts growing back.",
+  "s": 81.6,
+  "e": 84.475
+ },
+ {
+  "ch": 4,
+  "id": "A1",
+  "say": "The film cost under fifteen million dollars, and beat Hollywood to the Oscar for visual effects.",
+  "s": 84.925,
+  "e": 89.725
+ },
+ {
+  "ch": 4,
+  "id": "A2",
+  "say": "The team carried their Godzilla toys on stage.",
+  "s": 89.945,
+  "e": 92.37
+ },
+ {
+  "ch": 5,
+  "id": "Z1",
+  "say": "Now, Minus Zero. It's 1949, the [Shikishimas](/\u0283\u02cciki\u0283\u02c8im\u0259z/) are back, and so is he.",
+  "s": 92.82,
+  "e": 97.145
+ },
+ {
+  "ch": 5,
+  "id": "Z2",
+  "say": "The trailers tease golden lightning, and a three-headed rival. So keep an eye on that mark.",
+  "s": 97.365,
+  "e": 101.89
+ },
+ {
+  "ch": 5,
+  "id": "Z3",
+  "say": "Twenty-three fishermen saw a false sunrise. Seventy-two years later, we're still watching it walk.",
+  "s": 102.11,
+  "e": 107.085
+ }
+]
