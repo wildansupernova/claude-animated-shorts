@@ -1,4 +1,4 @@
-// The places of the recap, each a static group built once (merged geometry per material, two-tone shading, painted
+// The places of the explainer, each a static group built once (merged geometry per material, two-tone shading, painted
 // Canvas2D textures) and placed far apart; only the current shot's place is visible. Coordinates are place-local:
 // y up, metres. Things that move per shot (planets, ships, branches, ice) are exported handles posed in world.ts.
 import * as THREE from "three";
@@ -9,8 +9,7 @@ import { sign, FONT } from "./fx2d";
 import { Pen } from "./toon";
 
 export const PLACES = {
-  city: [0, 0, 0], space: [8000, 0, 0], tva: [-8000, 0, 0], mansion: [0, 0, 8000], desert: [0, 0, -8000],
-  retro: [8000, 0, 8000], ocean: [-8000, 0, 8000], castle: [8000, 0, -8000], cave: [-8000, 0, -8000], snow: [-8000, 0, -7000],
+  sea: [0, 0, 0], studio: [8000, 0, 0], island: [-8000, 0, 0], ruins: [0, 0, 8000], city: [0, 0, -8000], rooms: [8000, 0, 8000],
 } as const;
 export type PlaceId = keyof typeof PLACES;
 
@@ -125,8 +124,139 @@ const gable = (b: Batch, x0: number, x1: number, z0: number, z1: number, y: numb
 
 // ---------------- places ----------------
 export type Handles = {
-  planets: THREE.Mesh[]; ship: THREE.Group; ice: THREE.Mesh; saucers: THREE.Mesh[]; water: THREE.Mesh; screen: THREE.Mesh;
-  bubbles: THREE.Mesh[]; platform: THREE.Mesh; branches: THREE.Group; galactusPlanet: THREE.Mesh; skyFx: THREE.Group;
+  water: THREE.Mesh; boat: THREE.Group; ships: THREE.Group[]; tug: THREE.Group; shinden: THREE.Group; zero: THREE.Group;
+  board: THREE.Mesh; screen: THREE.Mesh; tram: THREE.Group; marquee: THREE.Mesh;
+};
+const basic = (key: string, make: () => THREE.MeshBasicMaterialParameters) => {
+  let m = mats.get("b" + key);
+  if (!m) { m = new THREE.MeshBasicMaterial(make()); mats.set("b" + key, m); }
+  return m;
+};
+/** text label as an unlit plane (hull names, shop signs, marquee) */
+const label = (w: number, h: number, lines: string[], bg: string, fg: string, px = 120) => {
+  const t = canvasTex(Math.round(w * 64), Math.round(h * 64), (g) => {
+    g.fillStyle = bg; g.fillRect(0, 0, g.canvas.width, g.canvas.height);
+    g.fillStyle = fg; g.textAlign = "center"; g.textBaseline = "middle"; g.font = `${px}px ${FONT}`;
+    lines.forEach((l, i) => g.fillText(l, g.canvas.width / 2, ((i + 0.5) * g.canvas.height) / lines.length + 4));
+  });
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: t, side: THREE.DoubleSide }));
+  m.layers.set(NOINK);
+  return m;
+};
+const woodTex = (base: string, key: string) => tex("wd" + key, () => canvasTex(256, 256, (g) => {
+  g.fillStyle = base; g.fillRect(0, 0, 256, 256); noise(g, 256, 256, [base, "#00000014", "#ffffff12"], 30, [4, 12], 5);
+  g.strokeStyle = "#00000050"; g.lineWidth = 3; for (let y = 0; y <= 256; y += 32) { g.beginPath(); g.moveTo(0, y); g.lineTo(256, y); g.stroke(); }
+}, true));
+const brickTex = (base: string, key: string) => tex("br" + key, () => canvasTex(256, 256, (g) => {
+  g.fillStyle = base; g.fillRect(0, 0, 256, 256); noise(g, 256, 256, [base, "#00000018"], 30, [4, 10], 6);
+  g.strokeStyle = "#00000045"; g.lineWidth = 3;
+  for (let r = 0; r < 8; r++) { g.beginPath(); g.moveTo(0, r * 32); g.lineTo(256, r * 32); g.stroke(); for (let c = 0; c < 4; c++) { const x = (c * 64 + (r % 2) * 32) % 256; g.beginPath(); g.moveTo(x, r * 32); g.lineTo(x, r * 32 + 32); g.stroke(); } }
+}, true));
+const tinTex = (base: string, key: string) => tex("tn" + key, () => canvasTex(128, 128, (g) => {
+  g.fillStyle = base; g.fillRect(0, 0, 128, 128); noise(g, 128, 128, ["#7a4a2a40", "#00000020"], 16, [6, 18], 8);
+  g.strokeStyle = "#00000040"; g.lineWidth = 3; for (let x = 0; x <= 128; x += 16) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 128); g.stroke(); }
+}, true));
+/** shop-house / western block facade with a window grid */
+const winTex = (wall: string, win: string, key: string, arch = false, lit = 0) => tex("wn" + key, () => canvasTex(128, 128, (g) => {
+  g.fillStyle = wall; g.fillRect(0, 0, 128, 128); noise(g, 128, 128, [wall, "#00000016"], 10, [6, 16], key.length);
+  g.fillStyle = "#00000030"; g.fillRect(0, 0, 128, 8);
+  g.fillStyle = mixHex(win, "#000000", 0.2); if (arch) { g.beginPath(); g.moveTo(36, 100); g.lineTo(36, 46); g.arc(64, 46, 28, Math.PI, 0); g.lineTo(92, 100); g.fill(); } else g.fillRect(34, 30, 60, 70);
+  g.fillStyle = win; if (arch) { g.beginPath(); g.moveTo(42, 96); g.lineTo(42, 48); g.arc(64, 48, 22, Math.PI, 0); g.lineTo(86, 96); g.fill(); } else g.fillRect(40, 36, 48, 58);
+  if (lit) { g.fillStyle = `rgba(255,214,140,${lit})`; g.fillRect(40, 36, 48, 58); }
+  g.fillStyle = "#ffffff30"; g.fillRect(44, 40, 10, 50);
+  g.fillStyle = "#00000028"; g.fillRect(28, 100, 72, 8);
+}, true));
+const mixHex = (a: string, b: string, t: number) => "#" + new THREE.Color(a).lerp(new THREE.Color(b), t).getHexString();
+
+// ---- vehicles ----
+const makeBoat = () => { // Lucky Dragon No. 5: a wooden tuna boat, bow toward +x, waterline at y = 0
+  const g = new THREE.Group(), b = new Batch();
+  const hullShape = new THREE.Shape([new THREE.Vector2(-13, -2.6), new THREE.Vector2(8, -3), new THREE.Vector2(12, -1.8), new THREE.Vector2(14.5, 0), new THREE.Vector2(12, 1.8), new THREE.Vector2(8, 3), new THREE.Vector2(-13, 2.6), new THREE.Vector2(-13.6, 0)]);
+  const hull = new THREE.ExtrudeGeometry(hullShape, { depth: 3.2, bevelEnabled: false }); hull.rotateX(-Math.PI / 2); hull.translate(0, -1.2, 0);
+  b.add(hull, col("#efe9dc"));
+  const strip = new THREE.ExtrudeGeometry(hullShape, { depth: 0.9, bevelEnabled: false }); strip.rotateX(-Math.PI / 2); strip.scale(1.01, 1, 1.03); strip.translate(0, -1.3, 0);
+  b.add(strip, col("#7a3a32"));
+  const deckS = new THREE.Shape([new THREE.Vector2(-12.6, -2.3), new THREE.Vector2(8, -2.7), new THREE.Vector2(13.5, 0), new THREE.Vector2(8, 2.7), new THREE.Vector2(-12.6, 2.3)]);
+  const deck = new THREE.ExtrudeGeometry(deckS, { depth: 0.2, bevelEnabled: false }); deck.rotateX(-Math.PI / 2); deck.translate(0, 1.9, 0);
+  b.add(deck, texMat("deck", woodTex("#b08a5a", "deck")));
+  // bulwark rails
+  for (const s of [-1, 1]) b.add(boxG(-12.5, 2.0, s * 2.5 - 0.08, 9, 2.7, s * 2.5 + 0.08), col("#efe9dc"));
+  // wheelhouse + cabin
+  b.add(boxG(-10.5, 2.0, -1.8, -5.5, 4.6, 1.8, 2), texMat("whouse", winTex("#efe9dc", "#3a4a5a", "whouse")));
+  b.add(boxG(-10.8, 4.6, -2.0, -5.2, 4.85, 2.0), col("#3a3d47"));
+  b.add(boxG(-12.4, 2.0, -1.4, -10.5, 3.6, 1.4), col("#d8d0c0"));
+  // masts, booms, funnel
+  b.add(new THREE.CylinderGeometry(0.14, 0.18, 9, 8), col("#7a5a3a"), M4(5, 6.4, 0));
+  b.add(new THREE.CylinderGeometry(0.12, 0.16, 7, 8), col("#7a5a3a"), M4(-8, 8, 0));
+  const boom = new THREE.CylinderGeometry(0.08, 0.08, 6, 6); boom.rotateZ(Math.PI / 2 - 0.35); b.add(boom, col("#7a5a3a"), M4(7.5, 5, 0));
+  b.add(new THREE.CylinderGeometry(0.45, 0.5, 1.6, 10), col("#3a3d47"), M4(-6.5, 5.6, 0));
+  // line reels, buoys, crates on deck
+  for (let i = 0; i < 4; i++) b.add(new THREE.CylinderGeometry(0.5, 0.5, 0.6, 12), col("#8a6a4a"), M4(-3 + i * 2.2, 2.4, (i % 2 ? -1 : 1) * 1.2, 0));
+  for (let i = 0; i < 6; i++) b.add(new THREE.SphereGeometry(0.32, 10, 8), col(i % 2 ? "#e8b33c" : "#d8584a"), M4(1 + (i % 3) * 0.9, 2.45, -1.6 + Math.floor(i / 3) * 0.8));
+  b.build(g);
+  for (const s of [-1, 1]) { const n = label(6.5, 0.9, ["LUCKY DRAGON No.5"], "#efe9dc", "#2a2a36", 44); n.position.set(9, 1.1, s * 2.72); n.rotation.y = s > 0 ? 0 : Math.PI; n.rotation.y += s * -0.12; g.add(n); }
+  const flag = label(1.2, 0.8, [""], "#d8584a", "#d8584a"); flag.position.set(5.6, 10.4, 0); g.add(flag);
+  return g;
+};
+const makeShip = (kind: "destroyer" | "tug") => {
+  const g = new THREE.Group(), b = new Batch(), grey = col(kind === "tug" ? "#6a4a3a" : "#8a9098"), dark = col("#3a3d47");
+  const L = kind === "tug" ? 16 : 44, W = kind === "tug" ? 4.5 : 7;
+  const sh = new THREE.Shape([new THREE.Vector2(-L / 2, -W / 2), new THREE.Vector2(L / 4, -W / 2), new THREE.Vector2(L / 2, 0), new THREE.Vector2(L / 4, W / 2), new THREE.Vector2(-L / 2, W / 2)]);
+  const hull = new THREE.ExtrudeGeometry(sh, { depth: kind === "tug" ? 2.6 : 4, bevelEnabled: false }); hull.rotateX(-Math.PI / 2); hull.translate(0, -1.2, 0);
+  b.add(hull, grey);
+  if (kind === "tug") {
+    b.add(boxG(-5, 1.4, -1.6, 1, 4, 1.6, 2), texMat("tugh", winTex("#e8e2d0", "#3a4a5a", "tugh")));
+    b.add(new THREE.CylinderGeometry(0.6, 0.6, 2.4, 10), col("#d8584a"), M4(-1, 5, 0));
+  } else {
+    b.add(boxG(-6, 2.8, -2.4, 6, 6, 2.4), grey); b.add(boxG(2, 6, -1.6, 6, 8.5, 1.6), grey);
+    b.add(new THREE.CylinderGeometry(1, 1.1, 4, 10), dark, M4(-2, 8, 0));
+    b.add(new THREE.CylinderGeometry(0.2, 0.2, 9, 6), dark, M4(4, 12, 0));
+    for (const x of [14, -14]) { b.add(new THREE.CylinderGeometry(1.4, 1.6, 1.2, 10), grey, M4(x, 3.4, 0)); const gun = new THREE.CylinderGeometry(0.18, 0.18, 5, 6); gun.rotateZ(Math.PI / 2); b.add(gun, dark, M4(x + Math.sign(x) * 2.5, 3.7, 0)); }
+  }
+  b.build(g);
+  return g;
+};
+const makeZero = () => { // a Zero fighter: nose toward +x, wheels on the ground at y = 0
+  const g = new THREE.Group(), b = new Batch(), top = col("#7d8a6e"), belly = col("#b8b8ae"), dark = col("#2a2a30");
+  const fus = new THREE.CylinderGeometry(0.62, 0.3, 8.5, 12); fus.rotateZ(Math.PI / 2); b.add(fus, top, M4(0, 2.0, 0));
+  const cowl = new THREE.CylinderGeometry(0.7, 0.66, 1.2, 14); cowl.rotateZ(Math.PI / 2); b.add(cowl, dark, M4(4.6, 2.0, 0));
+  b.add(new THREE.SphereGeometry(0.62, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2), basic("canopy", () => ({ color: "#a8c4d0" })), M4(0.6, 2.4, 0, 0, [1.8, 0.9, 0.8]));
+  const wing = new THREE.Shape([new THREE.Vector2(-1.4, -6), new THREE.Vector2(0.8, -6), new THREE.Vector2(1.6, 0), new THREE.Vector2(0.8, 6), new THREE.Vector2(-1.4, 6), new THREE.Vector2(-1.8, 0)]);
+  const wg = new THREE.ExtrudeGeometry(wing, { depth: 0.18, bevelEnabled: false }); wg.rotateX(-Math.PI / 2); wg.translate(1, 1.55, 0); b.add(wg, top);
+  const tail = new THREE.Shape([new THREE.Vector2(-0.8, -2.2), new THREE.Vector2(0.4, -2.2), new THREE.Vector2(0.6, 0), new THREE.Vector2(0.4, 2.2), new THREE.Vector2(-0.8, 2.2)]);
+  const tg = new THREE.ExtrudeGeometry(tail, { depth: 0.12, bevelEnabled: false }); tg.rotateX(-Math.PI / 2); tg.translate(-3.6, 2.05, 0); b.add(tg, top);
+  const fin = new THREE.Shape([new THREE.Vector2(-1.2, 0), new THREE.Vector2(0.3, 0), new THREE.Vector2(-0.6, 1.7), new THREE.Vector2(-1.2, 1.6)]);
+  const fg = new THREE.ExtrudeGeometry(fin, { depth: 0.1, bevelEnabled: false }); fg.translate(-3.2, 2.1, -0.05); b.add(fg, top);
+  for (const s of [-1, 1]) { b.add(new THREE.CylinderGeometry(0.08, 0.08, 1.5, 6), dark, M4(1.4, 0.95, s * 1.8)); b.add(new THREE.CylinderGeometry(0.35, 0.35, 0.18, 12).rotateX(Math.PI / 2), dark, M4(1.4, 0.35, s * 1.8)); }
+  const prop = new THREE.CylinderGeometry(1.6, 1.6, 0.04, 20); prop.rotateZ(Math.PI / 2); b.add(prop, basic("propdisc", () => ({ color: "#3a3a40", transparent: true, opacity: 0.35 })), M4(5.25, 2.0, 0));
+  b.build(g);
+  for (const s of [-1, 1]) { const d = new THREE.Mesh(new THREE.CircleGeometry(0.75, 20), basic("hino", () => ({ color: "#c8323a" }))); d.rotation.x = -Math.PI / 2; d.position.set(1.0, 1.75, s * 4.2); d.layers.set(NOINK); g.add(d); }
+  return g;
+};
+const makeShinden = () => { // canard pusher fighter: small canards at the nose (+x), swept wings + twin fins and the prop at the back
+  const g = new THREE.Group(), b = new Batch(), top = col("#4f5e46"), dark = col("#2a2a30");
+  const fus = new THREE.CylinderGeometry(0.5, 0.7, 9, 12); fus.rotateZ(Math.PI / 2); b.add(fus, top, M4(0, 0, 0));
+  const nose = new THREE.ConeGeometry(0.5, 1.6, 12); nose.rotateZ(-Math.PI / 2); b.add(nose, top, M4(5.3, 0, 0));
+  b.add(new THREE.SphereGeometry(0.55, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2), basic("canopy", () => ({ color: "#a8c4d0" })), M4(0.8, 0.45, 0, 0, [1.8, 0.9, 0.8]));
+  const wing = new THREE.Shape([new THREE.Vector2(-2.8, -5.6), new THREE.Vector2(-1.6, -5.6), new THREE.Vector2(0.6, 0), new THREE.Vector2(-1.6, 5.6), new THREE.Vector2(-2.8, 5.6), new THREE.Vector2(-2.2, 0)]);
+  const wg = new THREE.ExtrudeGeometry(wing, { depth: 0.16, bevelEnabled: false }); wg.rotateX(-Math.PI / 2); wg.translate(-1.5, -0.1, 0); b.add(wg, top);
+  const can = new THREE.Shape([new THREE.Vector2(-0.4, -1.8), new THREE.Vector2(0.4, -1.6), new THREE.Vector2(0.6, 0), new THREE.Vector2(0.4, 1.6), new THREE.Vector2(-0.4, 1.8)]);
+  const cg = new THREE.ExtrudeGeometry(can, { depth: 0.1, bevelEnabled: false }); cg.rotateX(-Math.PI / 2); cg.translate(3.8, 0.1, 0); b.add(cg, top);
+  for (const s of [-1, 1]) { const fin = new THREE.Shape([new THREE.Vector2(-0.9, 0), new THREE.Vector2(0.2, 0), new THREE.Vector2(-0.5, 1.3), new THREE.Vector2(-0.9, 1.3)]); const fg = new THREE.ExtrudeGeometry(fin, { depth: 0.08, bevelEnabled: false }); fg.translate(-3.1, -0.05, s * 2.4); b.add(fg, top); }
+  const prop = new THREE.CylinderGeometry(1.5, 1.5, 0.04, 20); prop.rotateZ(Math.PI / 2); b.add(prop, basic("propdisc", () => ({ color: "#3a3a40", transparent: true, opacity: 0.35 })), M4(-4.7, 0, 0));
+  b.add(new THREE.CylinderGeometry(0.25, 0.25, 0.6, 8).rotateZ(Math.PI / 2), dark, M4(-4.4, 0, 0));
+  b.build(g);
+  for (const s of [-1, 1]) { const d = new THREE.Mesh(new THREE.CircleGeometry(0.6, 20), basic("hino", () => ({ color: "#c8323a" }))); d.rotation.x = -Math.PI / 2; d.position.set(-2.3, 0.08, s * 3.6); d.layers.set(NOINK); g.add(d); }
+  return g;
+};
+const makeTram = () => {
+  const g = new THREE.Group(), b = new Batch();
+  b.add(boxG(-6, 0.4, -1.3, 6, 3.3, 1.3, 1.5), texMat("tram", winTex("#d8b04a", "#3a4a5a", "tram")));
+  b.add(boxG(-6.1, 3.3, -1.4, 6.1, 3.6, 1.4), col("#5a4a3a"));
+  b.add(boxG(-6, 0.0, -1.2, 6, 0.4, 1.2), col("#3a3d47"));
+  b.add(new THREE.CylinderGeometry(0.04, 0.04, 3, 4).rotateZ(0.5), col("#2a2a30"), M4(0, 4.8, 0));
+  b.build(g);
+  return g;
 };
 
 export const buildPlaces = (root: THREE.Object3D) => {
@@ -134,306 +264,193 @@ export const buildPlaces = (root: THREE.Object3D) => {
   const H = {} as Handles;
   for (const id of Object.keys(PLACES) as PlaceId[]) { const g = new THREE.Group(); const P0 = PLACES[id]; g.position.set(P0[0], P0[1], P0[2]); g.visible = false; root.add(g); groups[id] = g; }
   const trunk = col("#7a4f33"), leaf = col("#5aa04a"), leaf2 = col("#4a8f3e");
+  const waterTex = (deep: string, line: string, key: string) => tex("wt" + key, () => { const t = canvasTex(256, 256, (g) => { g.fillStyle = deep; g.fillRect(0, 0, 256, 256); g.strokeStyle = line; g.lineWidth = 5; g.lineCap = "round"; const R2 = rng(4); for (let i = 0; i < 26; i++) { const x = R2() * 256, y = R2() * 256; g.beginPath(); g.moveTo(x, y); g.quadraticCurveTo(x + 14, y - 8, x + 28, y); g.stroke(); } }, true); t.repeat.set(120, 120); return t; });
 
-  // ===== CITY (New York): avenue along z, cross street at z = 0, cinema, billboard, park with blossom trees =====
+  // ===== SEA: open Pacific / Sagami Bay. The boat, ships and plane are handles posed per shot. =====
+  {
+    const G = groups.sea;
+    H.water = new THREE.Mesh(new THREE.PlaneGeometry(6000, 6000), lam("water", () => ({ map: waterTex("#2a6f98", "#6fb6d8", "sea") })));
+    H.water.rotation.x = -Math.PI / 2; H.water.position.set(0, 0, 0); G.add(H.water);
+    H.boat = makeBoat(); G.add(H.boat);
+    H.ships = []; for (let i = 0; i < 6; i++) { const s = makeShip("destroyer"); s.visible = false; G.add(s); H.ships.push(s); }
+    H.tug = makeShip("tug"); H.tug.visible = false; G.add(H.tug);
+    H.shinden = makeShinden(); H.shinden.visible = false; G.add(H.shinden);
+  }
+
+  // ===== STUDIO: the 1954 effects stage: plank floor, painted-sky cyclorama, a miniature Tokyo, lights + camera =====
+  {
+    const b = new Batch(), G = groups.studio;
+    ground(b, 400, texMat("stfloor", woodTex("#6a5644", "stfloor")), 0, 3);
+    const sky = canvasTex(512, 256, (g) => {
+      const gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, "#3e72b8"); gr.addColorStop(0.7, "#a8c8e4"); gr.addColorStop(1, "#e8e0cc"); g.fillStyle = gr; g.fillRect(0, 0, 512, 256);
+      g.fillStyle = "#ffffffcc"; const R2 = rng(9); for (let i = 0; i < 9; i++) { const x = R2() * 512, y = 40 + R2() * 110; for (let k = 0; k < 5; k++) { g.beginPath(); g.ellipse(x + k * 18, y + (k % 2) * 6, 26, 14, 0, 0, 7); g.fill(); } }
+      g.fillStyle = "#6a7a8a"; for (let x = 0; x < 512; x += 22) { const h = 10 + 30 * R2(); g.fillRect(x, 230 - h, 18, h + 30); }
+    });
+    const cyc = new THREE.Mesh(new THREE.CylinderGeometry(26, 26, 16, 32, 1, true, -Math.PI / 2 - 1.2, 2.4), basic("cyc", () => ({ map: sky, side: THREE.DoubleSide })));
+    cyc.position.set(0, 8, 6); cyc.layers.set(NOINK); G.add(cyc);
+    b.add(boxG(-60, 0, -40, 60, 30, -21), col("#26262c")); // black stage walls behind the cyclorama
+    // the miniature city: 40-140 cm buildings, little roofs, tiny poles
+    const R = rng(13), mini = [winTex("#c8c0b0", "#4a5a6a", "m1"), winTex("#a8aab0", "#3a4a5a", "m2"), winTex("#d8c8a0", "#4a5a6a", "m3"), winTex("#b8907a", "#3a4a5a", "m4")];
+    for (let i = -7; i <= 7; i++) for (let j = -9; j <= 1; j++) {
+      if (Math.abs(i) <= 1 && j > -6) continue; // a street for the monster
+      if (R() < 0.15) continue;
+      const x = i * 1.1 + (R() - 0.5) * 0.2, z = j * 1.1 + (R() - 0.5) * 0.2, h = 0.3 + R() * (R() < 0.2 ? 1.3 : 0.6), w = 0.7 + R() * 0.25;
+      b.add(boxG(x - w / 2, 0, z - w / 2, x + w / 2, h, z + w / 2, 0.3), texMat("mini" + (Math.abs(i + j) % 4), mini[Math.abs(i + j) % 4]));
+      if (h < 0.55 && R() < 0.6) gable(b, x - w / 2, x + w / 2, z - w / 2, z + w / 2, h, 0.25, col("#5a4a4a"), col("#c8c0b0"));
+    }
+    for (let k = -8; k <= 2; k++) for (const s of [-1, 1]) b.add(new THREE.CylinderGeometry(0.015, 0.015, 0.7, 4), col("#3a3030"), M4(s * 1.6, 0.35, k * 1.1 + 0.5));
+    // lights on stands + the camera
+    for (const [x, z] of [[-7, 5], [7, 5], [-9, -3], [9, -3]] as [number, number][]) {
+      b.add(new THREE.CylinderGeometry(0.06, 0.06, 4, 6), col("#2a2a30"), M4(x, 2, z));
+      b.add(new THREE.CylinderGeometry(0.45, 0.6, 0.8, 12).rotateX(Math.PI / 2 - 0.5), col("#3a3a42"), M4(x, 4.1, z));
+    }
+    b.add(boxG(2.6, 1.2, 5.6, 3.6, 1.9, 6.4), col("#2a2a30")); b.add(new THREE.CylinderGeometry(0.22, 0.25, 0.6, 12).rotateX(Math.PI / 2), col("#141016"), M4(3.1, 1.55, 5.3));
+    for (const s of [-1, 1, 0]) { const l = new THREE.CylinderGeometry(0.03, 0.03, 1.5, 4); l.rotateZ(s * 0.3); l.rotateX(s === 0 ? 0.3 : 0); b.add(l, col("#3a3a42"), M4(3.1 + s * 0.2, 0.6, 6 + (s === 0 ? 0.2 : 0))); }
+    b.build(G);
+  }
+
+  // ===== ISLAND: Odo Island airbase (1945) + a beach on its far side (60s monster fights, the parade) =====
+  {
+    const b = new Batch(), G = groups.island;
+    const grass = texMat("isgrass", speckTex("#8a9a5a", ["#7a8a4a", "#9aaa6a", "#a89a6a"], "isgrass", 90, [4, 14]));
+    const sand = texMat("issand", speckTex("#e2cf9c", ["#d6c28c", "#eedcaa"], "issand"));
+    b.add(new THREE.CircleGeometry(420, 48).rotateX(-Math.PI / 2), grass, M4(0, 0.02, 0));
+    b.add(new THREE.CircleGeometry(470, 48).rotateX(-Math.PI / 2), sand, M4(0, 0.0, 0));
+    b.add(boxG(-160, 0.03, -14, 160, 0.06, 14, 4), texMat("runway", speckTex("#b8a888", ["#a89878", "#c8b898"], "runway", 60, [3, 10])));
+    for (let x = -150; x <= 150; x += 12) b.add(boxG(x, 0.06, -0.3, x + 6, 0.08, 0.3), col("#e8e2d0"));
+    const hangar = (x: number, z: number) => {
+      const g = new THREE.CylinderGeometry(11, 11, 30, 20, 1, false, -Math.PI / 2, Math.PI); g.rotateZ(Math.PI / 2); g.rotateY(Math.PI / 2);
+      b.add(g, texMat("hang", tinTex("#8a8a7a", "hang")), M4(x, 0, z));
+      b.add(boxG(x - 9, 0, z - 15.2, x + 9, 8, z - 15), col("#3a3a32"));
+    };
+    hangar(-40, -60); hangar(10, -60);
+    b.add(boxG(50, 0, -50, 62, 4, -42, 2), texMat("hut", winTex("#a89a7a", "#3a4a5a", "hut")));
+    for (let i = 0; i < 14; i++) b.add(new THREE.CylinderGeometry(0.45, 0.45, 1.1, 10), col(i % 3 ? "#5a5a4a" : "#8a3a2a"), M4(70 + (i % 5) * 1.0, 0.55, -40 + Math.floor(i / 5) * 1.0));
+    const R = rng(21);
+    const palm = (x: number, z: number, h: number) => {
+      const t = new THREE.CylinderGeometry(0.2, 0.35, h, 6); t.rotateZ(0.12); b.add(t, trunk, M4(x, h / 2, z));
+      for (let k = 0; k < 6; k++) { const l = new THREE.ConeGeometry(0.6, 4.2, 4); l.rotateZ(Math.PI / 2 + 0.5); l.rotateY((k / 6) * Math.PI * 2); b.add(l, k % 2 ? leaf : leaf2, M4(x + 0.6, h, z)); }
+    };
+    for (let i = 0; i < 70; i++) { const a = R() * Math.PI * 2, r = 120 + R() * 280; const x = Math.cos(a) * r, z = Math.sin(a) * r; if (Math.abs(z) < 30 && Math.abs(x) < 170) continue; palm(x, z, 6 + R() * 5); }
+    for (let i = 0; i < 9; i++) b.add(new THREE.IcosahedronGeometry(40 + R() * 40, 1), col("#5a7a42"), M4(-300 + i * 75, -18, -330 - R() * 60, 0, [1.6, 0.8, 1]));
+    for (let i = 0; i < 30; i++) b.add(new THREE.DodecahedronGeometry(0.5 + R() * 1.2, 0), col("#8a8272"), M4(-60 + R() * 140, 0.2, 18 + R() * 6, R() * 3));
+    b.build(G);
+    const w = new THREE.Mesh(new THREE.PlaneGeometry(6000, 6000), lam("water", () => ({ map: waterTex("#2a6f98", "#6fb6d8", "sea") }))); w.rotation.x = -Math.PI / 2; w.position.y = -0.25; G.add(w);
+    H.zero = makeZero(); G.add(H.zero);
+  }
+
+  // ===== RUINS: burned-out Tokyo (1945-47) with the family shack; a rebuilt 1949 street at z < -100 =====
+  {
+    const b = new Batch(), G = groups.ruins;
+    ground(b, 1600, texMat("rubble", speckTex("#8a8070", ["#7a7060", "#9a9080", "#5a5048"], "rubble", 140, [3, 12])), 0, 8);
+    const R = rng(33), char = col("#2e2826"), brick = texMat("brick", brickTex("#9a5a42", "brick")), conc = texMat("conc", winTex("#9a968c", "#2a2624", "conc"));
+    for (let i = 0; i < 160; i++) {
+      const x = -260 + R() * 520, z = -90 + R() * 260; if (Math.hypot(x, z) < 14 || (Math.abs(x) < 6 && z > -90)) continue;
+      const k = R();
+      if (k < 0.35) { const h = 1 + R() * 3; for (let j = 0; j < 3; j++) b.add(boxG(x + j * 1.2, 0, z, x + j * 1.2 + 0.18, h * (0.5 + 0.5 * R()), z + 0.18), char); b.add(boxG(x, h * 0.8, z, x + 2.6, h * 0.8 + 0.18, z + 0.18), char); }
+      else if (k < 0.5) { const h = 5 + R() * 9; b.add(boxG(x, 0, z, x + 0.9, h, z + 0.9, 1), brick); }
+      else if (k < 0.62) { const w = 8 + R() * 10, h = 6 + R() * 10; b.add(boxG(x, 0, z, x + w, h, z + 0.6, 4), conc); b.add(boxG(x, 0, z, x + 0.6, h * 0.7, z + w * 0.6, 4), conc); }
+      else b.add(new THREE.DodecahedronGeometry(0.5 + R() * 1.6, 0), col(R() < 0.5 ? "#6a6058" : "#7a5a48"), M4(x, 0.1, z, R() * 3, [1.4, 0.6, 1.2]));
+    }
+    // shacks: tin + scrap wood
+    const shack = (x: number, z: number, ry: number, w = 4, d = 3) => {
+      const m = M4(x, 0, z, ry);
+      b.add(boxG(-w / 2, 0, -d / 2, w / 2, 2.4, d / 2, 1).applyMatrix4(m), texMat("shackw", woodTex("#7a6048", "shackw")));
+      const roof = new THREE.BoxGeometry(w + 0.6, 0.12, d + 0.8); roof.rotateX(0.18); roof.translate(0, 2.65, 0); b.add(roof.applyMatrix4(m), texMat("tin", tinTex("#7a6a5a", "tin")));
+      b.add(boxG(-0.5, 0, d / 2, 0.5, 1.9, d / 2 + 0.05).applyMatrix4(m), col("#4a3a2a"));
+    };
+    shack(0, -4, 0, 4.6, 3.4);
+    for (let i = 0; i < 18; i++) shack(-80 + R() * 160, -60 + R() * 140, R() * 0.6 - 0.3, 3 + R() * 2, 2.5 + R());
+    b.add(new THREE.CylinderGeometry(0.03, 0.03, 4.5, 4).rotateZ(Math.PI / 2), col("#3a3030"), M4(3.6, 1.8, -1.5)); // laundry line
+    // rebuilt 1949 street (z -140 .. -260): two-storey wooden shop-houses with tile roofs, poles and banners
+    ground(b, 1, col("#8a8070"), 0.01);
+    const ww = texMat("machiya", winTex("#8a6a4a", "#e8dcc0", "machiya")), tile = col("#3a3d47");
+    for (const s of [-1, 1]) for (let z = -140; z > -270; z -= 9) {
+      const x0 = s > 0 ? 6 : -14, h = 6 + R() * 1.5;
+      b.add(boxG(x0, 0, z - 8, x0 + 8, h, z, 3), ww);
+      const r = new THREE.BoxGeometry(9.6, 0.4, 9.2); r.rotateZ(s * 0.25); r.translate(x0 + 4, h + 0.9, z - 4); b.add(r, tile);
+      b.add(boxG(x0 + (s > 0 ? -0.6 : 8), 2.6, z - 8, x0 + (s > 0 ? 0 : 8.6), 2.8, z), tile);
+    }
+    for (let z = -140; z > -270; z -= 18) for (const s of [-1, 1]) { b.add(new THREE.CylinderGeometry(0.12, 0.14, 9, 6), col("#5a4a3a"), M4(s * 5.4, 4.5, z)); b.add(boxG(s * 5.4 - 0.8, 8.4, z - 0.06, s * 5.4 + 0.8, 8.5, z + 0.06), col("#5a4a3a")); }
+    b.build(G);
+    for (let z = -150, i = 0; z > -260; z -= 18, i++) { const ban = label(0.9, 2.6, [""], ["#c8323a", "#2f5fb3", "#e8b33c"][i % 3], "#fff"); ban.position.set(i % 2 ? 5.95 : -5.95, 3.4, z); ban.rotation.y = Math.PI / 2; G.add(ban); }
+  }
+
+  // ===== CITY: Ginza (1947 / 1954): stone blocks along z, tram tracks, a corner clock tower; a modern cinema at z > 160 =====
   {
     const b = new Batch(), G = groups.city;
-    ground(b, 1400, texMat("asph", speckTex("#5c5d66", ["#6a6b74", "#4e4f58"], "asph", 120, [3, 10])), 0, 10);
-    const walk = texMat("walk", tilesTex("#bdb6aa", "#b2ab9f", 4), "#ffffff");
+    ground(b, 1600, texMat("asph", speckTex("#6a665e", ["#5a5650", "#7a766e"], "asph", 120, [3, 10])), 0, 10);
+    const walk = texMat("walk", tilesTex("#b8b0a2", "#aca496", 4), "#ffffff");
+    for (const s of [-1, 1]) b.add(boxG(s > 0 ? 9 : -15, 0, -700, s > 0 ? 15 : -9, 0.18, 400, 2), walk);
+    for (const x of [-2.2, -0.8, 0.8, 2.2]) b.add(boxG(x - 0.06, 0.01, -700, x + 0.06, 0.06, 400), col("#9a9aa2"));
+    const R = rng(41);
+    const facades = [winTex("#d8ccb0", "#3a4a5a", "g1", true), winTex("#b8b4aa", "#2f4058", "g2"), winTex("#c8a888", "#3a4a5a", "g3", true), winTex("#e2dccb", "#46607e", "g4"), winTex("#a89a8a", "#2f4058", "g5", true)];
     for (const s of [-1, 1]) {
-      b.add(boxG(s > 0 ? 9 : -14, 0, -700, s > 0 ? 14 : -9, 0.18, 700, 2), walk);
-      b.add(boxG(-700, 0, s > 0 ? 9 : -14, 700, 0.18, s > 0 ? 14 : -9, 2), walk);
-    }
-    const paint = col("#f2f0e6");
-    for (let z = -690; z < 690; z += 9) if (Math.abs(z) > 16) b.add(boxG(-0.15, 0.01, z, 0.15, 0.03, z + 4.5), paint);
-    const R = rng(7);
-    const palettes: [string, string, string][] = [["#b8604a", "#3c5a7a", "#e8dcc8"], ["#d8c8a8", "#46607e", "#f2ece0"], ["#8a8f9a", "#2f4f6e", "#d0d4da"], ["#c9a46a", "#3a5470", "#efe2c4"],
-      ["#a8524a", "#34506e", "#e6d6c0"], ["#9fb4c8", "#2a4a6a", "#e8eef4"], ["#e2d2b0", "#4a6480", "#fff6e6"]];
-    const roofM = col("#6a6c74"), parapet = col("#8a8c94");
-    const tower = (x0: number, z0: number, w: number, d: number, h: number, pi: number) => {
-      const [wall, win, frame] = palettes[pi % palettes.length];
-      b.add(boxG(x0, 0, z0, x0 + w, h, z0 + d, 4), texMat(`fac${pi % palettes.length}`, facadeTex(wall, win, frame, pi), "#ffffff"));
-      b.add(boxG(x0 - 0.3, h, z0 - 0.3, x0 + w + 0.3, h + 0.9, z0 + d + 0.3), parapet);
-      b.add(boxG(x0 + 0.6, h, z0 + 0.6, x0 + w - 0.6, h + 0.5, z0 + d - 0.6), roofM);
-      if (R() < 0.35 && h < 70) { // water tower
-        const cx = x0 + w * (0.3 + 0.4 * R()), cz = z0 + d * (0.3 + 0.4 * R());
-        b.add(new THREE.CylinderGeometry(1.8, 1.8, 3.2, 10), col("#8a5a3c"), M4(cx, h + 3.4, cz));
-        b.add(new THREE.ConeGeometry(2, 1.4, 10), col("#5a3a2a"), M4(cx, h + 5.7, cz));
-        for (const [dx, dz] of [[-1.2, -1.2], [1.2, -1.2], [-1.2, 1.2], [1.2, 1.2]]) b.add(boxG(cx + dx - 0.1, h, cz + dz - 0.1, cx + dx + 0.1, h + 1.8, cz + dz + 0.1), col("#3a3a40"));
-      }
-    };
-    let pi = 0;
-    for (const s of [-1, 1]) for (const row of [0, 1]) {
-      let z = -680;
-      while (z < 280) {
-        const w = 14 + R() * 14, d = 16 + R() * 12, gap = 1.5 + R() * 3;
-        if (z + w > -16 && z < 16) { z = 16 + gap; continue; }
-        const h = row ? 50 + R() * 70 : 16 + R() * (Math.abs(z) < 80 ? 26 : 50);
-        const xin = row ? 48 + R() * 10 : 14.5;
-        if (!(s > 0 && row === 0 && z > 28 && z < 62)) tower(s > 0 ? xin : -xin - d, z, d, w, h, pi++);
-        z += w + gap;
+      let z = -420;
+      while (z < 150) {
+        const w = 14 + R() * 12, d = 16 + R() * 8, h = 14 + R() * 16, k = Math.floor(R() * 5), x0 = s > 0 ? 15 : -15 - d;
+        if (!(s > 0 && z > -40 && z < -8)) {
+          b.add(boxG(x0, 0, z, x0 + d, h, z + w, 4), texMat("gf" + k, facades[k]));
+          b.add(boxG(x0 - 0.4, h, z - 0.4, x0 + d + 0.4, h + 0.8, z + w + 0.4), col("#8a8478"));
+          b.add(boxG(s > 0 ? x0 - 0.3 : x0 + d, 0, z, s > 0 ? x0 : x0 + d + 0.3, 4, z + w), col("#5a5048"));
+        }
+        z += w + 1 + R() * 2;
       }
     }
-    // cinema (east side, z 30..60): low block, marquee over the sidewalk
-    b.add(boxG(14.5, 0, 30, 34, 13, 60, 4), texMat("cinema", facadeTex("#7a2a3a", "#2a1a2a", "#e8c45a", 3)));
-    b.add(boxG(10, 6.2, 34, 14.5, 6.6, 56), col("#2a2230"));
-    const marquee = new THREE.Mesh(new THREE.PlaneGeometry(11, 5.5), new THREE.MeshBasicMaterial({ map: canvasTex(1000, 500, (g) => sign(new Pen(g), 1000, 500, ["AVENGERS:", "DOOMSDAY", "DEC 18"], { bg: "#1f1b2e", lights: true, size: 118 })), fog: true }));
-    marquee.position.set(10.12, 9.4, 45); marquee.rotation.y = -Math.PI / 2; marquee.layers.set(NOINK); G.add(marquee);
-    b.add(boxG(10.2, 6.5, 39.3, 10.6, 12.3, 50.7), col("#2a2230"));
-    // billboard on the west side (Thunderbolts*)
-    const bb = new THREE.Mesh(new THREE.PlaneGeometry(14, 7), new THREE.MeshBasicMaterial({ fog: true, map: canvasTex(1000, 500, (g) => sign(new Pen(g), 1000, 500, ["BIG APPLE", "PIZZA"], { bg: "#c8323a", fg: "#ffd84a", size: 150 })) }));
-    bb.name = "billboard"; bb.position.set(-14.4, 26, -48); bb.rotation.y = Math.PI / 2; bb.layers.set(NOINK); G.add(bb);
-    b.add(boxG(-14.9, 22.2, -55.4, -14.5, 29.8, -40.6), col("#2a2730"));
-    // street lamps, trees, cars
-    const lampM = col("#3a3d47"), carCols = ["#e0b030", "#c8323a", "#3f6fb5", "#f2f2f6", "#2f8a4a", "#e0b030"];
-    for (let z = -400; z < 300; z += 24) for (const s of [-1, 1]) {
-      if (Math.abs(z) < 18) continue;
-      b.add(new THREE.CylinderGeometry(0.12, 0.16, 6, 6), lampM, M4(s * 10, 3, z));
-      b.add(boxG(s * 10 - (s > 0 ? 1.4 : -0.2), 5.8, z - 0.2, s * 10 + (s > 0 ? 0.2 : 1.4), 6.1, z + 0.2), lampM);
-      if ((z / 24) % 2 === 0) tree(b, s * 12, z + 10, 6, leaf, trunk, 0.18);
-    }
-    for (let i = 0; i < 18; i++) {
-      const lane = (i % 2 ? 1 : -1) * (3 + (i % 3)), z = -360 + i * 37 + R() * 8;
-      if (Math.abs(z) < 14 || (z > 20 && z < 70)) continue;
-      const c = col(carCols[i % carCols.length]);
-      b.add(boxG(lane - 1, 0.3, z - 2.2, lane + 1, 1.2, z + 2.2), c);
-      b.add(boxG(lane - 0.85, 1.2, z - 1.1, lane + 0.85, 1.9, z + 1.0), c);
-      for (const dz of [-1.4, 1.4]) b.add(new THREE.CylinderGeometry(0.38, 0.38, 2.1, 10), col("#222228"), new THREE.Matrix4().makeRotationZ(Math.PI / 2).setPosition(lane, 0.38, z + dz));
-    }
-    // landmark tower at the end of the avenue
-    b.add(boxG(-14, 0, -760, 14, 170, -732, 4), texMat("lmk", facadeTex("#9fb4c8", "#2a4a6a", "#e8eef4", 77)));
-    b.add(new THREE.CylinderGeometry(9, 14, 22, 8), col("#d0d4da"), M4(0, 181, -746));
-    // park with blossom trees (z 300..420) + grass
-    b.add(boxG(-60, 0.05, 300, 60, 0.2, 440, 4), texMat("grassC", speckTex("#6aab4f", ["#5a9a42", "#7cbc5c"], "grassC")));
-    const pink = col("#f2a0c0"), pink2 = col("#e888b0");
-    for (let i = 0; i < 26; i++) tree(b, -50 + R() * 100, 310 + R() * 120, 6 + R() * 3, i % 2 ? pink : pink2, trunk, 0.2);
+    // corner clock tower building (our own design)
+    const st = texMat("ctow", winTex("#d8ccb0", "#3a4a5a", "ctow", true));
+    b.add(new THREE.CylinderGeometry(12, 12, 22, 24, 1, false, Math.PI, Math.PI / 2), st, M4(27, 11, -10));
+    b.add(boxG(15, 0, -40, 40, 22, -22, 4), st);
+    b.add(new THREE.CylinderGeometry(5, 5.4, 9, 20), col("#d8ccb0"), M4(20, 26.5, -15));
+    b.add(new THREE.CylinderGeometry(5.6, 5.6, 1, 20), col("#8a8478"), M4(20, 31.5, -15));
+    b.add(new THREE.ConeGeometry(3, 4, 20), col("#4a5a5a"), M4(20, 34, -15));
+    // street lamps + poles
+    for (let z = -400; z < 150; z += 24) for (const s of [-1, 1]) { b.add(new THREE.CylinderGeometry(0.12, 0.16, 6, 6), col("#2a2a30"), M4(s * 9.6, 3, z)); b.add(new THREE.SphereGeometry(0.4, 8, 6), col("#f2ecd8"), M4(s * 9.6, 6.2, z)); }
+    // the modern cinema (2026) further down the street
+    b.add(boxG(15, 0, 170, 40, 20, 220, 4), texMat("cine", winTex("#3a3448", "#7a5a9a", "cine", false, 0.6)));
+    b.add(boxG(10, 6.5, 172, 15, 7.2, 218), col("#2a2430"));
+    for (let z = 160; z < 300; z += 30) for (const s of [-1]) b.add(boxG(-40, 0, z, -15, 24, z + 26, 4), texMat("gf4", facades[3]));
     b.build(G);
+    const face = canvasTex(128, 128, (g) => { g.fillStyle = "#f4f0e2"; g.beginPath(); g.arc(64, 64, 60, 0, 7); g.fill(); g.strokeStyle = "#2a2a30"; g.lineWidth = 6; g.stroke(); g.lineWidth = 7; g.beginPath(); g.moveTo(64, 64); g.lineTo(64, 24); g.moveTo(64, 64); g.lineTo(92, 74); g.stroke(); for (let i = 0; i < 12; i++) { const a = (i / 12) * 7; g.fillStyle = "#2a2a30"; g.fillRect(64 + Math.cos(a) * 50 - 3, 64 + Math.sin(a) * 50 - 3, 6, 6); } });
+    for (const [x, z, ry] of [[15.1, -15, -Math.PI / 2], [20, -9.95, 0]] as [number, number, number][]) { const c = new THREE.Mesh(new THREE.CircleGeometry(2.4, 24), new THREE.MeshBasicMaterial({ map: face })); c.position.set(x, 27, z); c.rotation.y = ry; c.layers.set(NOINK); G.add(c); }
+    H.marquee = label(5, 18, ["G", "O", "D", "Z", "I", "L", "L", "A"], "#2a1f36", "#ffd84a", 120); H.marquee.position.set(14.9, 13, 195); H.marquee.rotation.y = -Math.PI / 2; G.add(H.marquee);
+    const mq = label(44, 4.2, ["GODZILLA MINUS ZERO  ·  NOW SHOWING"], "#f4ead0", "#c8323a", 150); mq.position.set(9.95, 8.6, 195); mq.rotation.y = -Math.PI / 2; G.add(mq);
+    H.tram = makeTram(); H.tram.visible = false; G.add(H.tram);
   }
 
-  // ===== SPACE: rock (Thanos), citadel (end of time), planets, universe bubbles =====
+  // ===== ROOMS: planning hall (0), hospital room (100), Oscar stage (200), cinema auditorium (300) =====
   {
-    const b = new Batch(), G = groups.space;
-    const rock = texMat("rock", speckTex("#8a6a5a", ["#7a5a4a", "#9a7a66", "#6a4e40"], "rock", 80, [6, 22]));
-    const rg = new THREE.IcosahedronGeometry(16, 2), pos = rg.getAttribute("position") as THREE.BufferAttribute, R = rng(11);
-    for (let i = 0; i < pos.count; i++) { const y = pos.getY(i); pos.setXYZ(i, pos.getX(i) * (1 + 0.15 * Math.sin(i)), y > 0 ? 0 : y * 0.9, pos.getZ(i) * (1 + 0.12 * Math.cos(i * 1.7))); }
-    rg.computeVertexNormals(); b.add(rg, rock);
-    for (let i = 0; i < 9; i++) { const g = new THREE.IcosahedronGeometry(1 + R() * 3.5, 0); b.add(g, rock, M4(-40 + R() * 80, -8 + R() * 30, -30 - R() * 60)); }
-    // citadel platform at x = 300
-    const plat = col("#c9b48a"), gold = col("#e8b33c"), dark = col("#3a2a4a");
-    b.add(new THREE.CylinderGeometry(20, 16, 3, 32), plat, M4(300, -1.5, 0));
-    b.add(new THREE.TorusGeometry(20, 0.35, 6, 48), gold, new THREE.Matrix4().makeRotationX(Math.PI / 2).setPosition(300, 0, 0));
-    b.add(boxG(296, 0, -12, 304, 1.2, -9), dark); // dais
-    b.add(boxG(298, 1.2, -11.8, 302, 4.6, -10.8), gold); // throne back
-    b.add(boxG(298.2, 1.2, -11.2, 301.8, 2.2, -9.6), dark); // seat
-    for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; b.add(new THREE.CylinderGeometry(0.6, 0.7, 9, 10), plat, M4(300 + Math.cos(a) * 17, 4.5, Math.sin(a) * 17)); }
-    b.build(G);
-    // planets (posed per shot)
-    const planetTex = (a: string, c: string, k: string) => tex("pl" + k, () => canvasTex(256, 128, (g) => { g.fillStyle = a; g.fillRect(0, 0, 256, 128); for (let i = 0; i < 9; i++) { g.fillStyle = i % 2 ? c : a; g.globalAlpha = 0.6; g.fillRect(0, i * 14 + 6 * Math.sin(i), 256, 7 + 4 * Math.sin(i * 3)); } g.globalAlpha = 1; noise(g, 256, 128, [c, a], 20, [4, 12], k.length); }));
-    H.planets = [["#3f7be0", "#5ac06a", "e"], ["#e07a3a", "#f2c06a", "o"], ["#8a5fd0", "#d07ad8", "p"], ["#3fbfa8", "#e8f0a0", "t"]].map(([a, c, k]) => {
-      const m = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 16), lam("pm" + k, () => ({ map: planetTex(a, c, k) })));
-      m.visible = false; G.add(m); return m;
-    });
-    H.galactusPlanet = H.planets[0];
-    H.bubbles = [];
-    const bc = ["#e04040", "#3f7be0", "#f2d23c", "#3fbf5a", "#f08a2c", "#7a4fd0", "#40c8d0", "#e060a0"];
-    for (let i = 0; i < 26; i++) { const m = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 12), lam("bub" + (i % 8), () => ({ color: bc[i % 8] }))); m.visible = false; G.add(m); H.bubbles.push(m); }
-    H.branches = new THREE.Group(); G.add(H.branches);
-    H.skyFx = new THREE.Group(); G.add(H.skyFx);
-  }
-
-  // ===== TVA office =====
-  {
-    const b = new Batch(), G = groups.tva;
-    b.add(boxG(-30, -0.2, -40, 30, 0, 40, 4), texMat("tvaFloor", tilesTex("#a8743a", "#8a5a2c", 2)));
-    const wall = texMat("tvaWall", stripeTex("#c08a4a", "#a8743a", "tva"));
-    b.add(boxG(-30, 0, -41, 30, 12, -40, 6), wall); b.add(boxG(-31, 0, -40, -30, 12, 40, 6), wall); b.add(boxG(30, 0, -40, 31, 12, 40, 6), wall);
-    b.add(boxG(-30, 12, -40, 30, 12.5, 40), col("#5a3a22"));
-    for (let x = -24; x <= 24; x += 12) b.add(boxG(x - 0.8, 0, -40, x + 0.8, 12, -38.6), col("#7a4f2c"));
-    const desk = col("#6a4428"), mon = col("#d8c8a0"), monFace = col("#3a6a5a");
-    for (let r = 0; r < 4; r++) for (let c = -2; c <= 2; c++) {
-      const x = c * 9, z = -14 + r * 9;
-      b.add(boxG(x - 2.2, 0, z - 1, x + 2.2, 1.05, z + 1), desk);
-      b.add(boxG(x - 0.7, 1.05, z - 0.6, x + 0.7, 2.1, z + 0.5), mon);
-      b.add(boxG(x - 0.55, 1.2, z + 0.5, x + 0.55, 1.95, z + 0.52), monFace);
-    }
-    for (let x = -20; x <= 20; x += 10) for (let z = -30; z <= 30; z += 15) b.add(boxG(x - 2, 11.6, z - 0.3, x + 2, 12, z + 0.3), col("#ffe6b0"));
-    b.build(G);
-    const screen = new THREE.Mesh(new THREE.PlaneGeometry(36, 9), new THREE.MeshBasicMaterial({ color: "#ffffff", fog: false }));
-    screen.position.set(0, 7, -39.8); screen.layers.set(NOINK); G.add(screen); H.screen = screen;
-    // clock
-    const clock = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), new THREE.MeshBasicMaterial({ map: canvasTex(200, 200, (g) => { g.fillStyle = "#f2e6c8"; g.beginPath(); g.arc(100, 100, 92, 0, 7); g.fill(); g.lineWidth = 10; g.strokeStyle = "#2a1e16"; g.stroke(); g.lineWidth = 8; g.beginPath(); g.moveTo(100, 100); g.lineTo(100, 34); g.moveTo(100, 100); g.lineTo(150, 110); g.stroke(); }), transparent: true }));
-    clock.position.set(-29.8, 8, -10); clock.rotation.y = Math.PI / 2; clock.layers.set(NOINK); G.add(clock);
-  }
-
-  // ===== MANSION (X-Mansion lawn, cottage, quantum platform, open field) =====
-  {
-    const b = new Batch(), G = groups.mansion;
-    ground(b, 1400, texMat("lawn", speckTex("#6aab4f", ["#5a9a42", "#7cbc5c", "#64a64a"], "lawn", 160, [4, 12])), 0, 12);
-    b.add(boxG(-3, 0.02, -48, 3, 0.08, 40, 3), texMat("gravel", speckTex("#d8c8a0", ["#c8b890", "#e6d8b4"], "grav", 90, [2, 6])));
-    const brick = texMat("mbrick", facadeTex("#a8604a", "#2f4f6e", "#efe2c4", 21)), roof = col("#4a4f6a"), trim = col("#efe2c4");
-    b.add(boxG(-28, 0, -78, 28, 16, -54, 4), brick);
-    gable(b, -28, 28, -78, -54, 16, 9, roof, brick);
-    for (const s of [-1, 1]) {
-      b.add(boxG(s * 28 - 7, 0, -80, s * 28 + 7, 22, -52, 4), brick);
-      const cone = new THREE.ConeGeometry(10.5, 10, 4); cone.rotateY(Math.PI / 4); b.add(cone, roof, M4(s * 28, 27, -66));
-    }
-    b.add(boxG(-8, 0, -54, 8, 1.2, -48), trim); // steps
-    for (let x = -6; x <= 6; x += 4) b.add(new THREE.CylinderGeometry(0.45, 0.5, 8, 10), trim, M4(x, 5.2, -49.5));
-    b.add(boxG(-8, 9.2, -55, 8, 10.2, -48.5), trim);
-    const R = rng(5);
-    for (let i = 0; i < 60; i++) { const a = R() * Math.PI * 2, r = 70 + R() * 160, tx = Math.cos(a) * r, tz = -40 + Math.sin(a) * r * 0.8 + 60;
-      if ((Math.abs(tx) < 50 && tz < 15) || (tx > 60 && tx < 100 && tz > -5 && tz < 40) || (tx < -40 && tx > -125 && tz > -30 && tz < 40) || (Math.abs(tx) < 12 && tz > 110 && tz < 150)) continue;
-      tree(b, tx, tz, 8 + R() * 6, i % 2 ? leaf : leaf2, trunk, 0, i % 3 ? "round" : "cone"); }
-    for (let x = -40; x <= 40; x += 6) if (Math.abs(x) > 6) b.add(boxG(x - 2.6, 0, -46, x + 2.6, 1.4, -44.5), leaf2);
-    // cottage (Steve & Peggy) at x = 80
-    const cw = texMat("cott", facadeTex("#e8dcc0", "#3a5470", "#ffffff", 31));
-    b.add(boxG(72, 0, 8, 90, 6, 20, 4), cw); gable(b, 72, 90, 8, 20, 6, 4, col("#8a3a2a"), cw);
-    b.add(boxG(72, 0, 20, 90, 0.5, 26), col("#b08a5a")); for (const x of [73, 89]) b.add(new THREE.CylinderGeometry(0.2, 0.2, 3.5, 8), trim, M4(x, 2.2, 25.6));
-    b.add(boxG(72, 3.9, 20, 90, 4.2, 26.2), col("#8a3a2a"));
-    // quantum platform at x = -80
-    b.add(new THREE.CylinderGeometry(7, 7.5, 0.6, 32), col("#c9ccd2"), M4(-80, 0.3, 20));
-    b.add(new THREE.TorusGeometry(6.2, 0.25, 6, 40), col("#3fbfe8"), new THREE.Matrix4().makeRotationX(Math.PI / 2).setPosition(-80, 0.65, 20));
-    // a clean modern block behind it (the compound)
-    b.add(boxG(-110, 0, -20, -50, 9, -4, 4), texMat("cmp", facadeTex("#e8eef4", "#3a5a7a", "#ffffff", 41)));
-    b.add(boxG(-110, 9, -20, -50, 9.6, -4), col("#9aa1aa"));
-    b.build(G);
-  }
-
-  // ===== DESERT (New Mexico / battlefield / the Void) =====
-  {
-    const b = new Batch(), G = groups.desert;
-    const sand = texMat("sand", speckTex("#e2c08a", ["#d8b47c", "#ecd09c", "#caa470"], "sand", 140, [4, 14]));
-    const dg = new THREE.PlaneGeometry(1600, 1600, 80, 80); dg.rotateX(-Math.PI / 2);
-    const dp = dg.getAttribute("position") as THREE.BufferAttribute;
-    for (let i = 0; i < dp.count; i++) { const x = dp.getX(i), z = dp.getZ(i), r = Math.hypot(x, z); dp.setY(i, r < 60 ? 0 : (Math.sin(x * 0.02) * 2.4 + Math.cos(z * 0.025 + x * 0.01) * 2.4) * Math.min(1, (r - 60) / 80)); }
-    dg.computeVertexNormals();
-    const duv = dg.getAttribute("uv") as THREE.BufferAttribute; for (let i = 0; i < duv.count; i++) duv.setXY(i, duv.getX(i) * 160, duv.getY(i) * 160);
-    b.add(dg, sand);
-    const mesa = col("#c8703a"), mesa2 = col("#b05a30"), rockM = col("#a8805a"), R = rng(3);
-    for (let i = 0; i < 14; i++) { const a = R() * Math.PI * 2, r = 260 + R() * 260; b.add(new THREE.CylinderGeometry(20 + R() * 30, 30 + R() * 34, 26 + R() * 40, 7), i % 2 ? mesa : mesa2, M4(Math.cos(a) * r, 10, Math.sin(a) * r)); }
-    for (let i = 0; i < 40; i++) { const a = R() * Math.PI * 2, r = 22 + R() * 140; b.add(new THREE.DodecahedronGeometry(0.6 + R() * 2.2, 0), rockM, M4(Math.cos(a) * r, 0.3, Math.sin(a) * r, R() * 3, [1, 0.7, 1])); }
-    // Magneto's rock tower at (-20, 0, -6): top at y = 4.4
-    for (let i = 0; i < 7; i++) { const k = i / 6, r = L1(3.2, 1.3, k); b.add(new THREE.DodecahedronGeometry(r, 0), rockM, M4(-20 + Math.sin(i * 2.1) * 0.5 * (1 - k), 0.6 + k * 3.2, -6.4 + Math.cos(i * 1.7) * 0.4 * (1 - k), i, [1, 0.7, 1])); }
-    // crater for Thor
-    b.add(new THREE.TorusGeometry(5, 1.1, 6, 24), col("#b8905a"), new THREE.Matrix4().makeRotationX(Math.PI / 2).setPosition(0, 0.2, 0));
-    // ruins (Void / battlefield) around x = -120
-    const ruin = col("#b9ab96"), ruinD = col("#8a7e70");
-    for (let i = 0; i < 12; i++) { const x = -150 + R() * 70, z = -40 + R() * 80, h = 2 + R() * 9; b.add(boxG(x, 0, z, x + 1.4 + R() * 5, h, z + 1.2), i % 2 ? ruin : ruinD); }
-    for (let i = 0; i < 6; i++) { const x = -150 + R() * 70, z = -40 + R() * 80, h = 3 + R() * 6; b.add(new THREE.CylinderGeometry(0.9, 1, h, 10), ruin, M4(x, h / 2, z)); }
-    // wrecked car + giant broken statue head (Void)
-    b.add(boxG(-108, 0, 18, -103, 1.6, 21), col("#6a7a8a")); b.add(new THREE.IcosahedronGeometry(9, 1), col("#a89a86"), M4(-160, 4, 30, 0, [1, 0.8, 1]));
-    b.build(G);
-  }
-
-  // ===== CAVE (workshop) =====
-  {
-    const b = new Batch(), G = groups.cave;
-    const rockIn = texMat("cave", speckTex("#6a5a4e", ["#5a4a40", "#7a6a5c", "#4a3c34"], "cave", 120, [6, 18]));
-    const cg = new THREE.SphereGeometry(16, 24, 16), cp = cg.getAttribute("position") as THREE.BufferAttribute;
-    for (let i = 0; i < cp.count; i++) { const k = 1 + 0.08 * Math.sin(i * 1.3) + 0.05 * Math.cos(i * 0.7); cp.setXYZ(i, cp.getX(i) * k * 1.2, Math.max(-0.2, cp.getY(i) * 0.6 * k), cp.getZ(i) * k); }
-    cg.scale(-1, 1, 1); cg.computeVertexNormals(); b.add(cg, rockIn);
-    b.add(boxG(-30, -0.4, -30, 30, 0, 30, 4), texMat("cavef", speckTex("#5a4a40", ["#4a3c34", "#6a5a4e"], "cavef")));
-    b.add(boxG(-3, 0, -3, 3, 1.0, -1.6), col("#5c4a3a")); // bench
-    b.add(boxG(-2.6, 1.0, -2.8, -1.4, 1.6, -2.0), col("#7a7f88")); b.add(boxG(1, 1.0, -2.9, 2.2, 1.3, -2.2), col("#9aa1aa"));
-    for (const [x, z] of [[-6, -4], [5.5, -5], [6, 2]]) b.add(boxG(x - 0.8, 0, z - 0.8, x + 0.8, 1.4, z + 0.8), col("#6a5a3a"));
-    b.add(new THREE.SphereGeometry(0.35, 10, 8), col("#fff0c0"), M4(0, 4.5, -2));
-    b.build(G);
-  }
-  // ===== SNOW (ice block) =====
-  {
-    const b = new Batch(), G = groups.snow;
-    ground(b, 1400, texMat("snow", speckTex("#eef4fa", ["#dfe8f4", "#ffffff", "#d6e2f0"], "snow", 120, [4, 14])), 0, 10);
-    const ice = col("#bfe0f4"), R = rng(17);
-    for (let i = 0; i < 18; i++) { const a = R() * Math.PI * 2, r = 50 + R() * 300; b.add(new THREE.ConeGeometry(8 + R() * 14, 14 + R() * 30, 5), ice, M4(Math.cos(a) * r, 6, Math.sin(a) * r, R() * 3)); }
-    b.add(boxG(6, 0, -14, 22, 1.6, -9), col("#6a7470")); b.add(boxG(9, 0, -16, 13, 3.4, -13), col("#5a6460")); // plane wreck wing / tail
-    b.build(G);
-    const iceM = new THREE.MeshLambertMaterial({ color: "#a8dcff", transparent: true, opacity: 0.55, depthWrite: false });
-    H.ice = new THREE.Mesh(new THREE.BoxGeometry(1.6, 2.6, 1.2), twoTone(iceM)); H.ice.position.set(0, 1.3, 0); G.add(H.ice);
-  }
-
-  // ===== RETRO (Earth-828 city) + nursery =====
-  {
-    const b = new Batch(), G = groups.retro;
-    ground(b, 1400, texMat("rplaza", tilesTex("#f2e6c8", "#e6d6b0", 2, "r")), 0, 6);
-    const cols = ["#3fb0a8", "#f2e6c8", "#f08a4a", "#9ad8c8", "#e8c060", "#5a9ad0"].map(col), R = rng(23);
-    for (let i = 0; i < 46; i++) {
-      const a = R() * Math.PI * 2, r = 45 + R() * 260; if (Math.abs(Math.sin(a)) < 0.25 && Math.cos(a) > 0) continue;
-      const x = Math.cos(a) * r, z = Math.sin(a) * r - 40, h = 20 + R() * 90, w = 5 + R() * 7, c = cols[i % cols.length];
-      b.add(new THREE.CylinderGeometry(w * 0.8, w, h, 16), c, M4(x, h / 2, z));
-      b.add(new THREE.SphereGeometry(w * 0.8, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), cols[(i + 2) % cols.length], M4(x, h, z));
-      for (let k = 1; k < 3; k++) b.add(new THREE.TorusGeometry(w * 1.02, 0.5, 6, 20), cols[(i + 1) % cols.length], new THREE.Matrix4().makeRotationX(Math.PI / 2).setPosition(x, (h * k) / 3, z));
-    }
-    // the Four's tower (x = 0, z = -120) with a sign
-    b.add(new THREE.CylinderGeometry(11, 13, 140, 20), col("#e8eef4"), M4(0, 70, -120)); b.add(new THREE.SphereGeometry(11, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), col("#3a6fbf"), M4(0, 140, -120));
-    const s4 = new THREE.Mesh(new THREE.PlaneGeometry(16, 16), new THREE.MeshBasicMaterial({ map: canvasTex(256, 256, (g) => { g.fillStyle = "#3a6fbf"; g.beginPath(); g.arc(128, 128, 120, 0, 7); g.fill(); g.lineWidth = 12; g.strokeStyle = "#f2f2f6"; g.stroke(); g.fillStyle = "#f2f2f6"; g.font = `200px ${FONT}`; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("4", 128, 138); }), transparent: true, alphaTest: 0.4 }));
-    s4.position.set(0, 120, -106.8); s4.layers.set(NOINK); G.add(s4);
-    // monorail
-    for (let x = -300; x <= 300; x += 30) b.add(new THREE.CylinderGeometry(0.8, 0.8, 22, 8), col("#c9ccd2"), M4(x, 11, -60));
-    b.add(boxG(-310, 22, -61.2, 310, 23.4, -58.8), col("#e8eef4"));
-    // nursery at x = 400 (room 10 x 4 x 10)
-    const wall = texMat("nurs", tex("nursT", () => canvasTex(128, 128, (g) => { g.fillStyle = "#3a4e8a"; g.fillRect(0, 0, 128, 128); g.fillStyle = "#f2e6a0"; for (const [x, y] of [[20, 30], [80, 20], [50, 80], [110, 90], [20, 110]]) { g.beginPath(); g.arc(x, y, 5, 0, 7); g.fill(); } }, true)));
-    b.add(boxG(395, 0, -5, 405, 4.2, -4.8, 2), wall); b.add(boxG(394.8, 0, -5, 395, 4.2, 5, 2), wall); b.add(boxG(405, 0, -5, 405.2, 4.2, 5, 2), wall);
-    b.add(boxG(395, -0.1, -5, 405, 0, 5, 2), texMat("nflo", tilesTex("#8a6a4a", "#7a5a3c", 4, "n")));
-    b.add(new THREE.CylinderGeometry(2, 2, 0.05, 24), col("#e86a6a"), M4(400, 0.03, -0.5));
-    b.add(boxG(401.5, 0, -4.8, 404.5, 0.9, -2.8), col("#f2e6c8")); b.add(boxG(396, 0, -4.8, 396.6, 1.6, -4.2), col("#c9a46a"));
-    b.add(new THREE.SphereGeometry(0.3, 10, 8), col("#ffe6a0"), M4(396.3, 1.9, -4.5));
-    b.build(G);
-    H.saucers = [];
-    for (let i = 0; i < 6; i++) { const m = new THREE.Mesh(new THREE.SphereGeometry(2.2, 16, 8), col(i % 2 ? "#e8c060" : "#f08a4a")); m.scale.set(1, 0.35, 1); G.add(m); H.saucers.push(m); }
-  }
-
-  // ===== OCEAN (Wakanda coast) =====
-  {
-    const b = new Batch(), G = groups.ocean;
-    const sandM = texMat("beach", speckTex("#e8d4a0", ["#dcc690", "#f2e0b0"], "beach"));
-    b.add(boxG(-200, -0.6, 10, 200, 0.4, 80, 4), sandM);
-    const cliff = col("#8a7a6a"), green = col("#3f8a4a"), R = rng(29);
-    for (let i = 0; i < 16; i++) b.add(new THREE.DodecahedronGeometry(3 + R() * 6, 0), cliff, M4(-120 + R() * 240, 0.5, 16 + R() * 10, R() * 3, [1, 0.8, 1]));
-    for (let i = 0; i < 50; i++) tree(b, -200 + R() * 400, 50 + R() * 140, 8 + R() * 6, i % 2 ? green : leaf2, trunk, 0.4, "round");
-    // Wakandan towers on the far hill
-    const tw = [col("#7a5aa8"), col("#3a3d47"), col("#c9a46a")];
-    for (let i = 0; i < 12; i++) { const x = -160 + i * 28 + R() * 10, h = 40 + R() * 60; b.add(new THREE.CylinderGeometry(4, 7, h, 10), tw[i % 3], M4(x, h / 2, 220)); b.add(new THREE.SphereGeometry(5, 12, 8), tw[(i + 1) % 3], M4(x, h, 220, 0, [1, 0.6, 1])); }
-    b.add(boxG(-400, -2, 180, 400, 10, 400), green);
-    b.build(G);
-    const wt = canvasTex(256, 256, (g) => { g.fillStyle = "#2a8ab0"; g.fillRect(0, 0, 256, 256); g.strokeStyle = "#7fd0e8"; g.lineWidth = 5; g.lineCap = "round"; const R2 = rng(4); for (let i = 0; i < 26; i++) { const x = R2() * 256, y = R2() * 256; g.beginPath(); g.moveTo(x, y); g.quadraticCurveTo(x + 14, y - 8, x + 28, y); g.stroke(); } }, true);
-    wt.repeat.set(60, 60);
-    H.water = new THREE.Mesh(new THREE.PlaneGeometry(1600, 1600), lam("water", () => ({ map: wt })));
-    H.water.rotation.x = -Math.PI / 2; H.water.position.set(0, -0.1, -600); G.add(H.water);
-  }
-
-  // ===== CASTLE (Doom) =====
-  {
-    const b = new Batch(), G = groups.castle;
-    ground(b, 1400, texMat("court", stoneTex("#7a7e78", "court")), 0, 4);
-    const st = texMat("cwall", stoneTex("#8a8e86", "cwall")), roofM = col("#2f4a3a"), R = rng(31);
-    const wallRun = (x0: number, z0: number, x1: number, z1: number) => {
-      const len = Math.hypot(x1 - x0, z1 - z0), ang = Math.atan2(z1 - z0, x1 - x0);
-      const g = boxG(0, 0, -1.5, len, 14, 1.5, 4); b.add(g, st, new THREE.Matrix4().makeRotationY(-ang).setPosition(x0, 0, z0));
-      for (let d = 1; d < len; d += 3.2) b.add(boxG(d, 14, -1.5, d + 1.6, 15.8, 1.5), st, new THREE.Matrix4().makeRotationY(-ang).setPosition(x0, 0, z0));
+    const b = new Batch(), G = groups.rooms;
+    const room = (cx: number, w: number, d: number, h: number, wall: THREE.Material, floor: THREE.Material) => {
+      b.add(boxG(cx - w / 2, -0.2, -d / 2, cx + w / 2, 0, d / 2, 2), floor);
+      b.add(boxG(cx - w / 2, 0, -d / 2 - 0.3, cx + w / 2, h, -d / 2, 3), wall);
+      for (const s of [-1, 1]) b.add(boxG(s > 0 ? cx + w / 2 : cx - w / 2 - 0.3, 0, -d / 2, s > 0 ? cx + w / 2 + 0.3 : cx - w / 2, h, d / 2 + 8, 3), wall);
+      b.add(boxG(cx - w / 2, h, -d / 2, cx + w / 2, h + 0.3, d / 2 + 8), wall);
     };
-    wallRun(-50, -60, 50, -60); wallRun(-50, -60, -50, 50); wallRun(50, -60, 50, 50);
-    for (const [x, z, h] of [[-50, -60, 30], [50, -60, 30], [-50, 50, 24], [50, 50, 24], [0, -95, 62]] as [number, number, number][]) {
-      const r = h > 40 ? 14 : 7;
-      b.add(new THREE.CylinderGeometry(r, r * 1.1, h, 14), st, M4(x, h / 2, z)); b.add(new THREE.ConeGeometry(r * 1.25, r * 1.8, 14), roofM, M4(x, h + r * 0.9, z));
-    }
-    b.add(boxG(-26, 0, -92, 26, 40, -62, 4), st); b.add(boxG(-6, 0, -62.5, 6, 12, -61.5), col("#2a2420")); // keep + gate
-    for (let i = 0; i < 6; i++) { const x = -40 + i * 16; b.add(new THREE.CylinderGeometry(0.9, 1.1, 2.4, 10), col("#3a3d47"), M4(x, 1.2, -20 + (i % 2) * 30)); }
+    // planning hall: wood panels, blackboard, benches
+    room(0, 18, 12, 6, texMat("panel", woodTex("#8a6a48", "panel")), texMat("hfloor", woodTex("#6a5040", "hfloor")));
+    for (let r = 0; r < 3; r++) for (const s of [-1, 1]) { b.add(boxG(s * 1.2 + (s > 0 ? 0 : -4), 0.45, 1 + r * 1.8, s * 1.2 + (s > 0 ? 4 : 0), 0.6, 1.5 + r * 1.8), col("#7a5a3a")); for (const x of [0.3, 3.7]) b.add(boxG(s * 1.2 + (s > 0 ? x : -x) - 0.06, 0, 1.1 + r * 1.8, s * 1.2 + (s > 0 ? x : -x) + 0.06, 0.45, 1.4 + r * 1.8), col("#5a4030")); }
+    b.add(boxG(-5.2, 0.9, -5.98, 5.2, 4.3, -5.9), col("#4a3420"));
+    H.board = new THREE.Mesh(new THREE.PlaneGeometry(10, 3.2), new THREE.MeshBasicMaterial({ color: "#ffffff" })); H.board.position.set(0, 2.6, -5.85); H.board.layers.set(NOINK); G.add(H.board);
+    // hospital room
+    room(100, 12, 10, 4.5, texMat("hwall", speckTex("#d8e2dc", ["#ccd8d2", "#e2eae4"], "hwall", 40, [6, 16])), texMat("hfl", tilesTex("#c8ccc4", "#bcc0b8", 4, "h")));
+    b.add(boxG(97, 0, -4.8, 103, 0.55, -1.2), col("#c9ccd2")); b.add(boxG(97.1, 0.55, -4.7, 102.9, 0.85, -1.3), col("#f4f4f0")); b.add(boxG(97.4, 0.85, -4.6, 98.6, 1.1, -1.4), col("#ffffff"));
+    b.add(boxG(97, 0, -5, 97.2, 1.6, -1), col("#a8acb4")); b.add(boxG(103.4, 0, -4, 104.4, 0.8, -3), col("#8a6a4a"));
+    const win = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), basic("hwin", () => ({ color: "#fff4dc" }))); win.position.set(104, 2.6, -4.95); win.layers.set(NOINK); G.add(win);
+    // Oscar stage: dark wood stage with gold edge, red curtains, steps, seats in front
+    const curt = canvasTex(256, 128, (g) => { for (let x = 0; x < 256; x += 16) { const gr = g.createLinearGradient(x, 0, x + 16, 0); gr.addColorStop(0, "#5a0e1a"); gr.addColorStop(0.5, "#b8283a"); gr.addColorStop(1, "#5a0e1a"); g.fillStyle = gr; g.fillRect(x, 0, 16, 128); } }, true);
+    curt.repeat.set(6, 1);
+    b.add(boxG(186, 0, -8, 214, 1.2, 4), texMat("stage", woodTex("#4a3428", "stage"))); b.add(boxG(186, 1.2, 3.8, 214, 1.32, 4.1), col("#e8b33c"));
+    for (let i = 0; i < 3; i++) b.add(boxG(196, 0, 4 + i * 0.6, 204, 1.2 - i * 0.4, 4.6 + i * 0.6), col("#3a2a24"));
+    const cm = new THREE.Mesh(new THREE.PlaneGeometry(40, 16), basic("curt", () => ({ map: curt }))); cm.position.set(200, 8, -8); cm.layers.set(NOINK); G.add(cm);
+    for (let r = 0; r < 6; r++) for (let i = 0; i < 18; i++) b.add(boxG(184 + i * 1.8, 0, 10 + r * 1.6, 185.4 + i * 1.8, 0.9 + r * 0.25, 11 + r * 1.6), col("#5a1e28"));
+    b.add(boxG(180, -0.2, -10, 220, 0, 25), col("#2a2024"));
+    // cinema auditorium: seat rows facing the screen at z = -10
+    b.add(boxG(280, -0.2, -12, 320, 0, 20), col("#2a2430"));
+    for (let r = 0; r < 8; r++) for (let i = 0; i < 16; i++) { const z = 0 + r * 1.5, y = r * 0.3; b.add(boxG(286 + i * 1.6, y, z, 287.3 + i * 1.6, y + 0.5, z + 0.7), col("#8a2a34")); b.add(boxG(286 + i * 1.6, y + 0.5, z + 0.6, 287.3 + i * 1.6, y + 1.3, z + 0.8), col("#8a2a34")); b.add(boxG(285, y - 0.3, z - 0.2, 312, y, z + 1.3), col("#3a3040")); }
+    b.add(boxG(278, 0, -12.5, 322, 14, -12), col("#1e1a26"));
+    H.screen = new THREE.Mesh(new THREE.PlaneGeometry(22, 9.5), new THREE.MeshBasicMaterial({ color: "#ffffff" })); H.screen.position.set(300, 6.5, -11.9); H.screen.layers.set(NOINK); G.add(H.screen);
     b.build(G);
-    const ban = canvasTex(128, 320, (g) => { g.fillStyle = "#2f6b3a"; g.fillRect(0, 0, 128, 320); g.fillStyle = "#e8b33c"; g.fillRect(0, 0, 128, 16); g.fillRect(0, 300, 128, 20); g.beginPath(); g.moveTo(64, 120); g.lineTo(104, 170); g.lineTo(64, 220); g.lineTo(24, 170); g.fill(); });
-    for (const x of [-18, -6, 6, 18]) { const m = new THREE.Mesh(new THREE.PlaneGeometry(6, 15), lam("banner", () => ({ map: ban, side: THREE.DoubleSide }))); m.position.set(x, 26, -61.6); G.add(m); }
   }
-
-  // ship of the Four (posed per shot; lives in the city group)
-  {
-    const s = new THREE.Group(), hull = col("#e8eef4"), blue = col("#3a6fbf");
-    const body = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 4.2, 22, 20), hull); s.add(body);
-    const nose = new THREE.Mesh(new THREE.ConeGeometry(3.2, 9, 20), blue); nose.position.y = 15.5; s.add(nose);
-    for (let i = 0; i < 4; i++) { const f = new THREE.Mesh(new THREE.BoxGeometry(0.5, 7, 5), blue); const a = (i / 4) * Math.PI * 2 + Math.PI / 4; f.position.set(Math.cos(a) * 4.6, -8, Math.sin(a) * 4.6); f.rotation.y = -a; s.add(f); }
-    const four = new THREE.Mesh(new THREE.PlaneGeometry(6.5, 6.5), new THREE.MeshBasicMaterial({ map: canvasTex(256, 256, (g) => { g.fillStyle = "#3a6fbf"; g.beginPath(); g.arc(128, 128, 120, 0, 7); g.fill(); g.lineWidth = 14; g.strokeStyle = "#f2f2f6"; g.stroke(); g.fillStyle = "#f2f2f6"; g.font = `200px ${FONT}`; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("4", 128, 140); }), transparent: true, alphaTest: 0.4 }));
-    four.position.set(0, 2, 3.9); four.layers.set(NOINK); s.add(four);
-    s.visible = false; groups.city.add(s); H.ship = s;
-  }
-  // the quantum / end-of-time platform handle (unused placeholder for posing)
-  H.platform = new THREE.Mesh(); H.platform.visible = false; groups.space.add(H.platform);
   return { groups, H };
 };

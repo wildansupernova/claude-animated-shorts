@@ -9,7 +9,7 @@ export const CastSheet: React.FC = () => {
   useLayoutEffect(() => {
     const g = ref.current!.getContext("2d")!;
     g.fillStyle = "#cfe3f2"; g.fillRect(0, 0, 1440, 2000);
-    const ids = Object.keys(CAST), cols = 9, cw = 160, chh = 267;
+    const ids = Object.keys(CAST), cols = 8, cw = 180, chh = 300;
     const opts = (getInputProps() as { opts?: HeroOpts }).opts ?? {};
     ids.forEach((id, i) => {
       const x = (i % cols) * cw, y = Math.floor(i / cols) * (chh + 22);

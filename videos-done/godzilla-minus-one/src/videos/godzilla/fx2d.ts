@@ -49,7 +49,7 @@ export const crack = (p: Pen, col: string, seed = 1) => {
 export const bolt = (p: Pen, seed = 1, col = "#eaf6ff") => {
   const pts: P2[] = [];
   for (let i = 0; i <= 10; i++) pts.push([100 + (rnd(seed, i) - 0.5) * 120, 10 + i * 58]);
-  p.stroke(pts, 30, "#7fb8ff"); p.stroke(pts, 14, col);
+  p.stroke(pts, 30, col === "#eaf6ff" ? "#7fb8ff" : "#ff9a2a"); p.stroke(pts, 14, col);
 };
 /** dust puff / smoke cloud: box 400 x 300 */
 export const puff = (p: Pen, col = "#d8c8b0", seed = 1) => {

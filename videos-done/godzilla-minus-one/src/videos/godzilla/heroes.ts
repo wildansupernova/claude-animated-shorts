@@ -9,15 +9,16 @@ import {
 
 export type BuildK = "adult" | "slim" | "big" | "stout" | "kid";
 export type Pattern = "plain" | "spider" | "cap" | "iron" | "deadpool" | "wolverine" | "ff" | "thing" | "flame" | "armor" | "robe"
-  | "vest" | "suit" | "panther" | "thor" | "sam" | "tva" | "doom" | "abs" | "jacket" | "marvel" | "antman";
+  | "vest" | "suit" | "panther" | "thor" | "sam" | "tva" | "doom" | "abs" | "jacket" | "marvel" | "antman" | "flight";
 export type Emblem = null | "star" | "arc" | "spider" | "four" | "x" | "sun" | "tri" | "redstar" | "hourglass" | "bolt" | "sam";
 export type HeadK = "face" | "mask" | "cowl";
 export type EyesK = "face" | "lens" | "slit" | "doom" | "visor" | "goggle";
 export type HairK = null | "short" | "slick" | "long" | "curly" | "bun" | "spiky" | "bald" | "bob" | "wild";
 export type HelmK = null | "cap" | "antman" | "wolverine" | "magneto" | "loki" | "sylvie" | "panther" | "iron" | "doom" | "deadpool"
-  | "spider" | "galactus" | "kang" | "beast" | "nightcrawler" | "namor" | "thing" | "hulk" | "sentry" | "alien" | "ghost";
+  | "spider" | "galactus" | "kang" | "beast" | "nightcrawler" | "namor" | "thing" | "hulk" | "sentry" | "alien" | "ghost"
+  | "pilot" | "navycap" | "beret" | "bandage" | "hachimaki" | "fedora";
 export type PropK = null | "shield" | "hammer" | "gauntlet" | "claws" | "cards" | "tesseract" | "katanas" | "scepter" | "spell"
-  | "repulsor" | "glow" | "baby" | "flame" | "wrench" | "web" | "axe" | "stones" | "star" | "wheelchair" | "sword";
+  | "repulsor" | "glow" | "baby" | "flame" | "wrench" | "web" | "axe" | "stones" | "star" | "wheelchair" | "sword" | "toys" | "popcorn" | "chalk";
 
 export type Hero = {
   build?: BuildK; skin?: string;
@@ -27,6 +28,7 @@ export type Hero = {
   head?: HeadK; mask?: string; eyes?: EyesK; helm?: HelmK; helmCol?: string;
   hair?: string; hairK?: HairK; beard?: string; beardK?: null | "goatee" | "full" | "stubble" | "moustache" | "chin";
   prop?: PropK; wings?: string; tail?: string; glowCol?: string;
+  glasses?: boolean; mark?: boolean; scarf?: string; skirt?: string;
 };
 
 export type Pose = "idle" | "wave" | "point" | "fist" | "blast" | "cheer" | "cross" | "hips" | "reach" | "snap" | "hold" | "fight"
@@ -222,11 +224,15 @@ export const drawHero = (p: Pen, c: Hero, o: HeroOpts = {}) => {
   }
   for (const a of arms) if (!a.front) drawArm(a);
   // ---------- torso ----------
+  if (c.skirt) { const sk: P2[] = [[tcx - 0.92 * T.a, torsoBot - 0.2 * HH], [tcx + 0.92 * T.a, torsoBot - 0.2 * HH], [tcx + 1.25 * T.a, torsoBot + 0.62 * HH], [tcx - 1.25 * T.a, torsoBot + 0.62 * HH]];
+    p.gradFill(sk, c.skirt, mul(c.skirt, SH_CLOTH), light); p.inkRing(sk, ow, thick); }
   p.gradFill(tp, c.suit, mul(c.suit, SH_CLOTH), light);
   p.clip(tp, () => torsoPattern(p, c, tcx, tcy, T, chin, torsoBot, HH, u, facing));
   if (c.belt) p.clip(tp, () => p.band([[tcx - 1.3 * T.a, torsoBot - 0.18 * HH], [tcx + 1.3 * T.a, torsoBot - 0.18 * HH]], c.belt!, 0.1 * HH, 1.4 * u));
   emblem(p, c, tcx + 2 * u * facing, chin + 0.42 * HH * (Bd.torso / 1.1), u, glow);
   p.inkRing(tp, ow, thick);
+  if (c.scarf) { p.band([[tcx - 0.75 * T.a, chin + 0.06 * HH], [tcx + 0.75 * T.a, chin + 0.06 * HH]], c.scarf, 0.12 * HH, 1.4 * u, "round");
+    p.poly([[tcx + 0.25 * T.a, chin + 0.08 * HH], [tcx + 0.55 * T.a, chin + 0.12 * HH], [tcx + 0.6 * T.a + 6 * u * Math.sin(flutter * 6), chin + 0.55 * HH], [tcx + 0.3 * T.a, chin + 0.5 * HH]], c.scarf, 1.4 * u); }
   // ---------- arms in front + props ----------
   for (const a of arms) if (a.front) drawArm(a);
   const R = arms.find((a) => a.side === 1)?.pts[2], Lh = arms.find((a) => a.side === -1)?.pts[2];
@@ -294,6 +300,7 @@ const torsoPattern = (p: Pen, c: Hero, tcx: number, tcy: number, T: Blob, chin: 
     }
     case "panther": for (let i = 0; i < 5; i++) p.stroke([[tcx - 0.7 * T.a + i * 0.35 * T.a, chin], [tcx - 0.5 * T.a + i * 0.25 * T.a, chin + 0.5 * HH]], 1.6 * u, s2); break;
     case "sam": p.poly([[tcx - 1.4 * T.a, chin + 0.2 * HH], [tcx + 1.4 * T.a, chin + 0.2 * HH], [tcx + 1.4 * T.a, bot + 10], [tcx - 1.4 * T.a, bot + 10]], s2, 0); box(bot - 0.28 * HH, bot - 0.18 * HH, "#c8323a"); break;
+    case "flight": { for (const sx of [-0.45, 0.45]) p.band([[tcx + sx * T.a, chin - 6 * u], [tcx + sx * 0.8 * T.a, bot]], s2, 5 * u, 1.2 * u); p.band([[x0, chin + 0.62 * HH], [x1, chin + 0.62 * HH]], s2, 6 * u, 1.2 * u); p.ell(tcx, chin + 0.62 * HH, 7 * u, 7 * u, "#c9ccd2", 1.2 * u); break; }
     case "tva": p.stroke([[tcx - 1.3 * T.a, chin + 0.3 * HH], [tcx + 1.3 * T.a, chin + 0.3 * HH]], 4 * u, s2); break;
     case "doom": p.poly([[tcx - 0.55 * T.a, chin], [tcx + 0.55 * T.a, chin], [tcx + 0.45 * T.a, bot + 10], [tcx - 0.45 * T.a, bot + 10]], s2, 1.4 * u); break;
     case "abs": for (let i = 0; i < 3; i++) for (const s of [-1, 1]) p.arc(tcx + s * 0.22 * T.a, chin + (0.6 + i * 0.17) * HH, 0.16 * T.a, 0.06 * HH, 20, 160, 1.6 * u, mix(c.suit, INK, 0.5)); break;
@@ -369,6 +376,16 @@ const heldProps = (p: Pen, c: Hero, pose: Pose, R: P2, L: P2, u: number, HH: num
     case "web": p.stroke([[rx, ry], [rx + 120 * u, ry - 240 * u]], 1.6 * u, "#eef2f6"); break;
     case "star": p.poly(STAR(rx, ry - 20 * u, 14 * u), "#ffd84a", 1.6 * u); break;
     case "sword": p.band([[rx, ry + 6 * u], [rx + 14 * u, ry - 60 * u]], "#d9dde0", 3.4 * u, 1.3 * u, "round"); p.band([[rx - 8 * u, ry - 2 * u], [rx + 8 * u, ry + 2 * u]], "#e8c45a", 3 * u, 1.2 * u, "round"); p.dot(rx, ry, 6.5 * u); break;
+    case "toys": { // gold statuette in the right hand, a little kaiju toy in the left
+      p.band([[rx, ry + 8 * u], [rx, ry - 50 * u]], "#e8b33c", 6 * u, 1.3 * u, "round"); p.ell(rx, ry - 56 * u, 6 * u, 7 * u, "#e8b33c", 1.3 * u);
+      p.poly([[rx - 9 * u, ry + 6 * u], [rx + 9 * u, ry + 6 * u], [rx + 8 * u, ry + 14 * u], [rx - 8 * u, ry + 14 * u]], "#2a2420", 1.2 * u);
+      const tx = lx - 4 * u, ty = ly - 30 * u, tp2: P2[] = [[tx - 12 * u, ty + 30 * u], [tx - 14 * u, ty + 4 * u], [tx - 4 * u, ty - 14 * u], [tx + 10 * u, ty - 18 * u], [tx + 14 * u, ty - 10 * u], [tx + 4 * u, ty - 6 * u], [tx + 6 * u, ty + 30 * u]];
+      for (let i = 0; i < 4; i++) p.poly([[tx - 12 * u - i * 2 * u, ty + 12 * u - i * 7 * u], [tx - 22 * u - i * 2 * u, ty + 6 * u - i * 7 * u], [tx - 13 * u - i * 2 * u, ty + 2 * u - i * 7 * u]], "#e8e2d4", 1 * u);
+      p.poly(tp2, "#5a6470", 1.6 * u); p.dot(tx + 7 * u, ty - 12 * u, 1.4 * u); p.dot(lx, ly, 6 * u); break; }
+    case "popcorn": { const bx = (rx + lx) / 2, by = (ry + ly) / 2 - 6 * u; p.poly([[bx - 16 * u, by - 18 * u], [bx + 16 * u, by - 18 * u], [bx + 12 * u, by + 14 * u], [bx - 12 * u, by + 14 * u]], "#e04040", 1.6 * u);
+      for (const sx of [-8, 0, 8]) p.stroke([[bx + sx * u, by - 16 * u], [bx + sx * 0.8 * u, by + 12 * u]], 3 * u, WHITE);
+      for (let i = 0; i < 6; i++) p.ell(bx - 12 * u + i * 5 * u, by - 22 * u - (i % 2) * 4 * u, 5 * u, 4.5 * u, "#fff4d0", 1 * u); break; }
+    case "chalk": p.band([[rx, ry], [rx + 6 * u, ry - 12 * u]], WHITE, 3 * u, 1 * u, "round"); p.dot(rx, ry, 6 * u); break;
     case "wrench": p.band([[rx, ry + 8 * u], [rx + 6 * u, ry - 30 * u]], "#9aa1aa", 4 * u, 1.3 * u, "round"); p.arc(rx + 7 * u, ry - 34 * u, 7 * u, 7 * u, 200, 520, 3.5 * u, "#9aa1aa"); break;
     default: break;
   }
@@ -490,8 +507,38 @@ const drawHead = (p: Pen, c: Hero, H: Blob, cx: number, hc: number, W: number, H
     case "beast": case "nightcrawler": { for (const s of [-1, 1]) p.poly([[cx + s * 0.82 * H.a, hc - 0.2 * H.b], [cx + s * 1.18 * H.a, hc - 0.55 * H.b], [cx + s * 0.95 * H.a, hc + 0.1 * H.b]], skin, 1.4 * u); break; }
     case "namor": for (const s of [-1, 1]) p.poly([[cx + s * 0.85 * H.a, hc - 0.05 * H.b], [cx + s * 1.25 * H.a, hc - 0.6 * H.b], [cx + s * 1.0 * H.a, hc + 0.2 * H.b]], skin, 1.4 * u); break;
     case "sentry": break;
+    case "pilot": { // leather flight cap with ear flaps and goggles up on the forehead
+      const lc = hcol === "#e8c45a" ? "#6a4a30" : hcol;
+      p.clip(hp, () => p.poly([[cx - 2 * H.a, crown - 50], [cx + 2 * H.a, crown - 50], [cx + 2 * H.a, hc + 0.5 * H.b], [cx + 0.78 * H.a, hc + 0.5 * H.b], [cx + 0.7 * H.a, hc - 0.32 * H.b], [cx - 0.7 * H.a, hc - 0.32 * H.b], [cx - 0.78 * H.a, hc + 0.5 * H.b], [cx - 2 * H.a, hc + 0.5 * H.b]], lc, 0));
+      p.inkRing(hp, ow, thick);
+      p.band([[cx - 0.85 * H.a, hc - 0.5 * H.b], [cx + 0.85 * H.a, hc - 0.5 * H.b]], "#3a2a20", 5 * u, 1.2 * u);
+      for (const s of [-1, 1]) { p.ell(cx + s * 16 * u, hc - 0.5 * H.b, 11 * u, 9 * u, "#9ab8c8", 2.2 * u); p.ell(cx + s * 16 * u - 3 * u, hc - 0.5 * H.b - 3 * u, 3 * u, 2.4 * u, "#e8f4fa", 0); }
+      break;
+    }
+    case "navycap": {
+      p.poly([[cx - 0.95 * H.a, crown + 0.32 * H.b], [cx + 0.95 * H.a, crown + 0.32 * H.b], [cx + 1.05 * H.a, crown - 0.02 * H.b], [cx - 1.05 * H.a, crown - 0.02 * H.b]], "#f2f2f6", 1.8 * u);
+      p.poly([[cx - 0.95 * H.a, crown + 0.32 * H.b], [cx + 0.95 * H.a, crown + 0.32 * H.b], [cx + 0.92 * H.a, crown + 0.5 * H.b], [cx - 0.92 * H.a, crown + 0.5 * H.b]], "#1a2442", 1.8 * u);
+      p.poly([[cx - 0.5 * H.a, crown + 0.5 * H.b], [cx + 0.6 * H.a, crown + 0.5 * H.b], [cx + 0.75 * H.a, crown + 0.66 * H.b], [cx - 0.4 * H.a, crown + 0.62 * H.b]], "#141016", 1.4 * u);
+      p.ell(cx, crown + 0.4 * H.b, 7 * u, 6 * u, "#e8c45a", 1.2 * u);
+      break;
+    }
+    case "beret": p.ell(cx - 6 * u, crown + 0.12 * H.b, 0.95 * H.a, 0.32 * H.b, hcol === "#e8c45a" ? "#3a3040" : hcol, 1.8 * u); p.dot(cx - 6 * u, crown - 0.18 * H.b, 3 * u, INK); break;
+    case "fedora": { const fc = hcol === "#e8c45a" ? "#5a4a3a" : hcol;
+      p.poly([[cx - 1.25 * H.a, crown + 0.42 * H.b], [cx + 1.25 * H.a, crown + 0.42 * H.b], [cx + 1.1 * H.a, crown + 0.55 * H.b], [cx - 1.1 * H.a, crown + 0.55 * H.b]], fc, 1.8 * u);
+      p.poly([[cx - 0.75 * H.a, crown + 0.45 * H.b], [cx - 0.68 * H.a, crown - 0.15 * H.b], [cx, crown - 0.02 * H.b], [cx + 0.68 * H.a, crown - 0.15 * H.b], [cx + 0.75 * H.a, crown + 0.45 * H.b]], fc, 1.8 * u);
+      p.band([[cx - 0.73 * H.a, crown + 0.36 * H.b], [cx + 0.73 * H.a, crown + 0.36 * H.b]], "#2a2420", 4 * u, 1 * u); break; }
+    case "hachimaki": p.band([[cx - 1.0 * H.a, crown + 0.33 * H.b], [cx + 1.0 * H.a, crown + 0.3 * H.b]], hcol === "#e8c45a" ? "#f4f1e8" : hcol, 7 * u, 1.4 * u, "round");
+      p.poly([[cx + 0.95 * H.a, crown + 0.3 * H.b], [cx + 1.25 * H.a, crown + 0.18 * H.b], [cx + 1.2 * H.a, crown + 0.42 * H.b]], "#f4f1e8", 1.4 * u); break;
+    case "bandage": p.clip(hp, () => p.band([[cx - 1.2 * H.a, crown + 0.36 * H.b], [cx + 1.2 * H.a, crown + 0.3 * H.b]], "#f6f4ee", 0.24 * H.b, 0)); p.inkRing(hp, ow, thick);
+      p.stroke([[cx - 0.4 * H.a, crown + 0.26 * H.b], [cx + 0.3 * H.a, crown + 0.36 * H.b]], 1.4 * u, "#c9c4b8"); break;
     case "alien": for (let i = -2; i <= 2; i++) p.poly([[cx + i * 0.3 * H.a - 8 * u, crown + 0.15 * H.b], [cx + i * 0.3 * H.a, crown - 0.3 * H.b - Math.abs(i) * -4 * u], [cx + i * 0.3 * H.a + 8 * u, crown + 0.15 * H.b]], "#5d6b5a", 1.4 * u); break;
     default: break;
+  }
+  if (c.glasses && kind === "face") { const fx = cx + 7 * u * facing; for (const s of [-1, 1]) p.arc(fx + s * 13 * u, hc, 10.5 * u, 9.5 * u, 0, 360, 2.6 * u, INK); p.stroke([[fx - 3 * u, hc - 2 * u], [fx + 3 * u, hc - 2 * u]], 2.4 * u); }
+  if (c.mark) { // the black mark creeping up the side of the neck (Noriko, end of Minus One): below the jaw, veins reaching up
+    const mx = cx - 0.5 * H.a, my = hc + 0.92 * H.b;
+    p.ell(mx, my + 8 * u, 13 * u, 11 * u, "#1a1420", 0);
+    for (let i = 0; i < 5; i++) { const a = rad(-150 + i * 26); p.stroke([[mx, my + 4 * u], [mx + Math.cos(a) * 16 * u, my + 4 * u + Math.sin(a) * 16 * u], [mx + Math.cos(a + 0.35) * 25 * u, my + 4 * u + Math.sin(a + 0.35) * 24 * u]], 2.4 * u, "#1a1420"); }
   }
   // beards
   if (c.beard && c.beardK) {
@@ -505,81 +552,44 @@ const drawHead = (p: Pen, c: Hero, H: Blob, cx: number, hc: number, W: number, H
 };
 
 // ---------------- the cast ----------------
-const RED = "#c8323a", BLUE = "#2f5fb3", NAVY = "#24335e", GOLD = "#e8b33c", GREEN = "#2f8a4a", PURPLE = "#6b3fa0", BLACK = "#2a2730";
+const NAVY = "#24335e";
 export const CAST: Record<string, Hero> = {
-  // X-Men (Earth-10005)
-  profx: { suit: "#3a3f52", suit2: "#5a6078", suit3: "#ffffff", pattern: "suit", skin: "#f5c9a0", hairK: "bald", legs: "#2e3242", boots: "#1e1e24", build: "adult", prop: "wheelchair" },
-  magneto: { suit: "#7a2a4a", suit2: "#5c1f38", pattern: "plain", cape: "#8c2a3a", head: "cowl", mask: "#b02f3c", helm: "magneto", helmCol: "#6b3a8c", skin: "#f1d2b6", legs: "#4a1a2e", gloves: "#6b3a8c" },
-  cyclops: { suit: "#1f3a7a", suit2: "#f2c14e", pattern: "vest", eyes: "visor", hairK: "short", hair: "#5a3b2a", emblem: "x", gloves: "#f2c14e", boots: "#f2c14e" },
-  mystique: { suit: "#3d6fd6", skin: "#3d6fd6", hairK: "slick", hair: "#d8452e", build: "slim", eyes: "face" },
-  nightcrawler: { suit: "#2a2f5c", suit2: "#c8323a", pattern: "vest", skin: "#3f4fa0", hairK: "short", hair: "#1c1f3a", helm: "nightcrawler", tail: "#2a2f5c", build: "slim" },
-  beast: { suit: "#3f56b8", skin: "#4a62c8", hairK: "wild", hair: "#33479e", helm: "beast", pattern: "suit", suit2: "#c8323a", suit3: "#e8eef6", build: "stout", gloves: "#4a62c8" },
-  // Infinity saga
-  tony: { suit: "#3a3f52", suit2: "#2b2b36", pattern: "jacket", skin: "#f1c9a0", hairK: "slick", hair: "#2a1e1a", beard: "#2a1e1a", beardK: "goatee", emblem: "arc", prop: "wrench" },
-  ironman: { suit: RED, suit2: GOLD, pattern: "iron", emblem: "arc", head: "mask", mask: RED, eyes: "slit", helm: "iron", helmCol: GOLD, arms: RED, legs: RED, gloves: GOLD, boots: GOLD },
-  cap: { suit: BLUE, suit2: RED, suit3: "#ffffff", pattern: "cap", emblem: "star", head: "cowl", mask: BLUE, helm: "cap", arms: BLUE, legs: NAVY, gloves: "#8a4a2c", boots: "#8a4a2c", prop: "shield", skin: "#f5d2b0" },
-  steve: { suit: "#6b8cc2", suit2: "#2c3b5a", pattern: "jacket", skin: "#f5d2b0", hairK: "slick", hair: "#d9b25a" },
-  oldsteve: { suit: "#6a6a78", suit2: "#3a3a46", pattern: "jacket", skin: "#f0d0b8", hairK: "slick", hair: "#e8e8ee" },
-  peggy: { suit: "#2f4f9a", suit2: "#c8323a", pattern: "jacket", skin: "#f8d8c0", hairK: "bob", hair: "#5a2e1e", build: "slim", legs: "#2f4f9a" },
-  thor: { suit: "#3a3d4a", suit2: "#2a2c36", pattern: "thor", cape: RED, hairK: "long", hair: "#e3c26a", beard: "#d4b05a", beardK: "full", prop: "hammer", arms: "#f1c9a0", gloves: "#3a3d4a", skin: "#f1c9a0" },
-  hulk: { build: "big", suit: "#5aa648", skin: "#5aa648", pattern: "abs", legs: "#5a3f8c", arms: "#5aa648", boots: "#4a8f3a", helm: "hulk", hair: "#20231f" },
-  widow: { build: "slim", suit: BLACK, suit2: "#3a3740", pattern: "plain", skin: "#f8d8c0", hairK: "long", hair: "#b8402a", belt: "#c9a14a" },
-  hawkeye: { suit: "#3d3a4f", suit2: "#5c3a7a", pattern: "vest", skin: "#f1c9a0", hairK: "short", hair: "#8a6a4a" },
-  loki: { suit: "#2f6b3a", suit2: "#1f2a22", pattern: "robe", cape: "#2f6b3a", head: "face", hairK: "long", hair: "#1c1a1f", helm: "loki", helmCol: GOLD, skin: "#f8e2d0", prop: "scepter" },
-  lokiT: { suit: "#2f6b3a", suit2: "#1f2a22", pattern: "robe", head: "face", hairK: "long", hair: "#1c1a1f", helm: "loki", helmCol: GOLD, skin: "#f8e2d0", prop: "tesseract" },
-  lokiTVA: { suit: "#8a6a48", suit2: "#5c4630", pattern: "tva", head: "face", hairK: "long", hair: "#1c1a1f", skin: "#f8e2d0", emblem: "hourglass" },
-  alien: { suit: "#5d6b5a", suit2: "#3a4238", pattern: "armor", skin: "#9aa38f", helm: "alien", eyes: "face" },
-  thanos: { build: "big", suit: "#3f4a8c", suit2: GOLD, pattern: "armor", skin: "#8a5fa8", arms: "#8a5fa8", legs: "#3f4a8c", boots: GOLD, prop: "gauntlet", beard: "#6a457f", beardK: "chin" },
-  // Loki / TVA
-  sylvie: { build: "slim", suit: "#2f5a3a", suit2: "#1f2a22", pattern: "jacket", cape: "#2f5a3a", hairK: "long", hair: "#e8cf7a", helm: "sylvie", helmCol: GOLD, skin: "#f8e2d0", prop: "sword" },
-  hwr: { suit: "#5a3f8c", suit2: "#e8b33c", pattern: "robe", cape: "#3b2a6b", hairK: "curly", hair: "#1c1a1f", skin: "#8a5a3c" },
-  tva: { suit: "#8a6a48", suit2: "#5c4630", pattern: "tva", hairK: "short", hair: "#2a1e1a", emblem: "hourglass", skin: "#e8c4a0" },
-  lokiKing: { suit: "#2f6b3a", suit2: GOLD, pattern: "robe", cape: "#2f6b3a", hairK: "long", hair: "#1c1a1f", helm: "loki", helmCol: GOLD, skin: "#f8e2d0" },
-  // multiverse
-  spidey: { suit: RED, suit2: BLUE, pattern: "spider", emblem: "spider", head: "mask", mask: RED, eyes: "lens", helm: "spider", arms: RED, legs: BLUE, boots: RED, gloves: RED },
-  spidey2: { suit: "#b02a33", suit2: "#1f2a5c", pattern: "spider", emblem: "spider", head: "mask", mask: "#b02a33", eyes: "lens", helm: "spider", arms: "#b02a33", legs: "#1f2a5c", boots: "#b02a33", gloves: "#b02a33" },
-  spidey3: { suit: "#d8343c", suit2: "#2a5ac0", pattern: "spider", emblem: "spider", head: "mask", mask: "#d8343c", eyes: "lens", helm: "spider", arms: "#2a5ac0", legs: "#2a5ac0", boots: "#d8343c", gloves: "#d8343c" },
-  peter: { suit: "#c8a46a", suit2: "#3a5a8a", pattern: "jacket", hairK: "short", hair: "#5a3b2a", skin: "#f5d2b0" },
-  strange: { suit: "#2a4f8a", suit2: "#1c2b4a", pattern: "robe", cape: "#c8323a", hairK: "slick", hair: "#2a1e1a", beard: "#2a1e1a", beardK: "goatee", skin: "#f1c9a0", prop: "spell", belt: "#8a5a34" },
-  goblin: { suit: "#4f8a3a", suit2: "#5a3f8c", pattern: "armor", skin: "#5f9a48", eyes: "goggle", head: "mask", mask: "#5f9a48", helm: "alien" },
-  ock: { suit: "#5a4a3a", suit2: "#3a3029", pattern: "jacket", hairK: "slick", hair: "#2a1e1a", skin: "#f1c9a0", build: "stout" },
-  shuri: { build: "slim", suit: "#1e1b26", suit2: "#8a7adf", pattern: "panther", head: "mask", mask: "#1e1b26", eyes: "lens", helm: "panther", arms: "#1e1b26", legs: "#1e1b26" },
-  namor: { suit: "#3a8f6a", skin: "#b07a52", pattern: "abs", hairK: "slick", hair: "#1c1a1f", helm: "namor", arms: "#b07a52", legs: "#2f6b8a", boots: "#e8c45a" },
-  antman: { suit: RED, suit2: "#2a2730", pattern: "antman", head: "mask", mask: RED, eyes: "lens", helm: "antman", arms: "#2a2730", legs: "#2a2730", gloves: RED, boots: RED },
-  cassie: { build: "slim", suit: "#7a3fb0", suit2: "#2a2730", pattern: "antman", head: "face", hairK: "long", hair: "#c89a5a", skin: "#f5d2b0", gloves: "#7a3fb0" },
-  kang: { suit: "#2a3b6b", suit2: "#6fd6ff", pattern: "robe", helm: "kang", skin: "#8a5a3c", cape: "#1c2442", glowCol: "#9fe6ff" },
-  monica: { build: "slim", suit: "#f2f2f6", suit2: "#2f5fb3", pattern: "vest", skin: "#9a6a4a", hairK: "curly", hair: "#2a1e1a", prop: "glow", glowCol: "#cfefff", emblem: "redstar" },
-  captmarvel: { build: "slim", suit: RED, suit2: BLUE, pattern: "marvel", emblem: "star", skin: "#f5d2b0", hairK: "bob", hair: "#e3c26a", prop: "glow", glowCol: "#ffe7a8" },
-  // Deadpool & Wolverine
-  deadpool: { suit: RED, suit2: "#7a1f26", pattern: "deadpool", head: "mask", mask: RED, eyes: "lens", helm: "deadpool", arms: RED, legs: RED, gloves: "#2a2730", boots: "#2a2730", belt: "#2a2730", prop: "katanas" },
-  wolverine: { build: "stout", suit: "#f2c42c", suit2: "#2f5fb3", pattern: "wolverine", head: "cowl", mask: "#f2c42c", helm: "wolverine", skin: "#f1c9a0", arms: "#f2c42c", legs: "#2f5fb3", gloves: "#2f5fb3", boots: "#2f5fb3", prop: "claws", beard: "#2a1e1a", beardK: "stubble", belt: "#c8323a" },
-  gambit: { suit: "#8a5a3c", suit2: "#c86aa8", pattern: "jacket", hairK: "long", hair: "#7a4a2a", skin: "#f1c9a0", prop: "cards", cape: "#7a5232" },
-  // Phase 5-6
-  samcap: { suit: "#f2f2f6", suit2: BLUE, pattern: "sam", emblem: "sam", head: "cowl", mask: BLUE, helm: "cap", skin: "#7a4a2e", arms: BLUE, legs: NAVY, wings: "#c9ccd2", gloves: "#f2f2f6", boots: NAVY, prop: "shield" },
-  redhulk: { build: "big", suit: "#c8323a", skin: "#c8323a", pattern: "abs", legs: "#2a2a36", arms: "#c8323a", boots: "#8a2a30", helm: "hulk", hair: "#f2f2f6", beard: "#f2f2f6", beardK: "moustache" },
-  yelena: { build: "slim", suit: "#4a5a3a", suit2: "#2a2730", pattern: "vest", skin: "#f8e2d0", hairK: "long", hair: "#e8cf7a", belt: "#2a2730" },
-  bucky: { suit: "#2a2730", suit2: "#3a3740", pattern: "jacket", skin: "#f1c9a0", hairK: "short", hair: "#2a1e1a", arms: "#2a2730", gloves: "#c9ccd2" },
-  redguardian: { build: "stout", suit: RED, suit2: "#8a2a30", pattern: "plain", emblem: "redstar", head: "face", hairK: "short", hair: "#5a3b2a", beard: "#5a3b2a", beardK: "full", skin: "#f1c9a0", gloves: "#e8c45a" },
-  ghost: { build: "slim", suit: "#8a9098", suit2: "#5c6168", pattern: "plain", head: "mask", mask: "#8a9098", eyes: "lens", arms: "#8a9098", legs: "#8a9098" },
-  usagent: { suit: NAVY, suit2: "#f2f2f6", pattern: "sam", emblem: "star", head: "face", hairK: "short", hair: "#8a6a3a", skin: "#f1c9a0", prop: "shield" },
-  bob: { suit: "#f2f2f6", suit2: "#2f5fb3", pattern: "vest", emblem: "sun", hairK: "short", hair: "#e3c26a", skin: "#f8e2d0", cape: "#2f5fb3" },
-  void: { suit: "#141016", suit2: "#2a2240", pattern: "plain", head: "mask", mask: "#141016", eyes: "lens", arms: "#141016", legs: "#141016", cape: "#1c1726" },
-  // Fantastic Four (Earth-828)
-  reed: { suit: "#3a6fbf", suit2: "#1f2a44", suit3: "#f2f2f6", pattern: "ff", emblem: "four", hairK: "slick", hair: "#3a2a1e", skin: "#f1c9a0", beard: "#3a2a1e", beardK: "stubble", gloves: "#1f2a44", boots: "#1f2a44" },
-  sue: { build: "slim", suit: "#3a6fbf", suit2: "#1f2a44", suit3: "#f2f2f6", pattern: "ff", emblem: "four", hairK: "long", hair: "#e3c26a", skin: "#f8e2d0", gloves: "#1f2a44", boots: "#1f2a44" },
-  torch: { suit: "#ff8a2a", suit2: "#ffd84a", pattern: "flame", skin: "#ffcf8a", hairK: "spiky", hair: "#ff6a1a", arms: "#ff8a2a", legs: "#ff8a2a", prop: "flame", emblem: "four" },
-  thing: { build: "big", suit: "#e0823a", skin: "#e0823a", suit2: "#3a6fbf", pattern: "thing", arms: "#e0823a", legs: "#3a6fbf", boots: "#e0823a", helm: "thing", emblem: "four" },
-  galactus: { suit: PURPLE, suit2: "#3b8fbf", pattern: "armor", helm: "galactus", helmCol: PURPLE, skin: "#e8c4a0", build: "stout" },
-  doom: { suit: "#5c6168", suit2: "#2f6b3a", pattern: "doom", cape: "#2f6b3a", capeIn: "#1f4a28", head: "face", helm: "doom", helmCol: "#2f6b3a", skin: "#a9adb4", eyes: "doom", arms: "#5c6168", legs: "#3a3d44", gloves: "#5c6168", boots: "#3a3d44", belt: "#c9a14a" },
-  // Brand New Day
-  jean: { build: "slim", suit: "#2f6b8a", suit2: "#c8a46a", pattern: "jacket", hairK: "long", hair: "#d8452e", skin: "#f8e2d0" },
-  bruce: { suit: "#8a6a9a", suit2: "#4a3a5a", pattern: "jacket", hairK: "curly", hair: "#4a4a4a", skin: "#f1c9a0" },
-  shield: { suit: "#3a3f52", suit2: "#2b2b36", pattern: "suit", skin: "#f1c9a0", hairK: "short", hair: "#2a1e1a" },
-  franklin: { build: "kid", suit: "#3a6fbf", suit2: "#1f2a44", suit3: "#f2f2f6", pattern: "ff", emblem: "four", hairK: "short", hair: "#3a2a1e", skin: "#f5d2b0" },
-  president: { suit: "#2a2f45", suit2: "#c8323a", pattern: "suit", skin: "#f1c9a0", hairK: "slick", hair: "#e8e8ee", beard: "#e8e8ee", beardK: "moustache" },
-  folk1: { suit: "#3f6fb5", suit2: "#2c3b5a", pattern: "jacket", hairK: "short", hair: "#5a3b2a", skin: "#f5c9a0" },
-  folk2: { build: "slim", suit: "#c25a7a", suit2: "#7a2a4a", pattern: "jacket", hairK: "bob", hair: "#2a1e1a", skin: "#c99067" },
-  folk3: { suit: "#5d7a3a", suit2: "#3a4a28", pattern: "jacket", hairK: "curly", hair: "#2a1e1a", skin: "#8a5a3c" },
-  folk4: { build: "slim", suit: "#d9a441", suit2: "#8a6a2a", pattern: "jacket", hairK: "long", hair: "#c89a5a", skin: "#ffe2c2" },
+  // Minus One (1945-47): our own drawings of the film's people
+  koichiP: { suit: "#7a6a48", suit2: "#4a3a28", pattern: "flight", helm: "pilot", helmCol: "#6a4a30", scarf: "#f4f1e8", skin: "#f1d0b0", legs: "#6a5a3c", boots: "#3a2a20", gloves: "#4a3a28" },
+  koichi: { suit: "#5f7180", suit2: "#46525e", pattern: "jacket", hairK: "short", hair: "#1e1a1a", skin: "#f1d0b0", legs: "#4a4a52", boots: "#2a2420" },
+  noriko: { build: "slim", suit: "#ece4d0", suit2: "#d8cdb4", pattern: "plain", skirt: "#3a4a6a", hairK: "bob", hair: "#1e1a1a", skin: "#f6d8bc", legs: "#e8c8a8", boots: "#5a3b2a" },
+  norikoB: { build: "slim", suit: "#ece4d0", pattern: "plain", skirt: "#3a4a6a", hairK: "bob", hair: "#1e1a1a", skin: "#f6d8bc", legs: "#e8c8a8", boots: "#5a3b2a", prop: "baby" },
+  norikoH: { build: "slim", suit: "#f2f2f6", suit2: "#dfe4ea", pattern: "jacket", hairK: "bob", hair: "#1e1a1a", skin: "#f6d8bc", helm: "bandage", mark: true },
+  norikoM: { build: "slim", suit: "#c88a6a", suit2: "#a86a4e", pattern: "jacket", skirt: "#4a5a7a", hairK: "bob", hair: "#1e1a1a", skin: "#f6d8bc", legs: "#e8c8a8", boots: "#5a3b2a", mark: true },
+  akiko: { build: "kid", suit: "#d8584a", skirt: "#d8584a", pattern: "plain", hairK: "bob", hair: "#1e1a1a", skin: "#f8dcc4", legs: "#f8dcc4", boots: "#5a3b2a" },
+  tachibana: { suit: "#8a7a5a", suit2: "#6a5a3a", pattern: "vest", hairK: "short", hair: "#1e1a1a", skin: "#d8b090", beard: "#3a2a20", beardK: "stubble", legs: "#6a5a3a", boots: "#2a2420" },
+  noda: { suit: "#3a3f52", suit2: "#6a2a30", suit3: "#f2f2f6", pattern: "suit", glasses: true, hairK: "slick", hair: "#2a2420", skin: "#f1d0b0", legs: "#2e3242", boots: "#1e1e24" },
+  navy1: { suit: NAVY, suit2: "#1a2442", pattern: "jacket", helm: "navycap", skin: "#e8c4a0", beard: "#b8b8c0", beardK: "moustache", legs: NAVY, boots: "#141016", emblem: null },
+  navy2: { suit: NAVY, suit2: "#1a2442", pattern: "jacket", helm: "navycap", skin: "#d8b090", legs: NAVY, boots: "#141016" },
+  navy3: { build: "stout", suit: NAVY, suit2: "#1a2442", pattern: "jacket", hairK: "short", hair: "#9a9aa4", skin: "#e8c4a0", legs: NAVY, boots: "#141016" },
+  // 1954
+  fish1: { suit: "#ece8dc", pattern: "plain", helm: "hachimaki", hairK: "short", hair: "#1e1a1a", skin: "#d8a878", legs: "#3a4050", boots: "#2a2a30" },
+  fish2: { build: "stout", suit: "#c9c2b0", pattern: "plain", helm: "hachimaki", hairK: "short", hair: "#1e1a1a", skin: "#c99067", legs: "#4a4a40", boots: "#2a2a30" },
+  fish3: { suit: "#8a9aa8", pattern: "vest", suit2: "#6a7a88", hairK: "short", hair: "#1e1a1a", skin: "#e0b088", legs: "#3a4050", boots: "#2a2a30", beard: "#2a2420", beardK: "stubble" },
+  crew1: { suit: "#6a5a4a", suit2: "#4a3e32", pattern: "vest", helm: "beret", helmCol: "#2a2a36", skin: "#f1d0b0", legs: "#3a3a40", boots: "#2a2420" },
+  crew2: { suit: "#ece8dc", suit2: "#3a3f52", suit3: "#ece8dc", pattern: "suit", glasses: true, hairK: "slick", hair: "#1e1a1a", skin: "#f1d0b0", legs: "#3a3a40", boots: "#2a2420" },
+  // 1960s beach kids
+  kid1: { build: "kid", suit: "#e8b33c", pattern: "plain", hairK: "short", hair: "#1e1a1a", skin: "#f1d0b0", legs: "#3a5a9a", boots: "#f4f1ea" },
+  kid2: { build: "kid", suit: "#d8584a", skirt: "#3a8a5a", pattern: "plain", hairK: "bob", hair: "#1e1a1a", skin: "#f6d8bc", legs: "#f6d8bc", boots: "#f4f1ea" },
+  kid3: { build: "kid", suit: "#4a8ad0", pattern: "plain", hairK: "spiky", hair: "#1e1a1a", skin: "#e0b088", legs: "#2a3a5a", boots: "#f4f1ea" },
+  // Ginza 1947 crowd
+  folkM: { suit: "#5a5048", suit2: "#463e38", pattern: "jacket", helm: "fedora", skin: "#f1d0b0", legs: "#3a3632", boots: "#1e1a1a" },
+  folkW: { build: "slim", suit: "#7a4a6a", suit2: "#e8c45a", pattern: "robe", skirt: "#7a4a6a", hairK: "bun", hair: "#1e1a1a", skin: "#f6d8bc", legs: "#7a4a6a", boots: "#2a2420" },
+  folkB: { suit: "#8a7a5a", suit2: "#6a5a3a", pattern: "jacket", hairK: "short", hair: "#1e1a1a", skin: "#e0b088", legs: "#4a4a40", boots: "#2a2420" },
+  // the effects team at the Oscars (generic, our own)
+  vfx1: { suit: "#22222c", suit2: "#141016", suit3: "#f2f2f6", pattern: "suit", glasses: true, hairK: "short", hair: "#1e1a1a", skin: "#f1d0b0", prop: "toys", legs: "#22222c", boots: "#141016" },
+  vfx2: { build: "slim", suit: "#7a2a3a", skirt: "#7a2a3a", pattern: "plain", hairK: "long", hair: "#1e1a1a", skin: "#f6d8bc", prop: "toys", legs: "#7a2a3a", boots: "#141016" },
+  vfx3: { suit: "#22222c", suit2: "#141016", suit3: "#f2f2f6", pattern: "suit", hairK: "slick", hair: "#2a2420", skin: "#e8c4a0", prop: "toys", legs: "#22222c", boots: "#141016" },
+  vfx4: { build: "stout", suit: "#2a2a3a", suit2: "#141016", suit3: "#f2f2f6", pattern: "suit", glasses: true, hairK: "short", hair: "#5a5a60", skin: "#f1d0b0", prop: "toys", legs: "#2a2a3a", boots: "#141016" },
+  // today's audience
+  aud1: { suit: "#3f6fb5", suit2: "#2c3b5a", pattern: "jacket", hairK: "short", hair: "#5a3b2a", skin: "#f5c9a0", prop: "popcorn" },
+  aud2: { build: "slim", suit: "#c25a7a", suit2: "#7a2a4a", pattern: "jacket", hairK: "bob", hair: "#2a1e1a", skin: "#c99067" },
+  aud3: { suit: "#5d7a3a", suit2: "#3a4a28", pattern: "jacket", hairK: "curly", hair: "#2a1e1a", skin: "#8a5a3c", prop: "popcorn" },
+  aud4: { build: "slim", suit: "#d9a441", suit2: "#8a6a2a", pattern: "jacket", hairK: "long", hair: "#c89a5a", skin: "#ffe2c2" },
 };
 export type CastId = keyof typeof CAST;

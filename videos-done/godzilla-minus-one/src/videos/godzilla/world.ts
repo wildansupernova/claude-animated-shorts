@@ -10,7 +10,8 @@ import { CardPool, drawTex, camQuat, SU } from "./cards";
 import { CAST, drawHero, HeroOpts } from "./heroes";
 import { Pen } from "./toon";
 import * as F2 from "./fx2d";
-import { shotAt, camAt, ActorSpec, FxSpec, Shot, FPS } from "./story";
+import * as K from "./kaiju";
+import { shotAt, camAt, ActorSpec, FxSpec, ZSpec, Shot, FPS } from "./story";
 
 const C = (h: string) => new THREE.Color(h);
 const lin = (h: string) => untone(h);
@@ -101,11 +102,9 @@ export class World {
     this.skyU.t.value = f / FPS;
     if ((globalThis as unknown as { __nosky?: boolean }).__nosky) this.sky.visible = false;
     // shot content
-    for (const k of Object.keys(this.H) as (keyof Handles)[]) {
-      const h = this.H[k] as THREE.Object3D | THREE.Object3D[];
-      if (Array.isArray(h)) h.forEach((m) => (m.visible = false)); else if (k !== "water" && k !== "screen" && k !== "branches" && k !== "skyFx") h.visible = false;
-    }
-    this.H.branches.children.forEach((m) => (m.visible = false));
+    const H = this.H;
+    H.boat.visible = false; H.ships.forEach((m) => (m.visible = false)); H.tug.visible = false; H.shinden.visible = false; H.tram.visible = false;
+    H.zero.visible = true; H.zero.position.set(0, 0, 0); H.zero.rotation.set(0, 0, 0);
     const sc = s.scene(f, this.H);
     const camLocal = new THREE.Vector3(c.pos[0], c.pos[1], c.pos[2]);
     const G = this.groups[s.place];
@@ -114,6 +113,7 @@ export class World {
     const camW = cam.position;
     const tanH = Math.tan((c.fov * Math.PI) / 360);
     for (const a of sc.actors) this.actor(a, f, o, camW, camLocal, tanH);
+    for (const z of sc.zillas ?? []) this.zilla(z, o, camW, camLocal, tanH);
     for (const x of sc.fx ?? []) this.effect(x, o, camW);
     this.cards.end();
     // particles
@@ -128,6 +128,24 @@ export class World {
     (this.pts.material as THREE.PointsMaterial).size = sc.particleSize ?? 0.25;
     void G;
     return s;
+  }
+
+  /** a kaiju card: h = standing height in metres, base at (x, y, z); drawn facing screen-right, mirror flips it */
+  private zilla(z: ZSpec, o: readonly number[], camW: THREE.Vector3, camL: THREE.Vector3, tanH: number) {
+    if ((z.alpha ?? 1) <= 0.01) return;
+    const S = z.h * 1.08, y = z.y ?? 0;
+    const dist = Math.max(1, Math.hypot(camL.x - z.x, camL.y - (y + S * 0.5), camL.z - z.z));
+    const px = (S / (2 * dist * tanH)) * 1280;
+    const k = px > 900 ? 1.15 : px > 500 ? 0.8 : px > 250 ? 0.5 : 0.3;
+    const opts: K.ZOpts = { v: z.v, pose: z.pose, phase: z.pose === "walk" ? Math.round((z.phase ?? 0) * 8) / 8 % 1 : z.phase, glow: q(z.glow, 10), jaw: q(z.jaw, 10),
+      eye: z.eye, sweat: q(z.sweat, 8), regrow: q(z.regrow, 8), rim: z.rim };
+    const tex = drawTex(`z|${JSON.stringify(opts)}`, 1000, 1000, k, (p: Pen) => K.drawKaiju(p, opts));
+    if (z.shadow !== false && y < 1) {
+      const sh = drawTex("zshadow", 200, 100, 1, (p: Pen) => { const g = p.g, gr = g.createRadialGradient(100, 50, 5, 100, 50, 98); gr.addColorStop(0, "rgba(0,0,0,0.5)"); gr.addColorStop(1, "rgba(0,0,0,0)"); g.setTransform(1, 0, 0, 0.5, 0, 25); g.fillStyle = gr; g.fillRect(0, 0, 200, 200); });
+      this.cards.fx(sh, z.x + o[0], y + 0.05 + o[1], z.z + o[2], S * 0.75, S * 0.32, camW, { flat: true, soft: true, alpha: (z.alpha ?? 1) * 0.9 });
+    }
+    const col = z.tint ? new THREE.Color(z.tint) : this.cards.tint.clone();
+    this.cards.fx(tex, z.x + o[0], y + S * 0.475 + o[1], z.z + o[2], z.mirror ? -S : S, S, camW, { alpha: z.alpha, color: col, rot: z.roll });
   }
 
   private actor(a: ActorSpec, f: number, o: readonly number[], camW: THREE.Vector3, camL: THREE.Vector3, tanH: number) {
@@ -157,7 +175,7 @@ export class World {
       case "ring": tex = drawTex(`ring${x.col}${x.col2}${t}`, 500, 500, k, (p) => F2.ring(p, x.col ?? "#ffb347", x.col2 ?? "#ffd27a", t)); break;
       case "portal": tex = drawTex(`portal${x.col}${x.col2}${t}`, 500, 500, k, (p) => F2.portal(p, x.col ?? "#2a5ac0", x.col2 ?? "#7fd6ff", t)); break;
       case "crack": tex = drawTex(`crack${x.col}${x.seed}`, 600, 200, k, (p) => F2.crack(p, x.col ?? "#7fd6ff", x.seed ?? 1)); break;
-      case "bolt": tex = drawTex(`bolt${x.seed}`, 200, 600, k, (p) => F2.bolt(p, x.seed ?? 1)); break;
+      case "bolt": tex = drawTex(`bolt${x.seed}${x.col}`, 200, 600, k, (p) => F2.bolt(p, x.seed ?? 1, x.col)); break;
       case "puff": tex = drawTex(`puff${x.col}${x.seed}`, 400, 300, k, (p) => F2.puff(p, x.col, x.seed ?? 1)); break;
       case "note": tex = drawTex(`note${x.col}`, 200, 260, k, (p) => F2.note(p, x.col)); break;
       case "sign": tex = drawTex(`sign${x.text?.join("/")}${x.col}${x.col2}`, 1000, Math.round((1000 * h) / x.w), 0.6, (p) => F2.sign(p, 1000, Math.round((1000 * h) / x.w), x.text ?? [], { bg: x.col, fg: x.col2 })); break;
@@ -171,6 +189,18 @@ export class World {
         const id = x.text![0] as keyof typeof CAST, opts: HeroOpts = { expr: (x.text![1] as HeroOpts["expr"]) ?? "stern", pose: (x.text![2] as HeroOpts["pose"]) ?? "idle", seed: 3 };
         tex = drawTex(`hfx${x.text!.join("/")}`, 600, 1000, 0.8, (p) => drawHero(p, CAST[id], opts)); break;
       }
+      case "gorilla": tex = drawTex("gorilla", 600, 600, 0.7, (p) => K.gorilla(p)); break;
+      case "whale": tex = drawTex("whale", 800, 500, 0.7, (p) => K.whale(p)); break;
+      case "rival": tex = drawTex(`rival${t}`, 1000, 1000, 0.6, (p) => K.rival(p, t)); break;
+      case "three": tex = drawTex(`three${t}`, 1000, 800, 0.7, (p) => K.threeHead(p, t)); break;
+      case "mushroom": tex = drawTex(`mush${t}`, 800, 1000, 0.5, (p) => K.mushroom(p, t, x.seed ?? 1)); break;
+      case "fireball": tex = drawTex(`fireb${t}`, 600, 600, 0.5, (p) => K.fireball(p, t)); break;
+      case "chute": tex = drawTex("chute", 600, 400, 0.7, (p) => K.chute(p)); break;
+      case "bag": tex = drawTex(`bag${x.text?.[0]}${x.seed}`, 400, 400, 0.7, (p) => K.moneyBag(p, x.text?.[0] ?? "$", !!x.seed)); break;
+      case "statue": tex = drawTex(`statue${t}`, 200, 600, 1, (p) => K.statue(p, t)); break;
+      case "beam": tex = drawTex(`beam${x.col}`, 1000, 160, 0.6, (p) => { const g = p.g, gr = g.createLinearGradient(0, 0, 0, 160); gr.addColorStop(0, "rgba(120,220,255,0)"); gr.addColorStop(0.25, "#7fdcff"); gr.addColorStop(0.45, "#f4fdff"); gr.addColorStop(0.55, "#f4fdff"); gr.addColorStop(0.75, "#7fdcff"); gr.addColorStop(1, "rgba(120,220,255,0)"); g.fillStyle = gr; g.fillRect(0, 0, 1000, 160); }); break;
+      case "glow": tex = drawTex(`glow${x.col}`, 256, 256, 1, (p) => { const g = p.g, gr = g.createRadialGradient(128, 128, 4, 128, 128, 126); const c = new THREE.Color(x.col ?? "#ffffff"); const rgb = `${Math.round(c.r * 255)},${Math.round(c.g * 255)},${Math.round(c.b * 255)}`; gr.addColorStop(0, `rgba(255,255,255,1)`); gr.addColorStop(0.3, `rgba(${rgb},0.85)`); gr.addColorStop(1, `rgba(${rgb},0)`); g.fillStyle = gr; g.fillRect(0, 0, 256, 256); }); break;
+      case "toy": tex = drawTex(`toy${x.text?.[0]}`, 1000, 1000, 0.4, (p) => K.drawKaiju(p, { v: (x.text?.[0] as K.ZVar) ?? "showa", eye: "friendly" })); break;
       default: return;
     }
     this.cards.fx(tex, x.x + o[0], x.y + o[1], x.z + o[2], x.w, h, camW, { flat: x.flat, rot: x.rot, alpha: x.alpha, soft: x.soft, full: x.full, yaw: x.yaw,
@@ -178,3 +208,4 @@ export class World {
   }
 }
 export { SU };
+void F2.burst;

@@ -1,4 +1,4 @@
-// "The Road to Doomsday": an animated recap of every Marvel movie that leads into Avengers: Doomsday, in the skill's
+// "Before You Watch Godzilla Minus Zero": an animated explainer of Godzilla's history and Godzilla Minus One, in the skill's
 // flat-characters-in-a-3D-toon-world style. One three.js world (world.ts) posed per frame from the shot table
 // (story.ts); post = ink lines (own pass) -> Neutral tone map -> colour grade. On top, in HTML: subtitle captions
 // timed to the narration words (current word highlighted), a movie-title chip per chapter, flashes and the end title.
@@ -13,12 +13,12 @@ import { World } from "./world";
 import { InkPass } from "./ink";
 import { GradeEffect, GRADES } from "./grade";
 import { LOOKS } from "./looks";
-import { TOTAL, FLASHES, LIGHTNING, shotAt, SHOTS } from "./story";
+import { TOTAL, FLASHES, LIGHTNING, shotAt, SHOTS, CUES } from "./story";
 import WORDS from "./words.json";
 
-export const RECAP_FRAMES = TOTAL;
+export const GODZILLA_FRAMES = TOTAL;
 type W = { w: string; s: number; e: number; line: string; ch: number };
-const words = WORDS as W[];
+const words = (WORDS as W[]).map((w) => ({ ...w, w: w.w.replace(/^[^A-Za-z0-9$−-]+/, "") }));
 const FPS = 30;
 
 const Inner: React.FC<{ f: number }> = ({ f }) => {
@@ -78,26 +78,23 @@ const Captions: React.FC<{ f: number }> = ({ f }) => {
 
 // ---------------- chapter chips ----------------
 const CHIPS: [string, string][] = [
-  ["THE ROAD TO DOOMSDAY", "every movie you need, in order"], ["X-MEN  ·  X2", "2000 · 2003"], ["IRON MAN → THE AVENGERS", "2008 – 2012"], ["AVENGERS: INFINITY WAR", "2018"],
-  ["AVENGERS: ENDGAME", "2019"], ["LOKI  ·  SEASONS 1 & 2", "2021 – 2023 · series"], ["SPIDER-MAN: NO WAY HOME", "2021"], ["DOCTOR STRANGE IN THE MULTIVERSE OF MADNESS", "2022"],
-  ["BLACK PANTHER: WAKANDA FOREVER", "2022"], ["ANT-MAN AND THE WASP: QUANTUMANIA", "2023"], ["THE MARVELS", "2023"], ["DEADPOOL & WOLVERINE", "2024"],
-  ["CAPTAIN AMERICA: BRAVE NEW WORLD", "2025"], ["THUNDERBOLTS*", "2025"], ["THE FANTASTIC FOUR: FIRST STEPS", "2025"], ["SPIDER-MAN: BRAND NEW DAY", "2026"],
-  ["AVENGERS: DOOMSDAY", "in theaters December 18, 2026"],
+  ["BEFORE YOU WATCH", "GODZILLA MINUS ZERO"], ["GODZILLA", "1954 · the original"], ["70 YEARS OF GODZILLA", "1954 – 2024 · 38 films"],
+  ["GODZILLA MINUS ONE", "2023 · dir. Takashi Yamazaki"], ["THE OSCAR", "96th Academy Awards · 2024"], ["GODZILLA MINUS ZERO", "in theaters now · 2026"],
 ];
-const CH_START = CHIPS.map((_, ch) => SHOTS.find((s) => s.ch === ch)!.a);
+const CH_START = CHIPS.map((_, ch) => (ch === 0 ? CUES.H3 - 2 : SHOTS.find((s) => s.ch === ch)!.a));
 const Chip: React.FC<{ f: number }> = ({ f }) => {
   const ch = shotAt(f).ch, a = CH_START[ch];
-  if (f >= 5710) return null;
+  if (f < a || f >= CUES.END) return null;
   const k = interpolate(f - a, [0, 8], [0, 1], { extrapolateRight: "clamp", easing: Easing.out(Easing.back(1.6)) });
   const [title, sub] = CHIPS[ch];
-  const num = ch === 0 ? "" : ch === 16 ? "NEXT" : String(ch).padStart(2, "0");
+  const num = ch === 0 ? "" : ch === 5 ? "NOW" : String(ch).padStart(2, "0");
   return (
     <div style={{ position: "absolute", left: 0, right: 0, top: 150, display: "flex", justifyContent: "center", transform: `translateY(${(1 - k) * -60}px)`, opacity: k }}>
       <div style={{ display: "flex", alignItems: "stretch", maxWidth: 940, background: "rgba(18,12,24,0.82)", border: "5px solid #120c18", borderRadius: 26, boxShadow: "0 8px 0 rgba(18,12,24,0.45)", overflow: "hidden" }}>
-        {num ? <div style={{ background: ch === 16 ? "#3fae5a" : "#e0303a", color: "#fff", fontFamily: "Bangers", fontSize: 58, padding: "10px 22px 4px", display: "flex", alignItems: "center", letterSpacing: 2 }}>{num}</div> : null}
+        {num ? <div style={{ background: ch === 5 ? "#3fae5a" : "#e0303a", color: "#fff", fontFamily: "Bangers", fontSize: 58, padding: "10px 22px 4px", display: "flex", alignItems: "center", letterSpacing: 2 }}>{num}</div> : null}
         <div style={{ padding: "12px 26px 10px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <div style={{ color: "#ffd84a", fontFamily: "Bangers", fontSize: title.length > 30 ? 44 : 54, letterSpacing: 1.5, lineHeight: 1.0 }}>{title}</div>
-          <div style={{ color: "#e8e2f0", fontFamily: "Bangers", fontSize: 32, letterSpacing: 2, marginTop: 4 }}>{sub}</div>
+          <div style={{ color: "#ffd84a", fontFamily: "Bangers", fontSize: title.length > 22 ? 48 : 56, letterSpacing: 1.5, lineHeight: 1.0 }}>{title}</div>
+          <div style={{ color: "#e8e2f0", fontFamily: "Bangers", fontSize: ch === 0 ? 46 : 32, letterSpacing: 2, marginTop: 4 }}>{sub}</div>
         </div>
       </div>
     </div>
@@ -105,14 +102,15 @@ const Chip: React.FC<{ f: number }> = ({ f }) => {
 };
 
 const EndTitle: React.FC<{ f: number }> = ({ f }) => {
-  if (f < 5712) return null;
-  const k = interpolate(f, [5712, 5728], [0, 1], { extrapolateRight: "clamp", easing: Easing.out(Easing.back(1.4)) });
-  const d = interpolate(f, [5745, 5758], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const a = CUES.END;
+  if (f < a) return null;
+  const k = interpolate(f, [a, a + 16], [0, 1], { extrapolateRight: "clamp", easing: Easing.out(Easing.back(1.4)) });
+  const d = interpolate(f, [a + 26, a + 40], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
-    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", top: -330 }}>
-      <div style={{ fontFamily: "Bangers", fontSize: 150, color: "#d8dde4", WebkitTextStroke: "16px #120c18", paintOrder: "stroke fill", letterSpacing: 4, lineHeight: 0.95, textAlign: "center",
-        transform: `scale(${0.6 + 0.4 * k})`, opacity: k, textShadow: "0 10px 0 rgba(18,12,24,0.6)" }}>AVENGERS<br /><span style={{ color: "#7dff9a", fontSize: 190 }}>DOOMSDAY</span></div>
-      <div style={{ marginTop: 26, fontFamily: "Bangers", fontSize: 76, color: "#ffd84a", WebkitTextStroke: "10px #120c18", paintOrder: "stroke fill", letterSpacing: 3, opacity: d, transform: `translateY(${(1 - d) * 30}px)` }}>DECEMBER 18</div>
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", top: -380 }}>
+      <div style={{ fontFamily: "Bangers", fontSize: 170, color: "#e8e4dc", WebkitTextStroke: "16px #120c18", paintOrder: "stroke fill", letterSpacing: 5, lineHeight: 0.95, textAlign: "center",
+        transform: `scale(${0.6 + 0.4 * k})`, opacity: k, textShadow: "0 10px 0 rgba(18,12,24,0.6)" }}>GODZILLA<br /><span style={{ color: "#8fe4ff", fontSize: 150 }}>MINUS ZERO</span></div>
+      <div style={{ marginTop: 26, fontFamily: "Bangers", fontSize: 76, color: "#ffd84a", WebkitTextStroke: "10px #120c18", paintOrder: "stroke fill", letterSpacing: 3, opacity: d, transform: `translateY(${(1 - d) * 30}px)` }}>IN THEATERS NOW</div>
     </AbsoluteFill>
   );
 };
@@ -128,7 +126,7 @@ const useFonts = () => {
 const dpr = () => (getInputProps() as { dpr?: number }).dpr ?? 0.6667;
 const hideUI = () => !!(getInputProps() as { noui?: boolean }).noui;
 /** story time runs at 30 fps; the composition may run at 24 (frame mapped) or a fixed frame can be given (contact sheets) */
-export const Recap: React.FC<{ frame?: number }> = ({ frame }) => {
+export const Godzilla: React.FC<{ frame?: number }> = ({ frame }) => {
   const raw = useCurrentFrame(), { fps } = useVideoConfig();
   const f = frame ?? Math.round((raw * 30) / fps);
   useFonts();
