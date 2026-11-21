@@ -183,8 +183,9 @@ The losing branch runs ≤ 25 s and escalates the threat by one new sense. Then 
      that."
   3. "05:57. And your phone dies." Footsteps right beside you.
   4. "When the light comes back, there are two of you."
-  - The shell game: in one flicker, one lanyard spins and its badge reads "UOY" for 6-10 frames. That's the pause-to-find
-    clue.
+  - The shell game: in the **final** flicker, after the last swap, the lanyard of the figure that ends at ② spins and
+    its badge reads "UOY" for 6-10 frames. That's the pause-to-find clue. It must come after the last swap, or pausers
+    follow the wrong one.
 - **Choice:**
   - ① LEFT;
   - ② RIGHT.
@@ -272,6 +273,8 @@ The losing branch runs ≤ 25 s and escalates the threat by one new sense. Then 
   become the walk down) and finish in five.
 
 ## 12. Audit log
+**v3: virality verdict SHIP.** Production note applied: the "UOY" glimpse sits in the final flicker, after the last
+swap.
 **v2 → v3 (virality re-audit: "SHIP after 5 line-level fixes"): all 5 applied.**
 1. **The Part 5 badges were too easy:** they're now readable only in a 6-10 frame spin glimpse. On the hold the badges
    face in and the wrist prints are the visible clue. Target split ~60/40.
