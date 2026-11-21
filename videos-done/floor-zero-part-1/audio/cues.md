@@ -1,0 +1,71 @@
+# Sound cues: Floor Zero, Part 1 (96.467 s, 4630400 samples @ 48000 Hz)
+mix integrated -14.41 LUFS, true peak -1.05 dBTP; stems integrated: voice -17.0, music -26.5, sfx -23.8 LUFS
+
+-   0.000 s (f   0)  fluorescent hum
+-   0.000 s (f   0)  music: motif on music box over the empty office
+-   0.000 s (f   0)  office room tone
+-   1.200 s (f  36)  chair rolls back
+-   2.080 s (f  62)  clock tick
+-   4.367 s (f 131)  footsteps
+-   5.300 s (f 159)  row 4 lights off (clunk)
+-   5.900 s (f 177)  row 3 lights off (clunk)
+-   6.600 s (f 198)  row 2 lights off (clunk)
+-   6.800 s (f 204)  row 1 lights off (clunk)
+-   7.267 s (f 218)  row 0 lights off (clunk)
+-   8.600 s (f 258)  call button
+-   8.650 s (f 260)  elevator arrives: ding
+-   9.000 s (f 270)  doors open
+-   9.367 s (f 281)  music: drone darkens in the car (tritone)
+-   9.900 s (f 297)  footsteps
+-  11.067 s (f 332)  press G
+-  12.333 s (f 370)  doors close
+-  13.233 s (f 397)  car light hum
+-  13.233 s (f 397)  car motor
+-  13.233 s (f 397)  shaft wind (deepening)
+-  14.967 s (f 449)  floor 3
+-  15.900 s (f 477)  floor 2
+-  16.800 s (f 504)  floor 1
+-  17.700 s (f 531)  floor G (chime)
+-  19.067 s (f 572)  light flicker crackle
+-  20.833 s (f 625)  G pressed again
+-  21.267 s (f 638)  G pressed again
+-  21.533 s (f 646)  G pressed again
+-  23.417 s (f 702)  phone low battery chirp
+-  26.133 s (f 784)  emergency button
+-  26.383 s (f 792)  ringback
+-  27.017 s (f 810)  ringback
+-  27.967 s (f 839)  ringback
+-  29.724 s (f 892)  line goes dead
+-  35.000 s (f1050)  button 0 appears
+-  35.000 s (f1050)  music: riser into the jolt
+-  35.500 s (f1065)  button -1 appears
+-  36.667 s (f1100)  button -2 appears
+-  36.833 s (f1105)  button -3 appears
+-  37.033 s (f1111)  button -4 appears
+-  37.233 s (f1117)  button -5 appears
+-  37.400 s (f1122)  button -6 appears
+-  37.600 s (f1128)  button -7 appears
+-  40.433 s (f1213)  JOLT: impact, metal, cable twang
+-  40.433 s (f1213)  light flicker crackle
+-  40.833 s (f1225)  music: sub drone, thin high tone under the card
+-  41.700 s (f1251)  floor zero: deep dong
+-  43.033 s (f1291)  turn (cloth)
+-  48.400 s (f1452)  card paper
+-  60.616 s (f1818)  soft ding
+-  60.767 s (f1823)  doors open on floor zero
+-  60.800 s (f1824)  music: floor zero cluster + slow detuned motif
+-  67.167 s (f2015)  chair swivel creak
+-  73.133 s (f2194)  key: Y
+-  73.533 s (f2206)  key: O
+-  73.633 s (f2209)  key: U
+-  75.300 s (f2259)  light flicker crackle
+-  76.200 s (f2286)  breathing
+-  76.788 s (f2304)  dolly zoom riser
+-  77.538 s (f2326)  sub boom
+-  79.183 s (f2376)  POV turn whoosh
+-  82.533 s (f2476)  light flicker crackle
+-  82.632 s (f2479)  head twitch: neck crack
+-  83.750 s (f2512)  music: heartbeat returns for the choice
+-  84.267 s (f2528)  doors start to close (slow)
+-  86.067 s (f2582)  tag 1 pops
+-  86.233 s (f2587)  tag 2 pops
