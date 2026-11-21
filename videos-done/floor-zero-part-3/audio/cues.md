@@ -1,0 +1,44 @@
+# Sound cues: Floor Zero, Part 3 (87.800 s, 4214400 samples @ 48000 Hz)
+mix integrated -14.00 LUFS, true peak -1.18 dBTP; stems integrated: voice -17.0, music -26.5, sfx -23.7 LUFS
+
+-   0.000 s (f   0)  floor zero room tone (recap + walk in)
+-   0.040 s (f   1)  teaser: sub hit
+-   0.350 s (f  10)  teaser: one drip
+-   2.733 s (f  82)  teaser: suck-in to the white flash
+-   3.233 s (f  97)  music: the choice's heartbeat + drone carry over
+-   5.567 s (f 167)  stairwell: low draught
+-   5.567 s (f 167)  the red lamp buzzes
+-   5.717 s (f 172)  fire door swings shut
+-   6.167 s (f 185)  footsteps coming up
+-   6.417 s (f 192)  door latch
+-   9.600 s (f 288)  you hold your breath
+-  13.433 s (f 403)  phone torch on
+-  17.467 s (f 524)  the lamp flickers
+-  17.697 s (f 531)  it dies for a moment
+-  18.650 s (f 560)  music: string-cluster stinger (the hand)
+-  18.700 s (f 561)  cloth: the hand
+-  18.750 s (f 562)  A HAND ON YOUR SHOULDER: sub
+-  22.800 s (f 684)  the lamp dies
+-  23.300 s (f 699)  VHS rewind
+-  25.280 s (f 758)  tape stop
+-  25.350 s (f 760)  play
+-  25.583 s (f 768)  you walk in
+-  28.567 s (f 857)  car light hum
+-  28.967 s (f 869)  the doors close on the two of you
+-  29.467 s (f 884)  the car descends (motor bed)
+-  30.100 s (f 903)  -1: wet room tone
+-  32.383 s (f 972)  flicker 1
+-  32.613 s (f 978)  one step closer (in the dark)
+-  36.117 s (f1084)  flicker 2
+-  38.583 s (f1158)  flicker 3
+-  42.100 s (f1263)  the steel insert
+-  48.000 s (f1440)  ding: minus one
+-  49.800 s (f1494)  doors open on -1
+-  50.500 s (f1515)  you back out
+-  50.709 s (f1521)  drips
+-  51.433 s (f1543)  the doors close on it
+-  51.701 s (f1551)  music: the motif as -1 appears
+-  66.000 s (f1980)  a row of lights dies
+-  69.367 s (f2081)  music: heartbeat for the choice
+-  73.367 s (f2201)  tag 1 pops
+-  73.533 s (f2206)  tag 2 pops
