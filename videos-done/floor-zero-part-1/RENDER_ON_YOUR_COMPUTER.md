@@ -47,7 +47,7 @@ Steps:
      with 3 or 4 only if that's clearly faster.
    - If the whole render is going to take more than about 2 hours, tell me before carrying on.
 6. **Add the sound.** Run
-   `npx remotion ffmpeg -y -i out/video.mp4 -i audio/mix.m4a -map 0:v:0 -map 1:a:0 -c:v copy -c:a copy -shortest -movflags +faststart out/floor_zero_part1_master.mp4`
+   `npx remotion ffmpeg -y -i out/video.mp4 -i audio/mix.m4a -map 0:v:0 -map 1:a:0 -c:v copy -c:a copy -movflags +faststart out/floor_zero_part1_master.mp4`
 7. **Make the share version** (smaller, for Reels / TikTok / Shorts). Run
    `npx remotion ffmpeg -y -i out/floor_zero_part1_master.mp4 -c:v libx264 -preset slow -crf 21 -tune animation -maxrate 7M -bufsize 14M -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart out/floor_zero_part1.mp4`
 8. **Verify.**

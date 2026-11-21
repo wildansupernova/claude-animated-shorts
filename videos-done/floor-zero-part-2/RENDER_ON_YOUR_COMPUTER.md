@@ -48,13 +48,13 @@ Steps:
      with 3 or 4 only if that's clearly faster.
    - If the whole render is going to take more than about 2 hours, tell me before carrying on.
 6. **Add the sound.** Run
-   `npx remotion ffmpeg -y -i out/video.mp4 -i audio/mix.m4a -map 0:v:0 -map 1:a:0 -c:v copy -c:a copy -shortest -movflags +faststart out/floor_zero_part2_master.mp4`
+   `npx remotion ffmpeg -y -i out/video.mp4 -i audio/mix.m4a -map 0:v:0 -map 1:a:0 -c:v copy -c:a copy -movflags +faststart out/floor_zero_part2_master.mp4`
 7. **Make the share version** (smaller, for Reels / TikTok / Shorts). Run
    `npx remotion ffmpeg -y -i out/floor_zero_part2_master.mp4 -c:v libx264 -preset slow -crf 21 -tune animation -maxrate 7M -bufsize 14M -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart out/floor_zero_part2.mp4`
 8. **Verify.**
    - `npx remotion ffprobe out/floor_zero_part2.mp4` should show 1080x1920, 30 fps, about 91.1 s, and both a video
      and an audio stream.
-   - Grab frames at 5 s, 40 s, 75 s and 94 s, e.g.
+   - Grab frames at 5 s, 40 s, 60 s and 89 s, e.g.
      `npx remotion ffmpeg -y -ss 40 -i out/floor_zero_part2.mp4 -frames:v 1 out/check_40.jpg`, and confirm none
      are black.
 9. **Report back:** the paths and sizes of `out/floor_zero_part2_master.mp4` and `out/floor_zero_part2.mp4`, the

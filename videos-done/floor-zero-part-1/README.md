@@ -16,10 +16,11 @@ exact copy of your office. Something is breathing behind you, and the episode en
   - the flagged "pops" are planned story events (light rows switching off, flickers, button flares);
   - the "frozen" spans are short camera holds (shots 13, 14b, 23).
   - The GPU render matches the CPU stills (ink, lighting, captions, tags).
-- **Hosted** on Tigris at `floor-zero-part-1/floor_zero_part1.mp4` and **queued in Buffer**, AI label off:
-  - TikTok: Sat 21 Nov 18:20 WIB;
-  - YouTube Short: Sun 22 Nov 09:06 WIB.
-  - Delete the Tigris file only after both posts show `sent`.
+- **Posted** from Tigris through Buffer, AI label off. Both posts were switched to "share now" in Buffer a couple
+  of minutes after being queued, so they went out early:
+  - TikTok: Sat 21 Nov, 16:08 WIB;
+  - YouTube Short: 16:06 WIB.
+  - Both are `sent`, so the Tigris file was deleted per the repo rule.
 
 ## What's in it
 - **Picture:** our house style (flat bean-head cards in an inked 3D world, `templates/bridge/` lineage via

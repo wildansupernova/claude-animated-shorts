@@ -16,6 +16,21 @@ The episode follows the sequel beat sheet in `references/INTERACTIVE_SERIES_FORM
    creaks open on red dark with footsteps coming up.
 6. **The new choice:** ① STAIRS / ② ELEVATOR. "So, which way down do you go?"
 
+## Render record
+- **Rendered** on the user's Mac with `RENDER_ON_YOUR_COMPUTER.md` (`--gl=angle`, concurrency 2). The picture took
+  75 s; the CPU-only cloud container needs about 2.5 h for the same render.
+- **Files** (kept on the Mac in the git-ignored `output/floor-zero-part-2/`):
+  - share encode `floor_zero_part2.mp4`: 19.9 MB;
+  - master: 42.0 MB.
+  - Both are 1080x1920, 30 fps, 2734 frames, 91.13 s, AAC 48 kHz stereo.
+- **Frame QA** on the share encode:
+  - -14.3 LUFS, LRA 2.1, peak -1.2 dBFS; no silences, no unplanned white frames;
+  - the black and frozen frames fall in the planned lights-out (628-708);
+  - the 323-352 hold is the dead display under "the light above you hums";
+  - the rewind and the crash countdown checked out on the contact sheets.
+- **Mux fix:** done without `-shortest`, which had cut Part 1's last 2 frames. Both render prompts are fixed.
+- **Not posted.** Per the series notes, Part 2 goes out 12-24 h after Part 1.
+
 ## What's new on top of Part 1
 - **Set** (`office.ts`): a fire door cut into the elevator wall (hinged, swings into the office) with an EXIT sign;
   behind it a red-lit stairwell (unlit materials, no fog) with a landing, steps going down, a handrail, a pulsing
