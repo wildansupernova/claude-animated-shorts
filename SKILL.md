@@ -148,6 +148,11 @@ lighting 5-6, ink 6, textures 5-6, characters 7, depth 6-7, composition 6-7 (fro
   - Expect about 7.5-10 s per 1080x1920 frame per worker, so check stills first.
   - Then render the shots as parallel, resumable chunks (`scripts/render-chunks.mjs`) and join them with ffmpeg concat.
   - Render at 1080x1920 here, not 2K.
+- **Blank 3D canvas, no error, stills in ~0.9 s:** @react-three/postprocessing 3.2+ builds its composer in an effect after
+  the first R3F frame, and Remotion advances R3F once per frame, so a fresh mount renders nothing. Hold a `delayRender` until
+  `composer.passes.length > 1`, then `advance()` again (`videos-done/floor-zero-part-1/src/videos/floorzero/FloorZero.tsx`).
+- **Night interiors:** the sun two-tone can't light a room. Use ceiling light pools with a z-clip and light the cards from
+  the same pools on the CPU (`videos-done/floor-zero-part-1/src/videos/floorzero/shade.ts`).
 - **Time every cue from words.json by word** (`cue(line, "word")` in story.ts), not by hand-typed frame numbers. Export the timeline to JSON for the sound script.
 - **Several TTS voices** (dialogue): pick Kokoro voices by measured pitch so they read as different people, and level-match each line's RMS before joining (`videos-done/birthday-bet/voice/gen_voice.py`). Give dialogue captions a name tag.
 - **Freeze-frame:** wrap the shot layers in Remotion's `<Freeze frame={f0} active={frozen}>` so the canvas stays mounted (@remotion/three bridges the frame context), then desaturate it with a CSS filter.
