@@ -156,8 +156,9 @@ const PhotoWall: React.FC<{ k: number; plate: number }> = ({ k, plate }) => useC
   // a slow pan across the wall, landing on the newest (empty) frame, then a push onto its plate
   const total = COLSP * ROWSP, empty = total - 1;
   const ex = (empty % COLSP) * (FW + GX), ey = Math.floor(empty / COLSP) * (FH + GY);
-  const pan = glide(k), sc = 1.15 + 0.35 * pan + 1.1 * glide(plate);
-  const pl = glide(plate), cx = 300 + (ex + FW / 2 - 300) * pan - (FW / 2 + 20) * pl, cy = 260 + (ey + FH / 2 - 260) * pan + (FH / 2 + 30) * pl;
+  // wide enough at the start to see all five columns (the dates read on, week by week), then in to the newest frame
+  const pan = glide(k), sc = 0.82 + 0.68 * pan + 1.1 * glide(plate);
+  const pl = glide(plate), cx0 = (COLSP * (FW + GX) - GX) / 2, cx = cx0 + (ex + FW / 2 - cx0) * pan - (FW / 2 + 20) * pl, cy = 520 + (ey + FH / 2 - 520) * pan + (FH / 2 + 30) * pl;
   g.fillStyle = "#6e5a40"; g.fillRect(0, 0, W, H);
   g.translate(W / 2, 900); g.scale(sc, sc); g.translate(-cx, -cy);
   for (let i = 0; i < total; i++) {

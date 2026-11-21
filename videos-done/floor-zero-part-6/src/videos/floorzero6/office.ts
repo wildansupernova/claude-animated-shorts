@@ -307,7 +307,8 @@ export const buildSet = (root: THREE.Object3D): SetHandles => {
   const displayOut = new Dyn(256, 128);
   const displayOutMat = new THREE.MeshBasicMaterial({ map: displayOut.tex, color: new THREE.Color(1.6, 1.6, 1.6), fog: true });
   { const m = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.17), displayOutMat); place(m, DISPLAY_OUT[0], DISPLAY_OUT[1], DISPLAY_OUT[2], Math.PI); root.add(m); }
-  { const m = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.17), new THREE.MeshBasicMaterial({ map: (() => { const d = new Dyn(256, 128); d.draw("3", (g, w, h) => digits(g, w, h, "3")); return d.tex; })(), color: new THREE.Color(1.3, 1.3, 1.3) })); place(m, E2, DISPLAY_OUT[1], DISPLAY_OUT[2], Math.PI); root.add(m); }
+  // the second car's display shows the same floor (both cars stopped here); Parts 1-4 had it fixed at "3"
+  { const m = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.17), displayOutMat); place(m, E2, DISPLAY_OUT[1], DISPLAY_OUT[2], Math.PI); root.add(m); }
   { const m = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.15), lam("plaque", () => ({ map: plaqueTex() }))); place(m, 1.5, 1.6, WALL_Z - 0.015, Math.PI); root.add(m); }
   const clock = new Dyn(512, 512);
   { const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.23, 0.23, 0.05, 40).rotateX(Math.PI / 2), M.dark); rim.position.set(CLOCK[0], CLOCK[1], CLOCK[2] + 0.005); root.add(rim);

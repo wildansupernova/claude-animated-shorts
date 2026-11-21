@@ -86,3 +86,16 @@ Episode 5 of **Floor Zero** (Parts 1-4: `videos-done/floor-zero-part-1/` to `flo
 - **Title:** Floor Zero 5: There Are Two of You
 - **Caption:** `Floor Zero Part 5 #series #story #decide #horror`
 - **Pinned comment:** "① or ②? Which one is you? Look closely. The answer is in the video."
+
+## Render record
+- **First render** (Mac, `8ca5d3c`): 70 s for 2522 frames, 84.07 s; −14.1 LUFS, LRA 2.5. QA passed, and every clue
+  frame was confirmed (UOY at 2274–2278, the mirrored strands and outer-wrist prints at 2330, the still legs at 845).
+  Three notes:
+  1. The second elevator's display read "3" on −7.
+  2. The photo wall showed only two columns, so dates jumped between rows.
+  3. The grey prints read red under the red light.
+- **Fix pass:**
+  - Both elevator displays show the current floor.
+  - The photo wall opens wide on all five columns, so the dates read on week by week, then pushes in.
+  - Note 3 is left as is: the prints are lit by the red lamp like everything else, and their position carries the
+    clue.
