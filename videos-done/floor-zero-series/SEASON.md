@@ -3,6 +3,9 @@
 Six parts. Part 1 is posted and is fixed canon. Part 2 is rendered but not posted, so it can still change. Parts 3-6 are
 new. It follows `references/INTERACTIVE_SERIES_FORMULA.md` and the viral skills in §10. The audit log is in §12.
 
+**Full scripts:** `videos-done/floor-zero-part-2/SCRIPT.md` … `videos-done/floor-zero-part-6/SCRIPT.md`, with
+line-by-line voice-over, gaps, picture per line, HUD and props.
+
 ## 0. The core idea
 **Every rule is true, and it means exactly what it says.** The rules aren't lies. They're precise, and someone has
 scratched parts of them out. Viewers win by reading the words. (This replaces Part 2's "the rules were there to keep
