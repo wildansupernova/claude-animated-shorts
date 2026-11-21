@@ -137,7 +137,10 @@ SEASON:           5-8 parts; finale twist answers THE WHY (loop endings work: yo
 | 9 | Choice | 88-95 | 20-25 | "You have two choices. You <break the rule>, or you <stay with the threat>, with whatever is <right behind you>." |
 | 10 | Question | 95-98 | 4-5 | "So, what would you do?" Then stop |
 
-### 5.3 Part N beat sheet (target 100-115 s, ~300-330 words)
+### 5.3 Part N beat sheet (target 90-110 s, ~250-310 words)
+
+Open every sequel with the stranger-first template in `videos-done/floor-zero-series/SEASON.md` §7: a cold-open image,
+≤ 7 words of text and a ≤ 10-word premise line, then the recap at 1.8-4 s. The seconds below then shift by ~2 s.
 
 | # | Beat | Seconds | Line pattern |
 |---|---|---|---|
@@ -214,8 +217,9 @@ male voice and keep it for the whole series.
 
 ### 6.1 Retention and comment rules (apply to every episode)
 
-`videos-done/floor-zero-part-2/` is the worked example. Its `story.ts`, `Overlay.tsx` and `FloorZero2.tsx` implement
-each rule below and can be copied.
+`videos-done/floor-zero-part-2/` has the code for the HUD, the cold-open teaser, the COMMENT pill and the vote banner
+(`story.ts`, `Overlay.tsx`, `FloorZero2.tsx`). `videos-done/floor-zero-series/SEASON.md` is the worked season plan,
+audited for both virality and story logic.
 
 **Keep them watching.**
 1. **Cold open (first ~1 s):** flash forward to the episode's strongest image, glitched, with a sting and a white
@@ -224,18 +228,24 @@ each rule below and can be copied.
    branch.
 3. **Something changes every 2-3 s:** a cut, an insert, a new camera move or a highlighted caption word. A held
    shot must still creep (a slow push), never sit dead.
-4. **Plant, then pay off:** show the key prop early as an insert with the important part marked (Rule 2 circled in
-   red, `RULE2`), and land it later on a line that changes its meaning (`CARD9`).
-5. **The losing branch ends on a reveal, not just a death.** It must reframe the rules (Floor Zero: "the rules were
-   never there to protect you, they were there to keep you"). This is what people argue about in the comments.
-6. **A visible clock from the game reveal to the end:** a small countdown HUD in the top corner, ticking in real
-   seconds.
-7. **No dead air at the end:** the last line, then ~1.3 s. The last frame becomes the next part's recap frame.
+4. **Plant, then pay off, three times:** show the clue early and in passing, and pay it off later in a way that
+   changes its meaning. Floor Zero: the mirrored "UOY" badge in the steel (Part 3) and on CCTV (Part 4), a glimpse
+   (Part 5), then the finale's "it learned you backwards". Never mark a clue by hand in a way the story can't explain.
+5. **The losing branch escalates, but never answers the season's question.** Give each death one new sense of the
+   threat (its voice, a hand on your shoulder, its breath). Keep the reveals that matter in the canon branch, because
+   viewers learn that losing branches are dead ends.
+6. **Every rule is true; the argument is the wording.** Don't make the rules lies: then every vote becomes "break it"
+   and splits 80/20. Make the rules precise, and let viewers win by reading them (Floor Zero Part 1: zero lit up on the
+   panel before the doors opened).
+7. **A visible clock from the game reveal to the end:** a small countdown HUD below the top ~20 % of the frame. If
+   story time jumps, make it a rule the viewer sees (Floor Zero: "the dark eats time", so the HUD jumps after each
+   blackout).
+8. **No dead air at the end:** the last line, then ~1.3 s. The last frame becomes the next part's recap frame.
 
 **Get them commenting.**
 1. **Ask for the number, at the end only:** a "COMMENT 1 OR 2 ↓" pill under the pinned tags during the final
    question. It must not appear earlier, because it breaks the spell.
-2. **Leave one loophole per episode** that the episode doesn't answer (who circled Rule 2? what does "keep" mean?).
+2. **Leave one loophole per episode** that the episode doesn't answer ("NEVER LO…": look at it, or look away?).
 3. **Show the vote back:** the next part's recap can show Part N-1's real split from the comments (`VOTES`). It stays
    `null` until real numbers exist. Never invent them.
 4. **Canon goes to the branch that goes deeper**, not the majority, and the losing branch still gets its ending, so

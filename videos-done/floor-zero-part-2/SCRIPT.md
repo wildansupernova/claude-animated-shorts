@@ -1,5 +1,9 @@
 # Floor Zero, Part 2: script
 
+> **Superseded:** this script describes the rendered engagement cut (7572ef2). Part 2 is being re-cut per
+> `videos-done/floor-zero-series/SEASON.md` §9, the audited season bible. Its line 10 "rules were there to keep you"
+> idea is cut. Where the two disagree, the bible wins.
+
 Episode 2 of **Floor Zero** (Part 1: `videos-done/floor-zero-part-1/`). It follows the sequel beat sheet in
 `references/INTERACTIVE_SERIES_FORMULA.md`:
 1. vote recap;
@@ -13,9 +17,9 @@ Episode 2 of **Floor Zero** (Part 1: `videos-done/floor-zero-part-1/`). It follo
 - **Part 2 choice:** ① STAIRS (toward the footsteps) / ② ELEVATOR (with the one facing the wall, now a step closer).
 - **Season engine revealed:** every screen reads "Welcome to the Night Shift. 7 floors, 1 rule each. The only way up is
   down. Reach G before 06:00", with a countdown from 05:59.
-- **Series logic (decided):** the rules are a trap. The card is the building's bait: obeying it keeps you. Breaking
-  a rule is how you get deeper, and each new floor's rule is a test of whether you'll trust it.
-- **Planned Part 3:** Floor -1, a flooded parking garage: "Don't step in the water."
+- **Series logic (decided, see the season bible):** every rule is true and means exactly what it says. Viewers win by
+  reading the words (zero was on the panel).
+- **Part 3 onward:** `videos-done/floor-zero-series/SEASON.md`.
 
 ## Beat map
 | Sequel beat | Lines | Picture |
