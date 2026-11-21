@@ -1,4 +1,4 @@
-# Floor Zero, Season 1: series bible (v4.1)
+# Floor Zero, Season 1: series bible (v4.2)
 
 Six parts. Part 1 is posted and is fixed canon. Part 2 is rendered but not posted, so it can still change. Parts 3-6 are
 new. It follows `references/INTERACTIVE_SERIES_FORMULA.md` and the viral skills in §10. The audit log is in §12.
@@ -202,7 +202,7 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   2. Your phone, still showing "No Service", lights up: Home, "OK. See you soon ❤". It's a reply to "Leaving now" from
      your number. "You never sent that."
   3. "05:57. And your phone's light dies." (Real phones kill the flashlight at low battery; the phone stays at 1 %.)
-     In the dark, something takes your wrist.
+     In the dark, something takes your wrist. (It leaves no new mark: the wrist prints must stay the only two.)
   4. "When the light comes back, there are two of you. And both of you remember being you."
   - The shell game: in the **final** flicker, after the last swap, the lanyard of the figure that ends at ② spins and its
     badge reads "UOY" for 6-10 frames. That's the pause-to-find clue.
@@ -243,8 +243,10 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   2. The car passes G, and with a jolt, the lights go out.
   3. When they come back, in the corner, facing the wall: someone in a grey sweater, red lanyard, badge "UOY".
 - **Last line (word for word, Part 1's first line):** "Imagine you're the last one leaving the office."
-- **Pinned comment:** "Watch Part 1 again. The lights go out at 0:40. That's when it got in. Season 2: would you warn
-  them? ① YES / ② NO".
+- **Pinned comment:** "Watch Part 1 again. At 0:40 the lights go out. That's when it got in. At 1:20 it's standing
+  in the corner. Season 2: would you warn them? ① YES / ② NO".
+  - Both timestamps were checked on Part 1 stills: 0:40 is the jolt blackout (frames 1213-1230), and 1:20 (frame 2400)
+    is the first shot with the figure in the corner.
 
 ## 9. Part 2 edits (to the rendered cut, before posting)
 1. Revert line 10 to "This is the end." and remove the Rule 1 insert in shot 9.
@@ -311,6 +313,11 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   - The copy of you is your card with `scale.x = -1`.
 
 ## 12. Audit log
+**v4.1 → v4.2 (virality re-audit of v4: "SHIP after one blocking line").**
+- **The pinned comment now points to two real frames:** the 0:40 blackout, and 1:20, where the figure first stands in
+  the corner. Checked on Part 1 stills.
+- **Production note applied:** the -7 wrist touch leaves no new mark.
+
 **v4 → v4.1 (story re-audit, "REVISE, three small must-fixes"): all 3 applied.**
 1. **The finale had no cause:** the vote now decides which one you never look away from. The watched one can't move,
    so the unwatched one reaches the clock first (② loss) or you do (① win). The full card's Rule 2 lands right after
