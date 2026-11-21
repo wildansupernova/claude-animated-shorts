@@ -88,13 +88,14 @@ const Gold: React.FC<{ k: number }> = ({ k }) => useCanvas((g) => {
 }, [k]);
 
 /** the time clock, close: the LED time, a badge sliding into the slot, the clock takes it */
-const Slot: React.FC<{ k: number; time: string; front: boolean; took: boolean }> = ({ k, time, front, took }) => useCanvas((g) => {
+const Slot: React.FC<{ k: number; time: string; front: boolean; took: boolean; t: number }> = ({ k, time, front, took, t }) => useCanvas((g) => {
   g.fillStyle = "#1a0605"; g.fillRect(0, 0, W, H);
+  const z = 1 + 0.12 * t; g.translate(W / 2, 700); g.scale(z, z); g.translate(-W / 2, -700);
   const red = g.createRadialGradient(W / 2, 700, 100, W / 2, 700, 1000); red.addColorStop(0, "rgba(160,30,20,0.5)"); red.addColorStop(1, "rgba(0,0,0,0)"); g.fillStyle = red; g.fillRect(0, 0, W, H);
   g.fillStyle = "#2a2c30"; g.fillRect(90, 360, 900, 1000); g.strokeStyle = "#0d0e10"; g.lineWidth = 24; g.strokeRect(90, 360, 900, 1000);
   g.fillStyle = "#0a0b0c"; g.fillRect(150, 430, 780, 300);
   g.fillStyle = took ? "#ff6a4a" : "#ff3b2a"; g.font = `900 ${time.length > 5 ? 150 : 210}px Montserrat, sans-serif`; g.textAlign = "center"; g.textBaseline = "middle";
-  g.shadowColor = "rgba(255,60,30,0.8)"; g.shadowBlur = 30; g.fillText(time, W / 2, 585); g.shadowBlur = 0;
+  g.shadowColor = "rgba(255,60,30,0.8)"; g.shadowBlur = 30 + (took ? 0 : 18 * (0.5 + 0.5 * Math.sin(t * 40))); g.fillText(time, W / 2, 585); g.shadowBlur = 0;
   g.fillStyle = "#0d0e10"; g.fillRect(260, 860, 560, 56); // the slot
   g.fillStyle = took ? "#3cff7a" : "#3a0d0a"; g.beginPath(); g.arc(880, 888, 18, 0, 7); g.fill();
   g.fillStyle = "#6a655c"; g.font = "800 40px Montserrat, sans-serif"; g.fillText("INSERT BADGE", W / 2, 990);
@@ -108,7 +109,7 @@ const Slot: React.FC<{ k: number; time: string; front: boolean; took: boolean }>
   }
   g.fillStyle = "#f5c9a0"; g.beginPath(); g.roundRect(380, y + 420, 320, 300, 80); g.fill(); g.stroke(); // the hand
   g.restore();
-}, [k, time, front, took]);
+}, [k, time, front, took, t]);
 
 /** a phone: the thread with Home; one of you types "On my way." */
 const Phone6: React.FC<{ f: number; f0: number; mode: "it" | "you" }> = ({ f, f0, mode }) => useCanvas((g) => {
@@ -120,8 +121,8 @@ const Phone6: React.FC<{ f: number; f0: number; mode: "it" | "you" }> = ({ f, f0
   g.save(); g.beginPath(); g.roundRect(px, py, pw, ph, 70); g.clip();
   g.fillStyle = "#0c0d12"; g.fillRect(px, py, pw, ph);
   g.fillStyle = "#ffffff"; g.font = "800 30px Montserrat, sans-serif"; g.textBaseline = "middle"; g.textAlign = "left";
-  if (mode === "it") g.fillText("No Service", px + 50, py + 54);
-  else { for (let i = 0; i < 4; i++) { g.fillStyle = i === 0 ? "#ffffff" : "rgba(255,255,255,0.25)"; g.fillRect(px + 50 + i * 16, py + 66 - (i + 1) * 8, 10, (i + 1) * 8); } }
+  // at G both phones have one bar again
+  for (let i = 0; i < 4; i++) { g.fillStyle = i === 0 ? "#ffffff" : "rgba(255,255,255,0.25)"; g.fillRect(px + 50 + i * 16, py + 66 - (i + 1) * 8, 10, (i + 1) * 8); }
   g.textAlign = "right"; g.fillStyle = "#ff4a3a"; g.fillText("1%", px + pw - 50, py + 54);
   g.fillStyle = "#1b1d24"; g.fillRect(px, py + 90, pw, 120);
   g.fillStyle = "#ffffff"; g.textAlign = "center"; g.font = "900 40px Montserrat, sans-serif"; g.fillText("Home", W / 2, py + 150);
@@ -177,7 +178,7 @@ const Tag: React.FC<{ text: string }> = ({ text }) => (
 );
 const WaterFace: React.FC<{ k: number }> = ({ k }) => useCanvas((g) => {
   g.fillStyle = "#06191c"; g.fillRect(0, 0, W, H);
-  const b = bodyCanvas(YOU_O, { mode: "stand", expr: "smile", headTilt: -6, blink: 0, seed: 3 }, false, 2600);
+  const b = bodyCanvas(YOU_O, { mode: "stand", expr: "smile", headTilt: -6, blink: 0, seed: 3 }, true, 2600); // a reflection: mirrored
   g.globalAlpha = 0.75; g.drawImage(b, W / 2 - 780, 340, 1560, 2600); g.globalAlpha = 1;
   g.globalCompositeOperation = "source-atop"; g.fillStyle = "rgba(8,48,58,0.45)"; g.fillRect(0, 0, W, H); g.globalCompositeOperation = "source-over";
   for (let i = 0; i < 3; i++) { const r = 200 + 500 * ((k + i / 3) % 1); g.strokeStyle = `rgba(200,235,240,${(0.25 * (1 - ((k + i / 3) % 1))).toFixed(3)})`; g.lineWidth = 8; g.beginPath(); g.ellipse(W / 2, 800, r, r * 0.8, 0, 0, 7); g.stroke(); }
@@ -229,8 +230,8 @@ export const Overlay: React.FC = () => {
   if (f < TEASER) els.push(<Gold key="goldT" k={0.15 + 0.5 * (f / TEASER)} />);
   if (inR(GOLD_A)) els.push(<Gold key="goldA" k={u(GOLD_A)} />);
   if (inR(GOLD_B)) els.push(<Gold key="goldB" k={u(GOLD_B)} />);
-  if (inR(SLOT_A)) els.push(<Slot key="slotA" k={clamp01((g - cue(3, "swipes") + 4) / 14)} time="05:59" front={false} took={g >= cue(3, "takes")} />);
-  if (inR(SLOT_B)) els.push(<Slot key="slotB" k={clamp01((g - cue(17, "swipe") + 4) / 14)} time="05:59:59" front={true} took={g >= cue(17, "badge") + 6} />);
+  if (inR(SLOT_A)) els.push(<Slot key="slotA" k={clamp01((g - cue(3, "swipes") + 4) / 14)} time="05:59" front={false} took={g >= cue(3, "takes")} t={u(SLOT_A)} />);
+  if (inR(SLOT_B)) els.push(<Slot key="slotB" k={clamp01((g - cue(17, "swipe") + 4) / 14)} time="05:59:59" front={true} took={g >= cue(17, "badge") + 6} t={u(SLOT_B)} />);
   if (inR(PHONE_A)) els.push(<Phone6 key="phA" f={g} f0={PHONE_A[0]} mode="it" />);
   if (inR(PHONE_B)) els.push(<Phone6 key="phB" f={g} f0={PHONE_B[0]} mode="you" />);
   if (inR(HAIR_FLASH)) els.push(<HairFlash key="hair" a={Math.min(1, (g - HAIR_FLASH[0]) / 2, (HAIR_FLASH[1] - g) / 2)} />);

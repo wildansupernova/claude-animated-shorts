@@ -145,7 +145,10 @@ const PH_O: Outfit[] = [
   { jacket: "#7b3b3f", pants: "#2e2628", boots: "#1b1c20", skin: "#eccdb0", hat: "hair", hair: "#3a2a22", buttons: "none" },
 ];
 const HALE_O: Outfit = { jacket: "#727986", pants: "#3a3d45", boots: "#141518", skin: "#d9d2ca", hat: "hair", hair: "#121216", buttons: "none", build: "tall", collar: "#ece9e2" };
-const NAMES = ["R. OKAFOR", "M. LINDQVIST", "J. PRAKASH", "S. MORENO", "T. NAKAMURA", "E. WALSH", "A. HADDAD", "L. CHEN", "K. MBEKI", "P. ROSSI", "N. IVANOVA", "C. DUBOIS", "B. SANTOS", "F. AHMED", "G. KOWALSKI", "H. TAN"];
+const NAMES = ["R. OKAFOR", "M. LINDQVIST", "J. PRAKASH", "S. MORENO", "T. NAKAMURA", "E. WALSH", "A. HADDAD", "L. CHEN", "K. MBEKI", "P. ROSSI",
+  "N. IVANOVA", "C. DUBOIS", "B. SANTOS", "F. AHMED", "G. KOWALSKI", "H. TAN", "D. OKONJO", "I. BERG", "V. MARCHETTI", "Y. SATO", "O. NOWAK", "Z. KHAN",
+  "W. HUGHES", "Q. LIANG", "U. FISCHER", "X. ROMERO", "A. LEVI", "B. ODUYA", "C. PARK", "D. SILVA", "E. KARLSSON", "F. MENDES", "G. ADEYEMI", "H. JANSEN",
+  "I. RAHMAN", "J. COSTA", "K. VOGEL", "L. OYELARAN", "M. FERREIRA", "N. HOLM", "O. DIALLO", "P. NGUYEN", "R. BIANCHI", "S. EKSTROM", "T. MWANGI"];
 /** Fridays back from 21 NOV: k = 0 is 21 NOV, 1 is 14 NOV, ... */
 const friday = (k: number) => {
   const d = new Date(Date.UTC(2025, 10, 21 - 7 * k));
@@ -176,7 +179,7 @@ const PhotoWall: React.FC<{ k: number; plate: number }> = ({ k, plate }) => useC
     // the brass plate
     g.fillStyle = "#3a2c1c"; g.fillRect(x + 10, y + FH + 22, FW - 20, 44);
     g.fillStyle = "#f2e6cc"; g.font = "800 21px Montserrat, sans-serif"; g.textAlign = "center"; g.textBaseline = "middle";
-    const nm = i === empty ? "YOU" : i === empty - 1 ? "D. HALE" : NAMES[(i * 5) % NAMES.length];
+    const nm = i === empty ? "YOU" : i === empty - 1 ? "D. HALE" : NAMES[(i * 7) % NAMES.length];
     g.fillText(`${nm} · ${friday(wk)}`, x + FW / 2, y + FH + 45, FW - 28);
   }
   g.setTransform(1, 0, 0, 1, 0, 0); SEPIA(g);

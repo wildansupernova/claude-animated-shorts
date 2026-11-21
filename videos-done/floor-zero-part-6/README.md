@@ -72,3 +72,14 @@ Episode 6 of **Floor Zero** (Parts 1-5: `videos-done/floor-zero-part-1/` to `flo
 - **Caption:** `Floor Zero Part 6 (finale) #series #story #decide #horror`
 - **Pinned comment:** "Watch Part 1 again. At 0:40 the lights go out. That's when it got in. At 1:20 it's standing in
   the corner. Season 2: would you warn them? ① YES / ② NO"
+
+## Render record
+- **First render** (Mac, `178e2d5`): 83 s for 3056 frames, 101.87 s; −14.1 LUFS, LRA 1.8. QA passed: every 2D insert
+  drew, and the HUD matched the clock (00:00:01 against 05:59:59). Three notes:
+  1. The water flashback wasn't mirrored.
+  2. The copy's phone at G showed "No Service" while yours shows one bar.
+  3. The 05:59:59 slot held still for 2.3 s.
+- **Fix pass:**
+  - The water flashback is mirrored (its badge reads UOY, like the steel one).
+  - Both phones at G show one bar.
+  - The slot inserts push in slowly, and the LED glow pulses until the clock takes the badge.

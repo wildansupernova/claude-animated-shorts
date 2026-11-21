@@ -99,3 +99,7 @@ Episode 5 of **Floor Zero** (Parts 1-4: `videos-done/floor-zero-part-1/` to `flo
   - The photo wall opens wide on all five columns, so the dates read on week by week, then pushes in.
   - Note 3 is left as is: the prints are lit by the red lamp like everything else, and their position carries the
     clue.
+- **Second fix pass:**
+  - The photo wall has 45 different names (no one repeats on the wide shot).
+  - The re-render from `178e2d5` passed QA: 88 s; −14.1 LUFS; both elevator displays at −7 read "−7"; five columns of
+    consecutive dates at 1160.
