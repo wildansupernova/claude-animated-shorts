@@ -1,0 +1,47 @@
+# Sound cues: Floor Zero, Part 2 (91.133 s, 4374400 samples @ 48000 Hz)
+mix integrated -14.27 LUFS, true peak -1.05 dBTP; stems integrated: voice -17.0, music -26.5, sfx -23.6 LUFS
+
+-   0.000 s (f   0)  floor zero room tone
+-   0.000 s (f   0)  fluorescent hum
+-   0.000 s (f   0)  music: the choice's heartbeat + drone carry over
+-   0.100 s (f   3)  doors groan (recap)
+-   4.100 s (f 123)  car light hum (louder)
+-   4.100 s (f 123)  doors shut on you two
+-   9.300 s (f 279)  panel powers down
+-  13.633 s (f 409)  the figure breathes
+-  16.033 s (f 481)  sub under the figure's voice
+-  17.600 s (f 528)  sub under the figure's voice
+-  20.933 s (f 628)  LIGHTS OUT: clunk, then nothing
+-  23.267 s (f 698)  flicker crackle
+-  23.267 s (f 698)  lights back on
+-  24.769 s (f 743)  music: string-cluster stinger (it's you)
+-  25.519 s (f 766)  you're the one facing the wall: dong
+-  28.333 s (f 850)  display goes dark
+-  29.600 s (f 888)  VHS rewind
+-  31.680 s (f 950)  tape stop
+-  31.750 s (f 952)  play
+-  31.900 s (f 957)  footsteps out
+-  33.167 s (f 995)  doors close behind you
+-  35.367 s (f1061)  cable snaps
+-  35.367 s (f1061)  the car falls
+-  35.467 s (f1064)  brakes screech
+-  39.333 s (f1180)  CRASH far below
+-  39.383 s (f1182)  lights shake
+-  41.900 s (f1257)  you let out a breath
+-  45.933 s (f1378)  EVERY COMPUTER TURNS ON: fans
+-  45.933 s (f1378)  music: floor-zero cluster under the reveal, motif on 'Welcome'
+-  45.971 s (f1379)  startup chimes
+-  50.033 s (f1501)  message line 1
+-  52.000 s (f1560)  message line 2
+-  54.667 s (f1640)  message line 3
+-  56.633 s (f1699)  countdown ticks
+-  56.633 s (f1699)  message line 4
+-  62.633 s (f1879)  the elevator is back: ding
+-  65.733 s (f1972)  doors open
+-  66.933 s (f2008)  the figure breathes
+-  71.749 s (f2152)  one step closer: sub
+-  75.133 s (f2254)  music: heartbeat for the choice
+-  75.367 s (f2261)  stairwell door creaks
+-  77.800 s (f2334)  footsteps coming up
+-  81.133 s (f2434)  tag 1 pops
+-  81.300 s (f2439)  tag 2 pops
