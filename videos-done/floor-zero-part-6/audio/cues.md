@@ -1,0 +1,61 @@
+# Sound cues: Floor Zero, Part 6 (101.867 s, 4889600 samples @ 48000 Hz)
+mix integrated -14.00 LUFS, true peak -1.34 dBTP; stems integrated: voice -17.0, music -26.5, sfx -23.7 LUFS
+
+-   0.000 s (f   0)  -7: low red hum
+-   0.000 s (f   0)  -7: the time clock ticks
+-   0.000 s (f   0)  music: a warm major chord (morning) for the cold open
+-   0.000 s (f   0)  teaser: morning
+-   0.040 s (f   1)  teaser: soft sub
+-   0.200 s (f   6)  teaser: footsteps on the lobby floor
+-   0.416 s (f  12)  -7: the kept ones breathe
+-   2.200 s (f  66)  teaser: the glass door
+-   8.133 s (f 244)  nobody watching two: it's gone (a faint shift)
+-  11.296 s (f 339)  a badge into the slot
+-  12.771 s (f 383)  CHUNK: the clock takes it
+-  13.900 s (f 417)  G: morning air, birds outside
+-  13.900 s (f 417)  music: morning, for it
+-  14.500 s (f 435)  it walks out through the glass
+-  16.367 s (f 491)  it types: On my way.
+-  17.367 s (f 521)  sent
+-  20.533 s (f 616)  you turn to the wall
+-  23.633 s (f 709)  the blue drains out of you: a sinking tone
+-  24.752 s (f 743)  'watching yourself'
+-  28.467 s (f 854)  VHS rewind
+-  30.480 s (f 914)  tape stop
+-  30.550 s (f 916)  play
+-  35.454 s (f1064)  its badge: UOY
+-  37.100 s (f1113)  flash: your hair beside its hair
+-  40.033 s (f1201)  flashback: the steel
+-  40.933 s (f1228)  flashback: the water
+-  41.500 s (f1245)  flashback: the screens
+-  42.633 s (f1279)  it smiles your smile
+-  46.167 s (f1385)  music: a heartbeat up to 06:00
+-  48.267 s (f1448)  you back up, slowly
+-  52.498 s (f1575)  your badge into the slot
+-  53.135 s (f1594)  CHUNK
+-  53.285 s (f1599)  the clock accepts it (a green beep)
+-  54.084 s (f1623)  06:00: hit
+-  54.514 s (f1635)  all the kept ones exhale
+-  56.067 s (f1682)  it turns to the wall
+-  58.100 s (f1743)  it goes grey: a sinking tone
+-  63.600 s (f1908)  paper: the card
+-  68.283 s (f2048)  Rule three: low hit
+-  72.067 s (f2162)  G: morning (you)
+-  72.067 s (f2162)  music: morning, for you
+-  72.467 s (f2174)  you walk out through the glass
+-  73.550 s (f2206)  one bar: a message from home
+-  74.833 s (f2245)  you type: On my way.
+-  75.833 s (f2275)  sent
+-  78.100 s (f2343)  epilogue: the office at night
+-  78.467 s (f2354)  the last one leaving: footsteps
+-  85.033 s (f2551)  the rows die, one at a time
+-  86.767 s (f2603)  the car going down
+-  88.467 s (f2654)  the display passes G
+-  89.033 s (f2671)  0
+-  90.133 s (f2704)  THE JOLT
+-  91.450 s (f2744)  the lights go out
+-  93.033 s (f2791)  the lights come back
+-  93.833 s (f2815)  someone in the corner, breathing
+-  96.000 s (f2880)  the steel: its badge reads YOU
+-  98.433 s (f2953)  FLOOR ZERO: last sub
+-  98.433 s (f2953)  music: the motif, one last time, under the title
