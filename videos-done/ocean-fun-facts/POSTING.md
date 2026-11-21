@@ -48,5 +48,7 @@ Voice: Kokoro TTS `am_puck` (AI voice; disclose as AI-generated where the platfo
 - **Sources:** Matsumoto, Piraino & Miglietta 2019 (G3); Piraino et al. 1996 (Biological Bulletin); Kubota 2011 (Biogeography 13); Miglietta & Lessios 2009 (Biological Invasions); Pascual-Torner et al. 2022 (PNAS); AMNH.
 - **Queued on Buffer (2026-11-18, addToQueue):** TikTok post `6afdc5660a7aa6dca2c7d63e` for Thu 19 Nov 2026 22:35 WIB; YouTube post
   `6afdc5770a7aa6dca2c7e197` for Sat 21 Nov 2026 09:06 WIB. Cover frame 29.0 s (RESET). AI-generated label on. Media:
-  Tigris `wildan-video/immortal-jellyfish/jelly_final.mp4` (v2 share encode); delete it once both posts are sent.
+  Tigris `wildan-video/immortal-jellyfish/jelly_final.mp4` (v2 share encode); deleted 2026-11-21 after both posts were sent.
+- **Published:** TikTok https://tiktok.com/@ohmygoshfunfact/video/7709906700400069906 (19 Nov 2026 22:37 WIB); YouTube
+  https://www.youtube.com/shorts/Sx1lWxSSgIA (21 Nov 2026 09:06 WIB).
 
