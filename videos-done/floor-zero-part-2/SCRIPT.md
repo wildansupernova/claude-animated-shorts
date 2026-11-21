@@ -15,12 +15,12 @@ superseded.
 |---|---|---|---|
 | Cold open | P | 0-1.8 s | Frame 1: the car doors slide open on it, one step past its own dusty footprints. Glitch, sting, white flash. |
 | Recap | 0 | 1.8-3.5 s | Part 1's last frame: the half-open doors, both tags. The real split is a silent banner, only with real numbers. |
-| ② STAY IN (loses; new sense: its voice) | 1-10 | 4-31 s | The doors shut; the panel dies; it speaks without turning; blackout; you're facing the wall |
-| Rewind | 11 | 31-33 s | VHS rewind through the branch |
-| ① STEP OUT | 12-15 | 33-46 s | 1 s panel insert ("0" lit) as you step out; the car falls; crash; relief |
-| Game reveal | 16-21 | 46-63 s | Every monitor wakes: the message; HUD starts |
-| Escalation | 22-27 | 63-82 s | The ding; it's back, one step past its footprints; the stairwell creaks open; footsteps |
-| Choice + question | 28-31 | 82-95 s | Tags ① STAIRS / ② ELEVATOR; the COMMENT pill only on line 31 |
+| ② STAY IN (loses; new sense: its voice) | 1-9 | 3.5-29 s | The doors shut; the panel dies; it speaks without turning; blackout; you're facing the wall |
+| Rewind | 10 | 29-31 s | VHS rewind through the branch |
+| ① STEP OUT | 11-14 | 31-44 s | 1 s panel insert ("0" lit) as you step out; the car falls; crash; relief |
+| Game reveal | 15-20 | 44-61 s | Every monitor wakes: the message; HUD starts |
+| Escalation | 21-26 | 61-80 s | The ding; it's back, one step past its footprints; the stairwell creaks open; footsteps |
+| Choice + question | 27-30 | 80-93 s | Tags ① STAIRS / ② ELEVATOR; the COMMENT pill only on line 30 |
 
 ## Voice-over
 | # | Who | Line | Gap after (s) | Picture |

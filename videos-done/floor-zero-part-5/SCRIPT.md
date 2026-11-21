@@ -28,13 +28,13 @@ Episode 5 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 | Beat | Lines | Time (approx.) | Picture |
 |---|---|---|---|
 | Cold open | P | 0-1.8 s | -7: red dark, the punch clock at 05:57, two of you side by side, lanyards turned. Text: **05:57. THERE ARE TWO OF YOU.** |
-| Recap | 0 | 1.8-4 s | Part 4's last frame: the screens, both tags |
-| ① TURN AROUND (loses; new sense: its breath) | 1-6 | 4-22 s | Nothing behind you; it's still on the screens; turn again; breath on your neck; the monitors die |
-| Rewind | 7 | 22-24 s | VHS rewind |
-| ② KEEP WALKING | 8-12 | 24-40 s | You walk the rows watching the screens; it stays exactly one step behind; the screens die; HUD jumps; the stairwell |
-| -5 photo wall | 13-14 | 40-50 s | Sepia; hundreds of photos of people facing a wall; the empty frame "YOU · 21 NOV" |
-| -7 | 15-24 | 50-86 s | The clock and the rule; the message; 05:57, the light dies, something takes your wrist; two of you; the shell game |
-| Choice + question | 25-28 | 86-98 s | Tags ① and ② on the two of you; hold; COMMENT pill on line 28 |
+| Recap | 0 | 1.8-3.5 s | Part 4's last frame: the screens, both tags |
+| ① TURN AROUND (loses; new sense: its breath) | 1-5 | 3.5-18 s | Nothing behind you; it's still on the screens; turn again; breath on your neck; the monitors die |
+| Rewind | 6 | 18-20 s | VHS rewind |
+| ② KEEP WALKING | 7-11 | 20-36 s | You walk the rows watching the screens; it stays exactly one step behind; the screens die; HUD jumps; the stairwell |
+| -5 photo wall | 12-13 | 36-46 s | Sepia; hundreds of photos of people facing a wall; the empty frame "YOU · 21 NOV" |
+| -7 | 14-23 | 46-80 s | The clock and the rule; the message; 05:57, the light dies, something takes your wrist; two of you; the shell game |
+| Choice + question | 24-27 | 80-90 s | Tags ① and ② on the two of you; hold; COMMENT pill on line 27 |
 
 ## Voice-over
 | # | Line | Gap after (s) | Picture |
@@ -50,7 +50,7 @@ Episode 5 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 | 7 | If you kept walking, you watch it on the screens. Row by row. | 0.4 | Badge ② KEEP WALKING; you walk; every screen you pass shows it one step behind |
 | 8 | One step behind you. Always exactly one step. | 0.5 | Close on a screen: its feet don't move between your steps (the picture settles Rule 2) |
 | opt | *(only if real comments said it)* Some of you said: watch the screens. | 0.4 | - |
-| 9 | Then the screens start to die. One by one. | 0.3 | Screens go to static ahead of you; HUD jumps to 00:03:30 |
+| 9 | Then the screens start to die. One by one. | 0.3 | Screens go to static ahead of you; one dies to black and for 0.5 s shows your reflection in it; HUD jumps to 00:03:30 |
 | 10 | And you run. | 0.3 | You sprint for the stairwell |
 | 11 | Down the stairs, as fast as you can. | 0.4 | Red stairwell; landing numbers -4, -5 blur past (no signs read) |
 | 12 | Minus five. The door is open. | 0.3 | Sepia; push through the doorway |
@@ -60,7 +60,7 @@ Episode 5 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 | 16 | Then your phone lights up. No service. But a message gets through. | 0.3 | Phone: "No Service" still showing |
 | 17 | From home. OK. See you soon. | 0.4 | The bubble: "OK. See you soon ❤" |
 | 18 | It's a reply. To a message from your number. Leaving now. | 0.4 | Above it, a sent bubble: "Leaving now", 05:41 |
-| 19 | You never sent that. | 0.6 | Your face in the phone light |
+| 19 | You never sent that. | 0.6 | Front shot: your face in the phone light, the phone in your RIGHT hand, the grey print on that wrist in frame |
 | 20 | Five fifty-seven. And your phone's light dies. | 0.4 | The clock face 05:57; black |
 | 21 | In the dark, something takes your wrist. | 0.6 | Black; a soft grip sound |
 | 22 | When the light comes back, there are two of you. | 0.5 | Emergency light stutters on: two of you side by side, both looking at camera |

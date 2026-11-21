@@ -22,13 +22,13 @@ Episode 4 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 ## Beat map
 | Beat | Lines | Time (approx.) | Picture |
 |---|---|---|---|
-| Cold open | P | 0-1.8 s | -3: a wall of monitors, every one showing you from behind and it right behind you. Text: **IT'S RIGHT BEHIND YOU.** |
-| Recap | 0 | 1.8-4 s | Part 3's last frame: the flooded office, both tags |
-| ① WADE (loses; new sense: it's in the water) | 1-6 | 4-21 s | First step; warm water; the reflection doesn't step; it looks up; it pulls |
-| Rewind | 7 | 21-23 s | VHS rewind |
-| ② CLIMB | 8-17 | 23-50 s | Desk to desk; the badge falls; "step, not reach"; the reflection grabs your wrist; the print; the last row dies; HUD jumps |
-| Stairs + floor -3 | 18-26 | 50-79 s | The "-2" sign flashes; -3; CCTV of you from behind; the rule; it's behind you, facing you, in a blue sweater |
-| Choice + question | 27-30 | 79-95 s | Tags ① TURN AROUND (on you) / ② KEEP WALKING (on the far door); COMMENT pill on line 30 |
+| Cold open | P | 0-1.8 s | -3: a wall of monitors, every one showing you, and it right behind you. Text: **IT'S RIGHT BEHIND YOU.** |
+| Recap | 0 | 1.8-3.5 s | Part 3's last frame: the flooded office, both tags |
+| ① WADE (loses; new sense: it's in the water) | 1-5 | 3.5-17 s | First step; warm water; the reflection doesn't step; it looks up; it pulls |
+| Rewind | 6 | 17-19 s | VHS rewind |
+| ② CLIMB | 7-15 | 19-44 s | Desk to desk; the badge falls; "step, not reach"; the reflection grabs your wrist; the print; the last row dies; HUD jumps |
+| Stairs + floor -3 | 16-24 | 44-73 s | The "-2" sign flashes; -3; CCTV of you from a high front corner; the rule; it's behind you, facing you, in a blue sweater |
+| Choice + question | 25-28 | 73-88 s | Tags ① TURN AROUND (on you) / ② KEEP WALKING (on the far door); COMMENT pill on line 28 |
 
 ## Voice-over
 | # | Line | Gap after (s) | Picture |
@@ -53,11 +53,11 @@ Episode 4 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 | 16 | Minus two is bricked up. You keep going down. | 0.3 | Unnarrated 1 s: the -2 landing sign "IF YOU HEAR TYPING, DON'T STOP WALKING", over bricks |
 | 17 | Minus three. Your office again. | 0.3 | Phosphor green wide |
 | 18 | Every monitor is on. And every one shows the same thing. | 0.4 | Push across rows of screens |
-| 19 | A security camera. Pointed at you. From behind. | 0.4 | Insert: one screen, a live CCTV view of you |
+| 19 | A security camera. Pointed right at you. | 0.4 | Insert: one screen, a live CCTV view of you from a high corner in front of you |
 | 20 | Live. | 0.5 | You lift a hand; every screen lifts a hand |
 | 21 | A sign on the wall says: minus three. Never turn around. | 0.4 | Insert: the sign |
 | 22 | Then, on every screen, it's standing right behind you. | 0.4 | Hard cut: all screens show it one step behind you |
-| 23 | Not facing the wall anymore. Facing you. | 0.5 | Push in on one screen; its face is a dark smudge in the CCTV grain. Unnarrated: its badge reads **UOY**, and its hair strand runs the wrong way. |
+| 23 | Not facing the wall anymore. Facing you. | 0.5 | On the screens it stands one step behind you, just off your left shoulder, so its chest shows past you. Push in on one screen: its badge reads **UOY**, its hair strand runs the wrong way (unnarrated); its face stays a dark smudge in the grain. |
 | 24 | And it's wearing a blue sweater. Like yours. | 0.5 | Its sweater; yours |
 | 25 | You have two choices. | 0.3 | Tags appear |
 | 26 | Turn around, and face it. Even though the rule says never. | 0.4 | Tag ① TURN AROUND on you |
@@ -73,8 +73,12 @@ Episode 4 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 - **Signs:**
   - "-2. IF YOU HEAR TYPING, DON'T STOP WALKING." (1 s, unnarrated)
   - "-3. NEVER TURN AROUND."
-- **CCTV:** a render-to-texture feed from a ceiling camera behind you, not mirrored, with a timestamp burn-in and grain.
-  Its face is never readable: grain plus shadow.
+- **CCTV:** a ceiling camera in a high corner in front of you, not mirrored, with a timestamp burn-in and grain. Its
+  face is never readable: grain plus shadow.
+  - Build it as a pre-rendered clip: the CCTV camera, cards turned to face it, grain, and the figure only in this pass
+    (it is never in the room when you look). Map it onto the monitors as a video texture.
+  - Don't add a second live camera: the cards are yaw-only billboards facing the main camera, so a second camera would
+    see them edge-on.
 - **The figure's stage:** blue sweater, red lanyard, ears, your height. It faces you, seen only on the screens.
 
 ## Post

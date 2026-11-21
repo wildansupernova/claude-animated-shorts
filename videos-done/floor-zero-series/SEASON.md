@@ -131,7 +131,7 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
 - **Comment fuel:** "NEVER LO…": look at it, or look away?
 
 ### Part 3: "Don't Step in the Water" (0 → -1)
-- **Frame 1:** your reflection in black water looks up at you, while you're looking down at your feet.
+- **Frame 1:** you look down, scared; your reflection in the black water looks back up at you, smiling.
   - Text: "YOUR REFLECTION ISN'T COPYING YOU."
   - Line: "Floor minus one is flooded. Don't step in it."
 - **Recap:** stairs or elevator, plus the real split.
@@ -158,7 +158,7 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
 - **Last line:** "So, do you wade through it, or climb across the desks?"
 
 ### Part 4: "Never Turn Around" (-1 → -3)
-- **Frame 1:** a wall of monitors showing you from behind, and it right behind you.
+- **Frame 1:** a wall of monitors showing you (the CCTV is in a high corner in front of you), and it right behind you.
   - Text: "IT'S RIGHT BEHIND YOU."
   - Line: "The rule on this floor: never turn around."
 - **Recap:** wade or climb, plus the split.
@@ -172,10 +172,10 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   - The last row of lights dies as you reach the stairwell, and the HUD jumps to 03:12.
 - **Stairs:** the unnarrated "-2" sign for 1 s.
 - **Floor -3:**
-  - Phosphor green. Every monitor shows live CCTV: you, from behind, in this room, right now.
+  - Phosphor green. Every monitor shows live CCTV from a high corner in front of you: you, in this room, right now.
   - "-3. NEVER TURN AROUND."
-  - On screen it stands one step behind you, facing you, in a blue sweater. Its badge reads "UOY" and its hair strand
-    runs the wrong way, visible to pausers.
+  - On screen it stands one step behind you, just off your left shoulder, facing you, in a blue sweater. Its badge
+    reads "UOY" and its hair strand runs the wrong way, visible to pausers.
 - **Choice:**
   - ① TURN AROUND;
   - ② KEEP WALKING (with it at your back).
@@ -228,7 +228,7 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   watched (Rule 2), so whoever is watched can't reach the clock first.
 - **② RIGHT (loses):**
   1. "If you picked two, you kept your eyes on one. Nobody was watching two." It moves, and swipes its badge at 05:59.
-  2. G, morning. Its phone: "See you soon ❤".
+  2. G, morning. It types a message home: "On my way." (The same words you type in the win.)
   3. At -7, one turns to the wall, and the blue drains out. "You were one. You spent the last minute watching
      yourself." "This is the end."
 - **"Let's rewind."**
@@ -239,12 +239,14 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
      you backwards."
   3. Without blinking, you back up to the clock and swipe at 05:59:59. At 06:00 it turns to the wall and goes grey.
   4. G, gold morning, one bar. Home: "Where are you??" You type: "On my way."
-- **Final turn:** above the clock, the full card (§2.7). Rule 2 is finally readable, "NEVER LOOK AWAY FROM THEM",
-  right after the viewer has watched it save you. Then Rule 3: "THE NIGHT SHIFT ALWAYS KEEPS ONE."
+- **Final turn:** at -7, right after it goes grey, the unscratched card above the clock (§2.7; the car's card stays
+  scratched). Rule 2 is finally readable, "NEVER LOOK AWAY FROM THEM", right after the viewer has watched it save you.
+  Then Rule 3: "THE NIGHT SHIFT ALWAYS KEEPS ONE." Then G.
 - **Epilogue:**
   1. Next Friday, 23:59. Someone else is the last one leaving. Behind them, the lights switch off, one row at a time.
   2. The car passes G, and with a jolt, the lights go out.
-  3. When they come back, in the corner, facing the wall: someone in a grey sweater, red lanyard, badge "UOY".
+  3. When they come back, in the corner, facing the wall: someone in a grey sweater, red lanyard, the grey print on its
+     left wrist. In the steel, its reflected badge reads "YOU".
 - **Last line (word for word, Part 1's first line):** "Imagine you're the last one leaving the office."
 - **Pinned comment:** "Watch Part 1 again. At 0:40 the lights go out. That's when it got in. At 1:20 it's standing
   in the corner. Season 2: would you warn them? ① YES / ② NO".
@@ -313,9 +315,20 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   - Render the water (-1) and CCTV (-3) floors on the Mac GPU; they roughly double the passes.
   - The -1 reflection must misbehave (an extra person; not copying your step), so render a separate mirrored scene to a
     texture rather than a physical reflector. Test the ink/outline pass on it early.
-  - The copy of you is your card with `scale.x = -1`.
+  - The copy of you is your card with `scale.x = -1` (`Place`'s `mirror` flag on ②'s front card).
+  - CCTV (Part 4): a pre-rendered clip from the CCTV camera (cards turned to face it, grain, the figure only in this
+    pass), mapped onto the monitors as a video texture. The cards are yaw-only billboards, so no second live camera.
+  - Steel reflections (Part 3 "UOY", the epilogue "YOU"): flat 2D inserts, not mirror passes.
+  - Drained grey: a per-card desaturation uniform in `cardshade.ts`.
+  - Render Parts 3-5 before Part 6, whose flashbacks reuse them.
 
 ## 12. Audit log
+**Scripts v1 → v2:** both script audits are applied.
+- Virality: short recaps; a silent vote banner; tighter openings.
+- Story: the CCTV camera moves in front; the reflection flashback becomes a dead monitor; the full card moves to -7;
+  the epilogue badge is seen in the steel; the cold-open reflection smiles; the copy types "On my way"; a front shot
+  shows the wrist print.
+
 **Final, v4.2: both auditors say SHIP.**
 - "Viral topic search strategy" (hooks, retention, comments): SHIP, no blockers. It called "You spent the last minute
   watching yourself" the season's most shareable line.

@@ -23,18 +23,18 @@ Episode 3 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 ## Beat map
 | Beat | Lines | Time (approx.) | Picture |
 |---|---|---|---|
-| Cold open | P | 0-1.8 s | -1: your reflection in the black water looks UP at you while you look down. Text: **YOUR REFLECTION ISN'T COPYING YOU.** |
-| Recap | 0 | 1.8-4 s | Part 2's last frame: you between the stairwell and the car, both tags |
-| ① STAIRS (loses; new sense: touch) | 1-8 | 4-24 s | Red stairwell; the footsteps stop below; empty landing; a hand on your shoulder |
-| Rewind | 9 | 24-26 s | VHS rewind |
-| ② ELEVATOR | 10-19 | 26-55 s | Inside with it; 3 flickers, a step closer each time; HUD jumps; the steel shows "UOY"; your height, ears, lanyard; the doors open on -1 |
-| Floor -1 | 20-27 | 55-79 s | Flooded office; the sign; the far stairwell; the rows of lights die toward you |
-| Choice + question | 28-31 | 79-95 s | Tags ① WADE (on the water) / ② CLIMB (on the desks); COMMENT pill on line 31 |
+| Cold open | P | 0-1.8 s | -1: you look down, scared; in the black water your reflection looks back up at you, **smiling**. Text: **YOUR REFLECTION ISN'T COPYING YOU.** |
+| Recap | 0 | 1.8-3.5 s | Part 2's last frame: you between the stairwell and the car, both tags |
+| ① STAIRS (loses; new sense: touch) | 1-7 | 3.5-20 s | Red stairwell; the footsteps stop below; empty landing; a hand on your shoulder |
+| Rewind | 8 | 20-22 s | VHS rewind |
+| ② ELEVATOR | 9-18 | 22-51 s | Inside with it; 3 flickers, a step closer each time; HUD jumps; the steel shows "UOY"; your height, ears, lanyard; the doors open on -1 |
+| Floor -1 | 19-26 | 51-75 s | Flooded office; the sign; the far stairwell; the rows of lights die toward you |
+| Choice + question | 27-30 | 75-90 s | Tags ① WADE (on the water) / ② CLIMB (on the desks); COMMENT pill on line 30 |
 
 ## Voice-over
 | # | Line | Gap after (s) | Picture |
 |---|---|---|---|
-| P | Floor minus one is flooded. Don't step in it. | 0.3 | Cold open as above. HUD "FLOOR -1". |
+| P | Floor minus one is flooded. Don't step in it. | 0.3 | Cold open as above (your scared face; the reflection smiling). HUD "FLOOR -1". |
 | 0 | So, stairs, or elevator? | 0.5 | Part 2's last frame; recap tags; HUD "FLOOR 0 · 05:59 TO 06:00" |
 | 1 | If you took the stairs, the footsteps keep coming up. | 0.3 | Badge ① STAIRS; the fire door closes; red stairwell, high angle down |
 | 2 | Then they stop. Right below you. | 0.5 | Silence; your feet freeze |
@@ -76,6 +76,8 @@ Episode 3 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
   - "FLOOR -1 · 04:47" after the doors open.
 - **Sign:** "-1. DON'T STEP IN THE WATER."
 - **Badge:** from this part on it reads "YOU", and in reflections it reads "UOY".
+- **Steel reflection insert ("UOY"):** a flat 2D insert (a mirrored drawing of your badge on brushed steel), not a mirror
+  render pass, because the character cards are camera-facing billboards.
 - **The figure's stage:** your height, ears, a red lanyard. It's seen only from behind.
 
 ## Post
