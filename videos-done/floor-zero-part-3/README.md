@@ -64,3 +64,9 @@ Episode 3 of **Floor Zero** (Parts 1-2: `videos-done/floor-zero-part-1/`, `video
     water. It also shows at the lower right of shot 14.
   - **Captions** go high (top 520) from the push in shot 16 through shot 17, so the water stays clear.
   - **The fire door** reads dark red inside the stairwell. It stays grey-green from the office side.
+- **Fix-pass render** (Mac, `7e5105a`):
+  - 70 s for 2634 frames, 87.80 s; −14.0 LUFS, LRA 2.4. QA passed.
+  - All three fixes confirmed in the finished file: the "D. HALE · NIGHT SHIFT" insert (1848–1872), the upside-down
+    figure right of your head (frame 1965), and the dark-red backdrop (frame 620).
+  - Share version: 14,256,844 bytes, md5 `86e1d4e3e60024e44149e887f2a6e578`. Kept local, not uploaded or posted.
+  - Known cosmetic nit: at frame 1873, "THE STAIRS DOWN" shows for one frame in the high caption spot.

@@ -1,0 +1,60 @@
+# Sound cues: Floor Zero, Part 4 (85.333 s, 4096000 samples @ 48000 Hz)
+mix integrated -14.06 LUFS, true peak -1.05 dBTP; stems integrated: voice -17.0, music -26.6, sfx -23.8 LUFS
+
+-   0.000 s (f   0)  -1: wet room tone
+-   0.020 s (f   1)  teaser: screen static
+-   0.040 s (f   1)  teaser: sub hit
+-   0.043 s (f   1)  drips
+-   0.900 s (f  27)  teaser: a breath behind you (left)
+-   2.500 s (f  75)  teaser: suck-in to the white flash
+-   3.000 s (f  90)  music: the choice's heartbeat + drone carry over
+-   5.350 s (f 161)  your first step into the water
+-   8.050 s (f 242)  your second step (its doesn't make a sound)
+-   9.891 s (f 297)  low dong: your reflection doesn't step
+-  14.583 s (f 438)  something breaks the surface
+-  14.983 s (f 450)  music: string-cluster stinger (the pull)
+-  15.033 s (f 451)  IT PULLS: hit
+-  15.053 s (f 452)  you go under: big splash
+-  15.133 s (f 454)  underwater rush
+-  18.300 s (f 549)  VHS rewind
+-  20.280 s (f 608)  tape stop
+-  20.300 s (f 609)  music: climbing pulse
+-  20.317 s (f 610)  phone torch on
+-  20.350 s (f 610)  play
+-  20.467 s (f 614)  you walk to the desks
+-  21.603 s (f 648)  landing on a desk
+-  24.800 s (f 744)  the lanyard snags
+-  25.300 s (f 759)  the badge hits the water
+-  30.000 s (f 900)  the desk creaks as you kneel
+-  33.000 s (f 990)  your hand goes in
+-  34.667 s (f1040)  IT GRABS YOUR WRIST: hit
+-  34.667 s (f1040)  music: stab on the grab
+-  34.717 s (f1041)  thrash
+-  36.367 s (f1091)  you tear free
+-  36.867 s (f1106)  you gasp
+-  38.533 s (f1156)  the wrist insert: a low note
+-  41.237 s (f1237)  hops to the far door
+-  43.200 s (f1296)  THE LAST LIGHT DIES (relay)
+-  43.717 s (f1311)  you slam into the stairs door (push bar)
+-  43.747 s (f1312)  push bar clack
+-  44.333 s (f1330)  stairwell: low draught
+-  44.333 s (f1330)  the red lamp buzzes
+-  44.500 s (f1335)  footsteps going down
+-  45.233 s (f1357)  faint typing behind the bricked door
+-  47.400 s (f1422)  -3: every monitor hums
+-  47.400 s (f1422)  -3: office room tone
+-  47.450 s (f1423)  the stairwell door onto -3
+-  49.748 s (f1492)  music: the motif as the monitors appear
+-  53.667 s (f1610)  the feed: a little static
+-  56.633 s (f1699)  live: every screen lifts a hand
+-  58.000 s (f1740)  the sign
+-  62.383 s (f1872)  EVERY SCREEN: glitch
+-  62.433 s (f1873)  IT'S BEHIND YOU: hit
+-  62.433 s (f1873)  music: cluster on the reveal
+-  65.833 s (f1975)  digital zoom servo
+-  65.905 s (f1977)  'Facing you': low hit
+-  68.300 s (f2049)  music: heartbeat for the choice
+-  70.500 s (f2115)  'Like yours': one heartbeat
+-  72.267 s (f2168)  a breath, close behind (left)
+-  72.300 s (f2169)  tag 1 pops
+-  72.467 s (f2174)  tag 2 pops
