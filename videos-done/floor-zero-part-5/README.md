@@ -103,3 +103,6 @@ Episode 5 of **Floor Zero** (Parts 1-4: `videos-done/floor-zero-part-1/` to `flo
   - The photo wall has 45 different names (no one repeats on the wide shot).
   - The re-render from `178e2d5` passed QA: 88 s; −14.1 LUFS; both elevator displays at −7 read "−7"; five columns of
     consecutive dates at 1160.
+- **Final render** (Mac, `9229741`): 68 s; 2522 frames, 84.07 s; −14.1 LUFS, LRA 2.5, peak −1.0 dBFS. QA passed:
+  - All 25 visible plates at 1160 have different names.
+  - Share version 18,771,906 bytes, md5 `078ec32b160fb15854a63da41c4c6e83`, kept local and not posted.

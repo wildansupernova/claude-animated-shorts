@@ -83,3 +83,8 @@ Episode 6 of **Floor Zero** (Parts 1-5: `videos-done/floor-zero-part-1/` to `flo
   - The water flashback is mirrored (its badge reads UOY, like the steel one).
   - Both phones at G show one bar.
   - The slot inserts push in slowly, and the LED glow pulses until the clock takes the badge.
+- **Final render** (Mac, `9229741`): 80 s; 3056 frames, 101.87 s; −14.1 LUFS, LRA 1.8, peak −1.4 dBFS. QA passed:
+  - All three fixes are confirmed: the water flashback reads UOY at 1235, the copy's phone shows signal bars at 520,
+    and the slot inserts move.
+  - No unplanned black frames.
+  - Share version 17,569,750 bytes, md5 `d30b139d8b2cd7783df037e717cbc5fd`, kept local and not posted.
