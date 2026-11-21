@@ -212,6 +212,36 @@ the phone lock screen with battery % and "No Service", and the game screen with 
 **Voice.** One calm, low narrator, slightly confidential, like telling a story at night. With Kokoro, pick one
 male voice and keep it for the whole series.
 
+### 6.1 Retention and comment rules (apply to every episode)
+
+`videos-done/floor-zero-part-2/` is the worked example. Its `story.ts`, `Overlay.tsx` and `FloorZero2.tsx` implement
+each rule below and can be copied.
+
+**Keep them watching.**
+1. **Cold open (first ~1 s):** flash forward to the episode's strongest image, glitched, with a sting and a white
+   flash into the recap (`TEASER`). No logo and no fade-in. Start the voice after it (`LEAD`).
+2. **Open loop by 3 s:** the recap question is on screen with both numbered tags, so the viewer stays to see their
+   branch.
+3. **Something changes every 2-3 s:** a cut, an insert, a new camera move or a highlighted caption word. A held
+   shot must still creep (a slow push), never sit dead.
+4. **Plant, then pay off:** show the key prop early as an insert with the important part marked (Rule 2 circled in
+   red, `RULE2`), and land it later on a line that changes its meaning (`CARD9`).
+5. **The losing branch ends on a reveal, not just a death.** It must reframe the rules (Floor Zero: "the rules were
+   never there to protect you, they were there to keep you"). This is what people argue about in the comments.
+6. **A visible clock from the game reveal to the end:** a small countdown HUD in the top corner, ticking in real
+   seconds.
+7. **No dead air at the end:** the last line, then ~1.3 s. The last frame becomes the next part's recap frame.
+
+**Get them commenting.**
+1. **Ask for the number, at the end only:** a "COMMENT 1 OR 2 ↓" pill under the pinned tags during the final
+   question. It must not appear earlier, because it breaks the spell.
+2. **Leave one loophole per episode** that the episode doesn't answer (who circled Rule 2? what does "keep" mean?).
+3. **Show the vote back:** the next part's recap can show Part N-1's real split from the comments (`VOTES`). It stays
+   `null` until real numbers exist. Never invent them.
+4. **Canon goes to the branch that goes deeper**, not the majority, and the losing branch still gets its ending, so
+   nobody's vote is wasted.
+5. **Pin and reply:** pin the question as a comment, and reply to the first ~50 comments in-world (see §7).
+
 ## 7. Posting playbook
 
 - Title: `<Series> Part N`. Hashtags: `#series #story #decide` plus 1-2 niche tags.

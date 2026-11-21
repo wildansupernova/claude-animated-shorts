@@ -196,8 +196,14 @@ rt = roomtone(DUR, R) * 0.5
 S(widen(rt, R), 0, -21, what="floor zero room tone")
 hm = hum(DUR, R, 120.0, 0.5)
 S(widen(hm, R, 7), 0, -30, what="fluorescent hum")
+# cold-open teaser (frames 0..TEASER): a flash of the night-shift screens, then a white flash into the recap
+TZ = TL["teaser"] / FPS
+S(crackle(R, TZ + 0.1), 0, -13, 0, "teaser: screen glitch")
+S(fans_up(R, TZ + 0.4), 0, -17, 0.2, "teaser: every computer whirring")
+S(dong(R, 41, 2.2), 0, -12, 0, "teaser: sub hit")
+S(widen(G.whoosh(0.5, R, peak=0.45, f_lo=400, f_hi=7000, tail=0.02), R), TZ - 0.5, -17, 0, "teaser: suck-in to the white flash")
 # recap: the half-open doors groan
-S(door_slide(R, 2.6, True), 0.1, -22, 0, "doors groan (recap)")
+S(door_slide(R, 2.6, True), TZ + 0.1, -22, 0, "doors groan (recap)")
 # ---------------- branch 2: STAY IN ----------------
 S(door_slide(R, 0.95, False), fr(TL["closeA"]), -11, 0, "doors shut on you two")
 ch = hum(T(10) - fr(TL["closeA"]), R, 100.0, 0.7)
@@ -212,6 +218,7 @@ S(relay_clunk(R), fr(TL["lightsOn"]), -10, 0, "lights back on")
 S(crackle(R, 0.45), fr(TL["lightsOn"]), -16, 0.2, "flicker crackle")
 S(dong(R, 46, 4.0), wt(9, "you're") - 0.05, -10, 0, "you're the one facing the wall: dong")
 S(click(R, 700, 0.7), fr(TL["endDark"]), -18, 0, "display goes dark")
+S(dong(R, 36, 3.2), wt(10, "keep") - 0.05, -13, 0, "'to KEEP you': the trap shuts (sub)")
 # ---------------- rewind ----------------
 r0, r1 = fr(TL["rewind"][0]), fr(TL["rewind"][1])
 S(widen(tape_rewind(R, r1 - r0), R), r0, -12, what="VHS rewind")
@@ -265,11 +272,11 @@ def motif(t0, vel=0.55, slow=1.0, oct=0, gain=-12, detune=0.0):
 def drone(t0, t1, notes, vel=0.5, warm=500, trem=None, gain=-10):
     M(I.pad([m2f(n) for n in notes], max(0.5, t1 - t0), vel, R, att=1.2, rel=1.2, warm=warm, detune=9, trem=trem), t0, gain)
 # recap: the choice's heartbeat carries over
-t = 0.0
+t = TZ
 while t < T(2):
     M(heart(R, 0.9), t, -10); t += 60 / 96
-drone(0, T(2) + 0.5, [38, 44, 50, 56, 57], 0.5, 600, trem=lambda t: 1 + 0.3 * np.sin(TAU * 0.5 * t), gain=-12)
-cue(0, "music: the choice's heartbeat + drone carry over")
+drone(TZ - 0.3, T(2) + 0.5, [38, 44, 50, 56, 57], 0.5, 600, trem=lambda t: 1 + 0.3 * np.sin(TAU * 0.5 * t), gain=-12)
+cue(TZ, "music: the choice's heartbeat + drone carry over")
 # branch 2: dark drone; nothing at all in the blackout; a cluster on the reveal
 drone(T(2), fr(TL["lightsOut"]), [26, 33, 39], 0.55, 300, gain=-11)
 cl = I.pad([m2f(n) for n in (62, 63, 68, 69, 74, 75)], 3.5, 0.5, R, att=0.25, rel=1.5, warm=2600, detune=16)

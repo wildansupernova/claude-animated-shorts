@@ -1,47 +1,52 @@
-# Sound cues: Floor Zero, Part 2 (91.133 s, 4374400 samples @ 48000 Hz)
-mix integrated -14.27 LUFS, true peak -1.05 dBTP; stems integrated: voice -17.0, music -26.5, sfx -23.6 LUFS
+# Sound cues: Floor Zero, Part 2 (96.400 s, 4627200 samples @ 48000 Hz)
+mix integrated -14.07 LUFS, true peak -1.05 dBTP; stems integrated: voice -17.0, music -26.5, sfx -23.6 LUFS
 
 -   0.000 s (f   0)  floor zero room tone
 -   0.000 s (f   0)  fluorescent hum
--   0.000 s (f   0)  music: the choice's heartbeat + drone carry over
--   0.100 s (f   3)  doors groan (recap)
--   4.100 s (f 123)  car light hum (louder)
--   4.100 s (f 123)  doors shut on you two
--   9.300 s (f 279)  panel powers down
--  13.633 s (f 409)  the figure breathes
--  16.033 s (f 481)  sub under the figure's voice
--  17.600 s (f 528)  sub under the figure's voice
--  20.933 s (f 628)  LIGHTS OUT: clunk, then nothing
--  23.267 s (f 698)  flicker crackle
--  23.267 s (f 698)  lights back on
--  24.769 s (f 743)  music: string-cluster stinger (it's you)
--  25.519 s (f 766)  you're the one facing the wall: dong
--  28.333 s (f 850)  display goes dark
--  29.600 s (f 888)  VHS rewind
--  31.680 s (f 950)  tape stop
--  31.750 s (f 952)  play
--  31.900 s (f 957)  footsteps out
--  33.167 s (f 995)  doors close behind you
--  35.367 s (f1061)  cable snaps
--  35.367 s (f1061)  the car falls
--  35.467 s (f1064)  brakes screech
--  39.333 s (f1180)  CRASH far below
--  39.383 s (f1182)  lights shake
--  41.900 s (f1257)  you let out a breath
--  45.933 s (f1378)  EVERY COMPUTER TURNS ON: fans
--  45.933 s (f1378)  music: floor-zero cluster under the reveal, motif on 'Welcome'
--  45.971 s (f1379)  startup chimes
--  50.033 s (f1501)  message line 1
--  52.000 s (f1560)  message line 2
--  54.667 s (f1640)  message line 3
--  56.633 s (f1699)  countdown ticks
--  56.633 s (f1699)  message line 4
--  62.633 s (f1879)  the elevator is back: ding
--  65.733 s (f1972)  doors open
--  66.933 s (f2008)  the figure breathes
--  71.749 s (f2152)  one step closer: sub
--  75.133 s (f2254)  music: heartbeat for the choice
--  75.367 s (f2261)  stairwell door creaks
--  77.800 s (f2334)  footsteps coming up
--  81.133 s (f2434)  tag 1 pops
--  81.300 s (f2439)  tag 2 pops
+-   0.000 s (f   0)  teaser: every computer whirring
+-   0.000 s (f   0)  teaser: screen glitch
+-   0.000 s (f   0)  teaser: sub hit
+-   0.500 s (f  15)  teaser: suck-in to the white flash
+-   1.000 s (f  30)  music: the choice's heartbeat + drone carry over
+-   1.100 s (f  33)  doors groan (recap)
+-   5.100 s (f 153)  car light hum (louder)
+-   5.100 s (f 153)  doors shut on you two
+-  10.267 s (f 308)  panel powers down
+-  14.633 s (f 439)  the figure breathes
+-  17.033 s (f 511)  sub under the figure's voice
+-  18.600 s (f 558)  sub under the figure's voice
+-  21.933 s (f 658)  LIGHTS OUT: clunk, then nothing
+-  24.233 s (f 727)  flicker crackle
+-  24.233 s (f 727)  lights back on
+-  25.759 s (f 773)  music: string-cluster stinger (it's you)
+-  26.509 s (f 795)  you're the one facing the wall: dong
+-  29.433 s (f 883)  display goes dark
+-  33.425 s (f1003)  'to KEEP you': the trap shuts (sub)
+-  34.900 s (f1047)  VHS rewind
+-  36.980 s (f1109)  tape stop
+-  37.050 s (f1112)  play
+-  37.200 s (f1116)  footsteps out
+-  38.467 s (f1154)  doors close behind you
+-  40.667 s (f1220)  cable snaps
+-  40.667 s (f1220)  the car falls
+-  40.767 s (f1223)  brakes screech
+-  44.633 s (f1339)  CRASH far below
+-  44.683 s (f1340)  lights shake
+-  47.200 s (f1416)  you let out a breath
+-  51.233 s (f1537)  EVERY COMPUTER TURNS ON: fans
+-  51.233 s (f1537)  music: floor-zero cluster under the reveal, motif on 'Welcome'
+-  51.249 s (f1537)  startup chimes
+-  55.333 s (f1660)  message line 1
+-  57.300 s (f1719)  message line 2
+-  59.967 s (f1799)  message line 3
+-  61.933 s (f1858)  countdown ticks
+-  61.933 s (f1858)  message line 4
+-  67.900 s (f2037)  the elevator is back: ding
+-  71.033 s (f2131)  doors open
+-  72.233 s (f2167)  the figure breathes
+-  77.044 s (f2311)  one step closer: sub
+-  80.433 s (f2413)  music: heartbeat for the choice
+-  80.667 s (f2420)  stairwell door creaks
+-  83.100 s (f2493)  footsteps coming up
+-  86.433 s (f2593)  tag 1 pops
+-  86.600 s (f2598)  tag 2 pops

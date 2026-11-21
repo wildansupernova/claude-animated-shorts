@@ -5,7 +5,7 @@
 import React from "react";
 import * as THREE from "three";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
-import { camAt, shotAt, SH, TAGS_AT, TAG1_HOT, TAG2_HOT, TAG_ANCHORS, RECAP_ANCHORS, REWIND, branchAt, clamp01 } from "./story";
+import { camAt, shotAt, SH, TAGS_AT, TAG1_HOT, TAG2_HOT, TAG_ANCHORS, RECAP_ANCHORS, REWIND, branchAt, clamp01, TEASER, VOTES, MSG, messageAt, TOTAL } from "./story";
 
 const W = 1080, H = 1920;
 const cam = new THREE.PerspectiveCamera(40, W / H, 0.05, 80);
@@ -53,8 +53,8 @@ export const Overlay: React.FC = () => {
   const s = shotAt(f);
   const els: React.ReactNode[] = [];
   // series title (first ~2.3 s)
-  if (f < 70) {
-    const a = Math.min(clamp01((f - 2) / 8), clamp01((70 - f) / 12));
+  if (f < 64) {
+    const a = Math.min(clamp01((f + 4) / 6), clamp01((64 - f) / 10));
     els.push(
       <div key="title" style={{ position: "absolute", top: 150, width: W, textAlign: "center", opacity: a, fontFamily: "Montserrat, sans-serif", color: "#ffffff" }}>
         <div style={{ fontWeight: 900, fontSize: 64, letterSpacing: 14, WebkitTextStroke: "10px #0d0a10", paintOrder: "stroke fill" }}>FLOOR <span style={{ color: "#ffb347" }}>0</span></div>
@@ -62,7 +62,15 @@ export const Overlay: React.FC = () => {
       </div>);
   }
   // recap: Part 1's two choices
-  if (s.id === 1) els.push(...tags(1, f, RECAP_ANCHORS, 6, [f > 20 && f < 50 ? 1 : 0, f >= 50 ? 1 : 0], "r"));
+  if (s.id === 1 && f >= TEASER) els.push(...tags(1, f, RECAP_ANCHORS, TEASER + 6, [f > TEASER + 14 && f < TEASER + 44 ? 1 : 0, f >= TEASER + 44 ? 1 : 0], "r"));
+  // the real Part 1 vote split (only when VOTES holds real numbers)
+  if (VOTES && s.id === 1 && f >= 60) {
+    const k = pop(f, 60, 8);
+    els.push(<div key="votes" style={{ position: "absolute", left: W / 2, top: 330, transform: `translate(-50%, -50%) scale(${k})`, background: "rgba(10,12,18,0.88)", border: "5px solid #ffb347", borderRadius: 26, padding: "14px 30px", fontFamily: "Montserrat, sans-serif", fontWeight: 900, fontSize: 40, color: "#ffffff", whiteSpace: "nowrap", textAlign: "center" }}>
+      <div style={{ fontSize: 30, color: "#ffb347", letterSpacing: 4 }}>YOU VOTED</div>
+      <div><span style={{ color: "#7fb0ff" }}>1</span> STEP OUT {VOTES.out}% · <span style={{ color: "#ff7a6a" }}>2</span> STAY IN {VOTES.stay}%</div>
+    </div>);
+  }
   // branch badge
   const br = branchAt(f);
   if (br) {
@@ -80,6 +88,23 @@ export const Overlay: React.FC = () => {
         <svg width={110} height={64}><polygon points="52,0 52,64 0,32" fill="#ffffff" /><polygon points="108,0 108,64 56,32" fill="#ffffff" /></svg>
         <div style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 900, fontSize: 58, color: "#ffffff", letterSpacing: 6, textShadow: "3px 0 0 rgba(255,40,60,0.7), -3px 0 0 rgba(40,200,255,0.7)" }}>REWIND</div>
       </div>);
+  }
+  // the countdown stays on screen once it is revealed (a progress cue to the end)
+  if (f >= MSG[3] + 20 && f < TOTAL) {
+    const left = messageAt(f).left, p = (n: number) => String(n).padStart(2, "0");
+    const txt = `${p(Math.floor(left / 3600))}:${p(Math.floor((left % 3600) / 60))}:${p(left % 60)}`;
+    els.push(<div key="hud" style={{ position: "absolute", right: 44, top: 132, opacity: clamp01((f - MSG[3] - 20) / 8), background: "rgba(6,8,12,0.82)", border: "4px solid #ff4a3a", borderRadius: 18, padding: "6px 16px 8px", textAlign: "center", fontFamily: "Montserrat, sans-serif", color: "#ffffff" }}>
+      <div style={{ fontWeight: 800, fontSize: 20, letterSpacing: 3, color: "#ffb347" }}>UNTIL 06:00</div>
+      <div style={{ fontWeight: 900, fontSize: 42, color: "#ff4a3a", letterSpacing: 2, textShadow: "0 0 12px rgba(255,60,40,0.6)" }}>{txt}</div>
+    </div>);
+  }
+  // the ask: one keystroke
+  if (f >= TAGS_AT + 10 && (s.id === 19 || s.id === 20)) {
+    const k = pop(f, TAGS_AT + 10, 8) * (1 + 0.04 * Math.sin(f * 0.25));
+    els.push(<div key="cta" style={{ position: "absolute", left: W / 2, top: s.id === 19 ? 455 : 445, transform: `translate(-50%, -50%) scale(${k})`, display: "flex", alignItems: "center", gap: 14, background: "#ffb347", border: "5px solid #0d0a10", borderRadius: 999, padding: "10px 30px", fontFamily: "Montserrat, sans-serif", fontWeight: 900, fontSize: 46, color: "#0d0a10", letterSpacing: 2, whiteSpace: "nowrap" }}>
+      COMMENT 1 OR 2
+      <svg width={34} height={40}><polygon points="0,14 34,14 17,40" fill="#0d0a10" /><rect x={11} y={0} width={12} height={16} fill="#0d0a10" /></svg>
+    </div>);
   }
   // the new choice
   if (f >= TAGS_AT) {

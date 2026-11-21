@@ -4,7 +4,7 @@
 // the next chunk, or ~0.4 s after its last word when a pause follows; the last question holds to the end.
 import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
-import { WORD_LIST, FPS, TOTAL, shotAt } from "./story";
+import { WORD_LIST, FPS, TOTAL, shotAt, RULE2, CARD9 } from "./story";
 
 /** per voice line: [number of words.json tokens, display text]; *stars* mark highlighted words */
 const SPEC: [number, string][][] = [
@@ -18,7 +18,7 @@ const SPEC: [number, string][][] = [
   [[4, "THE LIGHTS GO *OUT*."]],
   [[5, "WHEN THEY COME BACK ON,"], [2, "THEY'RE *GONE*."]],
   [[2, "AND NOW,"], [3, "*YOU'RE* THE ONE"], [3, "*FACING THE WALL*."]],
-  [[4, "THIS IS *THE END*."]],
+  [[4, "THIS IS *THE END*."], [3, "BECAUSE THE *RULES*"], [3, "WERE NEVER THERE"], [3, "TO *PROTECT* YOU."], [3, "THEY WERE THERE"], [3, "TO *KEEP* YOU."]],
   [[2, "LET'S *REWIND*."]],
   [[4, "IF YOU *STEPPED OUT*,"], [3, "THE DOORS CLOSE"], [2, "BEHIND YOU."]],
   [[4, "AND THE ELEVATOR *DROPS*."]],
@@ -77,7 +77,8 @@ export const Captions: React.FC = () => {
   if (f >= until) return null;
   const u = f - c.a, k = u >= 5 ? 1 : [0.82, 1.06, 1.1, 1.04, 1.01][u];
   const big = c.text.replace(/\*/g, "").length <= 3; // the countdown digits
-  const sid = shotAt(f).id, low = sid === 15; // keep the message on the screen clear
+  const sid = shotAt(f).id, inR = (r: [number, number]) => f >= r[0] && f < r[1];
+  const low = sid === 15 || inR(RULE2) || inR(CARD9); // keep the screen message and the rules card clear
   return (
     <AbsoluteFill style={{ justifyContent: "flex-start", alignItems: "center", pointerEvents: "none" }}>
       <div style={{

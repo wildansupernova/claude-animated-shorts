@@ -1,13 +1,15 @@
 # Floor Zero, Part 2: the Night Shift
 
 Episode 2 of our original interactive horror series. Part 1 is in `videos-done/floor-zero-part-1/`, and `SCRIPT.md`
-has this episode's script and beat map. It runs 91.1 s at 1080x1920, 30 fps, with burned-in captions.
+has this episode's script and beat map. It runs 96.4 s (2892 frames) at 1080x1920, 30 fps, with burned-in captions.
 
 The episode follows the sequel beat sheet in `references/INTERACTIVE_SERIES_FORMULA.md`:
+0. **Cold open (1 s):** a glitchy flash-forward of every monitor reading NIGHT SHIFT, then a white flash.
 1. **Recap:** "So, did you step out, or did you stay in?" over Part 1's last frame and tags.
 2. **② STAY IN:** the doors shut and the panel dies. The one facing the wall speaks without turning: "Don't worry.
    I'll finish your shift." Lights out. When they come back on it's gone, and you are the one facing the wall.
-   "This is the end."
+   "This is the end. Because the rules were never there to protect you. They were there to keep you." The card
+   insert lands on Rule 1 (DO NOT STEP OUT), then back to the shut doors: obeying the card is what trapped you.
 3. **VHS rewind** back through the branch.
 4. **① STEP OUT:** you step out and the elevator falls (the display races -1…-7, then a crash far below). Every
    computer turns on at once, and every screen reads "WELCOME TO THE NIGHT SHIFT / 7 FLOORS · 1 RULE EACH / THE ONLY
@@ -16,7 +18,21 @@ The episode follows the sequel beat sheet in `references/INTERACTIVE_SERIES_FORM
    creaks open on red dark with footsteps coming up.
 6. **The new choice:** ① STAIRS / ② ELEVATOR. "So, which way down do you go?"
 
-## Render record
+## Engagement revision (current)
+Applied the retention and comment rules from `references/INTERACTIVE_SERIES_FORMULA.md`:
+- **Cold-open teaser** (`TEASER`, frames 0-29): the screens shot from later in the episode, glitched, with a sting;
+  the voice starts 1 s later (`LEAD = 1.12`).
+- **Rule 2 insert** in the figure's scene (`RULE2`): a push-in on the card with Rule 2 circled in red.
+- **"Rules are a trap" story logic:** the new line 10 and the Rule 1 card insert in shot 9 (`CARD9`), with a sub on
+  "keep". Captions drop low under both card inserts.
+- **Countdown HUD** ("UNTIL 06:00", top right) from the message reveal to the end: a ticking clock to the choice.
+- **Comment prompt:** a "COMMENT 1 OR 2" pill with an arrow under the final tags.
+- **Vote banner** (`VOTES` in `story.ts`): shows Part 1's real split over the recap. It's `null` (hidden) until we
+  have real numbers; never fill it with made-up ones.
+- QA: typecheck clean; stills checked (`preview_frames.jpg`); Whisper hears 258/258 words through the mix (median
+  offset 0.003 s); mix -14.1 LUFS, -1.05 dBTP, 96.40 s.
+
+## Render record (first cut, superseded)
 - **Rendered** on the user's Mac with `RENDER_ON_YOUR_COMPUTER.md` (`--gl=angle`, concurrency 2). The picture took
   75 s; the CPU-only cloud container needs about 2.5 h for the same render.
 - **Files** (kept on the Mac in the git-ignored `output/floor-zero-part-2/`):
@@ -29,7 +45,7 @@ The episode follows the sequel beat sheet in `references/INTERACTIVE_SERIES_FORM
   - the 323-352 hold is the dead display under "the light above you hums";
   - the rewind and the crash countdown checked out on the contact sheets.
 - **Mux fix:** done without `-shortest`, which had cut Part 1's last 2 frames. Both render prompts are fixed.
-- **Not posted.** Per the series notes, Part 2 goes out 12-24 h after Part 1.
+- **Not posted.** This cut is replaced by the engagement revision above, which needs a fresh render.
 
 ## What's new on top of Part 1
 - **Set** (`office.ts`): a fire door cut into the elevator wall (hinged, swings into the office) with an EXIT sign;
@@ -51,18 +67,18 @@ The episode follows the sequel beat sheet in `references/INTERACTIVE_SERIES_FORM
   - a red "???" name tag on the figure's lines;
   - captions dropped low over the monitor close-up.
 - **Voice** (`voice/gen_voice.py`): narrator af_heart. The figure uses Kokoro `am_onyx`, resampled 2 semitones
-  down (slower, lower), with word timings scaled to match. Whisper matches 241/243 words, median offset -0.002 s.
-- **Sound** (`audio/sound.py`, 44 cues):
-  - SFX: recap door groan, doors shutting, panel power-down, a sub under the figure's voice, a relay clunk into the
+  down (slower, lower), with word timings scaled to match. Whisper matches all 258 words, median offset 0.003 s.
+- **Sound** (`audio/sound.py`, 49 cues):
+  - SFX: the teaser sting (glitch, fans, sub, a suck-in to the white flash), recap door groan, doors shutting, panel power-down, a sub under the figure's voice, a relay clunk into the
     blackout and the stuttering return, a dong on "you're the one facing the wall", tape rewind and stop, a cable
     snap, brake screech and falling rush with beeps racing down to the crash, fans and a chorus of startup chimes as
     every computer wakes, message blips, countdown ticks, the ding, the doors, a sub on "one step closer", the
     stairwell door creak and echoing footsteps climbing.
   - Score: the Part 1 motif and drone, string-cluster stingers, the heartbeat for the choice.
-  - Master: -14.3 LUFS, -1.05 dBTP. Whisper recovers 242/243 narrated words through the full mix.
+  - Master: -14.1 LUFS, -1.05 dBTP. Whisper recovers all 258 narrated words through the full mix.
 
 ## Render
-- **Fast, on a GPU machine:** follow `RENDER_ON_YOUR_COMPUTER.md` (composition `FloorZero2`, 2734 frames; mux
+- **Fast, on a GPU machine:** follow `RENDER_ON_YOUR_COMPUTER.md` (composition `FloorZero2`, 2892 frames; mux
   `audio/mix.m4a`).
 - **CPU only:** same as Part 1 (`node scripts/stills.mjs FloorZero2 ...`, `scripts/render.mjs FloorZero2 ...`),
   at roughly 3 s per frame with 3 workers on 4 cores.

@@ -9,7 +9,7 @@ const out = {
   FPS: S.FPS, TOTAL: S.TOTAL, shots: S.SHOTS.map((s) => ({ id: s.id, a: s.a, b: s.b, light: s.light })),
   closeA: S.CLOSE_A, panelDark: S.PANEL_DARK, lightsOut: S.LIGHTS_OUT, lightsOn: S.LIGHTS_ON, endDark: S.END_DARK, speak: S.SPEAK,
   rewind: S.REWIND, exit: S.EXIT, closeB: S.CLOSE_B, drop: S.DROP, crash: S.CRASH, breathOut: S.BREATH_OUT, screensOn: S.SCREENS_ON,
-  msg: S.MSG, dingB: S.DING_B, openB: S.OPEN_B, stairOpen: S.STAIR_OPEN, shadow: S.SHADOW, tagsAt: S.TAGS_AT, kicks: S.KICKS, display: disp,
+  msg: S.MSG, dingB: S.DING_B, openB: S.OPEN_B, stairOpen: S.STAIR_OPEN, shadow: S.SHADOW, tagsAt: S.TAGS_AT, kicks: S.KICKS, teaser: S.TEASER, display: disp,
   flicker: Array.from({ length: S.TOTAL }, (_, f) => [f, S.cabLightAt(f)]).filter(([, k]) => k < 1),
 };
 fs.writeFileSync("out/timeline2.json", JSON.stringify(out));

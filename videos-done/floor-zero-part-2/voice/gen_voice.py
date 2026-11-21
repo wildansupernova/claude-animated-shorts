@@ -22,7 +22,7 @@ L = [  # (who, text, speed, gap after)
     ("narr", "The lights go out.", 0.86, 1.1),
     ("narr", "When they come back on, they're gone.", 0.9, 0.4),
     ("narr", "And now, you're the one facing the wall.", 0.86, 0.6),
-    ("narr", "This is the end.", 0.84, 0.8),
+    ("narr", "This is the end. Because the rules were never there to protect you. They were there to keep you.", 0.86, 0.8),
     ("narr", "Let's rewind.", 0.95, 1.2),
     ("narr", "If you stepped out, the doors close behind you.", 0.93, 0.35),
     ("narr", "And the elevator drops.", 0.9, 0.3),
@@ -45,7 +45,7 @@ L = [  # (who, text, speed, gap after)
     ("narr", "Or take the elevator, with the one facing the wall.", 0.92, 0.5),
     ("narr", "So, which way down do you go?", 0.86, 0.0),
 ]
-LEAD = 0.12
+LEAD = 1.12  # 1 s of room at the top for the cold-open teaser (Part 2 retention pass)
 pipes = {"a": KPipeline(lang_code="a")}
 out, words, t = [np.zeros(int(LEAD * SR), np.float32)], [], LEAD
 for li, (who, text, speed, gap) in enumerate(L):

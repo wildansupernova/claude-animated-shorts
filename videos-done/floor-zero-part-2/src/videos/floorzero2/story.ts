@@ -110,7 +110,18 @@ export const rewindSrc = (f: number) => {
 };
 /** the frame whose picture is shown at output frame f (only the rewind differs) */
 export const srcFrame = (f: number) => (f >= REWIND[0] && f < REWIND[1] ? rewindSrc(f) : f);
-export const layersAt = (f: number): { id: number; alpha: number; f: number }[] => { const g = srcFrame(f); return [{ id: shotAt(g).id, alpha: 1, f: g }]; };
+// ---------------- engagement pass ----------------
+/** cold open: the first second flashes the scariest unexplained frame of the episode (every screen: NIGHT SHIFT + countdown) */
+export const TEASER = 30;
+export const TEASER_SRC = L(21) + 40;
+export const layersAt = (f: number): { id: number; alpha: number; f: number }[] => {
+  if (f < TEASER) return [{ id: 15, alpha: 1, f: TEASER_SRC + f }];
+  const g = srcFrame(f); return [{ id: shotAt(g).id, alpha: 1, f: g }];
+};
+/** Part 1's real vote split (percent of numeric answers) for the recap banner; null = banner off. Only ever real numbers. */
+export const VOTES: { out: number; stay: number } | null = null;
+/** the Rule 2 payoff: a flash of the card (Rule 2 circled in red) while "the one facing the wall" is named */
+export const RULE2: [number, number] = [cue(4, "facing") - 6, cue(4, "speaks") - 1];
 /** which branch is playing (the badge): 2 = STAY IN, 1 = STEP OUT */
 export const branchAt = (f: number) => (f >= T0(2) && f < T0(10) ? 2 : f >= T0(11) && f < T0(19) ? 1 : 0);
 
@@ -228,15 +239,23 @@ const S2 = (f: number) => dolly([0.12, 1.36, 0.85], [0.0, 1.32, 3.5], pushK(f, T
 const S3 = (f: number) => dolly([0.05, 1.5, 1.68], [YC[0], 1.4, YC[2]], pushK(f, T0(3), 0.0035), { fov: 40 });
 // 4 the panel goes dark, tilt up to the humming light
 const S4a = (f: number) => dolly([0.3, 1.25, 3.25], [PANEL.x, 1.02, PANEL.z], pushK(f, T0(4), 0.002), { fov: 38 });
-const S4b = (_f: number): Shot => ({ pos: [0.32, 1.35, 3.55], look: [0.0, 1.95, 2.75], fov: 50 });
+const S4b = (f: number) => dolly([0.32, 1.35, 3.55], [0.0, 1.95, 2.75], pushK(f, cue(3, "light") - 10, 0.003), { fov: 50 });
 // 5-7 low angle on the corner (5: the one facing the wall speaks; 6: dark; 7: lights back, it's you)
 const LOW = (f: number, f0: number, rate = 0.0035) => ({ ...dolly([FG[0] + 0.42, 0.42, 2.62], [FG[0] - 0.02, 1.62, FG[2] + 0.1], pushK(f, f0, rate)), fov: 58 });
 const S5 = (f: number): Shot => ({ ...LOW(f, T0(5)), roll: -0.05 * span(f, T0(5), SH[6].b) });
+// the Rule 2 insert: the card on the mirror, Rule 2 circled (a fast push)
+const SCARD = (f: number) => dolly([CARD_AT[0] + 0.02, CARD_AT[1] - 0.04, CARD_AT[2] - 0.58], [CARD_AT[0], CARD_AT[1] - 0.05, CARD_AT[2]], pushK(f, RULE2[0], 0.012), { fov: 34, roll: 0.03 });
 const S7 = (f: number): Shot => ({ ...LOW(f, T0(7), 0.002), roll: -0.05 });
 // 8 front wide of the car: alone in the corner (slow push)
 const S8 = (f: number) => dolly([0.18, 1.5, 1.15], [-0.35, 1.2, 3.95], pushK(f, T0(8), 0.003), { fov: 42 });
 // 9 this is the end: the closed doors from the lobby, slow pull-out
-const S9 = (f: number) => dolly([0.35, 1.45, 0.35], [0.0, 1.7, 2.4], 1 / pushK(f, T0(9), 0.004), { fov: 42 });
+// shot 9 holds a card insert ("Because the rules were never there to protect you"), then returns to the doors for
+// "They were there to keep you"; the pull-out skips the insert so it resumes where it left off
+const IN9 = cue(10, "Because") - 2, OUT9 = cue(10, "They") - 2;
+export const CARD9: [number, number] = [IN9, OUT9];
+const S9 = (f: number) => dolly([0.35, 1.45, 0.35], [0.0, 1.7, 2.4], 1 / pushK(f < OUT9 ? f : f - (OUT9 - IN9), T0(9), 0.003), { fov: 42 });
+// "Because the rules were never there to protect you": back to the card, Rule 1, a slow push
+const S9b = (f: number) => dolly([CARD_AT[0] + 0.03, CARD_AT[1] + 0.06, CARD_AT[2] - 0.62], [CARD_AT[0], CARD_AT[1] + 0.03, CARD_AT[2]], pushK(f, IN9, 0.0035), { fov: 34, roll: -0.02 });
 // 11 you walk out toward the lens, the doors close behind you
 const S11 = (f: number): Shot => { const p = exitPos(f); return { pos: [0.75, 1.5, -0.85], look: [p[0] - 0.05, 1.3, p[2] + 0.9], fov: 44 }; };
 // 12 behind you, up at the display racing down (shake on the crash)
@@ -267,11 +286,11 @@ const CAMS: Record<number, Key[]> = {
   2: [{ f: T0(2), s: S2 }],
   3: [{ f: T0(3), s: S3 }],
   4: [{ f: T0(4), s: S4a }, { f: cue(3, "light") - 10, dur: 28, s: S4b }],
-  5: [{ f: T0(5), s: S5 }],
+  5: [{ f: T0(5), s: S5 }, { f: RULE2[0], cut: true, s: SCARD }, { f: RULE2[1], cut: true, s: S5 }],
   6: [{ f: T0(6), s: S5 }],
   7: [{ f: T0(7), s: S7 }],
   8: [{ f: T0(8), s: S8 }],
-  9: [{ f: T0(9), s: S9 }],
+  9: [{ f: T0(9), s: S9 }, { f: IN9, cut: true, s: S9b }, { f: OUT9, cut: true, s: S9 }],
   10: [{ f: T0(10), s: S9 }],
   11: [{ f: T0(11), s: S11 }],
   12: [{ f: T0(12), s: S12 }],
@@ -311,8 +330,12 @@ export const DOF: Dof[] = [
   { f: T0(4), cInf: 12, focus: () => [PANEL.x, 1.0, PANEL.z] },
   { f: cue(3, "light") - 10, dur: 24, cInf: 8, focus: () => [0.0, CAB.h, 3.2] },
   { f: T0(5), cInf: 9, focus: () => [FG[0], 1.7, FG[2]] },
+  { f: RULE2[0], cInf: 11, focus: () => [CARD_AT[0], CARD_AT[1] - 0.05, CARD_AT[2]] },
+  { f: RULE2[1], cInf: 9, focus: () => [FG[0], 1.7, FG[2]] },
   { f: T0(8), cInf: 7, focus: () => [FG[0], 1.4, FG[2]] },
   { f: T0(9), cInf: 0 },
+  { f: IN9, cInf: 11, focus: () => [CARD_AT[0], CARD_AT[1] + 0.03, CARD_AT[2]] },
+  { f: OUT9, cInf: 0 },
   { f: T0(11), cInf: 6, focus: (f) => { const p = exitPos(f); return [p[0], 1.4, p[2]]; } },
   { f: T0(12), cInf: 9, focus: () => DISPLAY_OUT },
   { f: T0(13), cInf: 12, focus: outEyes },

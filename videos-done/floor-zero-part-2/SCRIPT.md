@@ -13,13 +13,16 @@ Episode 2 of **Floor Zero** (Part 1: `videos-done/floor-zero-part-1/`). It follo
 - **Part 2 choice:** ① STAIRS (toward the footsteps) / ② ELEVATOR (with the one facing the wall, now a step closer).
 - **Season engine revealed:** every screen reads "Welcome to the Night Shift. 7 floors, 1 rule each. The only way up is
   down. Reach G before 06:00", with a countdown from 05:59.
+- **Series logic (decided):** the rules are a trap. The card is the building's bait: obeying it keeps you. Breaking
+  a rule is how you get deeper, and each new floor's rule is a test of whether you'll trust it.
 - **Planned Part 3:** Floor -1, a flooded parking garage: "Don't step in the water."
 
 ## Beat map
 | Sequel beat | Lines | Picture |
 |---|---|---|
-| Vote recap | 0 | Part 1's last frame: the half-closed doors, both tags |
-| Losing branch ② STAY IN | 1-10 | The doors shut on you two. The panel goes dark. The figure speaks without turning: "Don't worry. I'll finish your shift." Lights out. Lights on: the figure is gone, and **you** are the one facing the wall. "This is the end." |
+| Cold open | – | 1 s glitch flash-forward: every monitor reads NIGHT SHIFT; white flash |
+| Vote recap | 0 | Part 1's last frame: the half-closed doors, both tags (plus the real vote split, once we have it) |
+| Losing branch ② STAY IN | 1-10 | The doors shut on you two. The panel goes dark. The figure speaks without turning: "Don't worry. I'll finish your shift." Lights out. Lights on: the figure is gone, and **you** are the one facing the wall. "This is the end." Cut to the card, Rule 1: the rules were never there to protect you. Back to the shut doors: they were there to keep you. |
 | Rewind | 11 | VHS rewind back through the branch |
 | Winning branch ① STEP OUT: relief | 12-15 | You step out and the doors close. The display races -1…-7, a screech, a crash far below. You let out a breath. |
 | Twist + game reveal | 16-21 | Every computer turns on at once, and every screen shows the same message with a countdown |
@@ -39,7 +42,7 @@ Episode 2 of **Floor Zero** (Part 1: `videos-done/floor-zero-part-1/`). It follo
 | 7 | narr | The lights go out. |
 | 8 | narr | When they come back on, they're gone. |
 | 9 | narr | And now, you're the one facing the wall. |
-| 10 | narr | This is the end. |
+| 10 | narr | This is the end. Because the rules were never there to protect you. They were there to keep you. |
 | 11 | narr | Let's rewind. |
 | 12 | narr | If you stepped out, the doors close behind you. |
 | 13 | narr | And the elevator drops. |
@@ -68,6 +71,9 @@ Episode 2 of **Floor Zero** (Part 1: `videos-done/floor-zero-part-1/`). It follo
   REACH G BEFORE 06:00, with a countdown from 05:59:xx.
 - **Floor display:** races -1 … -7, then "--" when the car hits the bottom; "0" when the car comes back.
 - **Choice tags:** ① STAIRS (blue, to the stairwell door) and ② ELEVATOR (red, to the open car).
+- **Countdown HUD (top right):** UNTIL 06:00 / 05:59:xx, from the message reveal to the end.
+- **Comment prompt:** COMMENT 1 OR 2 ↓, under the final tags.
+- **Vote banner (recap, optional):** Part 1's real comment split; hidden until we have real numbers.
 
 ## Post caption
 `Floor Zero Part 2 #series #story #decide #horror`

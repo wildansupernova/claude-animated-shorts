@@ -476,6 +476,8 @@ export const drawCard = (g: CanvasRenderingContext2D, w: number, h: number) => {
   scrib(330, 560, 690, 610, 9, 8);
   scrib(50, 700, 690, 930, 22, 14);
   scrib(60, 760, 680, 900, 18, 10);
+  // Part 2: someone has circled Rule 2 in red marker
+  g.strokeStyle = "rgba(200,28,22,0.92)"; g.lineWidth = 10; g.beginPath(); g.ellipse(w / 2 - 6, 615, w / 2 - 22, 62, -0.03, 0, Math.PI * 2.05); g.stroke();
   // tape strips
   g.fillStyle = "rgba(240,232,200,0.75)"; g.save(); g.translate(w / 2, 18); g.rotate(-0.04); g.fillRect(-90, -24, 180, 48); g.restore();
   g.save(); g.translate(w / 2 + 40, h - 16); g.rotate(0.05); g.fillRect(-80, -22, 160, 44); g.restore();

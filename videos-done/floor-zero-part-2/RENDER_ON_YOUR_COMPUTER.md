@@ -12,7 +12,8 @@ Render the finished vertical short "Floor Zero, Part 2" on this computer and giv
 Context:
 - Repo: `https://github.com/wildansupernova/claude-animated-shorts`, branch `floor-zero-part-2`, project folder
   `videos-done/floor-zero-part-2/`. It's a Remotion 4 + three.js project: entry `src/index.ts`, composition id
-  `FloorZero2`, 2734 frames at 1080x1920, 30 fps (91.13 s).
+  `FloorZero2`, 2892 frames at 1080x1920, 30 fps (96.40 s). This is the engagement revision (cold-open teaser,
+  rules-card inserts, countdown HUD, comment prompt); it replaces any earlier Part 2 render.
 - The picture renders silent. The finished sound mix is `audio/mix.m4a` (AAC 256 kbps; the lossless master is
   `audio/mix.flac`) and gets muxed in afterwards.
 - Remotion's CLI ships its own ffmpeg and ffprobe (`npx remotion ffmpeg ...`), so no separate ffmpeg install is
@@ -32,12 +33,13 @@ Steps:
    - The `--gl` value to use: macOS or Windows → `angle`; Linux with a GPU → `angle-egl` (fallback `egl`); no
      usable GPU → `swangle` (works, but slow).
 4. **Test two stills first.**
-   - Run `npx remotion still src/index.ts FloorZero2 out/test_1760.png --frame=1760 --gl=<mode> --timeout=120000`, and
-     the same for `--frame=2600` → `out/test_2600.png`.
-   - Look at both images. Frame 1760 should show rows of office monitors all reading "NIGHT SHIFT" with a red
-     countdown. Frame 2600 should show the elevator wall: an open stairwell door under an EXIT sign (left), the open
-     elevator with a tall grey figure inside (right), the cartoon worker between them, and two numbered tags
-     (1 STAIRS, 2 ELEVATOR).
+   - Run `npx remotion still src/index.ts FloorZero2 out/test_930.png --frame=930 --gl=<mode> --timeout=120000`, and
+     the same for `--frame=2700` → `out/test_2700.png`.
+   - Look at both images. Frame 930 should show a close-up of the paper rules card ("NIGHT SHIFT / ELEVATOR RULES",
+     Rule 2 circled in red) with the caption "BECAUSE THE RULES" low on the card. Frame 2700 should show the elevator
+     wall: an open stairwell door under an EXIT sign (left), the open elevator with a tall grey figure inside (right),
+     the cartoon worker between them, two numbered tags (1 STAIRS, 2 ELEVATOR), a yellow "COMMENT 1 OR 2" pill and a
+     red countdown top right.
    - Compare them with `preview_frames.jpg` in the same folder.
    - If the 3D picture is black or empty (only captions visible), try the next `--gl` value and test again.
    - Tell me how long each still took.
@@ -52,9 +54,9 @@ Steps:
 7. **Make the share version** (smaller, for Reels / TikTok / Shorts). Run
    `npx remotion ffmpeg -y -i out/floor_zero_part2_master.mp4 -c:v libx264 -preset slow -crf 21 -tune animation -maxrate 7M -bufsize 14M -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart out/floor_zero_part2.mp4`
 8. **Verify.**
-   - `npx remotion ffprobe out/floor_zero_part2.mp4` should show 1080x1920, 30 fps, about 91.1 s, and both a video
+   - `npx remotion ffprobe out/floor_zero_part2.mp4` should show 1080x1920, 30 fps, about 96.4 s, and both a video
      and an audio stream.
-   - Grab frames at 5 s, 40 s, 60 s and 89 s, e.g.
+   - Grab frames at 0.5 s (the glitchy teaser), 31 s, 60 s and 95 s, e.g.
      `npx remotion ffmpeg -y -ss 40 -i out/floor_zero_part2.mp4 -frames:v 1 out/check_40.jpg`, and confirm none
      are black.
 9. **Report back:** the paths and sizes of `out/floor_zero_part2_master.mp4` and `out/floor_zero_part2.mp4`, the
