@@ -15,7 +15,7 @@ import { buildSet, SetHandles, digits, drawPanel, drawCallBtn, drawClock, drawMo
 import {
   FPS, SHOTS, SH, camAt, ShotDef, CEIL, ROWS, WALL_Z, DOOR, CAB, LOBBY_Z, MONITOR, doorAt, displayOutAt, displayInAt, cabLightAt,
   screensOnAt, messageAt, stairOpenAt, shadowAt, PANEL_DARK, STAIR,
-  floorAt, rowOnAt, TORCH, LAMP_FLICK, LAMP_DIE, BLACKS, lobbyOnAt, torchOn, climbPos, cctvAt, FAR_DOOR, WATER,
+  floorAt, rowOnAt, TORCH, LAMP_FLICK, LAMP_DIE, BLACKS, lobbyOnAt, lobbyKAt, torchOn, climbPos, cctvAt, FAR_DOOR, WATER,
 } from "./story";
 import { drawCCTV, clockOf } from "./cctv";
 
@@ -114,8 +114,9 @@ export class World {
       if (scr) P.push({ x: 0, y: 1.15, z: rz - 0.2, hx: 5.0, hz: 0.25, r: 1.1, wrap: 0.2, clip: office, col: [0.12, 0.3, 0.17] });
     });
     const lob = lobbyOnAt(f);
-    S.lobby.color.setRGB(...(lob ? roomGlow : [0.02, 0.03, 0.035] as [number, number, number]));
-    if (lob) P.push({ x: 0, y: CEIL - 0.05, z: LOBBY_Z, hx: 4.0, hz: 0.35, r: 1.9, wrap: 0.3, clip: office, col: roomCol.map((v) => v * 0.9) as [number, number, number] });
+    S.lobby.color.setRGB(...(lob ? roomGlow.map((v) => v * (fl === -1 ? Math.max(0.15, lobbyKAt(f)) : 1)) as [number, number, number] : [0.02, 0.03, 0.035] as [number, number, number]));
+    const lk = fl === -1 ? lobbyKAt(f) : 1;
+    if (lob) P.push({ x: 0, y: CEIL - 0.05, z: LOBBY_Z, hx: 4.0, hz: 0.35, r: 1.9, wrap: 0.3, clip: office, col: roomCol.map((v) => v * 0.9 * lk) as [number, number, number] });
     // the far stairs door's EXIT glow (-1 and -3), and your phone light while you climb in the dark
     if (fl === -1 || fl === -3) P.push({ x: FAR_DOOR.x, y: 2.4, z: FAR_DOOR.z + 0.35, hx: 0.45, hz: 0.2, r: 2.4, wrap: 0.3, clip: office, col: [0.1, 0.5, 0.22] });
     if (fl === -1 && torchOn(f)) { const p = climbPos(f); P.push({ x: p[0] - 0.15, y: p[1] + 1.4, z: p[2] - 0.35, hx: 0.15, hz: 0.15, r: 3.2, wrap: 0.4, clip: office, col: [0.85, 0.9, 0.95] }); }

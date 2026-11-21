@@ -20,7 +20,7 @@ const W = 640, H = 400;
 /** face and badge heights as fractions of the body height (for the smudge and the push-in) */
 export const FACE_Y = 0.655, BADGE_Y = 0.4;
 /** where things stand in the design space (feet at y), body height in design units */
-export const CC = { you: { x: 282, y: 396, h: 330 }, fig: { x: 362, y: 372, h: 314 } };
+export const CC = { you: { x: 282, y: 396, h: 330 }, fig: { x: 344, y: 346, h: 292 } };
 const FIG_O: Outfit = { ...YOU_O, badge: "YOU" };
 const ME_O: Outfit = { ...YOU_O, badge: "YOU" };
 
@@ -114,7 +114,8 @@ export const drawCCTV = (g: CanvasRenderingContext2D, w: number, h: number, o: C
   scene(g, o);
   g.restore();
   // phosphor monochrome
-  g.globalCompositeOperation = "color"; g.fillStyle = "#47ff95"; g.fillRect(0, 0, W, H);
+  // (a cheap colour camera: a little of the real colour survives, so the blue sweaters read)
+  g.globalAlpha = 0.6; g.globalCompositeOperation = "color"; g.fillStyle = "#47ff95"; g.fillRect(0, 0, W, H); g.globalAlpha = 1;
   g.globalCompositeOperation = "multiply"; g.fillStyle = "#8fe0a8"; g.fillRect(0, 0, W, H);
   g.globalCompositeOperation = "source-over";
   if (o.grain !== false) {

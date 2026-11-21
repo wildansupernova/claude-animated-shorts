@@ -82,3 +82,14 @@ Episode 4 of **Floor Zero** (Parts 1-3: `videos-done/floor-zero-part-1/` to `flo
 - **Title:** Floor Zero 4: Never Turn Around
 - **Caption:** `Floor Zero Part 4 #series #story #decide #horror`
 - **Pinned comment:** "① TURN AROUND or ② KEEP WALKING? The card said NEVER LO… Look at it, or look away?"
+
+## Render record
+- **First render** (Mac, `ac8e53c`): 73 s for 2560 frames, 85.33 s; −14.1 LUFS, LRA 1.7. QA passed, with three
+  picture notes:
+  1. "Right behind you" read as "beside you".
+  2. The all-green feed hid the "blue sweater".
+  3. A 1.3 s dead hold under "while the dark comes closer".
+- **Fix pass** (picture only; same length and sound):
+  - On the feed the copy now stands half a step further back, partly behind your left shoulder.
+  - The feed keeps a little real colour (a cheap colour camera), so both sweaters read teal-blue.
+  - Shot 6 creeps in slowly, and the lobby row behind you stutters and comes back at half strength on "the dark".

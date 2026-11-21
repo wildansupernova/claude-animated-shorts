@@ -208,6 +208,13 @@ export const stairOpenAt = (f: number) => (floorAt(f) === -3 ? 0.82 : 0);
 export const shadowAt = (_f: number) => 0;
 /** on -1 every ceiling row is already dark (Part 3); on -3 they're all on */
 export const rowOnAt = (f: number, _k: number) => floorAt(f) === -3;
+/** "while the dark comes closer": the lobby row behind you stutters and comes back weaker */
+export const lobbyKAt = (f: number) => {
+  const d = cue(7, "dark") - 3;
+  if (f < d || f >= T0(2) && f < T0(6)) return 1;
+  const n = f - d; if (n < 12) return [0.2, 0.9, 0.1, 0.05, 0.7, 0.15, 0.6, 0.3, 0.55, 0.5, 0.5, 0.5][n];
+  return 0.5;
+};
 export const lobbyOnAt = (f: number) => floorAt(f) === -3 || f < LOBBY_OFF || (f >= T0(2) && f < T0(6));
 export const figureAt = (_f: number): V3 | null => null;
 export const figStageAt = (_f: number) => ({ scale: 1.0, ears: true, lanyard: true });
@@ -280,7 +287,7 @@ const S3 = (f: number) => dolly([WADE1[0], 1.25, WADE1[2] - 0.0], [WADE1[0], WAT
 // 4 the pull: wide and low; you drop out of frame
 const S4 = (f: number) => dolly([WADE2[0] + 1.0, 1.3, WADE2[2] - 2.8], [WADE2[0], 0.95, WADE2[2]], pushK(f, T0(4), 0.003), { fov: 50 });
 // 6 desk to desk: tracking from the aisle as you hop
-const S6 = (f: number): Shot => { const p = climbPos(f); return { pos: [p[0] - 2.9, 2.05, p[2] + 1.3], look: [p[0] - 0.2, p[1] + 0.9, p[2] - 0.6], fov: 52 }; };
+const S6 = (f: number): Shot => { const p = climbPos(f), k = 1 - 0.22 * drift(f, 6); return { pos: [p[0] - 2.9 * k, 2.05 - 0.2 * (1 - k), p[2] + 1.3 * k], look: [p[0] - 0.2, p[1] + 0.9, p[2] - 0.6], fov: 52 }; };
 // 7 the badge drops: close at the desk edge, down to the water
 const S7 = (f: number) => dolly([DX - 0.85, 1.25, -2.45], [BADGE_AT[0], 0.2, BADGE_AT[2]], pushK(f, T0(7), 0.004), { fov: 44 });
 // 8 the rule says step: low from the water, up at you on the desk edge
