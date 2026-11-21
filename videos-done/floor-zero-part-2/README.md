@@ -37,6 +37,21 @@ Built from `SCRIPT.md`, the audited script, per `videos-done/floor-zero-series/S
   - The mix is -14.0 LUFS, -1.06 dBTP.
   - Stills are in `preview_frames.jpg`.
 
+## Render and posting record (final re-cut)
+- **Rendered** on the user's Mac from `RENDER_ON_YOUR_COMPUTER.md` (`--gl=angle`, concurrency 2): the picture took 74 s.
+- **Files:**
+  - Share encode `floor_zero_part2.mp4`: 20,644,748 bytes.
+  - Master: 43,101,351 bytes.
+  - Both are 1080x1920, 30 fps, 2800 frames, 93.333 s, AAC 48 kHz stereo.
+- **Frame QA:**
+  - -14.1 LUFS, LRA 1.9, peak -0.9 dBFS.
+  - The black and frozen frames all fall inside the planned lights-out (625-752).
+  - The other jumps are the cold open's white flash, caption pop-ins, and the display counting down to "--".
+- **Posted** on Sat 21 Nov, with the AI label off:
+  - TikTok through Buffer.
+  - YouTube: Buffer hit the channel's daily posting limit, so the user uploaded it in YouTube Studio.
+- **Tigris:** the file is deleted only once every Buffer post that uses it is `sent`.
+
 ## Engagement revision (superseded)
 Applied the retention and comment rules from `references/INTERACTIVE_SERIES_FORMULA.md`:
 - **Cold-open teaser** (`TEASER`, frames 0-29): the screens shot from later in the episode, glitched, with a sting;
