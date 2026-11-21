@@ -4,7 +4,7 @@
 // the next chunk, or ~0.4 s after its last word when a pause follows; the last question holds to the end.
 import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
-import { WORD_LIST, FPS, TOTAL, shotAt, RULE2, LAST_LINE, STEEL } from "./story";
+import { WORD_LIST, FPS, TOTAL, shotAt, RULE2, LAST_LINE, STEEL, HALE_INS, SH } from "./story";
 
 /** per voice line: [number of words.json tokens, display text]; *stars* mark highlighted words */
 const SPEC: Record<number, [number, string][]> = {
@@ -80,11 +80,12 @@ export const Captions: React.FC = () => {
   const big = c.text.replace(/\*/g, "").length <= 3; // the countdown digits
   const sid = shotAt(f).id, inR = (r: [number, number]) => f >= r[0] && f < r[1];
   const low = sid === 15 || inR(RULE2); // keep the sign clear
+  const high = !low && f >= HALE_INS[1] && f < SH[18].a; // keep the water (the extra reflection) clear
   if (inR(STEEL)) return null;
   return (
     <AbsoluteFill style={{ justifyContent: "flex-start", alignItems: "center", pointerEvents: "none" }}>
       <div style={{
-        position: "absolute", top: big ? 1130 : low ? 1320 : 1180, width: 900, left: 90, textAlign: "center",
+        position: "absolute", top: big ? 1130 : low ? 1320 : high ? 520 : 1180, width: 900, left: 90, textAlign: "center",
         fontFamily: "Montserrat, sans-serif", fontWeight: 900, fontSize: big ? 150 : 88, lineHeight: 1.08, letterSpacing: 1,
         color: "#ffffff", WebkitTextStroke: "16px #0d0a10", paintOrder: "stroke fill",
         textShadow: "0 7px 0 rgba(10,8,14,0.6), 0 0 30px rgba(0,0,0,0.45)", transform: `scale(${k})`, transformOrigin: "50% 50%",
@@ -92,7 +93,7 @@ export const Captions: React.FC = () => {
         <Styled text={c.text} />
       </div>
       {c.who === "fig" && (
-        <div style={{ position: "absolute", top: (low ? 1320 : 1180) - 96, left: 0, width: 1080, display: "flex", justifyContent: "center", transform: `scale(${k})` }}>
+        <div style={{ position: "absolute", top: (low ? 1320 : high ? 520 : 1180) - 96, left: 0, width: 1080, display: "flex", justifyContent: "center", transform: `scale(${k})` }}>
           <div style={{ background: "#b3261e", border: "6px solid #0d0a10", borderRadius: 20, padding: "2px 22px 4px", fontFamily: "Montserrat, sans-serif", fontWeight: 900, fontSize: 46, color: "#ffffff", letterSpacing: 4 }}>???</div>
         </div>
       )}

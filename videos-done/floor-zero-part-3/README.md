@@ -51,3 +51,16 @@ Episode 3 of **Floor Zero** (Parts 1-2: `videos-done/floor-zero-part-1/`, `video
 - **On a GPU machine:** `RENDER_ON_YOUR_COMPUTER.md` (composition `FloorZero3`, 2634 frames; mux `audio/mix.m4a`).
 - **To rebuild the sound:** `node scripts/dump-timeline.mjs` writes `out/timeline3.json`, then run
   `python audio/sound.py` (with `AUDIO_LIB=<repo>/templates/audio`).
+
+## Render record
+- **First render** (Mac, `c55be9d`): 72 s for 2634 frames, -14.0 LUFS. QA passed, with three notes:
+  1. The D. HALE badge couldn't be read anywhere.
+  2. The reflection-only figure sat under the captions.
+  3. The stairwell close-up had a teal backdrop.
+- **Fix pass** (picture only; same length, voice and sound):
+  - **Shot 16:** opens on a 1 s top-down insert of the floating badge, then cuts to the push. The badge's name fits
+    the card now.
+  - **The reflection-only figure** moved to `[1.4, 0, -4.6]`, just right of your head in shot 17, upside-down in the
+    water. It also shows at the lower right of shot 14.
+  - **Captions** go high (top 520) from the push in shot 16 through shot 17, so the water stays clear.
+  - **The fire door** reads dark red inside the stairwell. It stays grey-green from the office side.

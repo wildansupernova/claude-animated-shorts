@@ -199,8 +199,8 @@ const fxHaleBadge = (p: Pen) => {
   g.fillStyle = "#e9e5da"; g.strokeStyle = "#1d1b22"; g.lineWidth = 8; g.beginPath(); g.roundRect(14, 14, 292, 192, 18); g.fill(); g.stroke();
   g.fillStyle = "#8d9db8"; g.fillRect(36, 40, 92, 118);
   g.fillStyle = "#3a3d45"; g.beginPath(); g.arc(82, 82, 26, 0, 7); g.fill(); g.fillRect(52, 112, 60, 46);
-  g.fillStyle = "#1d1b22"; g.font = "900 44px Montserrat, sans-serif"; g.textBaseline = "middle"; g.fillText("D. HALE", 142, 78);
-  g.font = "800 22px Montserrat, sans-serif"; g.fillStyle = "#6a6458"; g.fillText("NIGHT SHIFT", 144, 124);
+  g.fillStyle = "#1d1b22"; g.font = "900 38px Montserrat, sans-serif"; g.textBaseline = "middle"; g.fillText("D. HALE", 140, 78, 152);
+  g.font = "800 22px Montserrat, sans-serif"; g.fillStyle = "#6a6458"; g.fillText("NIGHT SHIFT", 142, 124, 150);
   g.fillStyle = "#c8362c"; g.fillRect(14, 180, 292, 14);
 };
 
@@ -267,7 +267,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       out.ghosts.push(person(cam, "you", y.x, y.y, y.z, y.view, gfo, y.scale ?? 1));
     }
     // someone else, standing between the desks, who is only in the water
-    if (id === 14 || id === 16 || id === 17) out.ghosts.push(personO(cam, "fig", FIG_O, GHOST_AT[0], 0, GHOST_AT[2], { mode: "stand", ears: false, back: true }, 1.15, 0.8));
+    if (id === 14 || id === 16 || id === 17) out.ghosts.push(personO(cam, "fig", FIG_O, GHOST_AT[0], 0, GHOST_AT[2], { mode: "stand", ears: false, back: true }, 1.15, id === 17 ? 1.7 : 1.1));
   }
   return out;
 };

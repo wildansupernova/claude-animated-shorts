@@ -67,7 +67,7 @@ export const FAR_DOOR = { x: 0, z: OFFICE.z0 + 0.02, hw: 0.48, h: 2.1 };
 export const SIGN_AT: V3 = [-1.75, 1.5, WALL_Z - 0.02];
 export const HALE_AT: V3 = [0.3, WATER.y + 0.004, -4.0];
 /** the extra person who is only in the reflection, standing between the desks */
-export const GHOST_AT: V3 = [-0.95, 0, -4.4];
+export const GHOST_AT: V3 = [1.4, 0, -4.6];
 export const YOU_LAND: V3 = [SX - 0.05, 0, 2.95];          // the stairwell landing, just inside the door
 export const YOU_IN: V3 = [0.08, 0, 2.74];                 // in the car, at the doors, facing its back
 export const YOU_M1: V3 = [0.32, 0, 1.38];                 // -1: on the dry strip, at the water's edge
@@ -277,7 +277,10 @@ const S14 = (f: number) => dolly([-0.6, 0.32, 0.95], [0.6, 0.55, -9.5], pushK(f,
 // 15 the sign
 const S15 = (f: number) => dolly([SIGN_AT[0] + 0.1, SIGN_AT[1] - 0.02, SIGN_AT[2] - 1.9], [SIGN_AT[0], SIGN_AT[1] - 0.05, SIGN_AT[2]], pushK(f, T0(15), 0.004), { fov: 38 });
 // 16 the stairs down are on the far side: a long lens push down the aisle to the far door
-const S16 = (f: number): Shot => { const u = span(f, T0(16), SH[16].b); return { pos: [0.55, 1.55, 0.95], look: [0, 1.05, FAR_DOOR.z], fov: 40 - 18 * u }; };
+/** a 1 s top-down insert on the floating badge (D. HALE) before the push */
+export const HALE_INS: [number, number] = [T0(16), cue(22, "are") - 2];
+const S16b = (f: number) => dolly([HALE_AT[0] + 0.02, HALE_AT[1] + 0.95, HALE_AT[2] + 0.1], HALE_AT, pushK(f, HALE_INS[0], 0.004), { fov: 40 });
+const S16 = (f: number): Shot => { const u = span(f, HALE_INS[1], SH[16].b); return { pos: [0.55, 1.55, 0.95], look: [0, 1.05, FAR_DOOR.z], fov: 40 - 18 * u }; };
 // 17 the rows die toward you: behind you, wide down the office
 const S17 = (f: number): Shot => { const u = clamp01((f - T0(17)) / (SH[17].b - T0(17))); return { pos: [YM[0] + 0.18 - 0.05 * u, 2.15, YM[2] + 0.98 - 0.12 * u], look: [YM[0] - 0.15, -0.9, -7.0], fov: 56 }; };
 // 18 the only one standing in the light: low over the water, you look down; your reflection looks back up
@@ -294,7 +297,7 @@ const CAMS: Record<number, Key[]> = {
   1: [{ f: 0, s: S1 }], 2: [{ f: T0(2), s: S2 }], 3: [{ f: T0(3), s: S3 }], 4: [{ f: T0(4), s: S4 }], 5: [{ f: T0(5), s: S5 }], 6: [{ f: T0(6), s: S6 }],
   7: [{ f: T0(7), s: S1 }],
   8: [{ f: T0(8), s: S8 }], 9: [{ f: T0(9), s: S9 }], 10: [{ f: T0(10), s: S10 }], 11: [{ f: T0(11), s: S11 }], 12: [{ f: T0(12), s: S12 }],
-  13: [{ f: T0(13), s: S13 }], 14: [{ f: T0(14), s: S14 }], 15: [{ f: T0(15), s: S15 }], 16: [{ f: T0(16), s: S16 }], 17: [{ f: T0(17), s: S17 }],
+  13: [{ f: T0(13), s: S13 }], 14: [{ f: T0(14), s: S14 }], 15: [{ f: T0(15), s: S15 }], 16: [{ f: T0(16), s: S16b }, { f: HALE_INS[1], cut: true, s: S16 }], 17: [{ f: T0(17), s: S17 }],
   18: [{ f: T0(18), s: S18 }, { f: R18, cut: true, s: S18b }], 19: [{ f: T0(19), s: S19 }], 20: [{ f: T0(20), s: S20 }],
 };
 export const KICKS: [number, number][] = [[FLICKS[0], 0.2], [FLICKS[1], 0.2], [FLICKS[2], 0.28], [HAND, 0.35]];
@@ -330,7 +333,8 @@ export const DOF: Dof[] = [
   { f: T0(13), cInf: 6, focus: () => [0.15, 1.2, 2.2] },
   { f: T0(14), cInf: 3, focus: () => [0, 0.6, -4] },
   { f: T0(15), cInf: 12, focus: () => SIGN_AT },
-  { f: T0(16), cInf: 4, focus: () => [0, 1.0, FAR_DOOR.z] },
+  { f: T0(16), cInf: 3, focus: () => HALE_AT },
+  { f: HALE_INS[1], cInf: 4, focus: () => [0, 1.0, FAR_DOOR.z] },
   { f: T0(17), cInf: 4, focus: () => [0, 1.0, -5] },
   { f: T0(18), cInf: 12, focus: () => [YM[0], EYE, YM[2]] },
   { f: cue(26, "standing") - 4, cInf: 2, focus: () => [YM[0], -1.4, YM[2]] },

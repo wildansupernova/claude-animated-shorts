@@ -141,6 +141,8 @@ export class World {
     const dw = DOOR.hw + 0.02;
     S.doorL.position.x = -dw / 2 - open * (dw - 0.02); S.doorR.position.x = dw / 2 + open * (dw - 0.02);
     S.stairDoor.rotation.y = -so * (Math.PI / 2);
+    // inside the stairwell the fire door reads red (from the office side it stays grey-green)
+    ((S.stairDoor.children[0] as THREE.Mesh).material as THREE.MeshLambertMaterial).color.set(s.light === "stair" ? "#4a1614" : "#6b7a72");
     const sh = shadowAt(f);
     S.stairShadow.visible = so > 0.1 && sh > 0; S.stairShadow.position.y = -1.3 + 2.0 * sh;
     (S.stairShadow.material as THREE.MeshBasicMaterial).opacity = 0.85 * Math.min(1, so * 2) * (sh > 0 ? 1 : 0.4);
