@@ -1,4 +1,4 @@
-# Floor Zero, Season 1: series bible (v4)
+# Floor Zero, Season 1: series bible (v4.1)
 
 Six parts. Part 1 is posted and is fixed canon. Part 2 is rendered but not posted, so it can still change. Parts 3-6 are
 new. It follows `references/INTERACTIVE_SERIES_FORMULA.md` and the viral skills in §10. The audit log is in §12.
@@ -90,8 +90,8 @@ Optional, unnarrated pause-and-read Easter egg: the -2 landing sign in Part 4, "
 | 2 | 0 | 05:59 | 2 % | One step past its dusty footprints | Panel "0" lit as you step out |
 | 3 | 0 → -1 | 05:59 → 04:47 (after the 3 flickers) | 1 % | Your height; it grows ears; red lanyard | In the steel your badge reads "UOY"; "D. HALE" badge floating in the water; an extra figure in the reflection |
 | 4 | -1 → -3 | 04:47 → 03:12 (after the rows die) | 1 % | Blue sweater; on CCTV it faces you | Your reflection grabs your RIGHT wrist and leaves a grey print. On CCTV (not mirrored), its badge reads "UOY" and its hair strand runs the wrong way. |
-| 5 | -3 → -7 | 03:12 → 00:03:30 (after the screens die) | Dies at 05:57 | Identical, mirrored (`scale.x = -1`) | A 6-10 frame "UOY" glimpse in the final flicker; on the hold, badges face in, and the hair strands and prints differ |
-| 6 | -7 → G | 00:02 → 00:00:01 | 1 bar at G | Goes grey at 06:00 | The badge and hair close-up |
+| 5 | -3 → -7 | 03:12 → 00:03:30 (after the screens die) | 1 %; its light dies at 05:57 | Identical, mirrored (`scale.x = -1`) | A 6-10 frame "UOY" glimpse in the final flicker; on the hold, badges face in, and the hair strands and prints differ |
+| 6 | -7 → G | 00:02 → 00:00:01 | 1 %, 1 bar at G | Goes grey at 06:00 | The badge and hair close-up |
 
 ## 7. Opening template (every sequel)
 | Time | What happens |
@@ -201,7 +201,8 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   1. The card over the punch clock: "Only one of you can clock out."
   2. Your phone, still showing "No Service", lights up: Home, "OK. See you soon ❤". It's a reply to "Leaving now" from
      your number. "You never sent that."
-  3. "05:57. And your phone dies." In the dark, something takes your wrist.
+  3. "05:57. And your phone's light dies." (Real phones kill the flashlight at low battery; the phone stays at 1 %.)
+     In the dark, something takes your wrist.
   4. "When the light comes back, there are two of you. And both of you remember being you."
   - The shell game: in the **final** flicker, after the last swap, the lanyard of the figure that ends at ② spins and its
     badge reads "UOY" for 6-10 frames. That's the pause-to-find clue.
@@ -220,24 +221,30 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   - Text: "06:00. ONLY ONE WALKS OUT."
   - Line: "You picked one of them. Let's see if it was you."
 - **Recap:** the real split.
+- **The causal rule for both branches:** the vote decides which one you never take your eyes off. It can't move while
+  watched (Rule 2), so whoever is watched can't reach the clock first.
 - **② RIGHT (loses):**
-  1. It swipes its badge at 05:59, and the clock takes the first badge. G, morning. Its phone: "See you soon ❤".
-  2. At -7 the real you turns to the wall, and the blue drains out. "This is the end."
+  1. "If you picked two, you kept your eyes on one. Nobody was watching two." It moves, and swipes its badge at 05:59.
+  2. G, morning. Its phone: "See you soon ❤".
+  3. At -7, one turns to the wall, and the blue drains out. "You were one. You spent the last minute watching
+     yourself." "This is the end."
 - **"Let's rewind."**
 - **① LEFT (wins):**
-  1. "Look at its badge." Close-up: "UOY". Then the hair strand, the wrong way.
+  1. "If you picked one, then two is the copy. So you don't look away from it." Close-up: its badge, "UOY". Then the
+     hair strand, the wrong way.
   2. "It learned you from reflections. The steel. The water. The screens. It got everything right. Except it learned
      you backwards."
-  3. You swipe at 05:59:59. At 06:00 it turns to the wall and goes grey.
+  3. Without blinking, you back up to the clock and swipe at 05:59:59. At 06:00 it turns to the wall and goes grey.
   4. G, gold morning, one bar. Home: "Where are you??" You type: "On my way."
-- **Final turn:** above the clock, the full card (§2.7). Rule 2 is finally readable, and then Rule 3: "THE NIGHT SHIFT
-  ALWAYS KEEPS ONE."
+- **Final turn:** above the clock, the full card (§2.7). Rule 2 is finally readable, "NEVER LOOK AWAY FROM THEM",
+  right after the viewer has watched it save you. Then Rule 3: "THE NIGHT SHIFT ALWAYS KEEPS ONE."
 - **Epilogue:**
   1. Next Friday, 23:59. Someone else is the last one leaving. Behind them, the lights switch off, one row at a time.
   2. The car passes G, and with a jolt, the lights go out.
   3. When they come back, in the corner, facing the wall: someone in a grey sweater, red lanyard, badge "UOY".
 - **Last line (word for word, Part 1's first line):** "Imagine you're the last one leaving the office."
-- **Pinned comment:** "Watch Part 1 again. Pause at 0:40. Season 2: would you warn them? ① YES / ② NO".
+- **Pinned comment:** "Watch Part 1 again. The lights go out at 0:40. That's when it got in. Season 2: would you warn
+  them? ① YES / ② NO".
 
 ## 9. Part 2 edits (to the rendered cut, before posting)
 1. Revert line 10 to "This is the end." and remove the Rule 1 insert in shot 9.
@@ -304,6 +311,14 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   - The copy of you is your card with `scale.x = -1`.
 
 ## 12. Audit log
+**v4 → v4.1 (story re-audit, "REVISE, three small must-fixes"): all 3 applied.**
+1. **The finale had no cause:** the vote now decides which one you never look away from. The watched one can't move,
+   so the unwatched one reaches the clock first (② loss) or you do (① win). The full card's Rule 2 lands right after
+   it saves you.
+2. **The phone died at 05:57 but worked at G:** now only its light dies at 05:57; the phone stays at 1 %.
+3. **"Pause at 0:40" promised a frame that doesn't exist:** the pinned comment now points to the moment: "The lights
+   go out at 0:40. That's when it got in."
+
 **v3 → v4 (story audit, "Video Rendered", of v1; every point not already fixed is applied here).**
 1. **"Which one is you?" broke the second person:** now, in the dark, something takes your wrist, and "both of you
    remember being you." The touch rule is written down in §2.2.
@@ -314,8 +329,8 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
 4. **Rule 3 leaked in three wordings:** one canonical text, shown only on Part 6's full card. The Part 5 photo-wall line
    no longer says "keeps one".
 5. **Badge vs punch card:** unified. The clock takes the first badge, and badges say "YOU", never a name.
-6. **"There all along" failed a rewatch:** D. Hale now enters at Part 1's 0:40 jolt blackout. The pinned comment says
-   "Pause at 0:40".
+6. **"There all along" failed a rewatch:** D. Hale now enters at Part 1's 0:40 jolt blackout. The pinned comment
+   points to the moment (v4.1).
 7. **The numbers didn't add up:** the cadence is every Friday, and the scenes show "hundreds" and rows fading into the
    dark. No start year.
 8. **Part 5 was overloaded:** D. Hale's badge is planted in the Part 3 water. The full card moves to Part 6.
