@@ -74,7 +74,7 @@ Episode 5 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 - **Frame-1 text:** 05:57. THERE ARE TWO OF YOU.
 - **HUD:**
   - "FLOOR -3 · 03:12" through the recap and the branches;
-  - jumps to 00:03:30 at line 10;
+  - jumps to 00:03:30 at line 9;
   - "FLOOR -5", then "FLOOR -7 · 00:03:00 → 00:02:31" by the hold.
 - **The -7 sign:** "-7. ONLY ONE OF YOU CAN CLOCK OUT." The punch clock has a badge slot.
 - **Phone:**

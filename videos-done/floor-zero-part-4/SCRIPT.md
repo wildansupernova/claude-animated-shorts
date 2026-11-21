@@ -68,7 +68,7 @@ Episode 4 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 - **Frame-1 text:** IT'S RIGHT BEHIND YOU.
 - **HUD:**
   - "FLOOR -1 · 04:47" through the recap and the branches;
-  - jumps to 03:12 at line 17;
+  - jumps to 03:12 at line 15;
   - "FLOOR -3 · 03:12" after.
 - **Signs:**
   - "-2. IF YOU HEAR TYPING, DON'T STOP WALKING." (1 s, unnarrated)

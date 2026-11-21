@@ -15,7 +15,7 @@ Episode 6 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 - **The causal rule for both branches:** the vote decides which one you never take your eyes off. The watched one can't
   move (Rule 2), so the unwatched one reaches the clock first. The narration states only what happened. The full card
   then shows Rule 2 in words, right after the viewer has watched it save you.
-- **Rule 3's text** ("THE NIGHT SHIFT ALWAYS KEEPS ONE") appears only on the full card, line 23, for the first and only
+- **Rule 3's text** ("THE NIGHT SHIFT ALWAYS KEEPS ONE") appears only on the full card, line 22, for the first and only
   time in the season.
 - **The clue payoff** (badge "UOY", hair strand) gets close-ups. Explain the mirror in two lines, no more.
 - **Cold open:** a backlit silhouette walking out, so either branch could end this way. No readable badge.
@@ -54,7 +54,7 @@ Episode 6 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 | 17 | Five fifty-nine, and fifty-nine seconds. You swipe your badge. | 0.4 | The slot; *chunk*; 05:59:59 |
 | 18 | Six o'clock. In front of you, it turns to face the wall. | 0.4 | ② turns to the wall |
 | 19 | And slowly, it goes grey. | 0.5 | The blue drains from its sweater |
-| 20 | Above the clock, there's a card. The same rules. Only this one isn't scratched. | 0.4 | Push in on the card over the punch clock, legible |
+| 20 | Above the clock, the same card. Unscratched. | 0.4 | Push in on the card over the punch clock, legible |
 | 21 | Rule two. If someone is facing the wall, never look away from them. | 0.5 | Push in: Rule 2 in full |
 | 22 | Rule three. The night shift always keeps one. | 0.8 | Push in: Rule 3. Hold. |
 | 23 | Ground floor. Morning. One bar. A message from home. Where are you? You type: On my way. | 0.4 | G, gold; your phone: one bar; "Where are you??" → you type "On my way." |

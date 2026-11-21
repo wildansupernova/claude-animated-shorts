@@ -60,7 +60,7 @@ superseded.
 
 ## On-screen text and props
 - **Frame-1 text:** IT TOOK A STEP. NOBODY SAW.
-- **HUD:** "FLOOR 0" from frame 1; the countdown is added at line 21.
+- **HUD:** "FLOOR 0" from frame 1; the countdown is added at line 20.
 - **The card:** exactly as in Part 1, with no red circle. Rule 2 reads "NEVER LO…", half-legible.
 - **Monitors:** WELCOME TO THE NIGHT SHIFT / 7 FLOORS · 1 RULE EACH / THE ONLY WAY OUT IS DOWN / CLOCK OUT BEFORE
   06:00.

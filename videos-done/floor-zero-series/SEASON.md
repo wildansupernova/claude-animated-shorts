@@ -323,6 +323,9 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   - Render Parts 3-5 before Part 6, whose flashbacks reuse them.
 
 ## 12. Audit log
+**Scripts v2: both auditors say SHIP.** The stale line references are fixed, and Part 6 is trimmed ("Above the clock,
+the same card. Unscratched.").
+
 **Scripts v1 → v2:** both script audits are applied.
 - Virality: short recaps; a silent vote banner; tighter openings.
 - Story: the CCTV camera moves in front; the reflection flashback becomes a dead monitor; the full card moves to -7;
