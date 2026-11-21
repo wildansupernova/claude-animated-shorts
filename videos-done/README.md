@@ -9,7 +9,7 @@ characters, story, synthesized score and SFX, and Kokoro TTS voices (AI-generate
 |---|---|---|---|---|
 | `birthday-bet/` | **Would You Take This Bet?** The birthday paradox as a $2,200 party bet (v3, four voices, stakes HUD, 253 = 253 twist) | 55 s, 30 fps | `claude/birthday-paradox-short` (includes v1 from `claude/gallant-pascal-lpy05p`) | `README.md`, `SCRIPT.md` |
 | `doomsday-recap/` | **The Road to Doomsday**: an animated recap of the films leading into Avengers: Doomsday (fan recap, our own drawings) | 3 min 15 s, 24 fps | `ccr-c7875b3a-drnzdt` | `README.md`, `SCRIPT.md`, `QA_REPORT.md` |
-| `floor-zero-part-1/` | **Floor Zero, Part 1**: an interactive "what would you do?" horror series pilot (elevator past the ground floor, ends on ① STEP OUT / ② STAY IN). Night-interior relight with ceiling light pools, captions, choice tags | 96.5 s, 30 fps | `ccr-387febaf-ervqdy` | `README.md`, `SCRIPT.md` |
+| `floor-zero-part-1/` | **Floor Zero, Part 1**: an interactive "what would you do?" horror series pilot (elevator past the ground floor, ends on ① STEP OUT / ② STAY IN). Night-interior relight with ceiling light pools, captions, choice tags | 96.5 s, 30 fps | `floor-zero-part-1` | `README.md`, `SCRIPT.md` |
 | `forest-snitch/` | **The Forest Snitch**: how nature exposes buried bodies (forensic botany) | ~63 s, 30 fps | `claude/amazing-albattani-rvlgbr` | `README.md`, `SCRIPT.md` |
 | `fritz-haber/` | **Bread and Bombs from Thin Air**: Fritz Haber, fertilizer and gas | 68 s, 30 fps | `claude/fritz-haber-short` (same commit as `claude/adoring-tesla-hqjljy`) | `NOTES.md`, `SCRIPT.md` |
 | `henrietta-lacks/` | **The Woman Who Never Stopped**: Henrietta Lacks and the HeLa cells | 60 s, 30 fps | `claude/henrietta-lacks-short` | `NOTES.md`, `SCRIPT.md` |

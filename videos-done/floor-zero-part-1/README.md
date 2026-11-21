@@ -56,6 +56,11 @@ exact copy of your office. Something is breathing behind you, and the episode en
     heartbeat that quickens toward the jolt and again for the choice, and a riser cut dead on the impact.
   - Master: -14.4 LUFS, -1.05 dBTP, LRA 1.9. Whisper recovers every narrated word through the full mix.
 
+## Render on your own computer (fast, GPU)
+Follow `RENDER_ON_YOUR_COMPUTER.md`: a ready-to-paste prompt for a Claude Code session on a Mac / Windows / Linux machine
+(clone branch `floor-zero-part-1`, `npm install`, `npm run fonts`, test two stills, `npx remotion render ... --gl=angle`, mux
+`audio/mix.m4a`). The finished sound is in `audio/` (`mix.flac` lossless, `mix.m4a` AAC for muxing, `cues.md`).
+
 ## Build (Linux, no GPU)
 ```bash
 npm install && npm run fonts                       # Remotion 4 + R3F 9 + postprocessing; fonts into public/
