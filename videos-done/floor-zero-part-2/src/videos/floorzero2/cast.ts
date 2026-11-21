@@ -100,6 +100,20 @@ export class Fx {
 // ---------------- placements ----------------
 /** light: multiplier on the pool light at the card (the figure stands in the dim corner) */
 export type Place = { key: string; draw: (p: Pen) => void; x: number; y: number; z: number; scale?: number; mirror?: boolean; yaw?: number; roll?: number; size?: [number, number, number]; light?: number; who: "you" | "fig" };
+/** two dusty shoe prints (where it used to stand), lighter than the steel floor */
+const fxDustPrints = (p: Pen) => {
+  const g = p.g; g.clearRect(0, 0, 256, 256);
+  const sole = (cx: number, cy: number) => {
+    for (let i = 0; i < 90; i++) {
+      const a = Math.sin(i * 12.9898 + cx) * 43758.5453, r = a - Math.floor(a), b = Math.sin(i * 78.233 + cy) * 12345.678, q = b - Math.floor(b);
+      const x = cx + (r - 0.5) * 46, y = cy + (q - 0.5) * 120;
+      if (((x - cx) / 23) ** 2 + ((y - cy) / 60) ** 2 > 1) continue;
+      g.fillStyle = `rgba(214,214,206,${(0.18 + 0.22 * r).toFixed(3)})`; g.beginPath(); g.arc(x, y, 3 + 5 * q, 0, 7); g.fill();
+    }
+    g.strokeStyle = "rgba(225,225,218,0.55)"; g.lineWidth = 5; g.beginPath(); g.ellipse(cx, cy, 24, 62, 0, 0, 7); g.stroke();
+  };
+  sole(92, 128); sole(164, 120);
+};
 export type FxPlace = { key: string; cw: number; ch: number; draw: (p: Pen) => void; x: number; y: number; z: number; w: number; h: number; flat?: boolean; rot?: number; soft?: boolean; top?: boolean; tint?: number };
 export type CamInfo = { pos: THREE.Vector3; right: THREE.Vector3; up: THREE.Vector3; fwd: THREE.Vector3 };
 export type Stage = { places: Place[]; fx: FxPlace[] };
@@ -192,6 +206,8 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
   }
   // the one facing the wall: always back to us, breathing; it barely moves its head while it speaks
   const fp = figureAt(f);
+  if (fp && fp !== FIGURE && (id === 17 || id === 19 || id === 20))
+    out.fx.push({ key: "dustprints", cw: 256, ch: 256, draw: (p) => fxDustPrints(p), x: FIGURE[0], y: 0.006, z: FIGURE[2], w: 0.46, h: 0.46, flat: true, rot: 0.35 });
   if (fp && id !== 20) {
     const br = 4 + 4 * Math.sin((f / FPS) * Math.PI * 2 / 3.4);
     let tilt = 0;

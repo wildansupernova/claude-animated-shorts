@@ -111,11 +111,12 @@ export const rewindSrc = (f: number) => {
 /** the frame whose picture is shown at output frame f (only the rewind differs) */
 export const srcFrame = (f: number) => (f >= REWIND[0] && f < REWIND[1] ? rewindSrc(f) : f);
 // ---------------- engagement pass ----------------
-/** cold open: the first second flashes the scariest unexplained frame of the episode (every screen: NIGHT SHIFT + countdown) */
-export const TEASER = 30;
-export const TEASER_SRC = L(21) + 40;
+/** cold open: while the premise line plays ("Seven floors under your office, and it just moved."), the car doors open
+ * on it, one step past its dusty footprints (shot 17's push-in), under the hook text IT TOOK A STEP. NOBODY SAW. */
+export const TEASER = cueEnd(32) + 8;
+export const TEASER_SRC = cue(25, "nobody") - 2;
 export const layersAt = (f: number): { id: number; alpha: number; f: number }[] => {
-  if (f < TEASER) return [{ id: 15, alpha: 1, f: TEASER_SRC + f }];
+  if (f < TEASER) return [{ id: 17, alpha: 1, f: TEASER_SRC + f }];
   const g = srcFrame(f); return [{ id: shotAt(g).id, alpha: 1, f: g }];
 };
 /** Part 1's real vote split (percent of numeric answers) for the recap banner; null = banner off. Only ever real numbers. */
@@ -128,13 +129,15 @@ export const branchAt = (f: number) => (f >= T0(2) && f < T0(10) ? 2 : f >= T0(1
 // ---------------- story events (frames) ----------------
 // branch 2 (stay in)
 export const CLOSE_A = cue(1, "doors") - 2;
-export const PANEL_DARK = cue(3, "dark") - 2;
+export const PANEL_DARK = cue(3, "dies") - 2;
 export const LIGHTS_OUT = cue(7, "out") - 1, LIGHTS_ON = cue(8, "on") - 1;
 export const END_DARK = cue(10, "end") + 2;
 export const SPEAK: [number, number][] = [[cue(5), cueEnd(5)], [cue(6), cueEnd(6)]];
 // branch 1 (step out)
 export const EXIT: [number, number] = [T0(11) + 2, cue(12, "close") + 8];
 export const CLOSE_B = cue(12, "close") - 1;
+/** as you step out: a 1 s insert of the car panel with "0" lit (the silent payoff: zero WAS on the panel) */
+export const ZERO_INSERT: [number, number] = [cue(12, "stepped") - 3, cue(12, "stepped") + 27];
 export const DROP: [number, number] = [cue(13, "drops") - 2, cue(14, "bottom")];
 export const CRASH = cue(14, "bottom");
 export const BREATH_OUT = cue(15, "breath") - 4;
@@ -146,12 +149,12 @@ export const STAIR_OPEN = cue(26, "creaks") - 4;
 export const SHADOW: [number, number] = [cue(27, "footsteps") - 4, cue(27, "up") + 24];
 export const TAGS_AT = cue(28, "Two") - 2, TAG1_HOT: [number, number] = [cue(29) - 2, cue(30) - 4], TAG2_HOT: [number, number] = [cue(30) - 2, cue(31) - 2];
 export const TAG_ANCHORS: { n: number; label: string; color: string; at: V3; pill: [number, number] }[] = [
-  { n: 1, label: "STAIRS", color: "#3b7cf0", at: [(STAIR.x0 + STAIR.x1) / 2, 1.75, WALL_Z], pill: [270, 330] },
-  { n: 2, label: "ELEVATOR", color: "#e2453c", at: [0, 1.75, WALL_Z], pill: [810, 330] },
+  { n: 1, label: "STAIRS", color: "#3b7cf0", at: [(STAIR.x0 + STAIR.x1) / 2, 1.75, WALL_Z], pill: [270, 560] },
+  { n: 2, label: "ELEVATOR", color: "#e2453c", at: [0, 1.75, WALL_Z], pill: [810, 560] },
 ];
 export const RECAP_ANCHORS: { n: number; label: string; color: string; at: V3; pill: [number, number] }[] = [
-  { n: 1, label: "STEP OUT", color: "#3b7cf0", at: [0.35, 0.03, 2.15], pill: [250, 1590] },
-  { n: 2, label: "STAY IN", color: "#e2453c", at: [-0.3, 0.02, 3.35], pill: [830, 1590] },
+  { n: 1, label: "STEP OUT", color: "#3b7cf0", at: [0.35, 0.03, 2.15], pill: [250, 1420] },
+  { n: 2, label: "STAY IN", color: "#e2453c", at: [-0.3, 0.02, 3.35], pill: [760, 1420] },
 ];
 // Part 1 left the doors 45 % open
 export const doorAt = (f: number) => {
@@ -239,7 +242,6 @@ const S2 = (f: number) => dolly([0.12, 1.36, 0.85], [0.0, 1.32, 3.5], pushK(f, T
 const S3 = (f: number) => dolly([0.05, 1.5, 1.68], [YC[0], 1.4, YC[2]], pushK(f, T0(3), 0.0035), { fov: 40 });
 // 4 the panel goes dark, tilt up to the humming light
 const S4a = (f: number) => dolly([0.3, 1.25, 3.25], [PANEL.x, 1.02, PANEL.z], pushK(f, T0(4), 0.002), { fov: 38 });
-const S4b = (f: number) => dolly([0.32, 1.35, 3.55], [0.0, 1.95, 2.75], pushK(f, cue(3, "light") - 10, 0.003), { fov: 50 });
 // 5-7 low angle on the corner (5: the one facing the wall speaks; 6: dark; 7: lights back, it's you)
 const LOW = (f: number, f0: number, rate = 0.0035) => ({ ...dolly([FG[0] + 0.42, 0.42, 2.62], [FG[0] - 0.02, 1.62, FG[2] + 0.1], pushK(f, f0, rate)), fov: 58 });
 const S5 = (f: number): Shot => ({ ...LOW(f, T0(5)), roll: -0.05 * span(f, T0(5), SH[6].b) });
@@ -249,14 +251,9 @@ const S7 = (f: number): Shot => ({ ...LOW(f, T0(7), 0.002), roll: -0.05 });
 // 8 front wide of the car: alone in the corner (slow push)
 const S8 = (f: number) => dolly([0.18, 1.5, 1.15], [-0.35, 1.2, 3.95], pushK(f, T0(8), 0.003), { fov: 42 });
 // 9 this is the end: the closed doors from the lobby, slow pull-out
-// shot 9 holds a card insert ("Because the rules were never there to protect you"), then returns to the doors for
-// "They were there to keep you"; the pull-out skips the insert so it resumes where it left off
-const IN9 = cue(10, "Because") - 2, OUT9 = cue(10, "They") - 2;
-export const CARD9: [number, number] = [IN9, OUT9];
-const S9 = (f: number) => dolly([0.35, 1.45, 0.35], [0.0, 1.7, 2.4], 1 / pushK(f < OUT9 ? f : f - (OUT9 - IN9), T0(9), 0.003), { fov: 42 });
-// "Because the rules were never there to protect you": back to the card, Rule 1, a slow push
-const S9b = (f: number) => dolly([CARD_AT[0] + 0.03, CARD_AT[1] + 0.06, CARD_AT[2] - 0.62], [CARD_AT[0], CARD_AT[1] + 0.03, CARD_AT[2]], pushK(f, IN9, 0.0035), { fov: 34, roll: -0.02 });
+const S9 = (f: number) => dolly([0.35, 1.45, 0.35], [0.0, 1.7, 2.4], 1 / pushK(f, T0(9), 0.004), { fov: 42 });
 // 11 you walk out toward the lens, the doors close behind you
+const SZERO = (f: number) => { const y = PANEL_ROW_Y(BTN_ROW.zero); return dolly([PANEL.x - 0.06, y + 0.05, PANEL.z + 0.42], [PANEL.x - 0.035, y, PANEL.z], pushK(f, ZERO_INSERT[0], 0.004), { fov: 30 }); };
 const S11 = (f: number): Shot => { const p = exitPos(f); return { pos: [0.75, 1.5, -0.85], look: [p[0] - 0.05, 1.3, p[2] + 0.9], fov: 44 }; };
 // 12 behind you, up at the display racing down (shake on the crash)
 const S12 = (f: number) => dolly([1.45, 1.66, 0.35], [DISPLAY_OUT[0] + 0.05, DISPLAY_OUT[1] - 0.18, DISPLAY_OUT[2]], pushK(f, T0(12), 0.003) * pushK(f, CRASH - 3, 0, 0.007, 16), { fov: 40 });
@@ -272,6 +269,8 @@ const S15b = (f: number) => dolly([1.6, 1.55, 1.3], [2.6, 0.95, -3.2], 1 / pushK
 const S16 = (f: number) => dolly([YO[0] + 0.78, 1.55, YO[2] - 1.9], [YO[0] - 0.48, 1.48, YO[2] + 0.95], pushK(f, T0(16), 0.0025), { fov: 40 });
 // 17 over your shoulder: the doors open, the one facing the wall one step closer
 // (POV: your eyes; you are hidden in this shot)
+/** "And nobody saw it move": low in the car doorway, its shoes one step past its own dusty prints (also the cold open) */
+const SPRINTS = (f: number) => dolly([0.5, 1.62, CAB.z0 - 0.12], [FIGURE2[0] + 0.02, 0.06, (FIGURE[2] + FIGURE2[2]) / 2 + 0.05], pushK(f, cue(25, "nobody") - 2, 0.0025), { fov: 50 });
 const S17 = (f: number) => dolly([YO[0], 1.47, YO[2] - 0.05], [-0.15, 1.32, 3.3], pushK(f, T0(17), 0.002) * pushK(f, cue(25, "closer") - 6, 0, 0.007, 24), { fov: 54 });
 // 18 pan from the car to the stairwell door beside it, then push toward the red dark
 const S18a = (_f: number): Shot => ({ pos: [YO[0] - 0.1, 1.55, YO[2] - 1.5], look: [-0.1, 1.3, 2.6], fov: 42 });
@@ -285,20 +284,20 @@ const CAMS: Record<number, Key[]> = {
   1: [{ f: 0, s: S1 }],
   2: [{ f: T0(2), s: S2 }],
   3: [{ f: T0(3), s: S3 }],
-  4: [{ f: T0(4), s: S4a }, { f: cue(3, "light") - 10, dur: 28, s: S4b }],
+  4: [{ f: T0(4), s: S4a }],
   5: [{ f: T0(5), s: S5 }, { f: RULE2[0], cut: true, s: SCARD }, { f: RULE2[1], cut: true, s: S5 }],
   6: [{ f: T0(6), s: S5 }],
   7: [{ f: T0(7), s: S7 }],
   8: [{ f: T0(8), s: S8 }],
-  9: [{ f: T0(9), s: S9 }, { f: IN9, cut: true, s: S9b }, { f: OUT9, cut: true, s: S9 }],
+  9: [{ f: T0(9), s: S9 }],
   10: [{ f: T0(10), s: S9 }],
-  11: [{ f: T0(11), s: S11 }],
+  11: [{ f: T0(11), s: S11 }, { f: ZERO_INSERT[0], cut: true, s: SZERO }, { f: ZERO_INSERT[1], cut: true, s: S11 }],
   12: [{ f: T0(12), s: S12 }],
   13: [{ f: T0(13), s: S13 }],
   14: [{ f: T0(14), s: S14 }],
   15: [{ f: T0(15), s: S15a }, { f: L(21), cut: true, s: S15b }],
   16: [{ f: T0(16), s: S16 }],
-  17: [{ f: T0(17), s: S17 }],
+  17: [{ f: T0(17), s: S17 }, { f: cue(25, "nobody") - 2, cut: true, s: SPRINTS }],
   18: [{ f: T0(18), s: S18a }, { f: cue(26, "stairwell") - 14, dur: 30, s: S18b }],
   19: [{ f: T0(19), s: S19 }],
   20: [{ f: T0(20), s: S20 }],
@@ -328,14 +327,11 @@ export const DOF: Dof[] = [
   { f: T0(2), cInf: 6, focus: () => [0.0, 1.4, 3.2] },
   { f: T0(3), cInf: 13, focus: youEyes },
   { f: T0(4), cInf: 12, focus: () => [PANEL.x, 1.0, PANEL.z] },
-  { f: cue(3, "light") - 10, dur: 24, cInf: 8, focus: () => [0.0, CAB.h, 3.2] },
   { f: T0(5), cInf: 9, focus: () => [FG[0], 1.7, FG[2]] },
   { f: RULE2[0], cInf: 11, focus: () => [CARD_AT[0], CARD_AT[1] - 0.05, CARD_AT[2]] },
   { f: RULE2[1], cInf: 9, focus: () => [FG[0], 1.7, FG[2]] },
   { f: T0(8), cInf: 7, focus: () => [FG[0], 1.4, FG[2]] },
   { f: T0(9), cInf: 0 },
-  { f: IN9, cInf: 11, focus: () => [CARD_AT[0], CARD_AT[1] + 0.03, CARD_AT[2]] },
-  { f: OUT9, cInf: 0 },
   { f: T0(11), cInf: 6, focus: (f) => { const p = exitPos(f); return [p[0], 1.4, p[2]]; } },
   { f: T0(12), cInf: 9, focus: () => DISPLAY_OUT },
   { f: T0(13), cInf: 12, focus: outEyes },

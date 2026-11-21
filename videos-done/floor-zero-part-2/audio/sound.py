@@ -196,11 +196,12 @@ rt = roomtone(DUR, R) * 0.5
 S(widen(rt, R), 0, -21, what="floor zero room tone")
 hm = hum(DUR, R, 120.0, 0.5)
 S(widen(hm, R, 7), 0, -30, what="fluorescent hum")
-# cold-open teaser (frames 0..TEASER): a flash of the night-shift screens, then a white flash into the recap
+# cold-open teaser (frames 0..TEASER): its legs one step past its dusty prints ("IT TOOK A STEP. NOBODY SAW."),
+# under the premise line; one heavy footstep, a sub, a thin glitch, then a white flash into the recap
 TZ = TL["teaser"] / FPS
-S(crackle(R, TZ + 0.1), 0, -13, 0, "teaser: screen glitch")
-S(fans_up(R, TZ + 0.4), 0, -17, 0.2, "teaser: every computer whirring")
-S(dong(R, 41, 2.2), 0, -12, 0, "teaser: sub hit")
+S(step(R, True), 0.02, -6, -0.1, "teaser: one heavy footstep")
+S(dong(R, 41, 2.6), 0.04, -12, 0, "teaser: sub hit")
+S(crackle(R, TZ + 0.1), 0, -20, 0, "teaser: thin glitch")
 S(widen(G.whoosh(0.5, R, peak=0.45, f_lo=400, f_hi=7000, tail=0.02), R), TZ - 0.5, -17, 0, "teaser: suck-in to the white flash")
 # recap: the half-open doors groan
 S(door_slide(R, 2.6, True), TZ + 0.1, -22, 0, "doors groan (recap)")
@@ -218,7 +219,9 @@ S(relay_clunk(R), fr(TL["lightsOn"]), -10, 0, "lights back on")
 S(crackle(R, 0.45), fr(TL["lightsOn"]), -16, 0.2, "flicker crackle")
 S(dong(R, 46, 4.0), wt(9, "you're") - 0.05, -10, 0, "you're the one facing the wall: dong")
 S(click(R, 700, 0.7), fr(TL["endDark"]), -18, 0, "display goes dark")
-S(dong(R, 36, 3.2), wt(10, "keep") - 0.05, -13, 0, "'to KEEP you': the trap shuts (sub)")
+for k, dt in enumerate((0.0, 0.36)):
+    S(lp(step(R, False), 900, 2), wt(7, "move") + 0.15 + dt, -17 + 2 * k, -0.35, "in the dark, it moves (two scuffs)" if k == 0 else None)
+S(ui_pop(R, 520), fr(TL["zeroInsert"][0]) + 0.05, -19, 0.2, "the 0 button glows (insert)")
 # ---------------- rewind ----------------
 r0, r1 = fr(TL["rewind"][0]), fr(TL["rewind"][1])
 S(widen(tape_rewind(R, r1 - r0), R), r0, -12, what="VHS rewind")

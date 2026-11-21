@@ -11,44 +11,45 @@ SR = 24000
 NARR = sys.argv[1] if len(sys.argv) > 1 else "af_heart"
 FIG = "am_onyx"
 SEMI = 2.0  # the figure: pitch/speed down by this many semitones (resampling)
-L = [  # (who, text, speed, gap after)
-    ("narr", "So, did you step out, or did you stay in?", 0.9, 0.7),
-    ("narr", "If you stayed in, the doors close.", 0.92, 0.45),
-    ("narr", "The card said, don't step out. And you listened.", 0.92, 0.45),
-    ("narr", "The panel goes dark. The light above you hums.", 0.9, 0.45),
-    ("narr", "And then, without turning around, the one facing the wall speaks.", 0.9, 0.55),
-    ("fig", "Don't worry.", 0.95, 0.6),
-    ("fig", "I'll finish your shift.", 0.95, 0.8),
-    ("narr", "The lights go out.", 0.86, 1.1),
-    ("narr", "When they come back on, they're gone.", 0.9, 0.4),
-    ("narr", "And now, you're the one facing the wall.", 0.86, 0.6),
-    ("narr", "This is the end. Because the rules were never there to protect you. They were there to keep you.", 0.86, 0.8),
-    ("narr", "Let's rewind.", 0.95, 1.2),
-    ("narr", "If you stepped out, the doors close behind you.", 0.93, 0.35),
-    ("narr", "And the elevator drops.", 0.9, 0.3),
-    ("narr", "Floor after floor, all the way down, until it hits the bottom.", 0.95, 0.9),
-    ("narr", "You were right to leave. You let out a breath.", 0.92, 0.5),
-    ("narr", "But then, every computer in the office turns on.", 0.93, 0.25),
-    ("narr", "All at once. And every screen says the same thing.", 0.92, 0.45),
-    ("narr", "Welcome to the night shift.", 0.86, 0.4),
-    ("narr", "Seven floors. One rule on each.", 0.88, 0.35),
-    ("narr", "The only way up is down.", 0.84, 0.5),
-    ("narr", "Reach the ground floor by six in the morning. Or stay here forever.", 0.92, 0.7),
-    ("narr", "Then, behind you, a soft ding.", 0.9, 0.35),
-    ("narr", "The elevator is back.", 0.88, 0.5),
-    ("narr", "The doors open. The light is on. And the one facing the wall is still inside.", 0.93, 0.35),
-    ("narr", "Only now, one step closer to the doors.", 0.86, 0.6),
-    ("narr", "Right next to it, the stairwell door creaks open.", 0.93, 0.4),
-    ("narr", "Down in the dark, you hear footsteps. Coming up.", 0.9, 0.6),
-    ("narr", "You have to go down. Two ways.", 0.92, 0.4),
-    ("narr", "Take the stairs, toward the footsteps.", 0.93, 0.35),
-    ("narr", "Or take the elevator, with the one facing the wall.", 0.92, 0.5),
-    ("narr", "So, which way down do you go?", 0.86, 0.0),
+L = [  # (line id, who, text, speed, gap after). Ids stay stable so story.ts cues keep working; the order is the spoken order.
+    (32, "narr", "Seven floors under your office, and it just moved.", 0.92, 0.4),   # cold-open premise line
+    (0, "narr", "So, step out, or stay in?", 0.9, 0.5),
+    (1, "narr", "If you stayed in, the doors shut.", 0.92, 0.4),
+    (2, "narr", "The card said, don't step out. And you listened.", 0.92, 0.4),
+    (3, "narr", "Then the panel dies.", 0.88, 0.5),
+    (4, "narr", "Without turning around, the one facing the wall speaks.", 0.9, 0.55),
+    (5, "fig", "Don't worry.", 0.95, 0.6),
+    (6, "fig", "I'll finish your shift.", 0.95, 0.8),
+    (7, "narr", "The lights go out. And in the dark, you hear it move.", 0.86, 0.9),
+    (8, "narr", "When they come back on, it's gone.", 0.9, 0.4),
+    (9, "narr", "And now, you're the one facing the wall.", 0.86, 0.6),
+    (10, "narr", "This is the end.", 0.84, 0.8),
+    (11, "narr", "Let's rewind.", 0.95, 1.2),
+    (12, "narr", "If you stepped out, the doors close behind you.", 0.93, 0.35),
+    (13, "narr", "And the elevator drops.", 0.9, 0.3),
+    (14, "narr", "Floor after floor, all the way down, until it hits the bottom.", 0.95, 0.9),
+    (15, "narr", "You were right to leave. You let out a breath.", 0.92, 0.5),
+    (16, "narr", "But then, every computer in the office turns on.", 0.93, 0.25),
+    (17, "narr", "All at once. And every screen says the same thing.", 0.92, 0.45),
+    (18, "narr", "Welcome to the night shift.", 0.86, 0.4),
+    (19, "narr", "Seven floors. One rule on each.", 0.88, 0.35),
+    (20, "narr", "The only way out is down.", 0.84, 0.5),
+    (21, "narr", "Clock out before six in the morning. Or stay here forever.", 0.92, 0.7),
+    (22, "narr", "Then, behind you, a soft ding.", 0.9, 0.35),
+    (23, "narr", "The elevator is back.", 0.88, 0.5),
+    (24, "narr", "The doors open. The light is on. And the one facing the wall is still inside.", 0.93, 0.35),
+    (25, "narr", "Only now, it's one step closer. And nobody saw it move.", 0.88, 0.6),
+    (26, "narr", "Right next to it, the stairwell door creaks open.", 0.93, 0.4),
+    (27, "narr", "Down in the dark, you hear footsteps. Coming up.", 0.9, 0.6),
+    (28, "narr", "You have to go down. Two ways.", 0.92, 0.4),
+    (29, "narr", "Take the stairs, toward the footsteps.", 0.93, 0.35),
+    (30, "narr", "Or take the elevator, with the one facing the wall.", 0.92, 0.5),
+    (31, "narr", "So, which way down do you go?", 0.86, 0.0),
 ]
-LEAD = 1.12  # 1 s of room at the top for the cold-open teaser (Part 2 retention pass)
+LEAD = 0.15  # the premise line plays over the cold-open teaser from the start
 pipes = {"a": KPipeline(lang_code="a")}
 out, words, t = [np.zeros(int(LEAD * SR), np.float32)], [], LEAD
-for li, (who, text, speed, gap) in enumerate(L):
+for li, who, text, speed, gap in L:
     voice = NARR if who == "narr" else FIG
     chunks, toks, off = [], [], 0.0
     for r in pipes["a"](text, voice=voice, speed=speed):

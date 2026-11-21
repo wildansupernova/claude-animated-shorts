@@ -8,12 +8,12 @@ superseded.
   - STAY IN loses.
   - STEP OUT continues. It was allowed all along: zero lit up on the panel before the doors opened.
 - **Part 2 choice:** ① STAIRS (toward the footsteps) / ② ELEVATOR (ride all the way down with it).
-- **Target:** ~95 s, 30 fps, ~260 words. Narrator af_heart; the figure am_onyx, 2 semitones down.
+- **Produced:** 93.33 s (2800 frames), 250 words. Voice line ids in `voice/gen_voice.py`: P = 32, line 2b = 3. Narrator af_heart; the figure am_onyx, 2 semitones down.
 
 ## Beat map
 | Beat | Lines | Time (approx.) | Picture |
 |---|---|---|---|
-| Cold open | P | 0-1.8 s | Frame 1: the car doors slide open on it, one step past its own dusty footprints. Glitch, sting, white flash. |
+| Cold open | P | 0-3.3 s | Frame 1: low in the car doorway, its legs one step past its own dusty footprints. A footstep, a sub, a white flash. |
 | Recap | 0 | 1.8-3.5 s | Part 1's last frame: the half-open doors, both tags. The real split is a silent banner, only with real numbers. |
 | ② STAY IN (loses; new sense: its voice) | 1-9 | 3.5-29 s | The doors shut; the panel dies; it speaks without turning; blackout; you're facing the wall |
 | Rewind | 10 | 29-31 s | VHS rewind through the branch |
@@ -27,8 +27,9 @@ superseded.
 |---|---|---|---|---|
 | P | narr | Seven floors under your office, and it just moved. | 0.3 | Cold open (from line 24's shot). Text on frame 1: **IT TOOK A STEP. NOBODY SAW.** HUD "FLOOR 0". |
 | 0 | narr | So, step out, or stay in? | 0.5 | Part 1's last frame; recap tags pop |
-| 1 | narr | If you stayed in, the doors shut. And the panel dies. | 0.3 | Badge ② STAY IN; the doors shut on the two of you; the panel dies |
+| 1 | narr | If you stayed in, the doors shut. | 0.4 | Badge ② STAY IN; the doors shut on the two of you |
 | 2 | narr | The card said, don't step out. And you listened. | 0.4 | Your face; the card (Rule 2 half-legible, **no red circle**) |
+| 2b | narr | Then the panel dies. | 0.5 | The panel goes dark |
 | 3 | narr | Without turning around, the one facing the wall speaks. | 0.4 | Low angle on its back |
 | 4 | fig | Don't worry. | 0.5 | Its head tilts, but it doesn't turn |
 | 5 | fig | I'll finish your shift. | 0.6 | Hold |

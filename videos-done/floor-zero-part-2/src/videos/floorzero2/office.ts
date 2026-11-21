@@ -476,8 +476,6 @@ export const drawCard = (g: CanvasRenderingContext2D, w: number, h: number) => {
   scrib(330, 560, 690, 610, 9, 8);
   scrib(50, 700, 690, 930, 22, 14);
   scrib(60, 760, 680, 900, 18, 10);
-  // Part 2: someone has circled Rule 2 in red marker
-  g.strokeStyle = "rgba(200,28,22,0.92)"; g.lineWidth = 10; g.beginPath(); g.ellipse(w / 2 - 6, 615, w / 2 - 22, 62, -0.03, 0, Math.PI * 2.05); g.stroke();
   // tape strips
   g.fillStyle = "rgba(240,232,200,0.75)"; g.save(); g.translate(w / 2, 18); g.rotate(-0.04); g.fillRect(-90, -24, 180, 48); g.restore();
   g.save(); g.translate(w / 2 + 40, h - 16); g.rotate(0.05); g.fillRect(-80, -22, 160, 44); g.restore();
@@ -500,7 +498,7 @@ export const drawPhone = (g: CanvasRenderingContext2D, w: number, h: number, t: 
   g.font = "700 28px Montserrat, sans-serif"; g.fillStyle = "#ffd2cf"; g.textAlign = "center"; g.fillText("No signal", w / 2, 528);
 };
 
-/** every screen on floor zero: WELCOME TO THE NIGHT SHIFT / 7 FLOORS · 1 RULE EACH / THE ONLY WAY UP IS DOWN / REACH G BEFORE 06:00 + countdown */
+/** every screen on floor zero: WELCOME TO THE NIGHT SHIFT / 7 FLOORS · 1 RULE EACH / THE ONLY WAY OUT IS DOWN / CLOCK OUT BEFORE 06:00 + countdown */
 export const drawMessage = (g: CanvasRenderingContext2D, w: number, h: number, lines: number, left: number) => {
   g.fillStyle = "#04070d"; g.fillRect(0, 0, w, h);
   g.fillStyle = "rgba(255,255,255,0.03)"; for (let y = 0; y < h; y += 4) g.fillRect(0, y, w, 1);
@@ -509,9 +507,9 @@ export const drawMessage = (g: CanvasRenderingContext2D, w: number, h: number, l
   g.fillStyle = "#ffb347"; g.font = "900 52px Montserrat, sans-serif"; g.fillText("NIGHT SHIFT", w / 2, 80);
   g.fillStyle = "#e9eef6"; g.font = "800 26px Montserrat, sans-serif";
   if (lines >= 2) g.fillText("7 FLOORS \u00b7 1 RULE EACH", w / 2, 132);
-  if (lines >= 3) g.fillText("THE ONLY WAY UP IS DOWN", w / 2, 170);
+  if (lines >= 3) g.fillText("THE ONLY WAY OUT IS DOWN", w / 2, 170);
   if (lines >= 4) {
-    g.fillStyle = "#c9d3e6"; g.font = "800 22px Montserrat, sans-serif"; g.fillText("REACH  G  BEFORE  06:00", w / 2, 210);
+    g.fillStyle = "#c9d3e6"; g.font = "800 22px Montserrat, sans-serif"; g.fillText("CLOCK  OUT  BEFORE  06:00", w / 2, 210);
     const hh = Math.floor(left / 3600), mm = Math.floor((left % 3600) / 60), ss = left % 60, p = (n: number) => String(n).padStart(2, "0");
     g.fillStyle = "#ff4a3a"; g.font = "900 54px Montserrat, sans-serif"; g.shadowColor = "#ff2a1a"; g.shadowBlur = 12;
     g.fillText(`${p(hh)}:${p(mm)}:${p(ss)}`, w / 2, 260); g.shadowBlur = 0;

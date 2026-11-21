@@ -122,7 +122,7 @@ export const FloorZero2Short: React.FC = () => {
   const dark = f >= LIGHTS_OUT && f < LIGHTS_ON && !(f - LIGHTS_OUT === 9 || f - LIGHTS_OUT === 10);
   return (
     <AbsoluteFill style={{ background: "#05070c" }}>
-      <AbsoluteFill style={rw ? { filter: "saturate(0.45) contrast(1.3) brightness(1.08) hue-rotate(-8deg)", transform: `translateX(${jx}px) scale(1.02)` } : tz ? { filter: "contrast(1.25) saturate(0.8)", transform: `translateX(${jx}px) scale(${1.04 + 0.002 * f})` } : undefined}>
+      <AbsoluteFill style={rw ? { filter: "saturate(0.45) contrast(1.3) brightness(1.08) hue-rotate(-8deg)", transform: `translateX(${jx}px) scale(1.02)` } : tz ? { filter: "brightness(1.55) contrast(1.15) saturate(0.85)", transform: `translateX(${jx}px) scale(${1.04 + 0.0015 * f})` } : undefined}>
         {layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} kit={kit} alpha={l.alpha} f={l.f} />)}
       </AbsoluteFill>
       {dark && <AbsoluteFill style={{ background: "#000000" }} />}

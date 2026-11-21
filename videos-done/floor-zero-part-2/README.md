@@ -1,7 +1,7 @@
 # Floor Zero, Part 2: the Night Shift
 
 Episode 2 of our original interactive horror series. Part 1 is in `videos-done/floor-zero-part-1/`, and `SCRIPT.md`
-has this episode's script and beat map. It runs 96.4 s (2892 frames) at 1080x1920, 30 fps, with burned-in captions.
+has this episode's script and beat map. It runs 93.33 s (2800 frames) at 1080x1920, 30 fps, with burned-in captions.
 
 The episode follows the sequel beat sheet in `references/INTERACTIVE_SERIES_FORMULA.md`:
 0. **Cold open (1 s):** a glitchy flash-forward of every monitor reading NIGHT SHIFT, then a white flash.
@@ -18,7 +18,26 @@ The episode follows the sequel beat sheet in `references/INTERACTIVE_SERIES_FORM
    creaks open on red dark with footsteps coming up.
 6. **The new choice:** ① STAIRS / ② ELEVATOR. "So, which way down do you go?"
 
-## Engagement revision (current)
+## Final re-cut: "It Took a Step" (current, 2800 frames, 93.33 s)
+Built from `SCRIPT.md`, the audited script, per `videos-done/floor-zero-series/SEASON.md` §8-9.
+- **Cold open:** "Seven floors under your office, and it just moved." over a low shot of its legs, one step past its
+  dusty footprints. Text: "IT TOOK A STEP. NOBODY SAW."
+- **Story changes:**
+  - The "rules were there to keep you" line and its card insert are gone.
+  - The red circle on Rule 2 is gone.
+  - New line: "And in the dark, you hear it move."
+  - New silent clue: a 1 s insert of the panel with "0" lit as you step out.
+  - The screens now say "CLOCK OUT BEFORE 06:00".
+  - New line: "And nobody saw it move", on the footprints shot.
+- **Overlays:**
+  - The HUD ("FLOOR 0 · PART 2", then the countdown) and every tag and pill sit below the top 20 %.
+  - Caption baselines are at or above y 1500, and the right-edge button column is kept clear.
+- **QA:**
+  - Whisper hears 249/250 words; the one miss is "close" heard as "closed".
+  - The mix is -14.0 LUFS, -1.06 dBTP.
+  - Stills are in `preview_frames.jpg`.
+
+## Engagement revision (superseded)
 Applied the retention and comment rules from `references/INTERACTIVE_SERIES_FORMULA.md`:
 - **Cold-open teaser** (`TEASER`, frames 0-29): the screens shot from later in the episode, glitched, with a sting;
   the voice starts 1 s later (`LEAD = 1.12`).
