@@ -35,40 +35,38 @@ Episode 3 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 | # | Line | Gap after (s) | Picture |
 |---|---|---|---|
 | P | Floor minus one is flooded. Don't step in it. | 0.3 | Cold open as above. HUD "FLOOR -1". |
-| 0 | So, did you take the stairs, or the elevator? | 0.5 | Part 2's last frame; recap tags; HUD "FLOOR 0 · 05:59 TO 06:00" |
-| opt-a | *(only with real numbers)* Most of you took the {stairs / elevator}. Let's see. | 0.4 | Real vote banner |
-| opt-b | *(only if real comments found it)* And a lot of you noticed: zero was on the panel. | 0.5 | 1 s: Part 1's panel with "0" lit |
-| 1 | If you took the stairs, the door swings shut behind you. | 0.3 | Badge ① STAIRS; the fire door closes; red light |
-| 2 | Red light. Concrete steps. And the footsteps, still coming up. | 0.4 | High angle down the stairwell |
-| 3 | Then they stop. On the landing, right below you. | 0.5 | Silence; your feet freeze |
-| 4 | Your phone. One percent. You point the light down. | 0.3 | Phone torch on |
-| 5 | Nobody's there. | 0.6 | Empty landing |
-| 6 | The red lamp flickers. | 0.3 | Flicker, then black for 6 frames |
-| 7 | And a hand settles on your shoulder. | 0.6 | Close: a grey hand on your shoulder, from behind |
-| 8 | This is the end. | 0.6 | Hold; the lamp dies |
-| 9 | Let's rewind. | 0.4 | VHS rewind |
-| 10 | If you took the elevator, you step inside with it. | 0.3 | Badge ② ELEVATOR; you enter; it faces the corner |
-| 11 | The doors close. Minus one is a long way down. | 0.4 | You stand at the doors, eyes on its back |
-| 12 | The light flickers. | 0.3 | 4 dark frames; HUD jumps to 05:20 |
-| 13 | When it comes back, it's a step closer. | 0.4 | Two-shot: a visible gap closes |
-| 14 | Again. | 0.3 | Flicker; HUD 05:02 |
-| 15 | Another step. | 0.4 | Closer |
-| 16 | Again. | 0.3 | Flicker; HUD 04:47 |
-| 17 | And now it's standing right in front of you. | 0.5 | Its back fills the frame. Unnarrated 1 s insert: the brushed steel; your reflected badge reads **UOY**. |
-| 18 | It's your height now. It has ears now. And it's wearing a red lanyard. Like yours. | 0.5 | Tilt down its back: ears, the red lanyard strap |
-| 19 | Ding. Minus one. The doors open, and you back out. | 0.4 | Display "-1"; you step backwards; the doors close on it |
-| 20 | Minus one is your office again. | 0.3 | Wide: the office, black-teal |
-| 21 | Only it's flooded. Black water. Perfectly still. | 0.4 | Low angle across the mirror surface |
-| 22 | A sign on the wall says: minus one. Don't step in the water. | 0.4 | Insert: the sign |
-| 23 | The stairs down are on the far side. | 0.4 | Push across the room to the stairwell door. Unnarrated: a badge floats face-up, **D. HALE**; in the reflection, one extra person stands between the desks. |
-| 24 | Then, at the far end, the lights start switching off. | 0.3 | The farthest ceiling row clunks off |
-| 25 | One row at a time. | 0.4 | Next row; next row |
-| 26 | Coming toward you. | 0.5 | The dark advances; HUD stays 04:47 |
-| 27 | And you're the only one standing in the light. | 0.5 | You, small, at the water's edge |
-| 28 | You have two choices. | 0.3 | Tags appear |
-| 29 | Wade straight through the water. It's fast. But it breaks the rule. | 0.4 | Tag ① WADE on the water |
-| 30 | Or climb across the desks, one by one. It's slow. And the dark is coming. | 0.4 | Tag ② CLIMB on the desk row |
-| 31 | So, do you wade through it, or climb across the desks? | end + 1.3 | Tags pinned; COMMENT 1 OR 2 ↓ |
+| 0 | So, stairs, or elevator? | 0.5 | Part 2's last frame; recap tags; HUD "FLOOR 0 · 05:59 TO 06:00" |
+| 1 | If you took the stairs, the footsteps keep coming up. | 0.3 | Badge ① STAIRS; the fire door closes; red stairwell, high angle down |
+| 2 | Then they stop. Right below you. | 0.5 | Silence; your feet freeze |
+| 3 | Your phone. One percent. You point the light down. | 0.3 | Phone torch on |
+| 4 | Nobody's there. | 0.6 | Empty landing |
+| 5 | The red lamp flickers. | 0.3 | Flicker, then black for 6 frames |
+| 6 | And a hand settles on your shoulder. | 0.6 | Close: a grey hand on your shoulder, from behind |
+| 7 | This is the end. | 0.6 | Hold; the lamp dies |
+| 8 | Let's rewind. | 0.4 | VHS rewind |
+| opt | *(only if real comments found it)* A lot of you noticed: zero was on the panel. | 0.5 | 1 s: Part 1's panel with "0" lit |
+| 9 | If you took the elevator, you step inside with it. | 0.3 | Badge ② ELEVATOR; you enter; it faces the corner |
+| 10 | The doors close. Minus one is a long way down. | 0.4 | You stand at the doors, eyes on its back |
+| 11 | The light flickers. | 0.3 | 4 dark frames; HUD jumps to 05:20 |
+| 12 | When it comes back, it's a step closer. | 0.4 | Two-shot: a visible gap closes |
+| 13 | Again. | 0.3 | Flicker; HUD 05:02 |
+| 14 | Another step. | 0.4 | Closer |
+| 15 | Again. | 0.3 | Flicker; HUD 04:47 |
+| 16 | And now it's standing right in front of you. | 0.5 | Its back fills the frame. Unnarrated 1 s insert: the brushed steel; your reflected badge reads **UOY**. |
+| 17 | It's your height now. It has ears now. And it's wearing a red lanyard. Like yours. | 0.5 | Tilt down its back: ears, the red lanyard strap |
+| 18 | Ding. Minus one. The doors open, and you back out. | 0.4 | Display "-1"; you step backwards; the doors close on it |
+| 19 | Minus one is your office again. | 0.3 | Wide: the office, black-teal |
+| 20 | Only it's flooded. Black water. Perfectly still. | 0.4 | Low angle across the mirror surface |
+| 21 | A sign on the wall says: minus one. Don't step in the water. | 0.4 | Insert: the sign |
+| 22 | The stairs down are on the far side. | 0.4 | Push across the room to the stairwell door. Unnarrated: a badge floats face-up, **D. HALE**; in the reflection, one extra person stands between the desks. |
+| 23 | Then, at the far end, the lights start switching off. | 0.3 | The farthest ceiling row clunks off |
+| 24 | One row at a time. | 0.4 | Next row; next row |
+| 25 | Coming toward you. | 0.5 | The dark advances; HUD stays 04:47 |
+| 26 | And you're the only one standing in the light. | 0.5 | You, small, at the water's edge |
+| 27 | You have two choices. | 0.3 | Tags appear |
+| 28 | Wade straight through the water. It's fast. But it breaks the rule. | 0.4 | Tag ① WADE on the water |
+| 29 | Or climb across the desks, one by one. It's slow. And the dark is coming. | 0.4 | Tag ② CLIMB on the desk row |
+| 30 | So, do you wade through it, or climb across the desks? | end + 1.3 | Tags pinned; COMMENT 1 OR 2 ↓ |
 
 ## On-screen text and props
 - **Frame-1 text:** YOUR REFLECTION ISN'T COPYING YOU.
@@ -83,4 +81,4 @@ Episode 3 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 ## Post
 - **Title:** Floor Zero 3: Don't Step in the Water
 - **Caption:** `Floor Zero Part 3 #series #story #decide #horror`
-- **Pinned comment:** "① WADE or ② CLIMB? The rule says STEP in the water. Read it again."
+- **Pinned comment:** "① WADE or ② CLIMB? Which is worse down here: the water, or the dark?"

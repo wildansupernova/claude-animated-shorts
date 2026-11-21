@@ -34,9 +34,8 @@ Episode 6 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 ## Voice-over
 | # | Line | Gap after (s) | Picture |
 |---|---|---|---|
-| P | You picked one. Let's see if it was you. | 0.3 | Cold open as above. HUD "FLOOR G". |
-| 0 | So, which one did you pick? One, or two? | 0.5 | Part 5's last frame; HUD "FLOOR -7 · 00:02:31 TO 06:00" |
-| opt | *(only with real numbers)* Most of you picked {one / two}. Let's see. | 0.4 | Real vote banner |
+| P | You made your choice. Let's see if it was you. | 0.3 | Cold open as above. HUD "FLOOR G". |
+| 0 | So, one, or two? | 0.5 | Part 5's last frame; HUD "FLOOR -7 · 00:02:31 TO 06:00" |
 | 1 | If you picked two, you kept your eyes on one. | 0.4 | Badge ②; POV locked on ① |
 | 2 | Nobody was watching two. | 0.5 | Out of focus at frame edge, ② is gone |
 | 3 | Five fifty-nine. It swipes its badge, and the clock takes it. | 0.4 | Insert: a badge in the slot, *chunk*; the clock reads 05:59 |
@@ -56,17 +55,16 @@ Episode 6 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 | 17 | Five fifty-nine, and fifty-nine seconds. You swipe your badge. | 0.4 | The slot; *chunk*; 05:59:59 |
 | 18 | Six o'clock. Behind you, it turns to face the wall. | 0.4 | ② turns to the wall |
 | 19 | And slowly, it goes grey. | 0.5 | The blue drains from its sweater |
-| 20 | Ground floor. Morning. One bar of signal. | 0.4 | G, gold; your phone: one bar |
-| 21 | A message from home. Where are you? You type: On my way. | 0.6 | "Where are you??" → you type "On my way." |
-| 22 | On your way out, you see the whole card. For the first time. | 0.4 | Through the closing doors: the full card, legible |
-| 23 | Rule two. If someone is facing the wall, never look away from them. | 0.5 | Push in: Rule 2 in full |
-| 24 | Rule three. The night shift always keeps one. | 0.8 | Push in: Rule 3. The doors close. |
-| 25 | Next Friday, just before midnight, someone else is the last one leaving the office. | 0.3 | Part 1's office; a different worker (yellow cardigan) |
-| 26 | Behind them, the lights switch off. One row at a time. | 0.4 | Rows die (Part 1's opening, mirrored shot) |
-| 27 | The elevator goes right past the ground floor. | 0.3 | The display: 1 → G → 0 |
-| 28 | Then, with a jolt, the lights go out. | 0.6 | Black, 0.6 s |
-| 29 | And when they come back on, someone is standing in the corner. Facing the wall. | 0.6 | The corner: a grey sweater, a red lanyard, the badge "UOY" |
-| 30 | Imagine you're the last one leaving the office. | end + 1.2 | Smash to black; the end card "FLOOR ZERO" |
+| 20 | Ground floor. Morning. One bar. A message from home. Where are you? You type: On my way. | 0.4 | G, gold; your phone: one bar; "Where are you??" → you type "On my way." |
+| 21 | On your way out, you finally see the whole card. | 0.4 | Through the closing doors: the full card, legible |
+| 22 | Rule two. If someone is facing the wall, never look away from them. | 0.5 | Push in: Rule 2 in full |
+| 23 | Rule three. The night shift always keeps one. | 0.8 | Push in: Rule 3. The doors close. |
+| 24 | Next Friday, just before midnight, someone else is the last one leaving the office. | 0.3 | Part 1's office; a different worker (yellow cardigan) |
+| 25 | Behind them, the lights switch off. One row at a time. | 0.4 | Rows die (Part 1's opening, mirrored shot) |
+| 26 | The elevator goes right past the ground floor. | 0.3 | The display: 1 → G → 0 |
+| 27 | Then, with a jolt, the lights go out. | 0.6 | Black, 0.6 s |
+| 28 | And when they come back on, someone is standing in the corner. Facing the wall. | 0.6 | The corner: a grey sweater, a red lanyard, the badge "UOY" |
+| 29 | Imagine you're the last one leaving the office. | end + 1.2 | Hold on the corner shot; the title "FLOOR ZERO" fades in over it. No separate end card: the last frame loops. |
 
 ## On-screen text and props
 - **Frame-1 text:** 06:00. ONLY ONE WALKS OUT.
@@ -76,7 +74,7 @@ Episode 6 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
   2. IF SOMEONE IS FACING THE WALL, NEVER LOOK AWAY FROM THEM.
   3. THE NIGHT SHIFT ALWAYS KEEPS ONE.
 - **Phone:** "See you soon ❤" (the copy's); "Where are you??" → "On my way." (yours).
-- **End card:** "FLOOR ZERO", no CTA in the video.
+- **No end card:** the title "FLOOR ZERO" sits over the last corner shot, with no CTA in the video. The last frame loops into Part 1.
 
 ## Post
 - **Title:** Floor Zero 6: Only One Clocks Out

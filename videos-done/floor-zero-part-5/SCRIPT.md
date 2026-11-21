@@ -40,37 +40,35 @@ Episode 5 of **Floor Zero**, per `videos-done/floor-zero-series/SEASON.md` §8 (
 | # | Line | Gap after (s) | Picture |
 |---|---|---|---|
 | P | Only one of you gets to clock out. | 0.3 | Cold open as above. HUD "FLOOR -7". |
-| 0 | So, did you turn around, or keep walking? | 0.5 | Part 4's last frame; recap tags; HUD "FLOOR -3 · 03:12 TO 06:00" |
-| opt | *(only with real numbers)* Most of you {turned around / kept walking}. Let's see. | 0.4 | Real vote banner |
+| 0 | So, turn around, or keep walking? | 0.5 | Part 4's last frame; recap tags; HUD "FLOOR -3 · 03:12 TO 06:00" |
 | 1 | If you turned around, there's nothing there. | 0.4 | Badge ① TURN AROUND; you spin; an empty office |
-| 2 | Just the office. Empty. | 0.4 | Hold |
-| 3 | But on every screen, it's still right behind you. | 0.5 | The screens: it stands behind you, unchanged |
-| 4 | You turn again. Nothing. And you feel it breathe on your neck. | 0.5 | You spin again; your collar stirs |
-| 5 | One by one, the monitors go dark. | 0.4 | Screens die in a wave toward you |
-| 6 | This is the end. | 0.6 | Black |
-| 7 | Let's rewind. | 0.4 | VHS rewind |
-| 8 | If you kept walking, you watch it on the screens. Row by row. | 0.4 | Badge ② KEEP WALKING; you walk; every screen you pass shows it one step behind |
-| 9 | One step behind you. Always exactly one step. | 0.5 | Close on a screen: its feet don't move between your steps (the picture settles Rule 2) |
+| 2 | But on every screen, it's still right behind you. | 0.5 | The screens: it stands behind you, unchanged |
+| 3 | You turn again. Nothing. And you feel it breathe on your neck. | 0.5 | You spin again; your collar stirs |
+| 4 | One by one, the monitors go dark. | 0.4 | Screens die in a wave toward you |
+| 5 | This is the end. | 0.6 | Black |
+| 6 | Let's rewind. | 0.4 | VHS rewind |
+| 7 | If you kept walking, you watch it on the screens. Row by row. | 0.4 | Badge ② KEEP WALKING; you walk; every screen you pass shows it one step behind |
+| 8 | One step behind you. Always exactly one step. | 0.5 | Close on a screen: its feet don't move between your steps (the picture settles Rule 2) |
 | opt | *(only if real comments said it)* Some of you said: watch the screens. | 0.4 | - |
-| 10 | Then the screens start to die. One by one. | 0.3 | Screens go to static ahead of you; HUD jumps to 00:03:30 |
-| 11 | And you run. | 0.3 | You sprint for the stairwell |
-| 12 | Down the stairs, as fast as you can. | 0.4 | Red stairwell; landing numbers -4, -5 blur past (no signs read) |
-| 13 | Minus five. The door is open. | 0.3 | Sepia; push through the doorway |
-| 14 | Hundreds of photos. One for every Friday. The newest frame is empty. And it has your name on it. | 0.6 | Wall-to-wall frames of people from behind, facing a wall; the camera lands on the empty frame, plate **YOU · 21 NOV**. Unnarrated: the frame before it, **D. HALE · 14 NOV** (a tall grey suit). |
-| 15 | Minus seven. A time clock, and a sign above it. | 0.3 | Red; rows of kept ones facing the walls, fading into the dark (picture only) |
-| 16 | Only one of you can clock out. | 0.5 | Insert: the sign "-7. ONLY ONE OF YOU CAN CLOCK OUT." |
-| 17 | Then your phone lights up. No service. But a message gets through. | 0.3 | Phone: "No Service" still showing |
-| 18 | From home. OK. See you soon. | 0.4 | The bubble: "OK. See you soon ❤" |
-| 19 | It's a reply. To a message from your number. Leaving now. | 0.4 | Above it, a sent bubble: "Leaving now", 05:41 |
-| 20 | You never sent that. | 0.6 | Your face in the phone light |
-| 21 | Five fifty-seven. And your phone's light dies. | 0.4 | The clock face 05:57; black |
-| 22 | In the dark, something takes your wrist. | 0.6 | Black; a soft grip sound |
-| 23 | When the light comes back, there are two of you. | 0.5 | Emergency light stutters on: two of you side by side, both looking at camera |
-| 24 | And both of you remember being you. | 0.5 | Shell game: flicker, swap, flicker, swap; in the **final** flicker, after the last swap, ②'s lanyard spins and its badge reads **UOY** for 6-10 frames |
-| 25 | Look closely before you answer. | 0.4 | Hold on both, badges turned in; hair strands opposite; wrist prints opposite |
-| 26 | One. | 0.3 | Tag ① on the left |
-| 27 | Or two. | 0.4 | Tag ② on the right |
-| 28 | So… which one is you? | end + 1.3 | Tags pinned; COMMENT 1 OR 2 ↓ |
+| 9 | Then the screens start to die. One by one. | 0.3 | Screens go to static ahead of you; HUD jumps to 00:03:30 |
+| 10 | And you run. | 0.3 | You sprint for the stairwell |
+| 11 | Down the stairs, as fast as you can. | 0.4 | Red stairwell; landing numbers -4, -5 blur past (no signs read) |
+| 12 | Minus five. The door is open. | 0.3 | Sepia; push through the doorway |
+| 13 | Hundreds of photos. One for every Friday. The newest frame is empty. And it has your name on it. | 0.6 | Wall-to-wall frames of people from behind, facing a wall; the camera lands on the empty frame, plate **YOU · 21 NOV**. Unnarrated: the frame before it, **D. HALE · 14 NOV** (a tall grey suit). |
+| 14 | Minus seven. A time clock, and a sign above it. | 0.3 | Red; rows of kept ones facing the walls, fading into the dark (picture only) |
+| 15 | Only one of you can clock out. | 0.5 | Insert: the sign "-7. ONLY ONE OF YOU CAN CLOCK OUT." |
+| 16 | Then your phone lights up. No service. But a message gets through. | 0.3 | Phone: "No Service" still showing |
+| 17 | From home. OK. See you soon. | 0.4 | The bubble: "OK. See you soon ❤" |
+| 18 | It's a reply. To a message from your number. Leaving now. | 0.4 | Above it, a sent bubble: "Leaving now", 05:41 |
+| 19 | You never sent that. | 0.6 | Your face in the phone light |
+| 20 | Five fifty-seven. And your phone's light dies. | 0.4 | The clock face 05:57; black |
+| 21 | In the dark, something takes your wrist. | 0.6 | Black; a soft grip sound |
+| 22 | When the light comes back, there are two of you. | 0.5 | Emergency light stutters on: two of you side by side, both looking at camera |
+| 23 | And both of you remember being you. | 0.5 | Shell game: flicker, swap, flicker, swap; in the **final** flicker, after the last swap, ②'s lanyard spins and its badge reads **UOY** for 6-10 frames |
+| 24 | Look closely before you answer. | 0.4 | Hold on both, badges turned in; hair strands opposite; wrist prints opposite |
+| 25 | One. | 0.3 | Tag ① on the left |
+| 26 | Or two. | 0.4 | Tag ② on the right |
+| 27 | So… which one is you? | end + 1.3 | Tags pinned; COMMENT 1 OR 2 ↓ |
 
 ## On-screen text and props
 - **Frame-1 text:** 05:57. THERE ARE TWO OF YOU.
