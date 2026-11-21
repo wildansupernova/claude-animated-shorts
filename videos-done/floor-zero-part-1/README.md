@@ -8,6 +8,19 @@ You're the last one leaving the office. The elevator goes right past the ground 
 exact copy of your office. Something is breathing behind you, and the episode ends on a numbered choice:
 ① STEP OUT / ② STAY IN. `SCRIPT.md` has the script, the beat map, the on-screen text and the Part 2 plan.
 
+## Render and posting record
+- **Rendered** on the user's Mac (GPU) from `RENDER_ON_YOUR_COMPUTER.md`. The share encode is 23.5 MB, 1080x1920,
+  30 fps, 2894 frames, 96.47 s, AAC 48 kHz stereo.
+- **Frame QA** (`scripts/short_qa.py` on the posted file):
+  - no black, white or silent spans; -14.5 LUFS, LRA 1.8, peak -1.0 dBFS;
+  - the flagged "pops" are planned story events (light rows switching off, flickers, button flares);
+  - the "frozen" spans are short camera holds (shots 13, 14b, 23).
+  - The GPU render matches the CPU stills (ink, lighting, captions, tags).
+- **Hosted** on Tigris at `floor-zero-part-1/floor_zero_part1.mp4` and **queued in Buffer**, AI label off:
+  - TikTok: Sat 21 Nov 18:20 WIB;
+  - YouTube Short: Sun 22 Nov 09:06 WIB.
+  - Delete the Tigris file only after both posts show `sent`.
+
 ## What's in it
 - **Picture:** our house style (flat bean-head cards in an inked 3D world, `templates/bridge/` lineage via
   `videos-done/birthday-bet/`), relit for night interiors. There are 27 shots, each with its own motivated camera move
