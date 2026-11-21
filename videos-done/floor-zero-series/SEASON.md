@@ -1,4 +1,4 @@
-# Floor Zero, Season 1: series bible (v4.2)
+# Floor Zero, Season 1: series bible (v4.2, final: both audits SHIP)
 
 Six parts. Part 1 is posted and is fixed canon. Part 2 is rendered but not posted, so it can still change. Parts 3-6 are
 new. It follows `references/INTERACTIVE_SERIES_FORMULA.md` and the viral skills in §10. The audit log is in §12.
@@ -313,6 +313,12 @@ The losing branch runs ≤ 25 s, escalates the threat by one new sense, and neve
   - The copy of you is your card with `scale.x = -1`.
 
 ## 12. Audit log
+**Final, v4.2: both auditors say SHIP.**
+- "Viral topic search strategy" (hooks, retention, comments): SHIP, no blockers. It called "You spent the last minute
+  watching yourself" the season's most shareable line.
+- "Video Rendered" (logic, canon, fair play, cost): SHIP, no blockers. It re-checked the 0:40 and 1:20 timestamps on the
+  posted Part 1 frames; the figure first enters at 1:19.7.
+
 **v4.1 → v4.2 (virality re-audit of v4: "SHIP after one blocking line").**
 - **The pinned comment now points to two real frames:** the 0:40 blackout, and 1:20, where the figure first stands in
   the corner. Checked on Part 1 stills.
