@@ -1,4 +1,4 @@
-# Floor Zero, Season 1: series bible (v2, for re-audit)
+# Floor Zero, Season 1: series bible (v3)
 
 Six parts. Part 1 is posted and is fixed canon. Part 2 is rendered but not posted, so it can still change. Parts 3-6 are
 new. It follows `references/INTERACTIVE_SERIES_FORMULA.md` and the viral skills in §10. The audit log is in §12.
@@ -9,9 +9,12 @@ scratched parts of them out. Viewers win by reading the words. On the surface, o
 sometimes wins, so the votes can't be gamed. (This replaces Part 2's "the rules were there to keep you" line. That line
 answered the season's question in episode 2 and made every later vote 80/20.)
 
-## 1. Logline (it also opens every part, for strangers)
+## 1. Logline (for the team; never spoken in full)
 Seven floors under your office, one rule on each, and you have to clock out before 06:00. The one facing the wall only
 moves when nobody is watching, and every step closer, it looks more like you.
+
+Only the ≤ 10-word premise line in §7 is spoken. The "only moves when nobody is watching" key is never narrated; the
+pictures teach it, so Parts 3-4 can't be gamed.
 
 ## 2. The truth (hidden; the finale pays it off)
 1. **The Night Shift keeps one.** Whoever hasn't clocked out on -7 by 06:00 is kept: drained grey and facing a wall, for
@@ -36,7 +39,7 @@ moves when nobody is watching, and every step closer, it looks more like you.
 | Engine | What viewers track | What it gives the comments |
 |---|---|---|
 | Exact wording | One rule per episode, the precise words | Loophole arguments ("zero WAS on the panel", "reaching isn't stepping") |
-| Unseen movement | Dark, flicker or look-away means it moves | Theories and rewatching flickers; "look AT or AWAY?" stays open until Part 4 |
+| Unseen movement | Dark, flicker or look-away means it moves | Theories and rewatching flickers; "look AT or AWAY?" stays open until Part 5's keep-walking win settles it in the picture |
 | Becoming you | Height, lanyard, sweater, badge | Spot-the-change ("it's your height now") |
 | Clock + light | HUD "FLOOR -3 · 03:12 TO 06:00", phone % | A real ticking clock |
 
@@ -54,7 +57,7 @@ moves when nobody is watching, and every step closer, it looks more like you.
 | Part | Rule | Truth / loophole |
 |---|---|---|
 | 1-2 | 1. If the doors open on a floor that is not on the panel, do not step out. | Zero lit up on the panel before the doors opened, so stepping out was allowed. Shown silently in Part 2; named in Part 3's recap only if real comments found it. |
-| 1-4 | 2. If someone is facing the wall, never lo… | "Look AT or AWAY?" Never answered by the narrator. Part 4's camera win settles it in the picture. |
+| 1-5 | 2. If someone is facing the wall, never lo… | "Look AT or AWAY?" Never answered by the narrator. Settled only in the picture, in Part 5's keep-walking win (it never moves while you watch the screens). No script before Part 5 may answer it. |
 | 3 | -1. DON'T STEP IN THE WATER. | True: wading kills. "Step", not "reach". |
 | 4 | -3. NEVER TURN AROUND. | True. Rule against rule: you can't turn, but it's behind you. Loophole: the monitors. |
 | 5 | -7. ONLY ONE OF YOU CAN CLOCK OUT. | Literal: there will be two of you. |
@@ -69,7 +72,7 @@ Optional, unnarrated pause-and-read Easter egg: the -2 landing sign in Part 4, "
 | 2 | 0 | 05:59 | 2 % | One step past its dusty footprints | Panel "0" lit as you step out |
 | 3 | 0 → -1 | 04:47 | 1 % | Your height; red lanyard | In the steel your badge reads "UOY"; an extra figure in the water's reflection |
 | 4 | -1 → -3 | 03:12 | 1 % | Blue sweater; on CCTV it faces you | Your reflection grabs your RIGHT wrist and leaves a grey print. On CCTV (not mirrored), its badge reads "UOY". |
-| 5 | -3 → -7 | 00:02:31 | Dies at 05:57 | Identical, mirrored | Two badges: "YOU" and "UOY"; the print on the right wrist vs the left |
+| 5 | -3 → -7 | 00:02:31 | Dies at 05:57 | Identical, mirrored | A 6-10 frame glimpse of one badge reading "UOY" as its lanyard spins in a flicker; on the hold, badges face in and the prints show (right wrist vs left) |
 | 6 | -7 → G | 00:00:01 | 1 bar at G | Goes grey at 06:00 | The badge close-up |
 
 ## 7. Opening template (every sequel)
@@ -157,9 +160,9 @@ The losing branch runs ≤ 25 s and escalates the threat by one new sense. Then 
 - **Comment fuel:** watch it on the screens? Does a camera count as looking?
 
 ### Part 5: "There Are Two of You" (-3 → -5 → -7)
-- **Frame 1:** red light, a punch clock at 05:57, and two of you.
+- **Frame 1:** red dark, a punch clock at 05:57, and two of you, lanyards turned so no badge reads.
   - Text: "05:57. THERE ARE TWO OF YOU."
-  - Line: "Every night, this building keeps one worker. Tonight, you."
+  - Line: "Only one of you gets to clock out."
 - **Recap:** turn or walk, plus the split.
 - **① TURN AROUND (loses; new sense: its breath on your neck):**
   1. Nothing behind you, but on the screens it's still there.
@@ -169,24 +172,30 @@ The losing branch runs ≤ 25 s and escalates the threat by one new sense. Then 
   1. Eyes on the monitors, row by row. It never moves while you watch.
   2. Callback slot: "Some of you said: watch the screens", only if real comments did.
   3. The last screen goes to static, and you dive through the stairwell door.
-- **Walk down -5 (one image, sepia):**
-  - The door stands open. Every wall is covered in photos of people from behind, facing a wall.
-  - "One for every night. The newest frame is empty. It has your name on it." Plate: "YOU · 21 NOV".
+- **Walk down -5 (one image, sepia, one narrated line):**
+  - The door stands open. Every wall is covered in photos of people from behind, facing a wall. The camera lands on
+    the empty frame, plate "YOU · 21 NOV".
+  - The single line: "Every night, this building keeps one worker. Tonight, you."
   - Unnarrated: "D. HALE · 20 NOV" (a tall grey suit), and the original card in a frame with Rule 2 complete.
-- **Floor -7 (red):**
-  - Dozens facing the walls. The punch clock, one card. "-7. ONLY ONE OF YOU CAN CLOCK OUT."
-  - Your phone lights up: Home, "OK. See you soon ❤", a reply to "Leaving now" from your number, which you never sent.
-  - 05:57, and the phone dies. Footsteps right beside you.
-  - The light stutters on: two of you, side by side, both looking at you.
+- **Floor -7 (red), capped at four narrated beats.** "Dozens facing the walls" is picture only.
+  1. The rule card over the punch clock: "Only one of you can clock out."
+  2. Your phone lights up: Home, "OK. See you soon ❤", a reply to "Leaving now" from your number. "You never sent
+     that."
+  3. "05:57. And your phone dies." Footsteps right beside you.
+  4. "When the light comes back, there are two of you."
+  - The shell game: in one flicker, one lanyard spins and its badge reads "UOY" for 6-10 frames. That's the pause-to-find
+    clue.
 - **Choice:**
   - ① LEFT;
   - ② RIGHT.
   - "Look closely before you answer."
-  - The badges are readable at phone size on the final hold: ① "YOU", ② "UOY". The print is a second clue.
+  - On the final hold both badges face in, and the grey wrist prints show: ① right wrist, ② left wrist. That's the
+    hard clue to argue about. The badge glimpse rewards pausers ("PAUSE AT 1:21"), so the split should stay near 60/40.
 - **Last line:** "So… which one is you?"
 
 ### Part 6: "Only One Clocks Out" (-7 → G, finale)
-- **Frame 1:** gold morning through lobby glass, and one of you walking out.
+- **Frame 1:** gold morning through lobby glass, and one of you walking out, backlit to a silhouette so either branch
+  could end this way.
   - Text: "06:00. ONLY ONE WALKS OUT."
   - Line: "You picked one of them. Let's see if it was you."
 - **Recap:** the real split.
@@ -263,6 +272,18 @@ The losing branch runs ≤ 25 s and escalates the threat by one new sense. Then 
   become the walk down) and finish in five.
 
 ## 12. Audit log
+**v2 → v3 (virality re-audit: "SHIP after 5 line-level fixes"): all 5 applied.**
+1. **The Part 5 badges were too easy:** they're now readable only in a 6-10 frame spin glimpse. On the hold the badges
+   face in and the wrist prints are the visible clue. Target split ~60/40.
+2. **Cold-open frames gave the answer away:** no readable badge in the Part 5 cold open (red dark, lanyards turned),
+   and the Part 6 cold open is a backlit silhouette.
+3. **The Part 5 hook layers didn't match:** the line is now "Only one of you gets to clock out." The "keeps one
+   worker" line moves to the photo wall.
+4. **The -7 section was too dense:** capped at four narrated beats. The dozens facing the walls are picture only, and
+   the photo wall gets one line.
+5. **The master key was spoken:** the logline is never spoken; only the ≤ 10-word premise line is. "Look AT or AWAY?"
+   is settled in Part 5's picture, and the bible now says Part 5 everywhere.
+
 **v1 → v2 (virality audit, "Viral topic search strategy"): all 8 fixes and the §11 answers applied.**
 1. **Openings for strangers:** the §7 template; a premise line first; HUD floor line; hook titles.
 2. **The wrist clue was unreadable:** replaced by the mirrored "UOY" badge, planted in Parts 3 and 4 and paid off in
@@ -270,7 +291,7 @@ The losing branch runs ≤ 25 s and escalates the threat by one new sense. Then 
 3. **The Part 5 flashlight vote was 80/20:** the vote is cut and the photo wall folds into the walk down. Six parts.
 4. **"More than one" sat in a dead branch:** moved to a canon Easter egg (an extra figure in the reflection), confirmed
    by the photo wall.
-5. **The narrator answered Rule 2:** the line is removed. "Look AT or AWAY?" stays open until Part 4.
+5. **The narrator answered Rule 2:** the line is removed. "Look AT or AWAY?" stays open (until Part 5 since v3).
 6. **Part 4's hand:** it's now your reflection's hand. The climb branch is cut to 3 beats.
 7. **"One step closer" wasn't readable:** dusty footprints on the car floor.
 8. **Every floor looked the same:** each floor gets its own palette (§4).
