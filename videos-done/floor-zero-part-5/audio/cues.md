@@ -1,0 +1,62 @@
+# Sound cues: Floor Zero, Part 5 (84.067 s, 4035200 samples @ 48000 Hz)
+mix integrated -14.00 LUFS, true peak -1.11 dBTP; stems integrated: voice -17.0, music -26.1, sfx -23.6 LUFS
+
+-   0.000 s (f   0)  -3: office room tone
+-   0.000 s (f   0)  -3: the monitors hum
+-   0.040 s (f   1)  teaser: sub hit
+-   0.300 s (f   9)  teaser: one breath (left)
+-   0.900 s (f  27)  teaser: another breath (right)
+-   1.767 s (f  53)  teaser: suck-in to the white flash
+-   2.267 s (f  68)  music: the choice's heartbeat + drone carry over
+-   5.200 s (f 156)  cloth: you turn around
+-   6.439 s (f 193)  nothing there
+-   7.600 s (f 228)  the wall of screens
+-  10.967 s (f 329)  cloth: you turn again
+-  13.267 s (f 398)  IT BREATHES ON YOUR NECK (close, left)
+-  13.267 s (f 398)  music: cluster on the breath
+-  15.000 s (f 450)  a monitor dies
+-  19.667 s (f 590)  VHS rewind
+-  21.647 s (f 649)  tape stop
+-  21.717 s (f 652)  play
+-  21.867 s (f 656)  music: a pulse that runs with you
+-  21.967 s (f 659)  your footsteps (only yours)
+-  27.579 s (f 827)  'exactly one step': low note
+-  29.400 s (f 882)  the dark eats time (HUD jump)
+-  30.100 s (f 903)  the desk monitors die, far to near
+-  31.000 s (f 930)  your reflection in a dead screen
+-  32.433 s (f 973)  you run
+-  32.533 s (f 976)  panting
+-  33.233 s (f 997)  the stairs door bangs open
+-  33.300 s (f 999)  stairwell: draught
+-  33.350 s (f1000)  down the stairs, fast
+-  35.767 s (f1073)  -5: a still, dusty room
+-  35.867 s (f1076)  -5: the door is open (creak)
+-  36.167 s (f1085)  music: the motif, slow, in the photo room
+-  42.145 s (f1264)  the newest frame is empty
+-  43.607 s (f1308)  YOUR NAME: hit
+-  45.232 s (f1357)  -7: the kept ones breathe, all around
+-  45.300 s (f1359)  -7: arrival
+-  45.300 s (f1359)  -7: low red hum
+-  45.300 s (f1359)  -7: the time clock ticks
+-  48.633 s (f1459)  the sign
+-  51.043 s (f1531)  your phone buzzes
+-  53.233 s (f1597)  a message gets through
+-  54.567 s (f1637)  the thread opens
+-  57.200 s (f1716)  'a message from your number': dread
+-  60.625 s (f1819)  you never sent that: heartbeat
+-  62.818 s (f1885)  the clock flips to 05:57
+-  65.217 s (f1956)  the phone light dies
+-  65.267 s (f1958)  the emergency light dies
+-  67.188 s (f2016)  in the dark: something takes your wrist
+-  69.400 s (f2082)  music: cluster on the two of you
+-  69.400 s (f2082)  the light stutters back
+-  69.500 s (f2085)  TWO OF YOU: hit
+-  72.750 s (f2182)  flicker 1
+-  72.830 s (f2185)  they swap places in the dark
+-  73.717 s (f2212)  flicker 2
+-  73.797 s (f2214)  they swap places in the dark
+-  75.333 s (f2260)  music: heartbeat for the choice
+-  75.550 s (f2266)  flicker 3
+-  75.767 s (f2273)  a lanyard spins (UOY)
+-  79.333 s (f2380)  tag 1 pops
+-  80.163 s (f2405)  tag 2 pops
